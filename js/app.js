@@ -60,6 +60,8 @@
   $$('.segmented').forEach(el=>syncIndicator(el,'button','.segmented-indicator'));
  }
  window.addEventListener('resize',debounce(syncAllIndicators,120));
+ // iOS Safari only applies :active press states when a touchstart listener exists.
+ document.addEventListener('touchstart',()=>{},{passive:true});
 
  // FLIP-ish list reconciliation: keeps entering/leaving/reordering animated instead of a full rebuild.
  function flipUpdate(container,items,keyFn,render){
@@ -75,12 +77,17 @@
    const prior=existing.get(key)||null;
    const el=render(item,prior,i);
    el.dataset.key=key;
-   if(!prior){el.classList.add('is-entering');el.style.setProperty('--stagger',i);}
+   if(!prior&&!reducedMotion()){
+    el.classList.add('is-entering');el.style.setProperty('--stagger',Math.min(i,9));
+    const done=e=>{if(e.target!==el)return;el.classList.remove('is-entering');el.removeEventListener('animationend',done);el.removeEventListener('animationcancel',done);};
+    el.addEventListener('animationend',done);el.addEventListener('animationcancel',done);
+   }
    frag.appendChild(el);
   });
   existing.forEach((el,key)=>{
    if(seen.has(key))return;
-   const r=el.getBoundingClientRect();
+   const r=before.get(key)||el.getBoundingClientRect();
+   const vtArt=el.querySelector('.art');if(vtArt)vtArt.style.viewTransitionName='';
    el.style.position='fixed';el.style.left=r.left+'px';el.style.top=r.top+'px';el.style.width=r.width+'px';el.style.height=r.height+'px';el.style.margin='0';el.style.zIndex='60';el.style.pointerEvents='none';
    document.body.appendChild(el);
    if(reducedMotion()){el.remove();return;}
@@ -88,20 +95,19 @@
    setTimeout(()=>el.remove(),240);
   });
   container.appendChild(frag);
-  if(!reducedMotion()){
-   items.forEach(item=>{
-    const key=String(keyFn(item));
-    if(!before.has(key))return;
-    const el=container.querySelector(`:scope > [data-key="${CSS.escape(key)}"]`);
-    if(!el||el.classList.contains('is-entering'))return;
+  if(!reducedMotion()&&before.size){
+   // Batched FLIP: read every new rect first (one layout), then write all inverted transforms,
+   // then play them together next frame — no per-card layout thrash.
+   const moves=[];
+   [...container.children].forEach(el=>{
+    const key=el.dataset&&el.dataset.key;
+    if(!key||!before.has(key)||el.classList.contains('is-entering'))return;
     const prev=before.get(key),now=el.getBoundingClientRect();
     const dx=prev.left-now.left,dy=prev.top-now.top;
-    if(Math.abs(dx)<1&&Math.abs(dy)<1)return;
-    el.style.transition='none';
-    el.style.transform=`translate(${dx}px,${dy}px)`;
-    el.getBoundingClientRect();
-    requestAnimationFrame(()=>{el.style.transition='transform .34s var(--ease)';el.style.transform='';});
+    if(Math.abs(dx)>=1||Math.abs(dy)>=1)moves.push([el,dx,dy]);
    });
+   moves.forEach(([el,dx,dy])=>{el.style.transition='none';el.style.transform=`translate(${dx}px,${dy}px)`;});
+   if(moves.length)requestAnimationFrame(()=>requestAnimationFrame(()=>moves.forEach(([el])=>{el.style.transition='transform .5s cubic-bezier(.22,1,.36,1)';el.style.transform='';const clr=e=>{if(e.target===el&&e.propertyName==='transform'){el.style.transition='';el.removeEventListener('transitionend',clr);}};el.addEventListener('transitionend',clr);})));
   }
  }
 
@@ -339,112 +345,253 @@
  }
 
  /* ───────────────────────── Stop-slider (time / intensity control) ─────────────────────────
-    A touch-friendly discrete slider: N evenly spaced stops, a draggable thumb (pointer events),
-    keyboard arrows, role="slider" + aria-valuetext. The thumb follows the pointer continuously
-    while dragging (springing to the nearest stop on release); callers get a throttled "preview"
-    callback during the drag (rAF) plus a final "commit" callback when the value is set. */
- function buildStopSlider({root,stops,valueOf,initial,onPreview,onCommit,paintThumb}){
+    A touch-first discrete slider with real physics. N evenly spaced stops; the thumb is driven by a
+    small spring simulation on requestAnimationFrame (transform/opacity only, idle when settled):
+     • drag  — the thumb tracks the finger through a stiff spring, with soft "detent" magnetism near
+               each stop and a rubber-band past the ends; the knob squashes with speed.
+     • fling — on release the value is projected from the drag velocity, then a bouncy spring carries
+               the thumb (and its momentum) into the chosen stop.
+     • ticks — crossing a stop pings its tick, kicks the knob, rolls the readout and (where supported)
+               fires a tiny haptic. The floating bubble hangs off the thumb and swings with its speed.
+    Keyboard (arrows / Home / End / Page keys), role="slider" + aria-valuetext, a 44px hit target on
+    the thumb, and tap-to-set on the track (committed on release, so a vertical scroll that starts on
+    the track never changes the value). prefers-reduced-motion → no springs, no swing, no pings.
+    Callers get onPreview(stop,i) whenever the stop under the thumb changes during a drag, and
+    onCommit(stop,i) once the value is set; paintThumb(stop,i,dir) repaints labels; hooks.onFrame
+    lets a caller animate thumb content off the same frame loop. */
+ function rollText(el,html,dir){
+  if(!el||el.innerHTML===html)return;
+  el.innerHTML=html;
+  if(reducedMotion()||typeof el.animate!=='function')return;
+  if(el._roll)el._roll.cancel();
+  const d=(dir||1)*9;
+  el._roll=el.animate([{transform:`translateY(${d}px)`,opacity:0,filter:'blur(1.5px)'},{transform:'none',opacity:1,filter:'blur(0)'}],{duration:220,easing:'cubic-bezier(.2,.8,.2,1)'});
+ }
+ function buildStopSlider({root,stops,valueOf,initial,onPreview,onCommit,paintThumb,labels,colors,hooks}){
+  hooks=hooks||{};
   const rail=root.querySelector('.stopslider-rail');
   const fill=root.querySelector('.stopslider-fill');
   const thumb=root.querySelector('.stopslider-thumb');
   const ticksWrap=root.querySelector('.stopslider-ticks');
   const bubble=root.querySelector('.stopslider-bubble');
   const n=stops.length;
-  ticksWrap.innerHTML=stops.map(()=>'<span class="stopslider-tick"></span>').join('');
-  let index=Math.max(0,stops.findIndex(s=>valueOf(s)===valueOf(initial)));
-  if(index<0)index=0;
-  let dragging=false,focused=false,rafId=null,disabled=false;
   const fracOf=i=>n<=1?0:i/(n-1);
-  const INSET=14; // matches the thumb radius / CSS track inset, so the thumb travels exactly the visible track
-  function trackWidth(){return Math.max(1,rail.getBoundingClientRect().width-INSET*2);}
-  function positionBubble(thumbLeftPx){
-   if(!bubble)return;
-   const railW=rail.getBoundingClientRect().width;
-   const bw=bubble.offsetWidth||0;
-   const left=clamp(thumbLeftPx-bw/2,4,Math.max(4,railW-bw-4));
-   bubble.style.left=left+'px';
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  // Thumb: 44px transparent hit target → .stopslider-knob (the visible, squashable disc).
+  const knob=document.createElement('span');knob.className='stopslider-knob';
+  while(thumb.firstChild)knob.appendChild(thumb.firstChild);
+  thumb.appendChild(knob);
+  if(root.classList.contains('intensity')){const g=document.createElement('span');g.className='stopslider-glow';g.setAttribute('aria-hidden','true');thumb.insertBefore(g,knob);}
+  const glow=thumb.querySelector('.stopslider-glow');
+  ticksWrap.innerHTML=stops.map((_,i)=>`<span class="stopslider-tick" style="left:${(fracOf(i)*100).toFixed(4)}%"><i></i></span>`).join('');
+  const ticks=[...ticksWrap.children];
+  // Bubble layers: outer (follows + swings, JS) › inner (show/hide, CSS) › body (edge clamp, JS) › text (pop).
+  bubble.setAttribute('aria-hidden','true');
+  bubble.innerHTML='<span class="stopslider-bubble-inner"><span class="stopslider-bubble-body"><span class="stopslider-bubble-text"></span></span></span>';
+  const bubbleBody=bubble.querySelector('.stopslider-bubble-body'),bubbleText=bubble.querySelector('.stopslider-bubble-text');
+  let bubbleW=0;
+  // Scale of stop labels under the track (decorative; the slider itself carries the a11y semantics).
+  let scaleEls=[];
+  if(labels){
+   const scale=document.createElement('div');scale.className='stopslider-scale';scale.setAttribute('aria-hidden','true');
+   scale.innerHTML=labels.map((l,i)=>`<span class="stopslider-stop" data-i="${i}" style="left:${(fracOf(i)*100).toFixed(4)}%">${l}</span>`).join('');
+   root.appendChild(scale);
+   scaleEls=[...scale.children];
+   scale.addEventListener('click',e=>{const s=e.target.closest('.stopslider-stop');if(!s||disabled)return;setIndex(Number(s.dataset.i),{commit:true});});
   }
-  function updateBubbleVisibility(){if(bubble)bubble.classList.toggle('show',dragging||focused);}
-  function applyFrac(frac){
-   const tw=trackWidth();
-   const leftPx=INSET+frac*tw;
-   thumb.style.left=leftPx+'px';
-   fill.style.width=(frac*tw)+'px';
-   fill.style.backgroundSize=tw+'px 100%';
-   positionBubble(leftPx);
+
+  let index=Math.max(0,stops.findIndex(s=>valueOf(s)===valueOf(initial)));
+  let pos=fracOf(index),vel=0,target=pos,mode='idle';        // pos/vel in track fractions (vel per s)
+  let dragTarget=pos,grab=0,dragging=false,press=null,disabled=false;
+  let ks=1,kv=0,kTarget=1,hovering=false,focusVis=false;       // knob scale spring
+  let swing=0,swingV=0;                                        // bubble pendulum (deg)
+  let pointerFocus=false;
+  let shownIdx=index,onCount=-1,raf=0,lastT=0,prevPx=0,velPx=0,settleAt=0;
+  let INSET=14,TW=1,RW=1;
+  const RM=()=>reducedMotion();
+  function measure(){
+   INSET=(knob.offsetWidth||28)/2;
+   root.style.setProperty('--inset',INSET+'px');
+   RW=rail.clientWidth||1;
+   TW=Math.max(1,RW-INSET*2);
   }
-  function paint(i,{animate}={}){
-   const frac=fracOf(i);
-   thumb.style.transition=animate===false?'none':'';
-   fill.style.transition=animate===false?'none':'';
-   applyFrac(frac);
+  function fracFromClientX(x){const r=rail.getBoundingClientRect();return (x-r.left-INSET)/TW;}
+  const nearestIndex=f=>clamp(Math.round(clamp(f,0,1)*(n-1)),0,n-1);
+  // Rubber band past the ends + gentle magnetism towards the nearest stop (a soft detent).
+  function shape(raw){
+   const L=.045;
+   if(raw<0)return -L*(1-1/(1+(-raw)*.55/L));
+   if(raw>1)return 1+L*(1-1/(1+(raw-1)*.55/L));
+   const s=Math.round(raw*(n-1))/(n-1),half=.5/(n-1),d=raw-s,t=Math.min(1,Math.abs(d)/half);
+   return s+d*(.58+.42*t);
+  }
+  function colorAt(p){
+   if(!colors)return null;
+   const f=clamp(p,0,1)*(n-1),i=Math.min(n-2,Math.floor(f)),t=f-i;
+   if(t<.002)return colors[i];if(t>.998)return colors[i+1];
+   return `color-mix(in oklab,${colors[i]} ${((1-t)*100).toFixed(1)}%,${colors[i+1]})`;
+  }
+  function render(){
+   const p=clamp(pos,-.06,1.06),x=INSET+p*TW;
+   thumb.style.transform=`translate3d(${x.toFixed(2)}px,-50%,0)`;
+   const w=clamp(pos,0,1)*TW;
+   fill.style.clipPath=`inset(0 ${(TW-w).toFixed(2)}px 0 0 round 999px)`;
+   const sp=Math.min(1,Math.abs(velPx)/2600);
+   const sx=1+sp*.16,sy=1-sp*.1;
+   knob.style.transform=`scale(${(ks*sx).toFixed(4)},${(ks*sy).toFixed(4)})`;
+   if(colors){const c=colorAt(pos);root.style.setProperty('--thumb-c',c);}
+   // bubble: attached to the thumb, body clamped inside the rail, swinging from its tail
+   const half=bubbleW/2,shift=clamp(x,half+2,RW-half-2)-x;
+   bubble.style.transform=`translate3d(${x.toFixed(2)}px,0,0) rotate(${swing.toFixed(2)}deg)`;
+   bubbleBody.style.transform=`translateX(${shift.toFixed(1)}px)`;
+   const c=clamp(Math.floor(clamp(pos,0,1)*(n-1)+.02)+1,0,n);
+   if(c!==onCount){onCount=c;ticks.forEach((t,i)=>t.classList.toggle('on',i<c));}
+  }
+  function pingTick(i){
+   const t=ticks[i];if(!t||RM())return;
+   const ring=t.firstElementChild;
+   if(ring&&ring.animate)ring.animate([{transform:'scale(.6)',opacity:.55},{transform:'scale(3.2)',opacity:0}],{duration:420,easing:'cubic-bezier(.2,.8,.2,1)'});
+  }
+  function showIdx(i,{detent}={}){
+   if(i===shownIdx&&!detent)return;
+   const dir=Math.sign(i-shownIdx)||1;
+   shownIdx=i;
+   paintThumb(stops[i],i,dir);
+   bubbleW=bubbleBody.offsetWidth||bubbleW;
+   scaleEls.forEach((s,k)=>s.classList.toggle('on',k===i));
    thumb.setAttribute('aria-valuenow',String(i));
-   thumb.setAttribute('aria-valuemin','0');
-   thumb.setAttribute('aria-valuemax',String(n-1));
-   paintThumb(stops[i],i);
+   if(detent&&!RM()){
+    pingTick(i);
+    kv+=dragging?2.2:1.4;                              // knob "click" into the detent
+    swingV+=dir*-38;
+    if(bubbleText.animate)bubbleText.animate([{transform:'scale(1.12)'},{transform:'none'}],{duration:220,easing:'cubic-bezier(.2,.8,.2,1)'});
+    if(dragging&&navigator.vibrate)try{navigator.vibrate(4);}catch(err){}
+   }
   }
-  function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
-  function fracFromClientX(x){
-   const r=rail.getBoundingClientRect();
-   const tw=trackWidth();
-   return tw?clamp((x-r.left-INSET)/tw,0,1):0;
+  // Semi-implicit Euler in 4 ms sub-steps: stable for the stiff drag spring, cheap for the rest.
+  function stepSpring(x,v,to,k,zeta,dt){const c=2*Math.sqrt(k)*zeta;const a=-k*(x-to)-c*v;v+=a*dt;x+=v*dt;return[x,v];}
+  function frame(now){
+   raf=0;
+   let dt=Math.min(.034,Math.max(0,(now-lastT)/1000));lastT=now;
+   const steps=Math.max(1,Math.ceil(dt/.004)),h=dt/steps;
+   for(let s=0;s<steps;s++){
+    if(mode==='drag')[pos,vel]=stepSpring(pos,vel,dragTarget,2000,1,h);
+    else if(mode==='spring')[pos,vel]=stepSpring(pos,vel,target,380,.56,h);
+    [ks,kv]=stepSpring(ks,kv,kTarget,620,.42,h);
+    [swing,swingV]=stepSpring(swing,swingV,0,160,.32,h);
+   }
+   const px=pos*TW;velPx=dt>0?(px-prevPx)/dt:0;prevPx=px;
+   swingV+=clamp(-velPx*1.1,-2400,2400)*dt;                   // speed leans the bubble back, like a flag
+   swing=clamp(swing,-14,14);
+   if(mode==='spring'&&Math.abs(pos-target)<.0006&&Math.abs(vel)<.004){pos=target;vel=0;mode='idle';velPx=0;}
+   render();
+   const i=nearestIndex(pos);
+   if(i!==shownIdx){
+    showIdx(i,{detent:true});
+    if(dragging)queuePreview(i);
+   }
+   let busy=mode!=='idle'||Math.abs(ks-kTarget)>.001||Math.abs(kv)>.01||Math.abs(swing)>.05||Math.abs(swingV)>.2;
+   if(hooks.onFrame&&!RM()){
+    const want=hooks.onFrame({t:now/1000,dt,pos,velPx,idx:shownIdx,active:dragging||hovering||focusVis,sinceSettle:(now-settleAt)/1000,thumbX:INSET+clamp(pos,0,1)*TW});
+    busy=busy||!!want;
+   }
+   if(busy)raf=requestAnimationFrame(frame);
+   else{velPx=0;render();}
   }
-  function nearestIndex(frac){return clamp(Math.round(frac*(n-1)),0,n-1);}
-  function previewFrac(frac){
-   thumb.style.transition='none';fill.style.transition='none';
-   applyFrac(frac);
-   const idx=nearestIndex(frac);
-   paintThumb(stops[idx],idx);
-   if(rafId)return;
-   rafId=requestAnimationFrame(()=>{rafId=null;onPreview(stops[idx],idx);});
+  // Live results while dragging, but only once the finger settles on a stop for a beat: a fast
+  // sweep across several stops never stalls a frame on re-ranking/layout.
+  let previewTimer=0;
+  function queuePreview(i){clearTimeout(previewTimer);previewTimer=setTimeout(()=>{previewTimer=0;if(dragging)onPreview(stops[i],i);},110);}
+  function kick(){if(!raf){lastT=performance.now();prevPx=pos*TW;raf=requestAnimationFrame(frame);}}
+  function jumpTo(i){pos=target=dragTarget=fracOf(i);vel=0;mode='idle';velPx=0;render();showIdx(i);}
+  function setIndex(i,{commit,animate=true}={}){
+   i=clamp(i,0,n-1);
+   index=i;target=fracOf(i);settleAt=performance.now();
+   if(!animate||RM()){jumpTo(i);}
+   else{mode='spring';kick();}
+   if(commit){thumb.setAttribute('aria-valuenow',String(i));onCommit(stops[i],i);if(hooks.onCommit)hooks.onCommit(stops[i],i);}
   }
-  function commitIndex(i,{animate}={}){
-   index=clamp(i,0,n-1);
-   paint(index,{animate});
-   onCommit(stops[index],index);
+  function updateBubble(){root.classList.toggle('show-bubble',dragging||focusVis);}
+  function startDrag(clientX){
+   dragging=true;mode='drag';kTarget=1.18;
+   root.classList.add('is-dragging');updateBubble();
+   dragTarget=shape(fracFromClientX(clientX)-grab);
+   if(RM()){pos=dragTarget;}
+   kick();
   }
-  function pointerXY(e){return e.touches&&e.touches[0]?e.touches[0].clientX:e.clientX;}
-  thumb.addEventListener('pointerdown',e=>{
-   if(disabled)return;
-   dragging=true;thumb.classList.add('dragging');updateBubbleVisibility();
-   try{thumb.setPointerCapture(e.pointerId);}catch(err){}
-   previewFrac(fracFromClientX(pointerXY(e)));
-   e.preventDefault();
-  });
-  thumb.addEventListener('pointermove',e=>{if(!dragging)return;previewFrac(fracFromClientX(pointerXY(e)));});
-  function endDrag(e){
-   if(!dragging)return;dragging=false;thumb.classList.remove('dragging');updateBubbleVisibility();
-   const frac=fracFromClientX(pointerXY(e));
-   commitIndex(nearestIndex(frac));
+  function release({fling}){
+   clearTimeout(previewTimer);previewTimer=0;
+   dragging=false;kTarget=hovering?1.07:1;
+   root.classList.remove('is-dragging');updateBubble();
+   const projected=fling?pos+clamp(vel,-4,4)*.085:pos;
+   vel=clamp(vel,-3,3);
+   setIndex(nearestIndex(projected),{commit:true});
   }
-  thumb.addEventListener('pointerup',endDrag);
-  thumb.addEventListener('pointercancel',endDrag);
   rail.addEventListener('pointerdown',e=>{
-   if(disabled||e.target===thumb||thumb.contains(e.target))return;
-   commitIndex(nearestIndex(fracFromClientX(pointerXY(e))));
+   if(disabled||(e.pointerType==='mouse'&&e.button!==0))return;
+   const onThumb=thumb.contains(e.target);
+   measure();
+   press={id:e.pointerId,x0:e.clientX,y0:e.clientY,onThumb};
+   try{rail.setPointerCapture(e.pointerId);}catch(err){}
+   pointerFocus=true;try{thumb.focus({preventScroll:true});}catch(err){}pointerFocus=false;
+   setKbd(false);
+   if(onThumb){grab=fracFromClientX(e.clientX)-pos;e.preventDefault();startDrag(e.clientX);}
+   else if(e.pointerType==='mouse'){grab=0;e.preventDefault();startDrag(e.clientX);}
+   else{grab=0;kTarget=1.08;kick();}   // touch on the track: tap-to-set on release, or drag once it moves sideways
   });
-  thumb.addEventListener('focus',()=>{focused=true;updateBubbleVisibility();});
-  thumb.addEventListener('blur',()=>{focused=false;updateBubbleVisibility();});
+  rail.addEventListener('pointermove',e=>{
+   if(e.pointerType==='mouse'&&!press){
+    const r=thumb.getBoundingClientRect(),over=Math.abs(e.clientX-(r.left+r.width/2))<r.width/2&&Math.abs(e.clientY-(r.top+r.height/2))<r.height/2;
+    if(over!==hovering){hovering=over;if(!dragging)kTarget=over?1.07:1;root.classList.toggle('is-hover',over);kick();}
+   }
+   if(!press||e.pointerId!==press.id)return;
+   if(!dragging){
+    const dx=e.clientX-press.x0,dy=e.clientY-press.y0;
+    if(Math.abs(dx)>6&&Math.abs(dx)>Math.abs(dy))startDrag(e.clientX);
+    return;
+   }
+   dragTarget=shape(fracFromClientX(e.clientX)-grab);
+   if(RM()){pos=dragTarget;render();const i=nearestIndex(pos);if(i!==shownIdx){showIdx(i);queuePreview(i);}}
+   else kick();
+  });
+  function endPress(e,cancelled){
+   if(!press||e.pointerId!==press.id)return;
+   const p=press;press=null;
+   if(dragging){release({fling:!cancelled});return;}
+   kTarget=hovering?1.07:1;kick();
+   if(!cancelled&&!p.onThumb)setIndex(nearestIndex(fracFromClientX(e.clientX)),{commit:true});
+  }
+  rail.addEventListener('pointerup',e=>endPress(e,false));
+  rail.addEventListener('pointercancel',e=>endPress(e,true));
+  rail.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&hovering&&!press){hovering=false;kTarget=1;root.classList.remove('is-hover');kick();}});
+  // Focus ring + bubble only for keyboard focus (pointer-initiated focus stays quiet).
+  function setKbd(v){focusVis=v;root.classList.toggle('kbd-focus',v);updateBubble();if(v)kick();}
+  thumb.addEventListener('focus',()=>{if(!pointerFocus&&!press)setKbd(thumb.matches(':focus-visible'));});
+  thumb.addEventListener('blur',()=>setKbd(false));
   thumb.addEventListener('keydown',e=>{
    if(disabled)return;
    let next=null;
-   if(e.key==='ArrowLeft'||e.key==='ArrowDown')next=index-1;
-   else if(e.key==='ArrowRight'||e.key==='ArrowUp')next=index+1;
+   if(e.key==='ArrowLeft'||e.key==='ArrowDown'||e.key==='PageDown')next=index-1;
+   else if(e.key==='ArrowRight'||e.key==='ArrowUp'||e.key==='PageUp')next=index+1;
    else if(e.key==='Home')next=0;
    else if(e.key==='End')next=n-1;
-   else if(e.key==='PageDown')next=index-1;
-   else if(e.key==='PageUp')next=index+1;
    if(next==null)return;
    e.preventDefault();
-   commitIndex(next,{animate:!reducedMotion()});
+   if(!focusVis)setKbd(true);
+   next=clamp(next,0,n-1);
+   if(next===index){kv-=1.6*(RM()?0:1);swingV+=(next===0?30:-30);kick();return;} // bump against the end
+   setIndex(next,{commit:true});
   });
-  window.addEventListener('resize',debounce(()=>paint(index,{animate:false}),120));
-  paint(index,{animate:false});
+  window.addEventListener('resize',debounce(()=>{if(!root.isConnected)return;measure();render();},100));
+  thumb.setAttribute('aria-valuemin','0');
+  thumb.setAttribute('aria-valuemax',String(n-1));
+  measure();
+  shownIdx=-1;jumpTo(index);
   return {
    setValue(v,{animate}={}){
     const i=stops.findIndex(s=>valueOf(s)===valueOf(v));
-    if(i<0)return;
-    index=i;paint(i,{animate:animate!==false});
+    if(i<0||i===index)return;
+    setIndex(i,{animate:animate!==false});
    },
    setDisabled(v){disabled=v;thumb.setAttribute('aria-disabled',String(v));thumb.tabIndex=v?-1:0;root.classList.toggle('is-disabled',v);},
   };
@@ -461,11 +608,20 @@
   if(intensity&&intensity!=='any'&&category!=='hip')pool=pool.filter(s=>s.intensity===intensity);
   return pool;
  }
+ // Plan.fit is pure for a given session/minutes/countdown — cache it so dragging the time slider back
+ // and forth only pays for each stop once (keeps drag frames well under budget).
+ const fitCache=new Map();
+ function fitCached(s,minutes){
+  const key=s.id+'|'+minutes+'|'+countdown();
+  let res=fitCache.get(key);
+  if(!res){res=Plan.fit(s,minutes,META,{countdown:countdown()});fitCache.set(key,res);if(fitCache.size>2000)fitCache.clear();}
+  return res;
+ }
  function computeResults(category,minutesSel,focus,intensity){
   const pool=poolFor(category,focus,intensity),isAny=minutesSel==='any';
   const items=pool.map((s,i)=>{
    if(isAny){const plan=Plan.compile(s,META,{countdown:countdown()});return{session:s,plan,changed:[],fits:!!plan.steps.length,idx:i,options:{...Plan.DEFAULTS,countdown:countdown()},score:0};}
-   const res=Plan.fit(s,minutesSel,META,{countdown:countdown()});
+   const res=fitCached(s,minutesSel);
    return{session:s,plan:res.plan,changed:res.changed,fits:res.fits,idx:i,options:res.options,score:res.score};
   }).filter(x=>x.fits);
   // A chosen time ranks by how well the plan fills it with the fewest changes; "Any" keeps catalogue order.
@@ -497,7 +653,8 @@
      </div>
      <div class="stopslider intensity" id="intensity-slider">
       <div class="stopslider-head">
-       <span class="stopslider-label">Intensity</span>
+       <span class="stopslider-label">${icon('bolt')}<span>Intensity</span></span>
+       <span class="stopslider-readout" id="intensity-readout"></span>
       </div>
       <div class="stopslider-rail" id="intensity-rail">
        <div class="stopslider-track-bg"></div>
@@ -532,25 +689,53 @@
    <button type="button" class="category-tile${c.id==='all'?' is-neutral':''}${homeState.category===c.id?' on':''}" data-cat="${c.id}"
     aria-pressed="${homeState.category===c.id}" style="--tile-c:${c.id==='all'?'var(--ink)':'var(--'+c.id+')'}">
     ${icon(c.icon)}<span class="category-tile-label">${h(c.label)}</span>
-   </button>`).join('');
+   </button>`).join('')+'<span class="tile-indicator" aria-hidden="true"></span>';
   row.addEventListener('click',e=>{
    const btn=e.target.closest('.category-tile');if(!btn)return;
    setCategory(btn.dataset.cat);
   });
+  requestAnimationFrame(()=>moveTileIndicator(false));
  }
+ // A ring that glides between category tiles (stretching mid-flight), while the chosen tile's tint
+ // fades in underneath and its icon does a small bounce.
+ function moveTileIndicator(animate){
+  const row=$('#cat-tiles');if(!row)return;
+  const ind=row.querySelector('.tile-indicator'),t=row.querySelector('.category-tile.on');
+  if(!ind)return;
+  if(!t){ind.style.opacity='0';return;}
+  const x=t.offsetLeft,y=t.offsetTop,w=t.offsetWidth,hh=t.offsetHeight,prev=ind._x;
+  ind.style.opacity='1';ind.style.width=w+'px';ind.style.height=hh+'px';
+  ind.style.setProperty('--tile-c',t.style.getPropertyValue('--tile-c'));
+  ind.classList.toggle('is-neutral',t.classList.contains('is-neutral'));
+  ind.style.transform=`translate3d(${x}px,${y}px,0)`;ind._x=x;
+  if(animate&&prev!=null&&prev!==x&&!reducedMotion()&&ind.animate){
+   const d=x-prev,st=1+Math.min(.28,Math.abs(d)/w*.07);
+   if(ind._anim)ind._anim.cancel();
+   ind._anim=ind.animate([
+    {transform:`translate3d(${prev}px,${y}px,0)`},
+    {transform:`translate3d(${prev+d*.5}px,${y}px,0) scale(${st},${(1/Math.sqrt(st)).toFixed(3)})`,offset:.42},
+    {transform:`translate3d(${x+Math.sign(d)*Math.min(7,Math.abs(d)*.04)}px,${y}px,0) scale(.985,1.01)`,offset:.78},
+    {transform:`translate3d(${x}px,${y}px,0)`}],{duration:560,easing:'cubic-bezier(.3,.7,.3,1)'});
+   const ic=t.querySelector('.icon');
+   if(ic&&ic.animate)ic.animate([{transform:'scale(1)'},{transform:`scale(.72) rotate(${d>0?-10:10}deg)`,offset:.28},{transform:'scale(1.2) rotate(0deg)',offset:.62},{transform:'scale(1)'}],{duration:520,delay:90,easing:'cubic-bezier(.3,.7,.3,1)'});
+  }
+ }
+ window.addEventListener('resize',debounce(()=>moveTileIndicator(false),120));
  const TIME_STOPS=[5,10,15,20,30,45,60,'any'];
  const timeLabel=v=>v==='any'?'Any':`${v} min`;
+ const timeReadout=v=>v==='any'?'<span class="ro-n">Any</span>':`<span class="ro-n">${v}</span><span class="ro-u">min</span>`;
  let timeSlider=null,intensitySlider=null;
  function buildTimeSlider(){
   const root=$('#time-slider');
-  const readout=$('#time-readout'),bubble=$('#time-bubble');
+  const readout=$('#time-readout'),thumb=$('#time-thumb');
   timeSlider=buildStopSlider({
    root,stops:TIME_STOPS,valueOf:v=>v,initial:homeState.minutes,
-   paintThumb(v){
+   labels:TIME_STOPS.map(v=>v==='any'?'Any':String(v)),
+   paintThumb(v,i,dir){
     const label=timeLabel(v);
-    if(readout.textContent!==label)readout.textContent=label;
-    if(bubble.textContent!==label)bubble.textContent=label;
-    root.querySelector('.stopslider-thumb').setAttribute('aria-valuetext',v==='any'?'Any duration':label);
+    rollText(readout,timeReadout(v),dir);
+    const t=root.querySelector('.stopslider-bubble-text');if(t&&t.textContent!==label)t.textContent=label;
+    thumb.setAttribute('aria-valuetext',v==='any'?'Any duration':`${v} minutes`);
    },
    onPreview(v){homeState.minutes=v;updateResults();},
    onCommit(v){setMinutes(v,{fromSlider:true});},
@@ -558,23 +743,82 @@
  }
  const intensityLabelOf=v=>(INTENSITY_META[v]||INTENSITY_META.any).label;
  const INTENSITY_STOPS=['any',1,2,3];
+ // Multi-part thumb glyphs so each part can move on its own (all 24×24, stroked like Crux icons).
+ const INTENSITY_GLYPHS={
+  any:`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect class="g-sq" x="4.5" y="4.5" width="6" height="6" rx="1.6"/><rect class="g-sq" x="13.5" y="4.5" width="6" height="6" rx="1.6"/><rect class="g-sq" x="4.5" y="13.5" width="6" height="6" rx="1.6"/><rect class="g-sq" x="13.5" y="13.5" width="6" height="6" rx="1.6"/></svg>`,
+  1:`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g class="g-leaf"><path d="M5 19c9 1 14-4 14-13-9 0-14 4-14 13Z" class="g-leaf-body"/><path d="M5 19c1.5-4.5 4.5-8 9.5-10.5"/></g></svg>`,
+  2:`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g class="g-heart"><path class="g-heart-body" d="M12 20C12 20 4 14 4 8.7 4 5.7 6.4 3.3 9.3 3.3 10.9 3.3 12 4.3 12 4.3 12 4.3 13.1 3.3 14.7 3.3 17.6 3.3 20 5.7 20 8.7 20 14 12 20 12 20Z"/></g><path class="g-ecg" pathLength="1" d="M4.3 11h3l1.4-3 2 5.5 1.3-3.5 1 1.5h6.3"/></svg>`,
+  3:`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g class="g-flame"><path class="g-flame-body" d="M12 21c3.9 0 6.5-2.6 6.5-6.3 0-3.5-2.4-5.8-4.3-8.3-.4 1.7-1.3 3-2.6 3.6.2-2.9-1-5.3-3.1-7-.3 3.3-5 6.1-5 11.7C3.5 18.4 7.6 21 12 21Z"/></g><path class="g-flame-core" d="M12 20.2c-1.8 0-3-1.2-3-2.8 0-1.8 1.4-2.8 2.4-4.3.4 1.3 1.2 1.9 2 2.3.9.5 1.6 1.3 1.6 2.3 0 1.4-1.2 2.5-3 2.5Z"/></svg>`,
+ };
  function buildIntensitySlider(){
   const root=$('#intensity-slider');
-  const thumb=$('#intensity-thumb'),thumbIcon=thumb.querySelector('.stopslider-thumb-icon'),bubble=$('#intensity-bubble');
+  const thumb=$('#intensity-thumb'),thumbIcon=thumb.querySelector('.stopslider-thumb-icon'),readout=$('#intensity-readout');
+  thumbIcon.innerHTML=INTENSITY_STOPS.map(v=>`<span class="ico ${(INTENSITY_META[v]||{}).cls||'i0'}" data-v="${v}">${INTENSITY_GLYPHS[v]}</span>`).join('');
+  const icos=[...thumbIcon.children];
+  const q=(i,sel)=>icos[i].querySelector(sel);
+  const leaf=q(1,'.g-leaf'),heart=q(2,'.g-heart'),ecg=q(2,'.g-ecg'),flame=q(3,'.g-flame'),core=q(3,'.g-flame-core');
+  leaf.style.transformOrigin='5px 19px';heart.style.transformOrigin='12px 13px';flame.style.transformOrigin='12px 21px';core.style.transformOrigin='12px 20.5px';
+  const rail=root.querySelector('.stopslider-rail'),glow=()=>thumb.querySelector('.stopslider-glow');
+  // ember pool for the strenuous stop
+  const embers=[];let emberAt=0,beat=0,lastIdx=-1,burst=0;
+  function ember(x,strong){
+   let el=embers.find(e=>!e._busy);
+   if(!el){if(embers.length>=14)return;el=document.createElement('span');el.className='stopslider-ember';el.setAttribute('aria-hidden','true');rail.appendChild(el);embers.push(el);}
+   el._busy=true;
+   const dx=(Math.random()-.5)*(strong?34:20),rise=24+Math.random()*(strong?34:22),sz=.6+Math.random()*.7,dur=620+Math.random()*520;
+   el.style.left=(x+(Math.random()-.5)*10)+'px';
+   const a=el.animate([{transform:`translate(-50%,0) scale(${sz})`,opacity:0},{transform:`translate(calc(-50% + ${dx*.35}px),${-rise*.3}px) scale(${sz})`,opacity:.95,offset:.18},{transform:`translate(calc(-50% + ${dx}px),${-rise}px) scale(0)`,opacity:0}],{duration:dur,easing:'cubic-bezier(.25,.6,.4,1)'});
+   a.onfinish=a.oncancel=()=>{el._busy=false;};
+  }
+  const bump=(f,c,w)=>f>=c&&f<=c+w?Math.sin(Math.PI*(f-c)/w):0;
+  function onFrame({t,dt,pos,velPx,idx,active,sinceSettle,thumbX}){
+   // energy: full while held / hovered / keyboard-focused, then a ~2 s decaying "arrival" flourish
+   const arrive=Math.max(0,1-sinceSettle/2.1),E=active?1:arrive*arrive*(3-2*arrive);
+   const lean=Math.max(-1,Math.min(1,velPx/1400));
+   // 1 · leaf sways in the breeze and leans against the motion
+   leaf.style.transform=`rotate(${(E*Math.sin(t*2.6)*9-lean*16).toFixed(2)}deg)`;
+   // 2 · heart beats lub-dub; tempo rises with the slider position (≈70 → 160 bpm)
+   const bpm=70+95*Math.max(0,Math.min(1,(pos-.2)/.8));
+   beat+=dt*bpm/60;const f=beat%1;
+   const s=1+E*(.2*bump(f,0,.13)+.1*bump(f,.2,.12));
+   heart.style.transform=`scale(${s.toFixed(3)})`;
+   if(E>.02){ecg.style.strokeDasharray='.42 1';ecg.style.strokeDashoffset=String((1.42-f*1.84).toFixed(3));ecg.style.opacity=String(.45+.55*E);}
+   else{ecg.style.strokeDasharray='';ecg.style.strokeDashoffset='';ecg.style.opacity='';}
+   // 3 · flame flickers (layered sines ≈ noise), leans away from the drag, core breathes
+   const heat=Math.max(0,Math.min(1,(pos-.66)/.34));
+   const nz=Math.sin(t*13.1)*.5+Math.sin(t*21.7+1.3)*.3+Math.sin(t*7.3+2.1)*.2;
+   const fl=E*.5+heat*.5;
+   flame.style.transform=`skewX(${(-lean*14+fl*3*Math.sin(t*9.2)).toFixed(2)}deg) scale(${(1-fl*.04*nz).toFixed(3)},${(1+fl*.1*nz).toFixed(3)})`;
+   core.style.transform=`scale(${(1+fl*.2*Math.sin(t*17.3+.7)).toFixed(3)})`;
+   const g=glow();
+   if(g){g.style.opacity=(heat*(.55+.25*E+.12*nz*fl)).toFixed(3);g.style.transform=`translate(-50%,-50%) scale(${(.85+heat*.25+.06*nz*fl).toFixed(3)})`;}
+   // embers: a burst on arriving at Strenuous, a trickle while held there
+   if(idx!==lastIdx){if(idx===3&&lastIdx!==-1)burst=7;lastIdx=idx;}
+   if(heat>.55){
+    if(burst>0&&t-emberAt>.035){ember(thumbX,true);burst--;emberAt=t;}
+    else if(active&&t-emberAt>.16-.06*heat){ember(thumbX,false);emberAt=t;}
+   }
+   return E>.01||burst>0;
+  }
   intensitySlider=buildStopSlider({
    root,stops:INTENSITY_STOPS,valueOf:v=>v,initial:homeState.intensity,
-   paintThumb(v){
+   labels:INTENSITY_STOPS.map(v=>v==='any'?'Any':`<span class="stop-ico ${INTENSITY_META[v].cls}">${icon(INTENSITY_META[v].icon)}</span>`),
+   colors:['var(--ink-2)','var(--intensity-1)','var(--intensity-2)','var(--intensity-3)'],
+   hooks:{onFrame,onCommit(v,i){
+    if(v==='any'&&!reducedMotion())icos[0].querySelectorAll('.g-sq').forEach((sq,k)=>sq.animate([{transform:'scale(.2)',opacity:0},{transform:'scale(1.15)',opacity:1,offset:.6},{transform:'none',opacity:1}],{duration:420,delay:k*55,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'}));
+   }},
+   paintThumb(v,i,dir){
     const m=INTENSITY_META[v]||INTENSITY_META.any;
-    thumbIcon.innerHTML=icon(m.icon);
-    thumbIcon.className='stopslider-thumb-icon '+m.cls;
-    if(bubble.textContent!==m.label)bubble.textContent=m.label;
+    icos.forEach((el,k)=>el.classList.toggle('is-on',k===i));
+    root.dataset.level=String(v);
+    rollText(readout,h(m.label),dir);
+    const t=root.querySelector('.stopslider-bubble-text');if(t&&t.textContent!==m.label)t.textContent=m.label;
     thumb.setAttribute('aria-valuetext',m.aria);
-    const idx=INTENSITY_STOPS.indexOf(v);
-    root.querySelectorAll('.stopslider-tick').forEach((t,i)=>t.classList.toggle('on',i<=idx));
    },
    onPreview(v){homeState.intensity=v;updateResults();},
    onCommit(v){setIntensity(v);},
   });
+  icos[0].querySelectorAll('.g-sq').forEach(sq=>{sq.style.transformBox='fill-box';sq.style.transformOrigin='center';});
  }
  function buildFocusChips(instant){
   const row=$('#focus-chips'),group=$('#focus-group');
@@ -600,7 +844,10 @@
   if(homeState.category===id)return;
   homeState.category=id;prefs.set('category',id);
   homeState.focus=null;prefs.set('focus',null);
-  [...$('#cat-tiles').children].forEach(b=>{const on=b.dataset.cat===id;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+  $$('#cat-tiles .category-tile').forEach(b=>{const on=b.dataset.cat===id;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+  moveTileIndicator(true);
+  const onTile=$('#cat-tiles .category-tile.on');
+  if(onTile){const row=$('#cat-tiles');if(row.scrollWidth>row.clientWidth+2){const l=onTile.offsetLeft-16,r=onTile.offsetLeft+onTile.offsetWidth+16;if(l<row.scrollLeft||r>row.scrollLeft+row.clientWidth)row.scrollTo({left:l<row.scrollLeft?l:r-row.clientWidth,behavior:reducedMotion()?'auto':'smooth'});}}
   buildFocusChips(false);
   if(intensitySlider)intensitySlider.setDisabled(id==='hip');
   updateResults();
@@ -628,20 +875,46 @@
   if(!items.length){renderEmptyState(area);return;}
   const countLine=homeState.minutes==='any'?`${items.length} workout${items.length===1?'':'s'}`:`${items.length} workout${items.length===1?'':'s'} fit in ${homeState.minutes} min`;
   const hero=items[0],rest=items.slice(1);
-  let html=`<div class="results-head"><span class="results-count">${h(countLine)}</span></div><div id="hero-slot"></div>`;
-  html+=`<div class="result-grid" id="result-grid"></div>`;
-  area.innerHTML=html;
+  // Keep the skeleton between updates so the hero can update in place and cards FLIP instead of re-entering.
+  if(!area.querySelector(':scope > .results-head')||!$('#hero-slot')||!$('#result-grid')){
+   area.innerHTML=`<div class="results-head"><span class="results-count"></span></div><div id="hero-slot" class="hero-slot"></div><div class="result-grid" id="result-grid"></div>`;
+  }
+  const countEl=area.querySelector('.results-count');
+  if(countEl.textContent!==countLine){if(countEl.textContent)rollText(countEl,h(countLine),1);else countEl.textContent=countLine;}
   paintHero($('#hero-slot'),hero);
   flipUpdate($('#result-grid'),rest,x=>x.session.id,(item,el)=>buildResultCard(item,el));
  }
 
+ function countTo(el,to){
+  if(!el)return;
+  const from=Number(el.textContent)||0;
+  if(from===to)return;
+  if(reducedMotion()||!el.animate){el.textContent=String(to);return;}
+  if(el._pop)el._pop.cancel();
+  cancelAnimationFrame(el._raf);
+  const t0=performance.now(),dur=Math.min(620,260+Math.abs(to-from)*14);
+  const step=now=>{const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=String(Math.round(from+(to-from)*e));if(k<1)el._raf=requestAnimationFrame(step);};
+  el._raf=requestAnimationFrame(step);
+  el._pop=el.animate([{transform:'scale(1)'},{transform:`translateY(${to>from?-2:2}px) scale(1.08)`,offset:.35},{transform:'none'}],{duration:dur+120,easing:'cubic-bezier(.3,.7,.3,1)'});
+ }
+ function heroFittedHTML(changed){return changed&&changed.length?`<span class="hero-fitted">${icon('info')} Fitted: ${h(changed.join(', '))}</span>`:'';}
  function paintHero(slot,item){
-  const {session:s,plan,changed,options}=item;
+  const {session:s,plan,changed}=item;
+  const mins=Math.round(plan.duration/60);
+  const cur=slot.querySelector('.hero-card:not(.is-leaving)');
+  if(cur&&cur.dataset.id===s.id){
+   // Same workout: update in place — the duration counts to its new value, the fitted note swaps.
+   cur._item=item;
+   countTo(cur.querySelector('.hero-duration-num'),mins);
+   const fw=cur.querySelector('.hero-fitted-wrap'),fh=heroFittedHTML(changed);
+   if(fw&&fw.innerHTML!==fh)rollText(fw,fh,1);
+   return;
+  }
   const el=document.createElement('div');
-  el.className='hero-card';
+  el.className='hero-card';el.dataset.id=s.id;el._item=item;
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   const trainsLine=(s.goals&&s.goals.length)?`<p class="hero-trains">Trains ${h(s.goals.join(', '))}</p>`:'';
-  el.innerHTML=`<div class="art" id="hero-art"></div><span class="hero-eyebrow">Best match</span>
+  el.innerHTML=`<div class="hero-art-wrap"><div class="art" id="hero-art"></div></div><span class="hero-eyebrow">Best match</span>
    <div class="hero-content">
     <h2 class="hero-title">${h(s.title)}</h2>
     <p class="hero-summary">${h(s.summary)}</p>
@@ -650,29 +923,57 @@
      <span class="tag">${h(s.level)}</span>
      ${equip.map(e=>`<span class="tag">${h(e)}</span>`).join('')}
     </div>
-    ${changed&&changed.length?`<span class="hero-fitted">${icon('info')} Fitted: ${h(changed.join(', '))}</span>`:''}
+    <div class="hero-fitted-wrap">${heroFittedHTML(changed)}</div>
     <div class="hero-cta">
      <div class="hero-duration">
-      <div class="hero-duration-row"><span class="hero-duration-num num" id="hero-duration">${Math.round(plan.duration/60)}</span>${intensityBadge(s.intensity,'on-dark')}</div>
+      <div class="hero-duration-row"><span class="hero-duration-num num" id="hero-duration">${mins}</span>${intensityBadge(s.intensity,'on-dark')}</div>
       <span class="hero-duration-label">minutes</span>
      </div>
      <button type="button" class="btn hero-start" data-stop-tap>${icon('play')} Start</button>
     </div>
    </div>`;
-  slot.innerHTML='';slot.appendChild(el);
+  if(cur){
+   // Cross-fade: the outgoing hero lifts off on top while the new one settles in underneath.
+   const art=cur.querySelector('.art');if(art)art.style.viewTransitionName='';
+   cur.removeAttribute('id');cur.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+   cur.classList.add('is-leaving');cur.setAttribute('aria-hidden','true');cur.inert=true;
+   if(reducedMotion()||!cur.animate)cur.remove();
+   else{const a=cur.animate([{opacity:1},{opacity:0}],{duration:300,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'});a.onfinish=()=>cur.remove();}
+   el.classList.add('is-swapping');
+  }else el.classList.add('is-arriving');
+  slot.insertBefore(el,slot.firstChild);
   mountArt(el.querySelector('#hero-art'),s.id,s.category);
   setVT(el.querySelector('#hero-art'),'card-art-'+s.id);
   makeTappable(el,()=>go('#/session/'+encodeURIComponent(s.id),true),'Open '+s.title+' details');
-  el.querySelector('.hero-start').addEventListener('click',()=>startSession(s,options,s.title));
+  el.querySelector('.hero-start').addEventListener('click',()=>startSession(s,el._item.options,s.title));
+  // Gentle parallax on the art for mouse/trackpad hover (no-op on touch).
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reducedMotion()){
+   let raf=0,px=0,py=0;
+   el.addEventListener('pointermove',e=>{
+    if(e.pointerType!=='mouse')return;
+    const r=el.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;
+    if(!raf)raf=requestAnimationFrame(()=>{raf=0;el.style.setProperty('--px',px.toFixed(3));el.style.setProperty('--py',py.toFixed(3));});
+   });
+   el.addEventListener('pointerleave',()=>{el.style.setProperty('--px','0');el.style.setProperty('--py','0');});
+  }
+  const clear=e=>{if(e.target===el){el.classList.remove('is-arriving','is-swapping');}};
+  el.addEventListener('animationend',clear);
  }
  function buildResultCard(item,existingEl){
   const {session:s,plan}=item;
+  const mins=Math.round(plan.duration/60);
+  if(existingEl&&existingEl.dataset.id===s.id&&existingEl.querySelector('.result-duration-num')){
+   const num=existingEl.querySelector('.result-duration-num');
+   if(num.textContent!==String(mins))rollText(num,String(mins),mins>Number(num.textContent)?1:-1);
+   return existingEl;
+  }
   const el=existingEl||document.createElement('button');
+  el.dataset.id=s.id;
   if(!existingEl){el.type='button';el.className='result-card';}
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   el.innerHTML=`<div class="result-art"><div class="art" id="art-${h(s.id)}"></div>
     <span class="result-cat-icon" style="color:var(--${s.category})">${icon(catIcon(s.category))}</span>
-    <span class="result-duration-badge">${Math.round(plan.duration/60)} min${intensityBadge(s.intensity,'sm')}</span></div>
+    <span class="result-duration-badge"><span class="result-duration-num">${mins}</span> min${intensityBadge(s.intensity,'sm')}</span></div>
    <div class="result-body">
     <h3 class="result-title">${h(s.title)}</h3>
     <p class="result-summary">${h(s.summary)}</p>
@@ -683,6 +984,10 @@
   mountArt(artEl,s.id,s.category);
   setVT(artEl,'card-art-'+s.id);
   el.onclick=()=>go('#/session/'+encodeURIComponent(s.id),true);
+  if(!el._sheen&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+   el._sheen=true;
+   el.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');});
+  }
   return el;
  }
  function renderEmptyState(area){
