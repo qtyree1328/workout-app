@@ -262,8 +262,8 @@ const hipPoses=[
  ['hip-twisted-pigeon','floor'],['hip-bound-baby','supine'],['hip-seated-pigeon','standing'],['hip-railroad-squat','squat'],['hip-thunderbolt','kneeling'],['hip-prayer-squat','squat'],
 ].map(([id,position])=>({id,position}));
 const hipOpener={id:'hip-opener',title:'Hip Opener',category:'hip',level:'Beginner',goals:['Hip mobility'],focus:['Hips'],
-  summary:'A random mix from the 42-pose hip chart, timed to fit.',
-  why:'Poses are picked at random from the YOGABODY hip-opening chart and ordered from standing to lying down, so you only go down to the floor once. Hold times are shared out to fill the time you choose. A short warm-up comes first because warm muscles stretch more comfortably. Holds of 30–60 s and about a minute per stretch in total match the ACSM guidance. Use the easier variations shown on each photo.',
+  summary:'Random poses from the 42-pose hip chart: 6-minute holds, 1-minute rests.',
+  why:'Poses are picked at random from the YOGABODY hip-opening chart and ordered from standing to lying down, so you only go down to the floor once. Each pose is a long, passive 6-minute hold (3 minutes per side for one-sided poses) with a minute to reset in between, in the style of yin yoga. That is well beyond the ~60 s per stretch ACSM uses as a minimum, so ease in, use props and the easier variations on each photo, and back off any pinching or joint pain. Add the optional warm-up if you are coming in cold.',
   sources:['yogabody','acsm']};
 
 const categories=[
