@@ -54,7 +54,7 @@ Use **Settings → Export** to download a backup and **Import** on another devic
 - `scripts/import_sources.py`: download source metadata/media with network access.
 - `scripts/serve.py`: local server with Safari video range support.
 - `scripts/add_climbing.py`: climbing exercises, diagrams (`media/climbing/`) and study sources. `scripts/add_hip_poses.py`: pose-chart images (`media/poses/`). Run either, then `scripts/classify.py`.
-- `scripts/build_preview.py`: builds a self-contained copy in `preview/` for hosting as a test page.
+- `scripts/build_preview.py`: builds a self-contained copy in `preview/` for hosting as a test page. Add `--password …` to put a password screen in front of it (only a hash is written; it hides the app but does not encrypt the files).
 
 Run `node tests/core.cjs` for catalog/state-machine checks, `node tests/catalog.cjs` for taxonomy/search/budgets, and `node tests/climbing.cjs` for climbing protocol rules and the hip challenge. `tests/browser.cjs` uses Playwright (set `PLAYWRIGHT_MODULE` to your installed module and `PLAYWRIGHT_BROWSERS_PATH` if needed) against `APP_URL`, defaulting to http://127.0.0.1:8766. It covers Chrome and WebKit at iPad sizes, actual video playback, filtering, favorites, rep sets and rest, editing/reordering, persistence, export/import, hidden-page pause, and byte-range media requests. Physical iPad testing is still needed to confirm device-specific media, sound, screen-lock, and Home Screen behavior.
 
