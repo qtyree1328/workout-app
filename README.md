@@ -1,6 +1,6 @@
 # Exercises
 
-A personal exercise library designed for iPad Safari. Three pages: **Groups**, **Exercises**, and **Create Group**.
+A personal exercise library designed for iPad Safari. Four pages: **Groups**, **Exercises**, **Climbing**, and **Create Group**.
 
 ## Open on iPad
 
@@ -25,6 +25,11 @@ The server supports HTTP byte ranges so Safari can load and seek local video cli
 - The workout player has a 3-second lead-in, looping demonstration, timer, optional transition tones, pause, previous/next, and rep counting. Rep sets advance only when you tap the counter to the target or tap Done. Static holds stay timed. Breaks follow each movement and between rounds; no break is added after the final movement.
 - Switching apps/backgrounding pauses the session. Resume explicitly when you return. Screen wake lock is requested where supported; on a local HTTP iPad address it may be unavailable, so keep the screen awake with iPad settings if needed.
 
+## Climbing and the hip challenge
+
+- **Climbing:** hangboard and pull-up bar protocols (max hangs, min-edge hangs, 7:3 repeaters, the Devise 80% / 60% intermittent hangs, low-intensity hangs, weighted, explosive and negative pull-ups, lock-offs, core and antagonist sessions). Each exercise and protocol is labelled by what it trains, such as *Max finger strength*, *Crimps*, *Strength-endurance* or *Endurance*. Filter by goal on the Climbing page, or use the **Climbing** chip on Groups and Exercises. Evidence and programming rules: [RESEARCH.md → Climbing training](RESEARCH.md#climbing-training).
+- **21-Day Hip Opening Challenge:** 42 poses from the supplied YOGABODY chart as photo guides, with a ready-made group for each day. Set the Groups type filter to *21-day hip challenge*.
+
 ## Groups and classification
 
 All exercises have separate Beginner / Intermediate / Advanced difficulty, Light / Moderate / High strain estimates, and Arms / Legs / Abs / Full body navigation categories. Arms includes shoulders/upper back; Legs includes hips. Original detail areas remain available. Group labels reflect the highest movement rating, not a measured workout intensity. These estimates can be changed in an exercise's details. Time, reps, pace, resistance, and rest change actual effort.
@@ -48,8 +53,10 @@ Use **Settings → Export** to download a backup and **Import** on another devic
 - `scripts/classify.py`: rebuild `data/classification.json` and `.js` after catalog changes. `scripts/catalog_rules.py` defines anatomy, movement patterns, dose presets, and bounded routine generation.
 - `scripts/import_sources.py`: download source metadata/media with network access.
 - `scripts/serve.py`: local server with Safari video range support.
+- `scripts/add_climbing.py`: climbing exercises, diagrams (`media/climbing/`) and study sources. `scripts/add_hip_poses.py`: pose-chart images (`media/poses/`). Run either, then `scripts/classify.py`.
+- `scripts/build_preview.py`: builds a self-contained copy in `preview/` for hosting as a test page.
 
-Run `node tests/core.cjs` for catalog/state-machine checks. `tests/browser.cjs` uses Playwright (set `PLAYWRIGHT_MODULE` to your installed module and `PLAYWRIGHT_BROWSERS_PATH` if needed) against `APP_URL`, defaulting to http://127.0.0.1:8766. It covers Chrome and WebKit at iPad sizes, actual video playback, filtering, favorites, rep sets and rest, editing/reordering, persistence, export/import, hidden-page pause, and byte-range media requests. Physical iPad testing is still needed to confirm device-specific media, sound, screen-lock, and Home Screen behavior.
+Run `node tests/core.cjs` for catalog/state-machine checks, `node tests/catalog.cjs` for taxonomy/search/budgets, and `node tests/climbing.cjs` for climbing protocol rules and the hip challenge. `tests/browser.cjs` uses Playwright (set `PLAYWRIGHT_MODULE` to your installed module and `PLAYWRIGHT_BROWSERS_PATH` if needed) against `APP_URL`, defaulting to http://127.0.0.1:8766. It covers Chrome and WebKit at iPad sizes, actual video playback, filtering, favorites, rep sets and rest, editing/reordering, persistence, export/import, hidden-page pause, and byte-range media requests. Physical iPad testing is still needed to confirm device-specific media, sound, screen-lock, and Home Screen behavior.
 
 ## Expanded search and time budgets
 

@@ -2,7 +2,7 @@ const assert=require('node:assert/strict');
 const K=require('../catalog-core.js'),C=require('../workout-core.js');
 const {exercises,groups}=require('../data/classification.json');
 const library=require('../data/library.json');const byId=Object.fromEntries(library.exercises.map(e=>[e.id,e]));
-assert.equal(library.exercises.length,105);assert.equal(groups.length,54);
+assert.equal(library.exercises.length,163);assert.equal(groups.length,89);
 for(const [id,m]of Object.entries(exercises)){assert(m.regions.length,id);assert(m.tags.length>=5,id);assert(m.pattern&&m.dose&&m.trainingType,id);}
 const find=q=>library.exercises.filter(e=>K.search(K.exerciseText(e,exercises[e.id]),q)).map(e=>e.id);
 assert(find('back').includes('prone-band-row'));assert(find('hips').includes('90-90-hip-switches'));assert(find('hip').includes('90-90-hip-switches'));assert(find('sholders').includes('arm-circles'));assert(find('shoulder band').includes('prone-band-w-raise'));assert(find('calves').includes('supported-calf-raise'));assert(find('glutes').includes('standing-hip-extension'));assert(find('thoracic').includes('band-assisted-thoracic-extension'));assert(find('upper back').includes('prone-t-raise'));assert(find('lower back').includes('standing-pelvic-shift'));assert(!find('lower back').includes('wall-push-up'));assert(find('no equipment abs').includes('hollow-body-hold'));assert(find('bar shoulders').includes('prone-dowel-diagonal-reach'));assert.equal(find('hip shoulder banana').length,0);
@@ -11,4 +11,4 @@ for(const minutes of [5,10,15,20,30,45,60]){const fit=K.fitting(groups,minutes);
 assert(K.fitting(groups,30).filter(g=>K.duration(g.steps)>=27*60).length>=6);
 const unknown={name:'Reps',steps:[{mode:'reps',work:30,rest:0}]};assert.equal(K.fitting([unknown],30).length,0);assert.equal(K.fitting([unknown],null).length,1);
 assert.equal(K.duration([{mode:'time',work:60,rest:0}]),63);assert.equal(K.fitting([{name:'Boundary',steps:[{mode:'time',work:300,rest:0}]}],5).length,0);
-console.log('PASS: 105 complete taxonomies, synonym/multiword/typo search, 54 plans, phase preservation, symmetric sides, hold limits, strength recovery, warm-up/cool-down, exact planned durations, global longest-first budgets, rep exclusions.');
+console.log('PASS: 163 complete taxonomies, synonym/multiword/typo search, 89 plans, phase preservation, symmetric sides, hold limits, strength recovery, warm-up/cool-down, exact planned durations, global longest-first budgets, rep exclusions.');

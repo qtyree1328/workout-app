@@ -25,7 +25,7 @@ for e in data['exercises']:
 
 from catalog_rules import enrich, build_groups
 metadata=enrich(data,metadata)
-groups=build_groups(metadata)
+groups=build_groups(metadata,data)
 out={'exercises':metadata,'groups':groups}
 (ROOT/'data/classification.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
 (ROOT/'data/classification.js').write_text('window.CLASSIFICATION = '+json.dumps(out,ensure_ascii=False)+';\n')

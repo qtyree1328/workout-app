@@ -1,0 +1,33 @@
+"""Build a self-contained copy of the app in preview/ for hosting as a test page.
+
+Small thumbnails and diagrams are inlined into data/library.js so the hosted copy
+stays under typical file-count limits. Full source videos are left out (the
+trimmed demonstration clips are included). Output is not committed.
+"""
+import base64, json, pathlib, shutil
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+OUT = ROOT / 'preview'
+if OUT.exists(): shutil.rmtree(OUT)
+OUT.mkdir()
+for name in ['index.html', 'style.css', 'app.js', 'catalog-core.js', 'workout-core.js', 'icon.svg', 'RESEARCH.md', 'data/classification.js']:
+    (OUT / name).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(ROOT / name, OUT / name)
+data = json.loads((ROOT / 'data/library.json').read_text())
+def inline(path):
+    kind = 'image/svg+xml' if path.endswith('.svg') else 'image/jpeg'
+    return f'data:{kind};base64,' + base64.b64encode((ROOT / path).read_bytes()).decode()
+copied = set()
+for e in data['exercises']:
+    for v in e['variants']:
+        v.pop('video', None)  # full source videos are not part of the preview
+        for key in ['clip', 'image']:
+            if v.get(key):copied.add(v[key])
+        if v.get('thumbnail') and v.get('thumbnail') != v.get('image'):
+            v['thumbnail'] = inline(v['thumbnail'])
+for path in sorted(copied):
+    (OUT / path).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(ROOT / path, OUT / path)
+(OUT / 'data/library.js').write_text('window.LIBRARY = ' + json.dumps(data, ensure_ascii=False) + ';\n')
+files = sorted(str(p.relative_to(OUT)) for p in OUT.rglob('*') if p.is_file())
+(OUT / 'files.json').write_text(json.dumps({p: p for p in files if p != 'index.html'}, indent=1))
+print(f'{len(files)} files, {sum((OUT / p).stat().st_size for p in files) / 1e6:.1f} MB in preview/')

@@ -31,11 +31,7 @@ for page,heading,id,name,kind,area,equipment,cue in rows:
 url='https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/warm-up-cool-down'
 sources.append({'id':'aha-warm-up','author':'American Heart Association','url':url,'status':'referenced','text':'Warm-up and cool-down guidance.','media':[]})
 exercises.append({'id':'easy-walking','name':'Easy walking','area':'Spine & full body','kind':'Warm-up','equipment':'None','level':'General','variants':[{'source':'aha-warm-up','type':'instruction','thumbnail':'media/examples/walking.svg','label':'Easy walking','named':True,'note':'Walk at an easy pace. For a warm-up, increase gradually; for a cool-down, slow down gradually.','start':0,'end':0}]})
-out={'sources':sources,'exercises':exercises}
-(ROOT/'data/extra-exercises.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
+from add_hip_poses import merge  # replaces these ids only; keeps climbing and pose-chart entries
+merge(sources,exercises)
 base=json.loads((ROOT/'data/library.json').read_text())
-base['sources']=[s for s in base['sources'] if s['id'] not in {x['id'] for x in sources}]+sources
-base['exercises']=[e for e in base['exercises'] if e['id'] not in {x['id'] for x in exercises}]+exercises
-(ROOT/'data/library.json').write_text(json.dumps(base,ensure_ascii=False,indent=2))
-(ROOT/'data/library.js').write_text('window.LIBRARY = '+json.dumps(base,ensure_ascii=False)+';\n')
 print(f'Added {len(rows)} NHS photo examples and one walking instruction. Catalog: {len(base["exercises"])} entries.')

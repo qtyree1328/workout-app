@@ -6,7 +6,7 @@
  function close(a,b){if(a===b)return true;if(a.length<5||Math.abs(a.length-b.length)>1)return false;let i=0,j=0,edits=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++edits>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return edits+(i<a.length||j<b.length?1:0)<=1;}
  function search(text,query){const q=tokens(query);if(!q.length)return true;const hay=new Set(tokens(text));return q.every(term=>hay.has(term)||[...hay].some(word=>word.startsWith(term)&&term.length>=3||close(term,word)));}
  function duration(steps,rounds=1){if(!steps.length)return 0;if(steps.some(s=>s.mode==='reps'))return null;return 3+steps.reduce((sum,s)=>sum+Number(s.work)+Number(s.rest),0)*rounds-Number(steps.at(-1).rest);}
- function fitting(groups,budgetMinutes){return groups.filter(g=>budgetMinutes===null||(duration(g.steps)!==null&&duration(g.steps)<=budgetMinutes*60)).sort((a,b)=>(duration(b.steps)??-1)-(duration(a.steps)??-1)||a.name.localeCompare(b.name));}
+ function fitting(groups,budgetMinutes){return groups.filter(g=>budgetMinutes===null||(duration(g.steps)!==null&&duration(g.steps)<=budgetMinutes*60)).sort((a,b)=>(duration(b.steps)??-1)-(duration(a.steps)??-1)||a.name.localeCompare(b.name,undefined,{numeric:true}));}
  function exerciseText(e,m){return [e.name,e.kind,e.equipment,e.area,m.target,m.difficulty,m.strain,...(m.tags||[]),...(m.regions||[]),...(e.variants||[]).map(v=>v.label)].join(' ');}
  function groupText(g,byId,metadata){return [g.name,g.kind,g.description,...(g.tags||[]),...(g.focus||[]),...g.steps.filter(s=>s.exercise!=='easy-walking').map(s=>exerciseText(byId[s.exercise],metadata[s.exercise]))].join(' ');}
  return {tokens,search,duration,fitting,exerciseText,groupText};
