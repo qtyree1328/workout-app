@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crux Player — test harness</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/player.css">
+<style>
+ body{padding:28px;max-width:560px;margin:0 auto}
+ h1{font-family:var(--font-round);font-size:22px;margin:0 0 4px}
+ p.lead{color:var(--muted);margin:0 0 22px;font-size:14px}
+ .row{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+ .row button{display:block;width:100%;text-align:left}
+ #status{font-size:13px;color:var(--muted);white-space:pre-wrap;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:18px}
+</style>
+</head>
+<body>
+<h1>Crux Player — demo harness</h1>
+<p class="lead">Starts real compiled sessions straight into <code>Crux.Player</code>. For manual + Playwright testing only.</p>
+
+<div class="row">
+ <button class="btn" id="btn-climbing" type="button">Climbing — Repeaters 7:3 (hangboard)</button>
+ <button class="btn" id="btn-strength" type="button">Strength — Push &amp; Pull (rep sets)</button>
+ <button class="btn" id="btn-mobility" type="button">Mobility — Hip Mobility Flow</button>
+ <button class="btn" id="btn-hip" type="button">Hip Opener — generate (3 poses)</button>
+ <button class="btn-secondary btn" id="btn-resume" type="button">Resume last session</button>
+</div>
+
+<div id="status">Loading…</div>
+
+<script src="data/library.js"></script>
+<script src="data/classification.js"></script>
+<script src="data/sessions.js"></script>
+<script src="js/core/plan.js"></script>
+<script src="js/core/engine.js"></script>
+<script src="js/core/search.js"></script>
+<script src="js/core/hip.js"></script>
+<script src="js/figures.js" onerror="console.warn('figures.js not built yet (guarded)')"></script>
+<script src="js/art.js" onerror="console.warn('art.js not built yet (guarded)')"></script>
+<script src="js/lib.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/player.js"></script>
+<script>
+(function(){
+ const statusEl=document.getElementById('status');
+ function bySessionId(id){return window.SESSIONS.sessions.find(s=>s.id===id);}
+ function startSession(session,titleOverride){
+  Crux.Player.start({session,options:{},title:titleOverride||session.title});
+ }
+ document.getElementById('btn-climbing').addEventListener('click',()=>startSession(bySessionId('repeaters')));
+ document.getElementById('btn-strength').addEventListener('click',()=>startSession(bySessionId('push-pull')));
+ document.getElementById('btn-mobility').addEventListener('click',()=>startSession(bySessionId('hip-flow')));
+ document.getElementById('btn-hip').addEventListener('click',()=>{
+  const gen=window.HipOpener.generate({minutes:20,count:3},window.SESSIONS.hipPoses,window.SESSIONS.positions,window.CLASSIFICATION.exercises);
+  startSession(gen.session,gen.session.title);
+ });
+ document.getElementById('btn-resume').addEventListener('click',()=>Crux.Player.resume());
+ function refreshStatus(){
+  const r=Crux.Player.resumeAvailable();
+  statusEl.textContent=r?`Resume available: "${r.title}" · step ${r.step}/${r.total} · saved ${new Date(r.savedAt).toLocaleTimeString()}`:'No saved session to resume.';
+ }
+ Crux.on('player:closed',refreshStatus);
+ refreshStatus();
+})();
+</script>
+</body>
+</html>

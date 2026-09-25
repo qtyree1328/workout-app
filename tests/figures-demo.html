@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figures &amp; Art demo</title>
+<style>
+ :root{
+  --bg:#f5f5f7; --card:#ffffff; --ink-strong:#1d1d1f; --ink-soft:#6e6e73;
+  --fig-ink:#1c2220; --fig-ink-2:#5b6360; --fig-wood:#C99B62; --fig-wood-2:#9C7443;
+  --fig-bar:#8C949A; --fig-accent:#F2692E; --fig-floor:rgba(0,0,0,.12);
+ }
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink-strong);-webkit-font-smoothing:antialiased}
+ header{padding:28px 28px 6px;max-width:1400px;margin:0 auto}
+ header h1{font-size:26px;margin:0 0 6px;letter-spacing:-.4px}
+ header p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.6;max-width:760px}
+ .toolbar{display:flex;align-items:center;gap:12px;margin-top:16px}
+ button.toggle{border:0;border-radius:12px;padding:10px 18px;font-size:14px;font-weight:600;background:#1c2220;color:#fff;cursor:pointer;min-height:40px}
+ button.toggle:active{transform:scale(.97)}
+ .phase-state{font-size:13px;color:var(--ink-soft)}
+ main{max-width:1400px;margin:0 auto;padding:8px 28px 60px}
+ section{margin-top:34px}
+ section h2{font-size:16px;margin:0 0 4px;letter-spacing:-.2px}
+ section .sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+ .tile{background:var(--card);border-radius:16px;padding:10px 10px 12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 1px 10px rgba(0,0,0,.03)}
+ .tile .stage{aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:var(--tint,#eef1f0)}
+ .tile .label{margin-top:8px;font-size:11.5px;font-weight:600;color:#2c2f2e;line-height:1.35}
+ .tile .id{display:block;font-weight:400;color:var(--ink-soft);font-size:10.5px;margin-top:2px}
+ section.dark{background:#14171a;border-radius:24px;padding:24px 24px 30px;margin-left:-24px;margin-right:-24px}
+ section.dark h2,section.dark .sub{color:#f1f1f3}
+ section.dark .tile{background:#20242a}
+ section.dark .tile .stage{--fig-ink:#f4f1ea;--fig-ink-2:#a9b0ac;--fig-wood:#caa06e;--fig-wood-2:#8a6a47;--fig-bar:#9aa2a8;--fig-accent:#ff8a52;--fig-floor:rgba(255,255,255,.16);background:#262b31}
+ section.dark .tile .label{color:#f1f1f3}
+ section.dark .tile .id{color:#9a9fa6}
+ .art-groups{display:flex;flex-direction:column;gap:22px}
+ .art-group h3{font-size:13px;margin:0 0 8px;text-transform:capitalize;color:var(--ink-soft)}
+ .art-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+ .art-card{aspect-ratio:4/3;border-radius:14px;overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.08)}
+</style>
+</head>
+<body>
+<header>
+ <h1>Figures &amp; Art demo</h1>
+ <p>window.Figures — animated skeletal SVG figures for climbing exercises. window.Art — deterministic generative topographic cover art. Both are dependency-free classic scripts (no build step).</p>
+ <div class="toolbar">
+  <button class="toggle" id="phase-toggle">Show rest phase</button>
+  <span class="phase-state" id="phase-state">Phase: work</span>
+ </div>
+</header>
+<main>
+ <section id="light-section">
+  <h2>Climbing figures — light</h2>
+  <p class="sub">All 16 exercise ids, mounted and animated on tinted tiles.</p>
+  <div class="grid" id="light-grid"></div>
+ </section>
+
+ <section class="dark" id="dark-section">
+  <h2>Climbing figures — dark container</h2>
+  <p class="sub">Same figures; the tile sets --fig-ink (and friends) to light values.</p>
+  <div class="grid" id="dark-grid"></div>
+ </section>
+
+ <section>
+  <h2>Cover art</h2>
+  <p class="sub">Art.cover(seed, category) — a few seeds per category, plus an unrecognised category to show the fallback slate gradient.</p>
+  <div class="art-groups" id="art-groups"></div>
+ </section>
+</main>
+<script src="../js/figures.js"></script>
+<script src="../js/art.js"></script>
+<script>
+ const EXERCISES=[
+  ['hb-warm-up-hangs','Warm-up hangs'],
+  ['hb-max-hang-half-crimp','Max hang · half crimp'],
+  ['hb-max-hang-open-hand','Max hang · open hand'],
+  ['hb-min-edge-hang','Min edge hang'],
+  ['hb-repeaters-7-3','Repeaters 7:3'],
+  ['hb-intermittent-80','Intermittent 80%'],
+  ['hb-endurance-60','Endurance 60%'],
+  ['hb-low-intensity','Low intensity hang'],
+  ['bar-scapular-pull-up','Scapular pull-up'],
+  ['bar-pull-up','Pull-up'],
+  ['bar-weighted-pull-up','Weighted pull-up'],
+  ['bar-explosive-pull-up','Explosive pull-up'],
+  ['bar-slow-negative','Slow negative'],
+  ['bar-lock-off','Lock-off'],
+  ['bar-hanging-knee-raise','Hanging knee raise'],
+  ['push-up','Push-up'],
+ ];
+ const TINTS=['#eef1f0','#eef2f6','#fbeee7','#f3eef7','#eef6f2','#f7f1ea'];
+
+ const controllers=[];
+ function buildGrid(container,tintOffset){
+  EXERCISES.forEach(([id,label],i)=>{
+   const tile=document.createElement('div');
+   tile.className='tile';
+   const stage=document.createElement('div');
+   stage.className='stage';
+   stage.style.setProperty('--tint',TINTS[(i+tintOffset)%TINTS.length]);
+   tile.appendChild(stage);
+   const labelEl=document.createElement('div');
+   labelEl.className='label';
+   labelEl.textContent=label;
+   const idEl=document.createElement('span');
+   idEl.className='id';
+   idEl.textContent=id;
+   labelEl.appendChild(idEl);
+   tile.appendChild(labelEl);
+   container.appendChild(tile);
+   controllers.push(Figures.mount(stage,id,{phase:'work'}));
+  });
+ }
+ buildGrid(document.getElementById('light-grid'),0);
+ buildGrid(document.getElementById('dark-grid'),2);
+
+ let resting=false;
+ const toggleBtn=document.getElementById('phase-toggle');
+ const stateEl=document.getElementById('phase-state');
+ toggleBtn.addEventListener('click',()=>{
+  resting=!resting;
+  controllers.forEach(c=>c.setPhase(resting?'rest':'work'));
+  toggleBtn.textContent=resting?'Show work phase':'Show rest phase';
+  stateEl.textContent='Phase: '+(resting?'rest':'work');
+ });
+
+ const CATS=['climbing','strength','mobility','hip','recovery','unknown'];
+ const artGroups=document.getElementById('art-groups');
+ CATS.forEach(cat=>{
+  const group=document.createElement('div');
+  group.className='art-group';
+  const h=document.createElement('h3');
+  h.textContent=cat;
+  group.appendChild(h);
+  const row=document.createElement('div');
+  row.className='art-row';
+  for(let s=0;s<4;s++){
+   const card=document.createElement('div');
+   card.className='art-card';
+   card.innerHTML=Art.cover(cat+'-seed-'+s,cat);
+   row.appendChild(card);
+  }
+  group.appendChild(row);
+  artGroups.appendChild(group);
+ });
+</script>
+</body>
+</html>
