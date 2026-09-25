@@ -187,22 +187,6 @@
       "media": []
     },
     {
-      "id": "yogabody-hip-challenge",
-      "author": "YOGABODY",
-      "url": "https://www.yogabody.com",
-      "status": "supplied",
-      "text": "21-Day Hip Opening Challenge pose chart (Posechart_Hip-Challenge.pdf). Two poses per day with regressions shown on each page.",
-      "media": []
-    },
-    {
-      "id": "acsm-flexibility",
-      "author": "ACSM position stand (Garber et al., 2011)",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/",
-      "status": "referenced",
-      "text": "Flexibility: hold stretches 10–30 s to mild tightness, accumulating about 60 s per exercise, on at least 2–3 days per week.",
-      "media": []
-    },
-    {
       "id": "lopez-2019",
       "author": "López-Rivera & González-Badillo (2012; 2019)",
       "url": "https://www.researchgate.net/publication/324731332_Comparison_of_the_Effects_of_Three_Hangboard_Strength_and_Endurance_Training_Programs_on_Grip_Endurance_in_Sport_Climbers",
@@ -280,6 +264,22 @@
       "url": "https://www.climbing.com/skills/lattice-hangboarding-part-2/",
       "status": "referenced",
       "text": "Coaching protocol: 7 s on / 3 s off × 6 = one repeater set, load set so the set is hard but completed; used for strength-endurance.",
+      "media": []
+    },
+    {
+      "id": "yogabody-hip-challenge",
+      "author": "YOGABODY",
+      "url": "https://www.yogabody.com",
+      "status": "supplied",
+      "text": "21-Day Hip Opening Challenge pose chart (Posechart_Hip-Challenge.pdf). Two poses per day with regressions shown on each page.",
+      "media": []
+    },
+    {
+      "id": "acsm-flexibility",
+      "author": "ACSM position stand (Garber et al., 2011)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/",
+      "status": "referenced",
+      "text": "Flexibility: hold stretches 10–30 s to mild tightness, accumulating about 60 s per exercise, on at least 2–3 days per week.",
       "media": []
     }
   ],
@@ -2655,2153 +2655,6 @@
       ]
     },
     {
-      "id": "hip-pigeon",
-      "name": "Pigeon",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 1,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 1"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-pigeon.jpg",
-          "image": "media/poses/hip-pigeon.jpg",
-          "label": "Pigeon",
-          "named": true,
-          "prescription": "",
-          "note": "Front shin angled, back leg long. Prop the hip with a block if it floats. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 2,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-butterfly",
-      "name": "Butterfly",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 1,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "groin"
-        ],
-        "pattern": "hip-abduction",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 1"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-butterfly.jpg",
-          "image": "media/poses/hip-butterfly.jpg",
-          "label": "Butterfly",
-          "named": true,
-          "prescription": "",
-          "note": "Soles together, knees wide. Fold forward only as far as feels easy. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 3,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-blaster",
-      "name": "Blaster",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 2,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 2"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-blaster.jpg",
-          "image": "media/poses/hip-blaster.jpg",
-          "label": "Blaster",
-          "named": true,
-          "prescription": "",
-          "note": "Low lunge with hands on a chair; sink the hips forward and down. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 4,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-passive-squat",
-      "name": "Passive Squat",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 2,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "ankles",
-          "adductors",
-          "lower back"
-        ],
-        "pattern": "squat",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 2"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-passive-squat.jpg",
-          "image": "media/poses/hip-passive-squat.jpg",
-          "label": "Passive Squat",
-          "named": true,
-          "prescription": "",
-          "note": "Deep squat, arms resting forward on a chair or block. Let the hips hang. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 5,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-happy-baby",
-      "name": "Happy Baby",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 3,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "hamstrings",
-          "lower back"
-        ],
-        "pattern": "hip-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 3"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-happy-baby.jpg",
-          "image": "media/poses/hip-happy-baby.jpg",
-          "label": "Happy Baby",
-          "named": true,
-          "prescription": "",
-          "note": "On your back, hold the feet and draw the knees toward the armpits. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 6,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-thread-the-needle-supine",
-      "name": "Thread the Needle (supine)",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 3,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 3"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-thread-the-needle-supine.jpg",
-          "image": "media/poses/hip-thread-the-needle-supine.jpg",
-          "label": "Thread the Needle (supine)",
-          "named": true,
-          "prescription": "",
-          "note": "Ankle over opposite knee; pull the lower thigh toward the chest. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 7,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-frog",
-      "name": "Frog",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 4,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "groin"
-        ],
-        "pattern": "hip-abduction",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 4"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-frog.jpg",
-          "image": "media/poses/hip-frog.jpg",
-          "label": "Frog",
-          "named": true,
-          "prescription": "",
-          "note": "Half frog: one knee out to the side at 90°, other leg long. Rest forward on a chair. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 8,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-jackknife-blaster",
-      "name": "Jackknife Blaster",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 4,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 4"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-jackknife-blaster.jpg",
-          "image": "media/poses/hip-jackknife-blaster.jpg",
-          "label": "Jackknife Blaster",
-          "named": true,
-          "prescription": "",
-          "note": "Kneeling lunge, back knee padded; reach back for the rear foot if available. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 9,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-scissors",
-      "name": "Scissors",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 5,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hamstrings",
-          "calves",
-          "hips"
-        ],
-        "pattern": "hinge",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 5"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-scissors.jpg",
-          "image": "media/poses/hip-scissors.jpg",
-          "label": "Scissors",
-          "named": true,
-          "prescription": "",
-          "note": "Staggered stance, hands on a chair or wall; hinge over the straight front leg. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 10,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-lightning-bolt",
-      "name": "Lightning Bolt",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 5,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "quads",
-          "hip flexors",
-          "knees",
-          "ankles"
-        ],
-        "pattern": "knee-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 5"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-lightning-bolt.jpg",
-          "image": "media/poses/hip-lightning-bolt.jpg",
-          "label": "Lightning Bolt",
-          "named": true,
-          "prescription": "",
-          "note": "Kneel sitting back on the heels; lean back only as far as the knees allow. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 11,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-zorro",
-      "name": "Zorro",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 6,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "adductors"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 6"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-zorro.jpg",
-          "image": "media/poses/hip-zorro.jpg",
-          "label": "Zorro",
-          "named": true,
-          "prescription": "",
-          "note": "Seated, one shin forward and one leg bent back. Sit tall on a cushion. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 12,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-supine-butterfly",
-      "name": "Supine Butterfly",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Strap",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 6,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "groin"
-        ],
-        "pattern": "hip-abduction",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 6"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-supine-butterfly.jpg",
-          "image": "media/poses/hip-supine-butterfly.jpg",
-          "label": "Supine Butterfly",
-          "named": true,
-          "prescription": "",
-          "note": "Soles together, then recline. Use a strap or pillows under the knees. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 13,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-thread-the-needle-wall",
-      "name": "Thread the Needle @ Wall",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Wall",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 7,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 7"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-thread-the-needle-wall.jpg",
-          "image": "media/poses/hip-thread-the-needle-wall.jpg",
-          "label": "Thread the Needle @ Wall",
-          "named": true,
-          "prescription": "",
-          "note": "Seated figure-four: ankle over the opposite knee, walk the hands back. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 14,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-prone-butterfly",
-      "name": "Prone Butterfly",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Strap",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 7,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 7"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-prone-butterfly.jpg",
-          "image": "media/poses/hip-prone-butterfly.jpg",
-          "label": "Prone Butterfly",
-          "named": true,
-          "prescription": "",
-          "note": "One leg bent in front, the other out behind; lower toward the floor. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 15,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-ninja-squats",
-      "name": "Ninja Squats",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 8,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "adductors",
-          "hips",
-          "hamstrings",
-          "ankles"
-        ],
-        "pattern": "lateral-squat",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 8"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-ninja-squats.jpg",
-          "image": "media/poses/hip-ninja-squats.jpg",
-          "label": "Ninja Squats",
-          "named": true,
-          "prescription": "",
-          "note": "Wide stance, shift into one bent knee with the other leg straight. Use a chair. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 16,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-lateral-chain-stretch",
-      "name": "Lateral Chain Stretch",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 8,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "obliques",
-          "hips",
-          "outer hip",
-          "lats"
-        ],
-        "pattern": "lateral-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 8"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-lateral-chain-stretch.jpg",
-          "image": "media/poses/hip-lateral-chain-stretch.jpg",
-          "label": "Lateral Chain Stretch",
-          "named": true,
-          "prescription": "",
-          "note": "Side-lying on a forearm, legs stacked; lift the hip gently to lengthen the side. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 17,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-psoas-blaster-chair",
-      "name": "Psoas Blaster (chair)",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 9,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 9"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-psoas-blaster-chair.jpg",
-          "image": "media/poses/hip-psoas-blaster-chair.jpg",
-          "label": "Psoas Blaster (chair)",
-          "named": true,
-          "prescription": "",
-          "note": "Back knee on a padded chair, front foot forward; press the hips forward. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 18,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-reclined-scissors",
-      "name": "Reclined Scissors",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 9,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hamstrings",
-          "hips",
-          "calves"
-        ],
-        "pattern": "hinge",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 9"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-reclined-scissors.jpg",
-          "image": "media/poses/hip-reclined-scissors.jpg",
-          "label": "Reclined Scissors",
-          "named": true,
-          "prescription": "",
-          "note": "On your back with one leg up on a chair or wall; keep the other leg long. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 19,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-blaster-twist",
-      "name": "Blaster Twist",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 10,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "hips",
-          "thoracic spine"
-        ],
-        "pattern": "thoracic-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 10"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-blaster-twist.jpg",
-          "image": "media/poses/hip-blaster-twist.jpg",
-          "label": "Blaster Twist",
-          "named": true,
-          "prescription": "",
-          "note": "Low lunge, rotate the chest toward the front knee. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 20,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-squat-twist",
-      "name": "Squat Twist",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 10,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "thoracic spine",
-          "adductors"
-        ],
-        "pattern": "thoracic-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 10"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-squat-twist.jpg",
-          "image": "media/poses/hip-squat-twist.jpg",
-          "label": "Squat Twist",
-          "named": true,
-          "prescription": "",
-          "note": "Deep squat, elbow inside one knee, rotate open. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 21,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-double-pigeon",
-      "name": "Double Pigeon",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 11,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 11"
-        ],
-        "target": "Legs",
-        "difficulty": "Advanced",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-double-pigeon.jpg",
-          "image": "media/poses/hip-double-pigeon.jpg",
-          "label": "Double Pigeon",
-          "named": true,
-          "prescription": "",
-          "note": "Stack the shins. Sit on a block or chair; fold forward gently. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 22,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-bound-butterfly",
-      "name": "Bound Butterfly",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 11,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "lower back"
-        ],
-        "pattern": "hip-abduction",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 11"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-bound-butterfly.jpg",
-          "image": "media/poses/hip-bound-butterfly.jpg",
-          "label": "Bound Butterfly",
-          "named": true,
-          "prescription": "",
-          "note": "Butterfly with a forward fold; rest the arms on a chair or block. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 23,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-eagle-fold",
-      "name": "Eagle Fold",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 12,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 12"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-eagle-fold.jpg",
-          "image": "media/poses/hip-eagle-fold.jpg",
-          "label": "Eagle Fold",
-          "named": true,
-          "prescription": "",
-          "note": "Cross one thigh over the other, then fold forward over the legs. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 24,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-cross-thread",
-      "name": "Cross-Thread",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 12,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 12"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-cross-thread.jpg",
-          "image": "media/poses/hip-cross-thread.jpg",
-          "label": "Cross-Thread",
-          "named": true,
-          "prescription": "",
-          "note": "On your back, cross the thighs and hug the legs toward the chest. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 25,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-swiss-army-knife",
-      "name": "Swiss Army Knife",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Strap",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 13,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 13"
-        ],
-        "target": "Legs",
-        "difficulty": "Advanced",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-swiss-army-knife.jpg",
-          "image": "media/poses/hip-swiss-army-knife.jpg",
-          "label": "Swiss Army Knife",
-          "named": true,
-          "prescription": "",
-          "note": "Kneeling lunge; loop a strap around the back foot and draw it up. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 26,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-saddle",
-      "name": "Saddle",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 13,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "quads",
-          "hip flexors",
-          "knees"
-        ],
-        "pattern": "knee-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 13"
-        ],
-        "target": "Legs",
-        "difficulty": "Advanced",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-saddle.jpg",
-          "image": "media/poses/hip-saddle.jpg",
-          "label": "Saddle",
-          "named": true,
-          "prescription": "",
-          "note": "From kneeling on the heels, lean back onto the hands or forearms. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 27,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-butterfly-squat",
-      "name": "Butterfly Squat",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 14,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "ankles"
-        ],
-        "pattern": "squat",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 14"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-butterfly-squat.jpg",
-          "image": "media/poses/hip-butterfly-squat.jpg",
-          "label": "Butterfly Squat",
-          "named": true,
-          "prescription": "",
-          "note": "Deep squat with knees wide; hold a chair or pole for balance. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 28,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-half-lightning-bolt",
-      "name": "Half Lightning Bolt",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 14,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "quads",
-          "hip flexors",
-          "knees"
-        ],
-        "pattern": "knee-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 14"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-half-lightning-bolt.jpg",
-          "image": "media/poses/hip-half-lightning-bolt.jpg",
-          "label": "Half Lightning Bolt",
-          "named": true,
-          "prescription": "",
-          "note": "One leg folded back, the other long. Lean back only as far as comfortable. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 29,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-fallen-blaster",
-      "name": "Fallen Blaster",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 15,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 15"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-fallen-blaster.jpg",
-          "image": "media/poses/hip-fallen-blaster.jpg",
-          "label": "Fallen Blaster",
-          "named": true,
-          "prescription": "",
-          "note": "Long low lunge, back knee down; support the chest on a chair. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 30,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-a-baby",
-      "name": "A-Baby",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 15,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hamstrings",
-          "hips",
-          "calves"
-        ],
-        "pattern": "hinge",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 15"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-a-baby.jpg",
-          "image": "media/poses/hip-a-baby.jpg",
-          "label": "A-Baby",
-          "named": true,
-          "prescription": "",
-          "note": "On your back, hold one straight leg up; keep the other leg long. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 31,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-standing-psoas",
-      "name": "Standing Psoas",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Table",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 16,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hip flexors",
-          "quads",
-          "hips"
-        ],
-        "pattern": "hip-extension",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 16"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-standing-psoas.jpg",
-          "image": "media/poses/hip-standing-psoas.jpg",
-          "label": "Standing Psoas",
-          "named": true,
-          "prescription": "",
-          "note": "Back shin on a table or bench, front leg standing; tuck the pelvis. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 32,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-standing-pigeon",
-      "name": "Standing Pigeon",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Table",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 16,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 16"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-standing-pigeon.jpg",
-          "image": "media/poses/hip-standing-pigeon.jpg",
-          "label": "Standing Pigeon",
-          "named": true,
-          "prescription": "",
-          "note": "Front shin across a table, hinge forward from the hips. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 33,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-sage-fold",
-      "name": "Sage Fold",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Pole",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 17,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hamstrings",
-          "hips",
-          "adductors"
-        ],
-        "pattern": "hinge",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 17"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-sage-fold.jpg",
-          "image": "media/poses/hip-sage-fold.jpg",
-          "label": "Sage Fold",
-          "named": true,
-          "prescription": "",
-          "note": "Seated, one leg long and one bent; reach forward along the long leg. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 34,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-long-butterfly",
-      "name": "Long Butterfly",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Pole",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 17,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "lower back"
-        ],
-        "pattern": "hip-abduction",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 17"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-long-butterfly.jpg",
-          "image": "media/poses/hip-long-butterfly.jpg",
-          "label": "Long Butterfly",
-          "named": true,
-          "prescription": "",
-          "note": "Soles together with feet further away; fold forward and relax the back. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 35,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-eagle-legs",
-      "name": "Eagle Legs",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 18,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 18"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-eagle-legs.jpg",
-          "image": "media/poses/hip-eagle-legs.jpg",
-          "label": "Eagle Legs",
-          "named": true,
-          "prescription": "",
-          "note": "Seated, cross one leg over the other and hug the shin toward you. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 36,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-chair-squat",
-      "name": "Chair Squat",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 18,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 18"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-chair-squat.jpg",
-          "image": "media/poses/hip-chair-squat.jpg",
-          "label": "Chair Squat",
-          "named": true,
-          "prescription": "",
-          "note": "Standing figure-four holding a chair: ankle on the opposite knee, sit back. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 37,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-twisted-pigeon",
-      "name": "Twisted Pigeon",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 19,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "thoracic spine"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 19"
-        ],
-        "target": "Legs",
-        "difficulty": "Advanced",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-twisted-pigeon.jpg",
-          "image": "media/poses/hip-twisted-pigeon.jpg",
-          "label": "Twisted Pigeon",
-          "named": true,
-          "prescription": "",
-          "note": "From pigeon, rotate the chest toward the back leg. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 38,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-bound-baby",
-      "name": "Bound Baby",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "None",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 19,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "lower back"
-        ],
-        "pattern": "hip-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 19"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-bound-baby.jpg",
-          "image": "media/poses/hip-bound-baby.jpg",
-          "label": "Bound Baby",
-          "named": true,
-          "prescription": "",
-          "note": "On your back, hold both feet with the knees wide and drawn down. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 39,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-seated-pigeon",
-      "name": "Seated Pigeon",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 20,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "glutes",
-          "outer hip"
-        ],
-        "pattern": "hip-rotation",
-        "trainingType": "static-stretch",
-        "unilateral": true,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 20"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-seated-pigeon.jpg",
-          "image": "media/poses/hip-seated-pigeon.jpg",
-          "label": "Seated Pigeon",
-          "named": true,
-          "prescription": "",
-          "note": "On a chair, ankle over the opposite knee; hinge forward with a long spine. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 40,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-railroad-squat",
-      "name": "Railroad Squat",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Pole",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 20,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "ankles",
-          "adductors"
-        ],
-        "pattern": "squat",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 20"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-railroad-squat.jpg",
-          "image": "media/poses/hip-railroad-squat.jpg",
-          "label": "Railroad Squat",
-          "named": true,
-          "prescription": "",
-          "note": "Deep squat holding a pole or doorframe; keep the heels down if you can. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 41,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-thunderbolt",
-      "name": "Thunderbolt",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Chair",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 21,
-        "pose": 1
-      },
-      "taxonomy": {
-        "regions": [
-          "quads",
-          "knees",
-          "ankles"
-        ],
-        "pattern": "knee-flexion",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 21"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-thunderbolt.jpg",
-          "image": "media/poses/hip-thunderbolt.jpg",
-          "label": "Thunderbolt",
-          "named": true,
-          "prescription": "",
-          "note": "Kneel sitting on the heels; add a cushion under the seat if needed. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 42,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "hip-prayer-squat",
-      "name": "Prayer Squat",
-      "area": "Hips & legs",
-      "kind": "Mobility",
-      "equipment": "Yoga block",
-      "level": "General",
-      "program": {
-        "id": "hip-challenge",
-        "day": 21,
-        "pose": 2
-      },
-      "taxonomy": {
-        "regions": [
-          "hips",
-          "adductors",
-          "ankles"
-        ],
-        "pattern": "squat",
-        "trainingType": "static-stretch",
-        "unilateral": false,
-        "aliases": [
-          "yoga",
-          "hip opener",
-          "hip opening",
-          "pose chart",
-          "hip challenge",
-          "day 21"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": true
-      },
-      "variants": [
-        {
-          "source": "yogabody-hip-challenge",
-          "type": "image",
-          "thumbnail": "media/poses/thumbs/hip-prayer-squat.jpg",
-          "image": "media/poses/hip-prayer-squat.jpg",
-          "label": "Prayer Squat",
-          "named": true,
-          "prescription": "",
-          "note": "Deep squat, palms together, elbows gently pressing the knees wide. Props shown are optional.",
-          "credit": "YOGABODY pose chart",
-          "page": 43,
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
       "id": "hb-warm-up-hangs",
       "name": "Hangboard warm-up hangs",
       "area": "Shoulders & back",
@@ -5695,6 +3548,2195 @@
           "prescription": "",
           "note": "Hands under shoulders, body in one line. Balances the pulling in climbing. Use knees or a wall to make it easier.",
           "credit": "Diagram",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-pigeon",
+      "name": "Pigeon",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 1,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 1"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-pigeon.jpg",
+          "image": "media/poses/hip-pigeon.jpg",
+          "options": "media/poses/hip-pigeon-options.jpg",
+          "label": "Pigeon",
+          "named": true,
+          "prescription": "",
+          "note": "Front shin angled, back leg long. Prop the hip with a block if it floats. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 2,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-butterfly",
+      "name": "Butterfly",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 1,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "groin"
+        ],
+        "pattern": "hip-abduction",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 1"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-butterfly.jpg",
+          "image": "media/poses/hip-butterfly.jpg",
+          "options": "media/poses/hip-butterfly-options.jpg",
+          "label": "Butterfly",
+          "named": true,
+          "prescription": "",
+          "note": "Soles together, knees wide. Fold forward only as far as feels easy. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 3,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-blaster",
+      "name": "Blaster",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 2,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 2"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-blaster.jpg",
+          "image": "media/poses/hip-blaster.jpg",
+          "options": "media/poses/hip-blaster-options.jpg",
+          "label": "Blaster",
+          "named": true,
+          "prescription": "",
+          "note": "Low lunge with hands on a chair; sink the hips forward and down. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 4,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-passive-squat",
+      "name": "Passive Squat",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 2,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "ankles",
+          "adductors",
+          "lower back"
+        ],
+        "pattern": "squat",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 2"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-passive-squat.jpg",
+          "image": "media/poses/hip-passive-squat.jpg",
+          "options": "media/poses/hip-passive-squat-options.jpg",
+          "label": "Passive Squat",
+          "named": true,
+          "prescription": "",
+          "note": "Deep squat, arms resting forward on a chair or block. Let the hips hang. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 5,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-happy-baby",
+      "name": "Happy Baby",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 3,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "hamstrings",
+          "lower back"
+        ],
+        "pattern": "hip-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 3"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-happy-baby.jpg",
+          "image": "media/poses/hip-happy-baby.jpg",
+          "options": "media/poses/hip-happy-baby-options.jpg",
+          "label": "Happy Baby",
+          "named": true,
+          "prescription": "",
+          "note": "On your back, hold the feet and draw the knees toward the armpits. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 6,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-thread-the-needle-supine",
+      "name": "Thread the Needle (supine)",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 3,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 3"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-thread-the-needle-supine.jpg",
+          "image": "media/poses/hip-thread-the-needle-supine.jpg",
+          "options": "media/poses/hip-thread-the-needle-supine-options.jpg",
+          "label": "Thread the Needle (supine)",
+          "named": true,
+          "prescription": "",
+          "note": "Ankle over opposite knee; pull the lower thigh toward the chest. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 7,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-frog",
+      "name": "Frog",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 4,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "groin"
+        ],
+        "pattern": "hip-abduction",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 4"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-frog.jpg",
+          "image": "media/poses/hip-frog.jpg",
+          "options": "media/poses/hip-frog-options.jpg",
+          "label": "Frog",
+          "named": true,
+          "prescription": "",
+          "note": "Half frog: one knee out to the side at 90°, other leg long. Rest forward on a chair. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 8,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-jackknife-blaster",
+      "name": "Jackknife Blaster",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 4,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 4"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-jackknife-blaster.jpg",
+          "image": "media/poses/hip-jackknife-blaster.jpg",
+          "options": "media/poses/hip-jackknife-blaster-options.jpg",
+          "label": "Jackknife Blaster",
+          "named": true,
+          "prescription": "",
+          "note": "Kneeling lunge, back knee padded; reach back for the rear foot if available. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 9,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-scissors",
+      "name": "Scissors",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 5,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hamstrings",
+          "calves",
+          "hips"
+        ],
+        "pattern": "hinge",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 5"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-scissors.jpg",
+          "image": "media/poses/hip-scissors.jpg",
+          "options": "media/poses/hip-scissors-options.jpg",
+          "label": "Scissors",
+          "named": true,
+          "prescription": "",
+          "note": "Staggered stance, hands on a chair or wall; hinge over the straight front leg. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 10,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-lightning-bolt",
+      "name": "Lightning Bolt",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 5,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "quads",
+          "hip flexors",
+          "knees",
+          "ankles"
+        ],
+        "pattern": "knee-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 5"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-lightning-bolt.jpg",
+          "image": "media/poses/hip-lightning-bolt.jpg",
+          "options": "media/poses/hip-lightning-bolt-options.jpg",
+          "label": "Lightning Bolt",
+          "named": true,
+          "prescription": "",
+          "note": "Kneel sitting back on the heels; lean back only as far as the knees allow. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 11,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-zorro",
+      "name": "Zorro",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 6,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "adductors"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 6"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-zorro.jpg",
+          "image": "media/poses/hip-zorro.jpg",
+          "options": "media/poses/hip-zorro-options.jpg",
+          "label": "Zorro",
+          "named": true,
+          "prescription": "",
+          "note": "Seated, one shin forward and one leg bent back. Sit tall on a cushion. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 12,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-supine-butterfly",
+      "name": "Supine Butterfly",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Strap",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 6,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "groin"
+        ],
+        "pattern": "hip-abduction",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 6"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-supine-butterfly.jpg",
+          "image": "media/poses/hip-supine-butterfly.jpg",
+          "options": "media/poses/hip-supine-butterfly-options.jpg",
+          "label": "Supine Butterfly",
+          "named": true,
+          "prescription": "",
+          "note": "Soles together, then recline. Use a strap or pillows under the knees. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 13,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-thread-the-needle-wall",
+      "name": "Thread the Needle @ Wall",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Wall",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 7,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 7"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-thread-the-needle-wall.jpg",
+          "image": "media/poses/hip-thread-the-needle-wall.jpg",
+          "options": "media/poses/hip-thread-the-needle-wall-options.jpg",
+          "label": "Thread the Needle @ Wall",
+          "named": true,
+          "prescription": "",
+          "note": "Seated figure-four: ankle over the opposite knee, walk the hands back. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 14,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-prone-butterfly",
+      "name": "Prone Butterfly",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Strap",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 7,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 7"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-prone-butterfly.jpg",
+          "image": "media/poses/hip-prone-butterfly.jpg",
+          "options": "media/poses/hip-prone-butterfly-options.jpg",
+          "label": "Prone Butterfly",
+          "named": true,
+          "prescription": "",
+          "note": "One leg bent in front, the other out behind; lower toward the floor. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 15,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-ninja-squats",
+      "name": "Ninja Squats",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 8,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "adductors",
+          "hips",
+          "hamstrings",
+          "ankles"
+        ],
+        "pattern": "lateral-squat",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 8"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-ninja-squats.jpg",
+          "image": "media/poses/hip-ninja-squats.jpg",
+          "options": "media/poses/hip-ninja-squats-options.jpg",
+          "label": "Ninja Squats",
+          "named": true,
+          "prescription": "",
+          "note": "Wide stance, shift into one bent knee with the other leg straight. Use a chair. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 16,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-lateral-chain-stretch",
+      "name": "Lateral Chain Stretch",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 8,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "obliques",
+          "hips",
+          "outer hip",
+          "lats"
+        ],
+        "pattern": "lateral-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 8"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-lateral-chain-stretch.jpg",
+          "image": "media/poses/hip-lateral-chain-stretch.jpg",
+          "options": "media/poses/hip-lateral-chain-stretch-options.jpg",
+          "label": "Lateral Chain Stretch",
+          "named": true,
+          "prescription": "",
+          "note": "Side-lying on a forearm, legs stacked; lift the hip gently to lengthen the side. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 17,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-psoas-blaster-chair",
+      "name": "Psoas Blaster (chair)",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 9,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 9"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-psoas-blaster-chair.jpg",
+          "image": "media/poses/hip-psoas-blaster-chair.jpg",
+          "options": "media/poses/hip-psoas-blaster-chair-options.jpg",
+          "label": "Psoas Blaster (chair)",
+          "named": true,
+          "prescription": "",
+          "note": "Back knee on a padded chair, front foot forward; press the hips forward. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 18,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-reclined-scissors",
+      "name": "Reclined Scissors",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 9,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hamstrings",
+          "hips",
+          "calves"
+        ],
+        "pattern": "hinge",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 9"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-reclined-scissors.jpg",
+          "image": "media/poses/hip-reclined-scissors.jpg",
+          "options": "media/poses/hip-reclined-scissors-options.jpg",
+          "label": "Reclined Scissors",
+          "named": true,
+          "prescription": "",
+          "note": "On your back with one leg up on a chair or wall; keep the other leg long. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 19,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-blaster-twist",
+      "name": "Blaster Twist",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 10,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "hips",
+          "thoracic spine"
+        ],
+        "pattern": "thoracic-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 10"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-blaster-twist.jpg",
+          "image": "media/poses/hip-blaster-twist.jpg",
+          "options": "media/poses/hip-blaster-twist-options.jpg",
+          "label": "Blaster Twist",
+          "named": true,
+          "prescription": "",
+          "note": "Low lunge, rotate the chest toward the front knee. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 20,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-squat-twist",
+      "name": "Squat Twist",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 10,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "thoracic spine",
+          "adductors"
+        ],
+        "pattern": "thoracic-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 10"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-squat-twist.jpg",
+          "image": "media/poses/hip-squat-twist.jpg",
+          "options": "media/poses/hip-squat-twist-options.jpg",
+          "label": "Squat Twist",
+          "named": true,
+          "prescription": "",
+          "note": "Deep squat, elbow inside one knee, rotate open. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 21,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-double-pigeon",
+      "name": "Double Pigeon",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 11,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 11"
+        ],
+        "target": "Legs",
+        "difficulty": "Advanced",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-double-pigeon.jpg",
+          "image": "media/poses/hip-double-pigeon.jpg",
+          "options": "media/poses/hip-double-pigeon-options.jpg",
+          "label": "Double Pigeon",
+          "named": true,
+          "prescription": "",
+          "note": "Stack the shins. Sit on a block or chair; fold forward gently. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 22,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-bound-butterfly",
+      "name": "Bound Butterfly",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 11,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "lower back"
+        ],
+        "pattern": "hip-abduction",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 11"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-bound-butterfly.jpg",
+          "image": "media/poses/hip-bound-butterfly.jpg",
+          "options": "media/poses/hip-bound-butterfly-options.jpg",
+          "label": "Bound Butterfly",
+          "named": true,
+          "prescription": "",
+          "note": "Butterfly with a forward fold; rest the arms on a chair or block. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 23,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-eagle-fold",
+      "name": "Eagle Fold",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 12,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 12"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-eagle-fold.jpg",
+          "image": "media/poses/hip-eagle-fold.jpg",
+          "options": "media/poses/hip-eagle-fold-options.jpg",
+          "label": "Eagle Fold",
+          "named": true,
+          "prescription": "",
+          "note": "Cross one thigh over the other, then fold forward over the legs. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 24,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-cross-thread",
+      "name": "Cross-Thread",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 12,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 12"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-cross-thread.jpg",
+          "image": "media/poses/hip-cross-thread.jpg",
+          "options": "media/poses/hip-cross-thread-options.jpg",
+          "label": "Cross-Thread",
+          "named": true,
+          "prescription": "",
+          "note": "On your back, cross the thighs and hug the legs toward the chest. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 25,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-swiss-army-knife",
+      "name": "Swiss Army Knife",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Strap",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 13,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 13"
+        ],
+        "target": "Legs",
+        "difficulty": "Advanced",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-swiss-army-knife.jpg",
+          "image": "media/poses/hip-swiss-army-knife.jpg",
+          "options": "media/poses/hip-swiss-army-knife-options.jpg",
+          "label": "Swiss Army Knife",
+          "named": true,
+          "prescription": "",
+          "note": "Kneeling lunge; loop a strap around the back foot and draw it up. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 26,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-saddle",
+      "name": "Saddle",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 13,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "quads",
+          "hip flexors",
+          "knees"
+        ],
+        "pattern": "knee-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 13"
+        ],
+        "target": "Legs",
+        "difficulty": "Advanced",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-saddle.jpg",
+          "image": "media/poses/hip-saddle.jpg",
+          "options": "media/poses/hip-saddle-options.jpg",
+          "label": "Saddle",
+          "named": true,
+          "prescription": "",
+          "note": "From kneeling on the heels, lean back onto the hands or forearms. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 27,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-butterfly-squat",
+      "name": "Butterfly Squat",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 14,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "ankles"
+        ],
+        "pattern": "squat",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 14"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-butterfly-squat.jpg",
+          "image": "media/poses/hip-butterfly-squat.jpg",
+          "options": "media/poses/hip-butterfly-squat-options.jpg",
+          "label": "Butterfly Squat",
+          "named": true,
+          "prescription": "",
+          "note": "Deep squat with knees wide; hold a chair or pole for balance. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 28,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-half-lightning-bolt",
+      "name": "Half Lightning Bolt",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 14,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "quads",
+          "hip flexors",
+          "knees"
+        ],
+        "pattern": "knee-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 14"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-half-lightning-bolt.jpg",
+          "image": "media/poses/hip-half-lightning-bolt.jpg",
+          "options": "media/poses/hip-half-lightning-bolt-options.jpg",
+          "label": "Half Lightning Bolt",
+          "named": true,
+          "prescription": "",
+          "note": "One leg folded back, the other long. Lean back only as far as comfortable. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 29,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-fallen-blaster",
+      "name": "Fallen Blaster",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 15,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 15"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-fallen-blaster.jpg",
+          "image": "media/poses/hip-fallen-blaster.jpg",
+          "options": "media/poses/hip-fallen-blaster-options.jpg",
+          "label": "Fallen Blaster",
+          "named": true,
+          "prescription": "",
+          "note": "Long low lunge, back knee down; support the chest on a chair. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 30,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-a-baby",
+      "name": "A-Baby",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 15,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hamstrings",
+          "hips",
+          "calves"
+        ],
+        "pattern": "hinge",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 15"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-a-baby.jpg",
+          "image": "media/poses/hip-a-baby.jpg",
+          "options": "media/poses/hip-a-baby-options.jpg",
+          "label": "A-Baby",
+          "named": true,
+          "prescription": "",
+          "note": "On your back, hold one straight leg up; keep the other leg long. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 31,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-standing-psoas",
+      "name": "Standing Psoas",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Table",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 16,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hip flexors",
+          "quads",
+          "hips"
+        ],
+        "pattern": "hip-extension",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 16"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-standing-psoas.jpg",
+          "image": "media/poses/hip-standing-psoas.jpg",
+          "options": "media/poses/hip-standing-psoas-options.jpg",
+          "label": "Standing Psoas",
+          "named": true,
+          "prescription": "",
+          "note": "Back shin on a table or bench, front leg standing; tuck the pelvis. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 32,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-standing-pigeon",
+      "name": "Standing Pigeon",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Table",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 16,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 16"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-standing-pigeon.jpg",
+          "image": "media/poses/hip-standing-pigeon.jpg",
+          "options": "media/poses/hip-standing-pigeon-options.jpg",
+          "label": "Standing Pigeon",
+          "named": true,
+          "prescription": "",
+          "note": "Front shin across a table, hinge forward from the hips. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 33,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-sage-fold",
+      "name": "Sage Fold",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Pole",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 17,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hamstrings",
+          "hips",
+          "adductors"
+        ],
+        "pattern": "hinge",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 17"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-sage-fold.jpg",
+          "image": "media/poses/hip-sage-fold.jpg",
+          "options": "media/poses/hip-sage-fold-options.jpg",
+          "label": "Sage Fold",
+          "named": true,
+          "prescription": "",
+          "note": "Seated, one leg long and one bent; reach forward along the long leg. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 34,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-long-butterfly",
+      "name": "Long Butterfly",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Pole",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 17,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "lower back"
+        ],
+        "pattern": "hip-abduction",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 17"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-long-butterfly.jpg",
+          "image": "media/poses/hip-long-butterfly.jpg",
+          "options": "media/poses/hip-long-butterfly-options.jpg",
+          "label": "Long Butterfly",
+          "named": true,
+          "prescription": "",
+          "note": "Soles together with feet further away; fold forward and relax the back. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 35,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-eagle-legs",
+      "name": "Eagle Legs",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 18,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 18"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-eagle-legs.jpg",
+          "image": "media/poses/hip-eagle-legs.jpg",
+          "options": "media/poses/hip-eagle-legs-options.jpg",
+          "label": "Eagle Legs",
+          "named": true,
+          "prescription": "",
+          "note": "Seated, cross one leg over the other and hug the shin toward you. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 36,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-chair-squat",
+      "name": "Chair Squat",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 18,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 18"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-chair-squat.jpg",
+          "image": "media/poses/hip-chair-squat.jpg",
+          "options": "media/poses/hip-chair-squat-options.jpg",
+          "label": "Chair Squat",
+          "named": true,
+          "prescription": "",
+          "note": "Standing figure-four holding a chair: ankle on the opposite knee, sit back. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 37,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-twisted-pigeon",
+      "name": "Twisted Pigeon",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 19,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "thoracic spine"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 19"
+        ],
+        "target": "Legs",
+        "difficulty": "Advanced",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-twisted-pigeon.jpg",
+          "image": "media/poses/hip-twisted-pigeon.jpg",
+          "options": "media/poses/hip-twisted-pigeon-options.jpg",
+          "label": "Twisted Pigeon",
+          "named": true,
+          "prescription": "",
+          "note": "From pigeon, rotate the chest toward the back leg. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 38,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-bound-baby",
+      "name": "Bound Baby",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 19,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "lower back"
+        ],
+        "pattern": "hip-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 19"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-bound-baby.jpg",
+          "image": "media/poses/hip-bound-baby.jpg",
+          "options": "media/poses/hip-bound-baby-options.jpg",
+          "label": "Bound Baby",
+          "named": true,
+          "prescription": "",
+          "note": "On your back, hold both feet with the knees wide and drawn down. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 39,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-seated-pigeon",
+      "name": "Seated Pigeon",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 20,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "glutes",
+          "outer hip"
+        ],
+        "pattern": "hip-rotation",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 20"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-seated-pigeon.jpg",
+          "image": "media/poses/hip-seated-pigeon.jpg",
+          "options": "media/poses/hip-seated-pigeon-options.jpg",
+          "label": "Seated Pigeon",
+          "named": true,
+          "prescription": "",
+          "note": "On a chair, ankle over the opposite knee; hinge forward with a long spine. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 40,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-railroad-squat",
+      "name": "Railroad Squat",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Pole",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 20,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "ankles",
+          "adductors"
+        ],
+        "pattern": "squat",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 20"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-railroad-squat.jpg",
+          "image": "media/poses/hip-railroad-squat.jpg",
+          "options": "media/poses/hip-railroad-squat-options.jpg",
+          "label": "Railroad Squat",
+          "named": true,
+          "prescription": "",
+          "note": "Deep squat holding a pole or doorframe; keep the heels down if you can. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 41,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-thunderbolt",
+      "name": "Thunderbolt",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 21,
+        "pose": 1
+      },
+      "taxonomy": {
+        "regions": [
+          "quads",
+          "knees",
+          "ankles"
+        ],
+        "pattern": "knee-flexion",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 21"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-thunderbolt.jpg",
+          "image": "media/poses/hip-thunderbolt.jpg",
+          "options": "media/poses/hip-thunderbolt-options.jpg",
+          "label": "Thunderbolt",
+          "named": true,
+          "prescription": "",
+          "note": "Kneel sitting on the heels; add a cushion under the seat if needed. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 42,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "hip-prayer-squat",
+      "name": "Prayer Squat",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Yoga block",
+      "level": "General",
+      "program": {
+        "id": "hip-challenge",
+        "day": 21,
+        "pose": 2
+      },
+      "taxonomy": {
+        "regions": [
+          "hips",
+          "adductors",
+          "ankles"
+        ],
+        "pattern": "squat",
+        "trainingType": "static-stretch",
+        "unilateral": false,
+        "aliases": [
+          "yoga",
+          "hip opener",
+          "hip opening",
+          "pose chart",
+          "hip challenge",
+          "day 21"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true
+      },
+      "variants": [
+        {
+          "source": "yogabody-hip-challenge",
+          "type": "image",
+          "thumbnail": "media/poses/thumbs/hip-prayer-squat.jpg",
+          "image": "media/poses/hip-prayer-squat.jpg",
+          "options": "media/poses/hip-prayer-squat-options.jpg",
+          "label": "Prayer Squat",
+          "named": true,
+          "prescription": "",
+          "note": "Deep squat, palms together, elbows gently pressing the knees wide. Props shown are optional.",
+          "credit": "YOGABODY pose chart",
+          "page": 43,
           "start": 0,
           "end": 0
         }
