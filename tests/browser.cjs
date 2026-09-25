@@ -1,0 +1,41 @@
+const {chromium,webkit}=require(process.env.PLAYWRIGHT_MODULE||'/tmp/range-browser-check/node_modules/playwright');
+const assert=require('node:assert/strict');
+const base=process.env.APP_URL||'http://127.0.0.1:8766';
+(async()=>{
+for(const engine of ['chromium','webkit']){
+ const browser=engine==='webkit'?await webkit.launch():await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const context=await browser.newContext({viewport:{width:1180,height:820},hasTouch:true,isMobile:true,deviceScaleFactor:1});
+ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base);await page.waitForSelector('.group-card');await page.locator('#any-duration').click();assert.equal(await page.locator('.group-card').count(),54);
+ await page.waitForFunction(()=>[...document.querySelectorAll('.group-collage img')].slice(0,3).every(i=>i.complete&&i.naturalWidth));
+ await page.screenshot({path:`/tmp/range-v2-${engine}-groups.png`});
+ await page.locator('[data-page="exercises"]').click();assert.equal(await page.locator('.exercise-card').count(),105);
+ await page.selectOption('[data-filter-scope="exercises"][data-filter="difficulty"]','Beginner');
+ await page.locator('[data-target="Arms"][data-filter-scope="exercises"]').click();assert(await page.locator('.exercise-card').count()>0);
+ await page.locator('[data-search="exercises"]').fill('Arm circles');assert(await page.locator('.exercise-card').count()>=1);
+ const armCard=page.locator('.exercise-card').filter({has:page.locator('[data-start-exercise="arm-circles"]')});await armCard.locator('.favorite-button').click();assert.equal(await armCard.locator('.favorite-button').getAttribute('aria-pressed'),'true');
+ await page.locator('[data-start-exercise="arm-circles"]').click();await page.locator('[data-setup-mode="reps"]').click();await page.locator('#setup-amount').fill('2');await page.locator('#setup-amount').blur();await page.locator('#setup-rounds').fill('2');await page.locator('#setup-rounds').blur();await page.locator('#setup-rest').fill('1');await page.locator('#setup-rest').blur();
+ await page.locator('#begin-workout').click();await page.waitForTimeout(3300);assert.equal(await page.locator('#phase-label').innerText(),'REPETITIONS');
+ await page.waitForFunction(()=>document.querySelector('#workout-video').readyState>=2);
+ await page.locator('#count-rep').click();assert.equal(await page.locator('#timer-value').innerText(),'1/2');
+ await page.locator('#pause-workout').click();assert(await page.locator('#count-rep').isDisabled());await page.locator('#pause-workout').click();await page.locator('#count-rep').click();assert.equal(await page.locator('#workout-title').innerText(),'Rest');
+ await page.waitForTimeout(1200);assert((await page.locator('#session-progress').innerText()).includes('Set 2 of 2'));
+ await page.locator('#count-rep').click();await page.locator('#count-rep').click();assert.equal(await page.locator('#workout-title').innerText(),'Workout complete');await page.locator('#finish-workout').click();
+ await page.locator('[data-page="create"]').click();await page.locator('[data-search="picker"]').fill('Arm circles');await page.locator('[data-pick="arm-circles"]').click();await page.locator('[data-search="picker"]').fill('Standing side bend');await page.locator('[data-pick="standing-side-bend"]').click();
+ await page.locator('#group-name').fill('iPad routine');await page.locator('[data-step="0"][data-field="work"]').fill('10');await page.locator('[data-step="0"][data-field="work"]').blur();
+ await page.selectOption('[data-step="1"][data-field="mode"]','reps');await page.locator('[data-step="1"][data-field="reps"]').fill('6');await page.locator('[data-step="1"][data-field="reps"]').blur();await page.selectOption('[data-step="1"][data-field="side"]','Left');
+ await page.locator('[data-reorder="1"][data-direction="-1"]').click();assert((await page.locator('.chain-item').first().innerText()).includes('Standing side bend'));
+ await page.locator('[data-duplicate="0"]').click();assert.equal(await page.locator('.chain-item').count(),3);await page.locator('[data-remove="1"]').click();
+ await page.setViewportSize({width:820,height:1180});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:`/tmp/range-v2-${engine}-create.png`});
+ await page.locator('#save-group').click();assert.equal(await page.locator('.group-card').count(),55);await page.reload();assert.equal(await page.locator('.group-card').count(),55);
+ await page.locator('.group-card').filter({hasText:'iPad routine'}).click();assert.equal(await page.locator('.setup-step').count(),2);assert((await page.locator('.setup-step').first().innerText()).includes('6 reps · Left'));await page.locator('#edit-group').click();assert.equal(await page.locator('#group-name').inputValue(),'iPad routine');
+ await page.locator('#preview-group').click();await page.locator('#begin-workout').click();await page.waitForTimeout(3300);await page.screenshot({path:`/tmp/range-v2-${engine}-player.png`});
+ await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));Object.defineProperty(document,'hidden',{configurable:true,value:false});});assert.equal(await page.locator('#timer-caption').innerText(),'Paused');
+ await page.locator('#end-workout').click();assert(await page.locator('#end-confirm').isVisible());await page.locator('#confirm-end').click();
+ await page.locator('#settings-button').click();const downloading=page.waitForEvent('download');await page.locator('#export-data').click();const download=await downloading;assert.equal(download.suggestedFilename(),'exercises-backup.json');await download.saveAs(`/tmp/range-backup-${engine}.json`);
+ await page.locator('#import-data').setInputFiles(`/tmp/range-backup-${engine}.json`);await page.waitForTimeout(200);await page.locator('[data-close="settings"]').click();await page.locator('[data-page="groups"]').click();assert.equal(await page.locator('.group-card').count(),55);
+ await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ const response=await page.request.get(base+'/media/clips/arm-circles-0.mp4',{headers:{Range:'bytes=0-9'}});assert.equal(response.status(),206);assert.equal((await response.body()).length,10);
+ assert.deepEqual(errors,[]);console.log('PASS '+engine+': categories, filtering, favorites, rep sets/rest/completion, video playback, per-step timing, sides, reorder, duplicate, saved groups/reload, edit, hidden-page pause, backup export/import, iPad portrait/landscape, phone overflow, Safari byte ranges.');await browser.close();
+}
+})().catch(e=>{console.error(e);process.exit(1)});

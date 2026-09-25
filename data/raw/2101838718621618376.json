@@ -1,0 +1,198 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/PostureUni/status/2101838718621618376",
+    "id": "2101838718621618376",
+    "text": "Your shoulders don\u2019t just need to be \u201cstrong.\u201d\n\nThey need to know how to move, stabilize, and control the shoulder blade under load. \ud83e\udde0\n\nWhat caught my attention: the exercises aren\u2019t simply about building bigger back muscles.\n\nThey challenge the muscles around the scapula, upper back, rear shoulder, and rotator cuff to work together.\n\nThat matters for swimmers, volleyball players, lifters\u2014and anyone spending hours at a desk. \ud83c\udfca\u200d\u2642\ufe0f\ud83c\udfd0\ud83c\udfcb\ufe0f\u200d\u2642\ufe0f\n\nIt helps to \n\u2705 Improve shoulder mobility and stability \n\u2705 Strengthen the upper and mid-back muscles \n\u2705 Support better posture and spinal control \n\u2705 Reduce muscular overload and injury risk\n\n\u23f1 How to perform: \n\u2022 20-30 seconds per exercise\n \u2022 2-3 sets \n\u2022 2-3 times per week\n\nThe goal is having enough strength and control to move well through different positions.\n\nTrain the back.\nTrain the shoulder.\nBut most importantly: train the connection between them.",
+    "raw_text": {
+      "text": "Your shoulders don\u2019t just need to be \u201cstrong.\u201d\n\nThey need to know how to move, stabilize, and control the shoulder blade under load. \ud83e\udde0\n\nWhat caught my attention: the exercises aren\u2019t simply about building bigger back muscles.\n\nThey challenge the muscles around the scapula, upper back, rear shoulder, and rotator cuff to work together.\n\nThat matters for swimmers, volleyball players, lifters\u2014and anyone spending hours at a desk. \ud83c\udfca\u200d\u2642\ufe0f\ud83c\udfd0\ud83c\udfcb\ufe0f\u200d\u2642\ufe0f\n\nIt helps to \n\u2705 Improve shoulder mobility and stability \n\u2705 Strengthen the upper and mid-back muscles \n\u2705 Support better posture and spinal control \n\u2705 Reduce muscular overload and injury risk\n\n\u23f1 How to perform: \n\u2022 20-30 seconds per exercise\n \u2022 2-3 sets \n\u2022 2-3 times per week\n\nThe goal is having enough strength and control to move well through different positions.\n\nTrain the back.\nTrain the shoulder.\nBut most importantly: train the connection between them.",
+      "display_text_range": [
+        0,
+        900
+      ],
+      "facets": [
+        {
+          "type": "media",
+          "indices": [
+            280,
+            303
+          ],
+          "id": "2101838621120802816",
+          "display": "pic.x.com/aPx5NLVmki",
+          "original": "https://t.co/aPx5NLVmki",
+          "replacement": "https://x.com/PostureUni/status/2101838718621618376/video/1"
+        }
+      ]
+    },
+    "author": {
+      "screen_name": "PostureUni",
+      "url": "https://x.com/PostureUni",
+      "id": "2039021986391707649",
+      "followers": 24045,
+      "following": 22,
+      "likes": 917,
+      "media_count": 451,
+      "name": "Posture University",
+      "description": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+      "raw_description": {
+        "text": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+        "facets": []
+      },
+      "location": "",
+      "banner_url": "https://pbs.twimg.com/profile_banners/2039021986391707649/1774979181",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2039037829943357440/sze9ZSdv_200x200.jpg",
+      "joined": "Tue Mar 31 16:48:53 +0000 2026",
+      "protected": false,
+      "website": {
+        "url": "http://bio.site/PostureUniversity",
+        "display_url": "bio.site/PostureUnivers\u2026"
+      },
+      "verification": {
+        "verified": true,
+        "verified_at": null,
+        "type": "individual"
+      },
+      "avatar_color": null
+    },
+    "replies": 13,
+    "retweets": 263,
+    "likes": 1659,
+    "bookmarks": 2654,
+    "quotes": 7,
+    "created_at": "Mon Sep 21 00:59:35 +0000 2026",
+    "created_timestamp": 1789952375,
+    "possibly_sensitive": false,
+    "views": 201299,
+    "is_note_tweet": true,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "media": {
+      "all": [
+        {
+          "id": "2101838621120802816",
+          "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101838621120802816/img/vTUUhRWG8cBa3apQ.jpg",
+          "duration": 40.32,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/pl/OfhAizw9aHpUSzfH.m3u8?tag=29&v=a64",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/320x568/0BBfzwl6d2E7dr16.mp4?tag=29",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/480x852/tTzhLnJr_l8Tz95X.mp4?tag=29",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/pl/OfhAizw9aHpUSzfH.m3u8?tag=29&v=a64",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/320x568/0BBfzwl6d2E7dr16.mp4?tag=29",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/480x852/tTzhLnJr_l8Tz95X.mp4?tag=29",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "2101838621120802816",
+          "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101838621120802816/img/vTUUhRWG8cBa3apQ.jpg",
+          "duration": 40.32,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/pl/OfhAizw9aHpUSzfH.m3u8?tag=29&v=a64",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/320x568/0BBfzwl6d2E7dr16.mp4?tag=29",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/480x852/tTzhLnJr_l8Tz95X.mp4?tag=29",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/pl/OfhAizw9aHpUSzfH.m3u8?tag=29&v=a64",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/320x568/0BBfzwl6d2E7dr16.mp4?tag=29",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/480x852/tTzhLnJr_l8Tz95X.mp4?tag=29",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101838621120802816/vid/avc1/720x1280/fud8E-Gui7cJ-kEu.mp4?tag=29",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Twitter Web App",
+    "twitter_card": "player",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}

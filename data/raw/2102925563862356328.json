@@ -1,0 +1,206 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/SmartPostures/status/2102925563862356328",
+    "id": "2102925563862356328",
+    "text": "1/10 \u2014 Band-assisted thoracic extension\n\nThis variation uses the bench to support the trunk while the band pulls across the upper arms and the hands stay behind the head.\n\nThe useful part is the combination of thoracic extension + shoulder positioning. You\u2019re asking the upper back to extend while the shoulders stay active rather than simply forcing the chest upward.\n\nThe common mistake is getting the movement from the lower back instead. Keep the ribs controlled and let the upper back do more of the work.\n\nThis can be useful if you spend a lot of time flexed forward, but it isn\u2019t a permanent \u201cposture fix.\u201d",
+    "raw_text": {
+      "text": "1/10 \u2014 Band-assisted thoracic extension\n\nThis variation uses the bench to support the trunk while the band pulls across the upper arms and the hands stay behind the head.\n\nThe useful part is the combination of thoracic extension + shoulder positioning. You\u2019re asking the upper back to extend while the shoulders stay active rather than simply forcing the chest upward.\n\nThe common mistake is getting the movement from the lower back instead. Keep the ribs controlled and let the upper back do more of the work.\n\nThis can be useful if you spend a lot of time flexed forward, but it isn\u2019t a permanent \u201cposture fix.\u201d",
+      "display_text_range": [
+        0,
+        613
+      ],
+      "facets": [
+        {
+          "type": "media",
+          "indices": [
+            277,
+            300
+          ],
+          "id": "2102925272240807936",
+          "display": "pic.x.com/NVEhnhfApN",
+          "original": "https://t.co/NVEhnhfApN",
+          "replacement": "https://x.com/SmartPostures/status/2102925563862356328/video/1"
+        }
+      ]
+    },
+    "author": {
+      "screen_name": "SmartPostures",
+      "url": "https://x.com/SmartPostures",
+      "id": "2080162062601498624",
+      "followers": 9841,
+      "following": 11,
+      "likes": 410,
+      "media_count": 261,
+      "name": "Smart Postures",
+      "description": "https://bio.site/SmartPosture\nBuild Better Posture.\nUnlock Better Mobility.\nOne simple habit at a time",
+      "raw_description": {
+        "text": "https://t.co/waXvIQg2D6\nBuild Better Posture.\nUnlock Better Mobility.\nOne simple habit at a time",
+        "facets": [
+          {
+            "type": "url",
+            "indices": [
+              0,
+              23
+            ],
+            "original": "https://t.co/waXvIQg2D6",
+            "replacement": "https://bio.site/SmartPosture",
+            "display": "bio.site/SmartPosture"
+          }
+        ]
+      },
+      "location": "",
+      "banner_url": "https://pbs.twimg.com/profile_banners/2080162062601498624/1784797497",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2080204570266095616/wYyVIPYn_200x200.jpg",
+      "joined": "Thu Jul 23 05:30:38 +0000 2026",
+      "protected": false,
+      "website": null,
+      "verification": {
+        "verified": true,
+        "verified_at": null,
+        "type": "individual"
+      },
+      "avatar_color": null
+    },
+    "replies": 3,
+    "retweets": 32,
+    "likes": 205,
+    "bookmarks": 261,
+    "quotes": 0,
+    "created_at": "Thu Sep 24 00:58:19 +0000 2026",
+    "created_timestamp": 1790211499,
+    "possibly_sensitive": false,
+    "views": 9626,
+    "is_note_tweet": true,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "media": {
+      "all": [
+        {
+          "id": "2102925272240807936",
+          "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2102925272240807936/img/_PB5UeI8rUuontm7.jpg",
+          "duration": 9.033,
+          "width": 720,
+          "height": 720,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/pl/VHg19BIq0XxCwwAY.m3u8?tag=29",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/320x320/Q83SELpj7827uQ2O.mp4?tag=29",
+              "bitrate": 432000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/540x540/CN0gLpuLCL2eoJ7v.mp4?tag=29",
+              "bitrate": 832000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+              "bitrate": 1280000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/pl/VHg19BIq0XxCwwAY.m3u8?tag=29",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/320x320/Q83SELpj7827uQ2O.mp4?tag=29",
+              "bitrate": 432000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/540x540/CN0gLpuLCL2eoJ7v.mp4?tag=29",
+              "bitrate": 832000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+              "bitrate": 1280000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "2102925272240807936",
+          "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2102925272240807936/img/_PB5UeI8rUuontm7.jpg",
+          "duration": 9.033,
+          "width": 720,
+          "height": 720,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/pl/VHg19BIq0XxCwwAY.m3u8?tag=29",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/320x320/Q83SELpj7827uQ2O.mp4?tag=29",
+              "bitrate": 432000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/540x540/CN0gLpuLCL2eoJ7v.mp4?tag=29",
+              "bitrate": 832000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+              "bitrate": 1280000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/pl/VHg19BIq0XxCwwAY.m3u8?tag=29",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/320x320/Q83SELpj7827uQ2O.mp4?tag=29",
+              "bitrate": 432000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/540x540/CN0gLpuLCL2eoJ7v.mp4?tag=29",
+              "bitrate": 832000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2102925272240807936/vid/avc1/720x720/aTRRBZC3Qzku7hTX.mp4?tag=29",
+              "bitrate": 1280000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Twitter Web App",
+    "twitter_card": "player",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "sources": [
+    {
+      "id": "nhs-strength",
+      "author": "NHS",
+      "url": "https://www.nhs.uk/live-well/exercise/strength-exercises/",
+      "status": "downloaded",
+      "text": "Public exercise photo guide. Source instructions linked in exercise details.",
+      "media": []
+    },
+    {
+      "id": "nhs-flex",
+      "author": "NHS",
+      "url": "https://www.nhs.uk/live-well/exercise/flexibility-exercises/",
+      "status": "downloaded",
+      "text": "Public exercise photo guide. Source instructions linked in exercise details.",
+      "media": []
+    },
+    {
+      "id": "nhs-sitting",
+      "author": "NHS",
+      "url": "https://www.nhs.uk/live-well/exercise/sitting-exercises/",
+      "status": "downloaded",
+      "text": "Public exercise photo guide. Source instructions linked in exercise details.",
+      "media": []
+    },
+    {
+      "id": "aha-warm-up",
+      "author": "American Heart Association",
+      "url": "https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/warm-up-cool-down",
+      "status": "referenced",
+      "text": "Warm-up and cool-down guidance.",
+      "media": []
+    }
+  ],
+  "exercises": [
+    {
+      "id": "chair-sit-to-stand",
+      "name": "Chair sit-to-stand",
+      "area": "Hips & legs",
+      "kind": "Strength",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/chair-sit-to-stand.jpg",
+          "image": "media/examples/chair-sit-to-stand.jpg",
+          "label": "Chair sit-to-stand",
+          "named": true,
+          "prescription": "",
+          "note": "Lean forward; rise using your legs, then sit with control.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_Sit-to-stand.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "supported-mini-squat",
+      "name": "Supported mini squat",
+      "area": "Hips & legs",
+      "kind": "Strength",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/supported-mini-squat.jpg",
+          "image": "media/examples/supported-mini-squat.jpg",
+          "label": "Supported mini squat",
+          "named": true,
+          "prescription": "",
+          "note": "Use the chair for balance; lower comfortably, then stand.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_mini-squats.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "supported-calf-raise",
+      "name": "Supported calf raise",
+      "area": "Hips & legs",
+      "kind": "Strength",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/supported-calf-raise.jpg",
+          "image": "media/examples/supported-calf-raise.jpg",
+          "label": "Supported calf raise",
+          "named": true,
+          "prescription": "",
+          "note": "Lift your heels slowly while holding a stable support.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_calf-raises.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "supported-side-leg-lift",
+      "name": "Supported side leg lift",
+      "area": "Hips & legs",
+      "kind": "Strength",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/supported-side-leg-lift.jpg",
+          "image": "media/examples/supported-side-leg-lift.jpg",
+          "label": "Supported side leg lift",
+          "named": true,
+          "prescription": "",
+          "note": "Move one leg sideways without leaning your trunk.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_Sideways-leg-lift.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "standing-hip-extension",
+      "name": "Standing hip extension",
+      "area": "Hips & legs",
+      "kind": "Strength",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/standing-hip-extension.jpg",
+          "image": "media/examples/standing-hip-extension.jpg",
+          "label": "Standing hip extension",
+          "named": true,
+          "prescription": "",
+          "note": "Move your leg behind you without arching your lower back.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_Leg-extension.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "wall-push-up",
+      "name": "Wall push-up",
+      "area": "Shoulders & back",
+      "kind": "Strength",
+      "equipment": "Wall",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/wall-push-up.jpg",
+          "image": "media/examples/wall-push-up.jpg",
+          "label": "Wall push-up",
+          "named": true,
+          "prescription": "",
+          "note": "Bend your elbows toward the wall; press away with control.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_wall_press-up.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "biceps-curl",
+      "name": "Biceps curl",
+      "area": "Shoulders & back",
+      "kind": "Strength",
+      "equipment": "Light weights",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-strength",
+          "type": "image",
+          "thumbnail": "media/examples/biceps-curl.jpg",
+          "image": "media/examples/biceps-curl.jpg",
+          "label": "Biceps curl",
+          "named": true,
+          "prescription": "",
+          "note": "Keep your elbows near your sides as you curl and lower.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/STRENGTH_EXERCISES-_Bicep_curls.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "seated-neck-rotation",
+      "name": "Seated neck rotation",
+      "area": "Shoulders & back",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-flex",
+          "type": "image",
+          "thumbnail": "media/examples/seated-neck-rotation.jpg",
+          "image": "media/examples/seated-neck-rotation.jpg",
+          "label": "Seated neck rotation",
+          "named": true,
+          "prescription": "",
+          "note": "Turn comfortably, pause up to 5 seconds, then return.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/NHSC_0118_neck-rotation.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "seated-neck-stretch",
+      "name": "Seated neck stretch",
+      "area": "Shoulders & back",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-flex",
+          "type": "image",
+          "thumbnail": "media/examples/seated-neck-stretch.jpg",
+          "image": "media/examples/seated-neck-stretch.jpg",
+          "label": "Seated neck stretch",
+          "named": true,
+          "prescription": "",
+          "note": "Tilt gently to one side; use brief 5-second holds.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/NHSC_0418_neck-stretch1.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "wall-calf-stretch",
+      "name": "Wall calf stretch",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Wall",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-flex",
+          "type": "image",
+          "thumbnail": "media/examples/wall-calf-stretch.jpg",
+          "image": "media/examples/wall-calf-stretch.jpg",
+          "label": "Wall calf stretch",
+          "named": true,
+          "prescription": "",
+          "note": "Step one leg back; keep that heel down and knee straight.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/NHSC_0518_calf-stretch.original.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "seated-chest-stretch",
+      "name": "Seated chest stretch",
+      "area": "Shoulders & back",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-sitting",
+          "type": "image",
+          "thumbnail": "media/examples/seated-chest-stretch.jpg",
+          "image": "media/examples/seated-chest-stretch.jpg",
+          "label": "Seated chest stretch",
+          "named": true,
+          "prescription": "",
+          "note": "Open your chest gently; hold 5–10 seconds, then relax.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/NHSC_0118_chest-stretch1.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "seated-ankle-pumps",
+      "name": "Seated ankle pumps",
+      "area": "Hips & legs",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-sitting",
+          "type": "image",
+          "thumbnail": "media/examples/seated-ankle-pumps.jpg",
+          "image": "media/examples/seated-ankle-pumps.jpg",
+          "label": "Seated ankle pumps",
+          "named": true,
+          "prescription": "",
+          "note": "Lift one foot and slowly alternate pointing and flexing it.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/ankle-stretch.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "seated-thoracic-rotation",
+      "name": "Seated thoracic rotation",
+      "area": "Spine & full body",
+      "kind": "Mobility",
+      "equipment": "Chair",
+      "level": "General",
+      "variants": [
+        {
+          "source": "nhs-sitting",
+          "type": "image",
+          "thumbnail": "media/examples/seated-thoracic-rotation.jpg",
+          "image": "media/examples/seated-thoracic-rotation.jpg",
+          "label": "Seated thoracic rotation",
+          "named": true,
+          "prescription": "",
+          "note": "Keep your hips still while gently turning your upper body.",
+          "credit": "NHS",
+          "originalMedia": "https://assets.nhs.uk/nhsuk-cms/images/NHSC_0118_upper-body-twist.width-1019.jpg",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "easy-walking",
+      "name": "Easy walking",
+      "area": "Spine & full body",
+      "kind": "Warm-up",
+      "equipment": "None",
+      "level": "General",
+      "variants": [
+        {
+          "source": "aha-warm-up",
+          "type": "instruction",
+          "thumbnail": "media/examples/walking.svg",
+          "label": "Easy walking",
+          "named": true,
+          "note": "Walk at an easy pace. For a warm-up, increase gradually; for a cool-down, slow down gradually.",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    }
+  ]
+}

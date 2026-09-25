@@ -1,0 +1,392 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/PostureUni/status/2101990070152581315",
+    "id": "2101990070152581315",
+    "text": "Your Posture Needs Work\u203c\ufe0f\n\nThese 5 resistance-band exercises target the muscles that help keep your shoulders and shoulder blades organized:\n\n\u2022 Rhomboids + mid/lower traps \u2022 Rear delts \u2022 Lats \u2022 Scapular stabilizers \u2022 Upper-back endurance\n\u2714\ufe0f Targets The Rhomboids & Mid/Lower Traps To Help Pull Your Shoulders Back\n\u2714\ufe0f Strengthens The Rear Delts To Build Better Balance Around The Shoulder Joint\n\u2714\ufe0f Activates The Lats & Improves Your Pulling Strength Without Heavy Weights\n\u2714\ufe0f Trains The Smaller Stabilizing Muscles That Control Your Shoulder Blades\n\n\u2714\ufe0f Builds Upper-Back Endurance To Help You Maintain Better Posture Throughout The Day\n\nHours of sitting, driving, and looking down at your phone can leave your chest feeling tight while your upper back does less work than it should.\n\nThat\u2019s where these movements come in.\n\nThe goal isn't to force your shoulders backward all day.\n\nIt\u2019s to build a back strong enough to support better positioning without constant effort.\n\nKeep the reps slow. Control the band. Let the back\u2014not the arms\u2014do the work.\n\nYou don't need massive weights.\n\nYou need tension, control, and consistency.",
+    "raw_text": {
+      "text": "Your Posture Needs Work\u203c\ufe0f\n\nThese 5 resistance-band exercises target the muscles that help keep your shoulders and shoulder blades organized:\n\n\u2022 Rhomboids + mid/lower traps \u2022 Rear delts \u2022 Lats \u2022 Scapular stabilizers \u2022 Upper-back endurance\n\u2714\ufe0f Targets The Rhomboids & Mid/Lower Traps To Help Pull Your Shoulders Back\n\u2714\ufe0f Strengthens The Rear Delts To Build Better Balance Around The Shoulder Joint\n\u2714\ufe0f Activates The Lats & Improves Your Pulling Strength Without Heavy Weights\n\u2714\ufe0f Trains The Smaller Stabilizing Muscles That Control Your Shoulder Blades\n\n\u2714\ufe0f Builds Upper-Back Endurance To Help You Maintain Better Posture Throughout The Day\n\nHours of sitting, driving, and looking down at your phone can leave your chest feeling tight while your upper back does less work than it should.\n\nThat\u2019s where these movements come in.\n\nThe goal isn't to force your shoulders backward all day.\n\nIt\u2019s to build a back strong enough to support better positioning without constant effort.\n\nKeep the reps slow. Control the band. Let the back\u2014not the arms\u2014do the work.\n\nYou don't need massive weights.\n\nYou need tension, control, and consistency.",
+      "display_text_range": [
+        0,
+        1124
+      ],
+      "facets": [
+        {
+          "type": "media",
+          "indices": [
+            279,
+            302
+          ],
+          "id": "2101843302597472256",
+          "display": "pic.x.com/A7USJIghpb",
+          "original": "https://t.co/A7USJIghpb",
+          "replacement": "https://x.com/PostureUni/status/2101990070152581315/video/1"
+        }
+      ]
+    },
+    "author": {
+      "screen_name": "PostureUni",
+      "url": "https://x.com/PostureUni",
+      "id": "2039021986391707649",
+      "followers": 24045,
+      "following": 22,
+      "likes": 917,
+      "media_count": 451,
+      "name": "Posture University",
+      "description": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+      "raw_description": {
+        "text": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+        "facets": []
+      },
+      "location": "",
+      "banner_url": "https://pbs.twimg.com/profile_banners/2039021986391707649/1774979181",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2039037829943357440/sze9ZSdv_200x200.jpg",
+      "joined": "Tue Mar 31 16:48:53 +0000 2026",
+      "protected": false,
+      "website": {
+        "url": "http://bio.site/PostureUniversity",
+        "display_url": "bio.site/PostureUnivers\u2026"
+      },
+      "verification": {
+        "verified": true,
+        "verified_at": null,
+        "type": "individual"
+      },
+      "avatar_color": null
+    },
+    "replies": 3,
+    "retweets": 87,
+    "likes": 676,
+    "bookmarks": 1058,
+    "quotes": 3,
+    "created_at": "Mon Sep 21 11:01:00 +0000 2026",
+    "created_timestamp": 1789988460,
+    "possibly_sensitive": false,
+    "views": 69210,
+    "is_note_tweet": true,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "media": {
+      "all": [
+        {
+          "id": "2101843302597472256",
+          "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101843302597472256/img/coN2szsl2xhUE-nf.jpg",
+          "duration": 23.938,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/pl/OgTHiZ7MDz75sRR0.m3u8?tag=29&v=cfc",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/320x568/0zQNf4pSTO29Zoyc.mp4?tag=29",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/480x852/_Zp1uEERAGcwX7jc.mp4?tag=29",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/pl/OgTHiZ7MDz75sRR0.m3u8?tag=29&v=cfc",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/320x568/0zQNf4pSTO29Zoyc.mp4?tag=29",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/480x852/_Zp1uEERAGcwX7jc.mp4?tag=29",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "2101843302597472256",
+          "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101843302597472256/img/coN2szsl2xhUE-nf.jpg",
+          "duration": 23.938,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/pl/OgTHiZ7MDz75sRR0.m3u8?tag=29&v=cfc",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/320x568/0zQNf4pSTO29Zoyc.mp4?tag=29",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/480x852/_Zp1uEERAGcwX7jc.mp4?tag=29",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/pl/OgTHiZ7MDz75sRR0.m3u8?tag=29&v=cfc",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/320x568/0zQNf4pSTO29Zoyc.mp4?tag=29",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/480x852/_Zp1uEERAGcwX7jc.mp4?tag=29",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101843302597472256/vid/avc1/720x1280/wUYxwRG0FeAQ4J3V.mp4?tag=29",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "quote": {
+      "url": "https://x.com/PostureUni/status/2101468886650728956",
+      "id": "2101468886650728956",
+      "text": "A better posture isn\u2019t just about \u201cpulling your shoulders back.\u201d\n\nThis sequence uses a foam roller to challenge shoulder mobility, upper-back extension, and trunk positioning in different ways.\n\nThe key is not forcing the range.\n\nMove slowly, breathe, and let the ribcage and shoulders gradually find a more comfortable position.\n\n1 minute can be a useful reset\u2014but consistent practice is what creates lasting changes in movement habits.\n\nYour posture is something you train, not something you simply \u201chold.\u201d",
+      "raw_text": {
+        "text": "A better posture isn\u2019t just about \u201cpulling your shoulders back.\u201d\n\nThis sequence uses a foam roller to challenge shoulder mobility, upper-back extension, and trunk positioning in different ways.\n\nThe key is not forcing the range.\n\nMove slowly, breathe, and let the ribcage and shoulders gradually find a more comfortable position.\n\n1 minute can be a useful reset\u2014but consistent practice is what creates lasting changes in movement habits.\n\nYour posture is something you train, not something you simply \u201chold.\u201d",
+        "display_text_range": [
+          0,
+          508
+        ],
+        "facets": [
+          {
+            "type": "media",
+            "indices": [
+              276,
+              299
+            ],
+            "id": "2101357051339542528",
+            "display": "pic.x.com/yPc6gUEwuV",
+            "original": "https://t.co/yPc6gUEwuV",
+            "replacement": "https://x.com/PostureUni/status/2101468886650728956/video/1"
+          }
+        ]
+      },
+      "author": {
+        "screen_name": "PostureUni",
+        "url": "https://x.com/PostureUni",
+        "id": "2039021986391707649",
+        "followers": 24045,
+        "following": 22,
+        "likes": 917,
+        "media_count": 451,
+        "name": "Posture University",
+        "description": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+        "raw_description": {
+          "text": "Fix your posture. Move better. Live pain-free.\nYoga \u2022 Mobility \u2022 Daily habits\nScience-backed tips that work\n\u2193",
+          "facets": []
+        },
+        "location": "",
+        "banner_url": "https://pbs.twimg.com/profile_banners/2039021986391707649/1774979181",
+        "avatar_url": "https://pbs.twimg.com/profile_images/2039037829943357440/sze9ZSdv_200x200.jpg",
+        "joined": "Tue Mar 31 16:48:53 +0000 2026",
+        "protected": false,
+        "website": {
+          "url": "http://bio.site/PostureUniversity",
+          "display_url": "bio.site/PostureUnivers\u2026"
+        },
+        "verification": {
+          "verified": true,
+          "verified_at": null,
+          "type": "individual"
+        },
+        "avatar_color": null
+      },
+      "replies": 1,
+      "retweets": 90,
+      "likes": 539,
+      "bookmarks": 543,
+      "quotes": 4,
+      "created_at": "Sun Sep 20 00:30:00 +0000 2026",
+      "created_timestamp": 1789864200,
+      "possibly_sensitive": false,
+      "views": 101108,
+      "is_note_tweet": true,
+      "community_note": null,
+      "lang": "en",
+      "replying_to": null,
+      "replying_to_status": null,
+      "media": {
+        "all": [
+          {
+            "id": "2101357051339542528",
+            "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+            "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101357051339542528/img/61H4PV6X0lJc_o4g.jpg",
+            "duration": 22.2,
+            "width": 720,
+            "height": 1280,
+            "format": "video/mp4",
+            "type": "video",
+            "formats": [
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/pl/vdo2kziiLDUVMEmE.m3u8?tag=29",
+                "container": "m3u8"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/320x568/bCyA2zr6MBrEcTgt.mp4?tag=29",
+                "bitrate": 632000,
+                "container": "mp4",
+                "codec": "h264"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/480x852/0CrcW_9Yx8vc6V2D.mp4?tag=29",
+                "bitrate": 950000,
+                "container": "mp4",
+                "codec": "h264"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+                "bitrate": 2176000,
+                "container": "mp4",
+                "codec": "h264"
+              }
+            ],
+            "publisher": null,
+            "variants": [
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/pl/vdo2kziiLDUVMEmE.m3u8?tag=29",
+                "bitrate": 0,
+                "content_type": "application/x-mpegURL"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/320x568/bCyA2zr6MBrEcTgt.mp4?tag=29",
+                "bitrate": 632000,
+                "content_type": "video/mp4"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/480x852/0CrcW_9Yx8vc6V2D.mp4?tag=29",
+                "bitrate": 950000,
+                "content_type": "video/mp4"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+                "bitrate": 2176000,
+                "content_type": "video/mp4"
+              }
+            ]
+          }
+        ],
+        "videos": [
+          {
+            "id": "2101357051339542528",
+            "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+            "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101357051339542528/img/61H4PV6X0lJc_o4g.jpg",
+            "duration": 22.2,
+            "width": 720,
+            "height": 1280,
+            "format": "video/mp4",
+            "type": "video",
+            "formats": [
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/pl/vdo2kziiLDUVMEmE.m3u8?tag=29",
+                "container": "m3u8"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/320x568/bCyA2zr6MBrEcTgt.mp4?tag=29",
+                "bitrate": 632000,
+                "container": "mp4",
+                "codec": "h264"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/480x852/0CrcW_9Yx8vc6V2D.mp4?tag=29",
+                "bitrate": 950000,
+                "container": "mp4",
+                "codec": "h264"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+                "bitrate": 2176000,
+                "container": "mp4",
+                "codec": "h264"
+              }
+            ],
+            "publisher": null,
+            "variants": [
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/pl/vdo2kziiLDUVMEmE.m3u8?tag=29",
+                "bitrate": 0,
+                "content_type": "application/x-mpegURL"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/320x568/bCyA2zr6MBrEcTgt.mp4?tag=29",
+                "bitrate": 632000,
+                "content_type": "video/mp4"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/480x852/0CrcW_9Yx8vc6V2D.mp4?tag=29",
+                "bitrate": 950000,
+                "content_type": "video/mp4"
+              },
+              {
+                "url": "https://video.twimg.com/amplify_video/2101357051339542528/vid/avc1/720x1280/nIkFuYmgXbscPmHe.mp4?tag=29",
+                "bitrate": 2176000,
+                "content_type": "video/mp4"
+              }
+            ]
+          }
+        ]
+      },
+      "source": "Twitter Web Client",
+      "twitter_card": "player",
+      "color": null,
+      "provider": "twitter",
+      "reposted_by": null
+    },
+    "source": "Twitter Web Client",
+    "twitter_card": "player",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}

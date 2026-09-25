@@ -1,0 +1,195 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/YogaMobilitys/status/2101692861582348465",
+    "id": "2101692861582348465",
+    "text": "If you\u2019ve got tight hips and your lower back is always giving you grief, start adding this stuff in.\n\nMost people never take their hips through these deeper ranges, never rotate, never get strong there then wonder why everything feels tight and restricted.",
+    "raw_text": {
+      "text": "If you\u2019ve got tight hips and your lower back is always giving you grief, start adding this stuff in.\n\nMost people never take their hips through these deeper ranges, never rotate, never get strong there then wonder why everything feels tight and restricted. https://t.co/x6iFwdo2Sh",
+      "display_text_range": [
+        0,
+        256
+      ],
+      "facets": [
+        {
+          "type": "media",
+          "indices": [
+            257,
+            280
+          ],
+          "id": "2101263210339033088",
+          "display": "pic.x.com/x6iFwdo2Sh",
+          "original": "https://t.co/x6iFwdo2Sh",
+          "replacement": "https://x.com/YogaMobilitys/status/2101692861582348465/video/1"
+        }
+      ]
+    },
+    "author": {
+      "screen_name": "YogaMobilitys",
+      "url": "https://x.com/YogaMobilitys",
+      "id": "2072257523969847296",
+      "followers": 5895,
+      "following": 14,
+      "likes": 449,
+      "media_count": 272,
+      "name": "Yoga & Mobility Exercies",
+      "description": "Daily yoga for better mobility, flexibility & posture. Feel stronger, move pain-free, and build a healthier body\u2014one practice at a time. \ud83e\uddd8",
+      "raw_description": {
+        "text": "Daily yoga for better mobility, flexibility & posture. Feel stronger, move pain-free, and build a healthier body\u2014one practice at a time. \ud83e\uddd8",
+        "facets": []
+      },
+      "location": "",
+      "banner_url": "https://pbs.twimg.com/profile_banners/2072257523969847296/1782900758",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2072258877501157376/TpmJ4WpV_200x200.jpg",
+      "joined": "Wed Jul 01 09:58:10 +0000 2026",
+      "protected": false,
+      "website": null,
+      "verification": {
+        "verified": false,
+        "verified_at": null,
+        "type": null
+      },
+      "avatar_color": null
+    },
+    "replies": 10,
+    "retweets": 380,
+    "likes": 2307,
+    "bookmarks": 2289,
+    "quotes": 10,
+    "created_at": "Sun Sep 20 15:20:00 +0000 2026",
+    "created_timestamp": 1789917600,
+    "possibly_sensitive": false,
+    "views": 73631,
+    "is_note_tweet": false,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "media": {
+      "all": [
+        {
+          "id": "2101263210339033088",
+          "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101263210339033088/img/GLKIhip6TC8CWYc-.jpg",
+          "duration": 20.9,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/pl/VeCi_rweYCWWUTmO.m3u8?tag=14&v=cfc",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/320x568/M8AbX0qW6kXoYchG.mp4?tag=14",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/480x852/KuNZeYjxOAuW4LdW.mp4?tag=14",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/pl/VeCi_rweYCWWUTmO.m3u8?tag=14&v=cfc",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/320x568/M8AbX0qW6kXoYchG.mp4?tag=14",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/480x852/KuNZeYjxOAuW4LdW.mp4?tag=14",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "2101263210339033088",
+          "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2101263210339033088/img/GLKIhip6TC8CWYc-.jpg",
+          "duration": 20.9,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/pl/VeCi_rweYCWWUTmO.m3u8?tag=14&v=cfc",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/320x568/M8AbX0qW6kXoYchG.mp4?tag=14",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/480x852/KuNZeYjxOAuW4LdW.mp4?tag=14",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/pl/VeCi_rweYCWWUTmO.m3u8?tag=14&v=cfc",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/320x568/M8AbX0qW6kXoYchG.mp4?tag=14",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/480x852/KuNZeYjxOAuW4LdW.mp4?tag=14",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2101263210339033088/vid/avc1/720x1280/CQCAW3c-x7ar2cRv.mp4?tag=14",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Twitter Web App",
+    "twitter_card": "player",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}

@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Node / Playwright
+node_modules/
+test-results/
+playwright-report/

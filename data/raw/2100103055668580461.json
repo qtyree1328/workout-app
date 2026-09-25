@@ -1,0 +1,195 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/DailyFitHQ/status/2100103055668580461",
+    "id": "2100103055668580461",
+    "text": "THIS ROUTINE IS WORTH A MILLION DOLLARS",
+    "raw_text": {
+      "text": "THIS ROUTINE IS WORTH A MILLION DOLLARS https://t.co/Nn4aEj6EzA",
+      "display_text_range": [
+        0,
+        39
+      ],
+      "facets": [
+        {
+          "type": "media",
+          "indices": [
+            40,
+            63
+          ],
+          "id": "2100102969253380096",
+          "display": "pic.x.com/Nn4aEj6EzA",
+          "original": "https://t.co/Nn4aEj6EzA",
+          "replacement": "https://x.com/DailyFitHQ/status/2100103055668580461/video/1"
+        }
+      ]
+    },
+    "author": {
+      "screen_name": "DailyFitHQ",
+      "url": "https://x.com/DailyFitHQ",
+      "id": "2031246814670893059",
+      "followers": 57416,
+      "following": 0,
+      "likes": 509,
+      "media_count": 381,
+      "name": "Daily Fitness",
+      "description": "Get jacked.",
+      "raw_description": {
+        "text": "Get jacked.",
+        "facets": []
+      },
+      "location": "",
+      "banner_url": "https://pbs.twimg.com/profile_banners/2031246814670893059/1774023470",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2035028042293112834/vp5_buNc_200x200.jpg",
+      "joined": "Tue Mar 10 05:53:16 +0000 2026",
+      "protected": false,
+      "website": null,
+      "verification": {
+        "verified": false,
+        "verified_at": null,
+        "type": null
+      },
+      "avatar_color": null
+    },
+    "replies": 47,
+    "retweets": 1920,
+    "likes": 10624,
+    "bookmarks": 12892,
+    "quotes": 35,
+    "created_at": "Wed Sep 16 06:02:41 +0000 2026",
+    "created_timestamp": 1789538561,
+    "possibly_sensitive": false,
+    "views": 647528,
+    "is_note_tweet": false,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "media": {
+      "all": [
+        {
+          "id": "2100102969253380096",
+          "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2100102969253380096/img/9oas-LozHQgv60Zq.jpg",
+          "duration": 40.518,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/pl/segEIQviQD7dnWJf.m3u8?tag=14",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/320x568/QI5TayfT8od19ETk.mp4?tag=14",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/480x852/2ewnShLOlWpJ9IVf.mp4?tag=14",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/pl/segEIQviQD7dnWJf.m3u8?tag=14",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/320x568/QI5TayfT8od19ETk.mp4?tag=14",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/480x852/2ewnShLOlWpJ9IVf.mp4?tag=14",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "2100102969253380096",
+          "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+          "thumbnail_url": "https://pbs.twimg.com/amplify_video_thumb/2100102969253380096/img/9oas-LozHQgv60Zq.jpg",
+          "duration": 40.518,
+          "width": 720,
+          "height": 1280,
+          "format": "video/mp4",
+          "type": "video",
+          "formats": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/pl/segEIQviQD7dnWJf.m3u8?tag=14",
+              "container": "m3u8"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/320x568/QI5TayfT8od19ETk.mp4?tag=14",
+              "bitrate": 632000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/480x852/2ewnShLOlWpJ9IVf.mp4?tag=14",
+              "bitrate": 950000,
+              "container": "mp4",
+              "codec": "h264"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+              "bitrate": 2176000,
+              "container": "mp4",
+              "codec": "h264"
+            }
+          ],
+          "publisher": null,
+          "variants": [
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/pl/segEIQviQD7dnWJf.m3u8?tag=14",
+              "bitrate": 0,
+              "content_type": "application/x-mpegURL"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/320x568/QI5TayfT8od19ETk.mp4?tag=14",
+              "bitrate": 632000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/480x852/2ewnShLOlWpJ9IVf.mp4?tag=14",
+              "bitrate": 950000,
+              "content_type": "video/mp4"
+            },
+            {
+              "url": "https://video.twimg.com/amplify_video/2100102969253380096/vid/avc1/720x1280/KvpNBcHq-APH_oDe.mp4?tag=14",
+              "bitrate": 2176000,
+              "content_type": "video/mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Twitter Web App",
+    "twitter_card": "player",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}
