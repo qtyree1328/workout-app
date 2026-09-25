@@ -4,15 +4,15 @@ Small thumbnails and diagrams are inlined into data/library.js so the hosted cop
 stays under typical file-count limits. Full source videos are left out (the
 trimmed demonstration clips are included). Output is not committed.
 """
-import argparse, base64, hashlib, json, pathlib, shutil
+import argparse, base64, hashlib, json, pathlib, re, shutil
 parser = argparse.ArgumentParser()
-parser.add_argument('--password', help='Show a password screen on the hosted page (only a SHA-256 hash is written)')
+parser.add_argument('--password', help='Password for the hosted page (default: the one in site-gate.js; only a SHA-256 hash is written)')
 args = parser.parse_args()
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'preview'
 if OUT.exists(): shutil.rmtree(OUT)
 OUT.mkdir()
-for name in ['index.html', 'style.css', 'app.js', 'catalog-core.js', 'workout-core.js', 'icon.svg', 'RESEARCH.md', 'data/classification.js']:
+for name in ['index.html', 'style.css', 'app.js', 'catalog-core.js', 'workout-core.js', 'icon.svg', 'site-gate.js', 'RESEARCH.md', 'data/classification.js']:
     (OUT / name).parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / name, OUT / name)
 data = json.loads((ROOT / 'data/library.json').read_text())
@@ -37,23 +37,10 @@ for tag in ['<!doctype html>\n', '<html lang="en">', '<head>', '</head>', '<body
     html = html.replace(tag, '')
 html = html.replace('<title>Exercises</title>', '<title>Exercises Workout App</title>').replace('<link rel="stylesheet" href="style.css">', '<link rel="stylesheet" href="style.css"><style>body{background:#f5f5f7}.toolbar{top:env(safe-area-inset-top,0px)}</style>')
 if args.password:
-    # A light lock for the hosted copy: it hides the app, but the files themselves are not encrypted.
+    # site-gate.js shows the password screen off the local network; set its hash.
     digest = hashlib.sha256(args.password.encode()).hexdigest()
-    gate = ('<style>#gate{position:fixed;inset:0;z-index:100;background:#f5f5f7;display:grid;place-items:center;padding:16px}'
-      '#gate form{background:#fff;border-radius:20px;padding:28px;width:min(360px,100%);display:grid;gap:14px;box-shadow:0 10px 40px #0000000f}'
-      '#gate h1{margin:0;font-size:24px;letter-spacing:-.5px}#gate p{margin:0;color:#727278;font-size:13px}'
-      '#gate input{height:46px;border:0;border-radius:12px;background:#eaeaef;padding:0 14px;font-size:16px}'
-      '#gate-error{color:#d5433f!important;min-height:18px}</style>'
-      '<div id="gate"><form id="gate-form"><h1>Exercises</h1><p>Enter the password to open the app.</p>'
-      '<input id="gate-password" type="password" autocomplete="current-password" aria-label="Password" autofocus>'
-      '<button class="primary" type="submit">Open</button><p id="gate-error" role="alert"></p></form></div>'
-      '<script>(function(){const H="' + digest + '",g=document.getElementById("gate");'
-      'try{if(localStorage.getItem("gate-ok")===H){g.remove();return;}}catch{}'
-      'async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}'
-      'document.getElementById("gate-form").addEventListener("submit",async e=>{e.preventDefault();const v=document.getElementById("gate-password").value;'
-      'if(await sha(v)===H){try{localStorage.setItem("gate-ok",H);}catch{}g.remove();}'
-      'else{document.getElementById("gate-error").textContent="That password is not right. Try again.";}});})();</script>')
-    html = html.replace('<div class="app-shell">', gate + '<div class="app-shell">', 1)
+    gate = (OUT / 'site-gate.js').read_text()
+    (OUT / 'site-gate.js').write_text(re.sub(r"HASH='[0-9a-f]+'", f"HASH='{digest}'", gate))
 (OUT / 'index.html').write_text(html)
 files = sorted(str(p.relative_to(OUT)) for p in OUT.rglob('*') if p.is_file())
 (OUT / 'files.json').write_text(json.dumps({p: p for p in files if p not in ('index.html', 'files.json')}, indent=1))

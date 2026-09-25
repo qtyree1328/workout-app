@@ -16,6 +16,15 @@ The Mac and server must remain running. This is a local-network app, not a publi
 
 The server supports HTTP byte ranges so Safari can load and seek local video clips. No build, package installation, account, API key, or runtime network service is needed.
 
+## Host it as a website
+
+The repository root is a complete static site, so any static host can serve it without a build step. `.nojekyll` makes GitHub Pages serve every file as-is.
+
+- **GitHub Pages:** Settings → Pages → Build and deployment → *Deploy from a branch* → choose the branch and `/ (root)` → Save. The site appears at `https://qtyree1328.github.io/workout-app/` within a minute or two. Pages for a **private** repository needs a paid GitHub plan (Pro, Team or Enterprise). A Pages site is public even when the repo is private.
+- **Netlify or Cloudflare Pages** (free, works with private repos): import the repository, leave the build command empty, and set the publish directory to the repository root.
+
+Off the local network the app shows a password screen (`site-gate.js`). It hides the app but does not encrypt the files, so anyone who knows a file's address can still download it. Change the password by replacing the hash in `site-gate.js`. Saved groups and favorites live in each browser and site address separately; use Settings → Export / Import to move them.
+
 ## Use
 
 - **Groups:** 54 editable starter routines plus your own saved chains. Tap to choose rounds, timing/repetition mode, and breaks, then Start. Edit a starter group to save your own copy.
