@@ -23,10 +23,9 @@ for e in data['exercises']:
     metadata[id]={'target':target,'difficulty':difficulty,'strain':strain,'hold':id in holds,'detail':e['area'],
        'work':15 if id in high else 30,'rest':90 if id in high else 30 if strain=='Moderate' else 10,'reps':5 if id in high else 8}
 
-from catalog_rules import enrich, build_groups
+from catalog_rules import enrich
 metadata=enrich(data,metadata)
-groups=build_groups(metadata,data)
-out={'exercises':metadata,'groups':groups}
+out={'exercises':metadata}
 (ROOT/'data/classification.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
 (ROOT/'data/classification.js').write_text('window.CLASSIFICATION = '+json.dumps(out,ensure_ascii=False)+';\n')
-print(f'Classified {len(metadata)} movements; created {len(groups)} groups.')
+print(f'Classified {len(metadata)} movements.')

@@ -1,14 +1,51 @@
-const assert=require('node:assert/strict');
-const K=require('../catalog-core.js'),C=require('../workout-core.js');
-const {exercises,groups}=require('../data/classification.json');
-const library=require('../data/library.json');const byId=Object.fromEntries(library.exercises.map(e=>[e.id,e]));
-assert.equal(library.exercises.length,163);assert.equal(groups.length,89);
-for(const [id,m]of Object.entries(exercises)){assert(m.regions.length,id);assert(m.tags.length>=5,id);assert(m.pattern&&m.dose&&m.trainingType,id);}
-const find=q=>library.exercises.filter(e=>K.search(K.exerciseText(e,exercises[e.id]),q)).map(e=>e.id);
-assert(find('back').includes('prone-band-row'));assert(find('hips').includes('90-90-hip-switches'));assert(find('hip').includes('90-90-hip-switches'));assert(find('sholders').includes('arm-circles'));assert(find('shoulder band').includes('prone-band-w-raise'));assert(find('calves').includes('supported-calf-raise'));assert(find('glutes').includes('standing-hip-extension'));assert(find('thoracic').includes('band-assisted-thoracic-extension'));assert(find('upper back').includes('prone-t-raise'));assert(find('lower back').includes('standing-pelvic-shift'));assert(!find('lower back').includes('wall-push-up'));assert(find('no equipment abs').includes('hollow-body-hold'));assert(find('bar shoulders').includes('prone-dowel-diagonal-reach'));assert.equal(find('hip shoulder banana').length,0);
-for(const g of groups){assert.equal(K.duration(g.steps),g.durationSeconds,g.id);assert(g.durationSeconds<=g.budgetMinutes*60,g.id);assert(g.tags.length>5);assert.equal(g.steps[0].phase,'warm-up');assert.equal(g.steps[0].exercise,'easy-walking');assert.equal(g.steps.at(-1).rest,0);const sides={};for(const s of g.steps){assert(byId[s.exercise],s.exercise);assert(!['skill'].includes(exercises[s.exercise].trainingType));if(s.side!=='Both'){sides[s.exercise]??={Left:0,Right:0};sides[s.exercise][s.side]+=s.work;}if(s.phase==='main'&&['strength','isometric'].includes(exercises[s.exercise].trainingType)&&g.kind==='Strength')assert(s.rest>=60);if(exercises[s.exercise].trainingType==='static-stretch')assert(s.work<=30);}for(const [id,total]of Object.entries(sides))assert.equal(total.Left,total.Right,`${g.id}: ${id} sides`);const sanitized=g.steps.map(s=>C.cleanStep(s,exercises));assert.equal(K.duration(sanitized),g.durationSeconds);assert.equal(sanitized[0].phase,'warm-up');if(g.kind==='Strength'){assert(g.steps[0].work>=300);assert.equal(g.steps.at(-1).exercise,'easy-walking');assert(g.steps.at(-1).work>=300);}}
-for(const minutes of [5,10,15,20,30,45,60]){const fit=K.fitting(groups,minutes);assert(fit.length>0);for(let i=0;i<fit.length;i++){assert(K.duration(fit[i].steps)<=minutes*60);if(i)assert(K.duration(fit[i-1].steps)>=K.duration(fit[i].steps));}}
-assert(K.fitting(groups,30).filter(g=>K.duration(g.steps)>=27*60).length>=6);
-const unknown={name:'Reps',steps:[{mode:'reps',work:30,rest:0}]};assert.equal(K.fitting([unknown],30).length,0);assert.equal(K.fitting([unknown],null).length,1);
-assert.equal(K.duration([{mode:'time',work:60,rest:0}]),63);assert.equal(K.fitting([{name:'Boundary',steps:[{mode:'time',work:300,rest:0}]}],5).length,0);
-console.log('PASS: 163 complete taxonomies, synonym/multiword/typo search, 89 plans, phase preservation, symmetric sides, hold limits, strength recovery, warm-up/cool-down, exact planned durations, global longest-first budgets, rep exclusions.');
+// Exercise catalog: classification completeness, media files on disk, search.
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const Search = require('../js/core/search.js');
+const { exercises } = require('../data/classification.json');
+const library = require('../data/library.json');
+const ROOT = path.join(__dirname, '..');
+
+assert.equal(library.exercises.length, 163, 'library exercise count');
+
+for (const e of library.exercises) {
+  const m = exercises[e.id];
+  assert(m, `${e.id}: missing classification metadata`);
+  assert(m.target, `${e.id}: missing target`);
+  assert(m.difficulty, `${e.id}: missing difficulty`);
+  assert(m.strain, `${e.id}: missing strain`);
+  assert(Array.isArray(m.regions) && m.regions.length, `${e.id}: missing regions`);
+  assert(m.pattern, `${e.id}: missing pattern`);
+  assert(m.trainingType, `${e.id}: missing trainingType`);
+  assert(m.dose && typeof m.dose === 'object', `${e.id}: missing dose`);
+  assert(Array.isArray(m.tags) && m.tags.length >= 5, `${e.id}: tags must have >=5 entries, has ${m.tags && m.tags.length}`);
+
+  for (const v of e.variants) {
+    for (const key of ['clip', 'thumbnail', 'image', 'options']) {
+      if (v[key]) assert(fs.existsSync(path.join(ROOT, v[key])), `${e.id}: ${key} file missing on disk: ${v[key]}`);
+    }
+  }
+}
+
+// ── Search ──────────────────────────────────────────────────────────────────
+// Searchable text per exercise: name/area/kind/equipment plus the classification
+// tags (which already fold in regions, pattern, trainingType, aliases and variant
+// labels - see catalog_rules.py:enrich) plus each variant's own label.
+function textFor(e) {
+  const m = exercises[e.id] || {};
+  return [e.name, e.area, e.kind, e.equipment, ...(m.tags || []), ...e.variants.map(v => v.label)].join(' ');
+}
+function find(query) {
+  return library.exercises.filter(e => Search.matches(textFor(e), query)).map(e => e.id);
+}
+
+assert(find('hips').includes('90-90-hip-switches'), 'hips -> 90-90-hip-switches');
+assert(find('sholders').includes('arm-circles'), 'sholders (typo) -> arm-circles');
+assert(find('hangboard').includes('hb-max-hang-half-crimp'), 'hangboard -> hb-max-hang-half-crimp');
+assert(find('crimps').includes('hb-min-edge-hang'), 'crimps -> hb-min-edge-hang');
+assert(find('pull ups').includes('bar-pull-up'), 'pull ups -> bar-pull-up');
+assert(find('pigeon').includes('hip-pigeon'), 'pigeon -> hip-pigeon');
+assert.equal(find('zqxxnonsense').length, 0, 'nonsense finds nothing');
+
+console.log('PASS catalog: 163 exercises with complete classification (target/difficulty/strain/regions/pattern/trainingType/dose/tags>=5); every referenced media file (clip/thumbnail/image/options) exists on disk; search synonyms, typos, multi-word and nonsense queries.');

@@ -66,8 +66,8 @@ const sessions=[
   why:'Finger strength is grip-specific: Levernier & Laffaye measured gains separately in slope, half-crimp and full-crimp grips. Training the half crimp and the open hand covers the positions you actually climb in. Full crimp is left out on purpose. '+FINGER_NOTE,
   sources:['levernier','lopez'],
   blocks:[warmFingers(),block('Alternating max hangs',[
-    t('hb-max-hang-half-crimp',10,{rest:150,log:'kg',cue:'Half crimp · ~20 mm edge.'}),
-    t('hb-max-hang-open-hand',10,{rest:150,log:'kg',cue:'Open hand or three-finger drag · ~20 mm edge.'})],{rounds:3}),armsLoose()]},
+    t('hb-max-hang-half-crimp',10,{rest:180,log:'kg',cue:'Half crimp · ~20 mm edge.'}),
+    t('hb-max-hang-open-hand',10,{rest:180,log:'kg',cue:'Open hand or three-finger drag · ~20 mm edge.'})],{rounds:3}),armsLoose()]},
  {id:'min-edge',focus:['Fingers'],fixed:true,title:'Min-Edge Hangs',category:'climbing',level:'Advanced',goals:['Crimps','Max finger strength'],
   summary:'Bodyweight on the smallest edge you can hold for ~13 s.',
   why:'Phase two of López-Rivera’s MaxHangs program. Instead of adding weight, you shrink the edge. Builds strength on small crimps. Move to a smaller edge only when all five hangs feel solid. '+FINGER_NOTE,
