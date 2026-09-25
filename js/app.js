@@ -322,21 +322,147 @@
 
  /* ───────────────────────── Home page ───────────────────────── */
  const CATEGORY_LIST=[{id:'all',label:'All',icon:'all'},...Object.entries(CATEGORIES).map(([id,c])=>({id,label:c.label,icon:c.icon}))];
- const homeState={category:prefs.get('category','all'),minutes:prefs.get('minutes','any'),focus:prefs.get('focus',null)};
+ const homeState={category:prefs.get('category','all'),minutes:prefs.get('minutes','any'),focus:prefs.get('focus',null),intensity:prefs.get('intensity','any')};
  let hipState=null;
  const minutesEff=()=>homeState.minutes==='any'?30:homeState.minutes;
+
+ /* ── Intensity meta (shared by the slider, result cards, hero and session detail) ── */
+ const INTENSITY_META={
+  any:{label:'Any',aria:'Any intensity',icon:'all',cls:''},
+  1:{label:'Relaxed',aria:'Relaxed',icon:'leaf',cls:'i1'},
+  2:{label:'Elevated heart rate',aria:'Elevated heart rate',icon:'heartpulse',cls:'i2'},
+  3:{label:'Strenuous',aria:'Strenuous',icon:'flame',cls:'i3'},
+ };
+ function intensityBadge(level,cls){
+  const m=INTENSITY_META[level]||INTENSITY_META.any;
+  return `<span class="intensity-badge ${m.cls}${cls?' '+cls:''}" title="${h(m.label)}" aria-label="${h(m.label)}">${icon(m.icon)}</span>`;
+ }
+
+ /* ───────────────────────── Stop-slider (time / intensity control) ─────────────────────────
+    A touch-friendly discrete slider: N evenly spaced stops, a draggable thumb (pointer events),
+    keyboard arrows, role="slider" + aria-valuetext. The thumb follows the pointer continuously
+    while dragging (springing to the nearest stop on release); callers get a throttled "preview"
+    callback during the drag (rAF) plus a final "commit" callback when the value is set. */
+ function buildStopSlider({root,stops,valueOf,initial,onPreview,onCommit,paintThumb}){
+  const rail=root.querySelector('.stopslider-rail');
+  const fill=root.querySelector('.stopslider-fill');
+  const thumb=root.querySelector('.stopslider-thumb');
+  const ticksWrap=root.querySelector('.stopslider-ticks');
+  const bubble=root.querySelector('.stopslider-bubble');
+  const n=stops.length;
+  ticksWrap.innerHTML=stops.map(()=>'<span class="stopslider-tick"></span>').join('');
+  let index=Math.max(0,stops.findIndex(s=>valueOf(s)===valueOf(initial)));
+  if(index<0)index=0;
+  let dragging=false,focused=false,rafId=null,disabled=false;
+  const fracOf=i=>n<=1?0:i/(n-1);
+  const INSET=14; // matches the thumb radius / CSS track inset, so the thumb travels exactly the visible track
+  function trackWidth(){return Math.max(1,rail.getBoundingClientRect().width-INSET*2);}
+  function positionBubble(thumbLeftPx){
+   if(!bubble)return;
+   const railW=rail.getBoundingClientRect().width;
+   const bw=bubble.offsetWidth||0;
+   const left=clamp(thumbLeftPx-bw/2,4,Math.max(4,railW-bw-4));
+   bubble.style.left=left+'px';
+  }
+  function updateBubbleVisibility(){if(bubble)bubble.classList.toggle('show',dragging||focused);}
+  function applyFrac(frac){
+   const tw=trackWidth();
+   const leftPx=INSET+frac*tw;
+   thumb.style.left=leftPx+'px';
+   fill.style.width=(frac*tw)+'px';
+   fill.style.backgroundSize=tw+'px 100%';
+   positionBubble(leftPx);
+  }
+  function paint(i,{animate}={}){
+   const frac=fracOf(i);
+   thumb.style.transition=animate===false?'none':'';
+   fill.style.transition=animate===false?'none':'';
+   applyFrac(frac);
+   thumb.setAttribute('aria-valuenow',String(i));
+   thumb.setAttribute('aria-valuemin','0');
+   thumb.setAttribute('aria-valuemax',String(n-1));
+   paintThumb(stops[i],i);
+  }
+  function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+  function fracFromClientX(x){
+   const r=rail.getBoundingClientRect();
+   const tw=trackWidth();
+   return tw?clamp((x-r.left-INSET)/tw,0,1):0;
+  }
+  function nearestIndex(frac){return clamp(Math.round(frac*(n-1)),0,n-1);}
+  function previewFrac(frac){
+   thumb.style.transition='none';fill.style.transition='none';
+   applyFrac(frac);
+   const idx=nearestIndex(frac);
+   paintThumb(stops[idx],idx);
+   if(rafId)return;
+   rafId=requestAnimationFrame(()=>{rafId=null;onPreview(stops[idx],idx);});
+  }
+  function commitIndex(i,{animate}={}){
+   index=clamp(i,0,n-1);
+   paint(index,{animate});
+   onCommit(stops[index],index);
+  }
+  function pointerXY(e){return e.touches&&e.touches[0]?e.touches[0].clientX:e.clientX;}
+  thumb.addEventListener('pointerdown',e=>{
+   if(disabled)return;
+   dragging=true;thumb.classList.add('dragging');updateBubbleVisibility();
+   try{thumb.setPointerCapture(e.pointerId);}catch(err){}
+   previewFrac(fracFromClientX(pointerXY(e)));
+   e.preventDefault();
+  });
+  thumb.addEventListener('pointermove',e=>{if(!dragging)return;previewFrac(fracFromClientX(pointerXY(e)));});
+  function endDrag(e){
+   if(!dragging)return;dragging=false;thumb.classList.remove('dragging');updateBubbleVisibility();
+   const frac=fracFromClientX(pointerXY(e));
+   commitIndex(nearestIndex(frac));
+  }
+  thumb.addEventListener('pointerup',endDrag);
+  thumb.addEventListener('pointercancel',endDrag);
+  rail.addEventListener('pointerdown',e=>{
+   if(disabled||e.target===thumb||thumb.contains(e.target))return;
+   commitIndex(nearestIndex(fracFromClientX(pointerXY(e))));
+  });
+  thumb.addEventListener('focus',()=>{focused=true;updateBubbleVisibility();});
+  thumb.addEventListener('blur',()=>{focused=false;updateBubbleVisibility();});
+  thumb.addEventListener('keydown',e=>{
+   if(disabled)return;
+   let next=null;
+   if(e.key==='ArrowLeft'||e.key==='ArrowDown')next=index-1;
+   else if(e.key==='ArrowRight'||e.key==='ArrowUp')next=index+1;
+   else if(e.key==='Home')next=0;
+   else if(e.key==='End')next=n-1;
+   else if(e.key==='PageDown')next=index-1;
+   else if(e.key==='PageUp')next=index+1;
+   if(next==null)return;
+   e.preventDefault();
+   commitIndex(next,{animate:!reducedMotion()});
+  });
+  window.addEventListener('resize',debounce(()=>paint(index,{animate:false}),120));
+  paint(index,{animate:false});
+  return {
+   setValue(v,{animate}={}){
+    const i=stops.findIndex(s=>valueOf(s)===valueOf(v));
+    if(i<0)return;
+    index=i;paint(i,{animate:animate!==false});
+   },
+   setDisabled(v){disabled=v;thumb.setAttribute('aria-disabled',String(v));thumb.tabIndex=v?-1:0;root.classList.toggle('is-disabled',v);},
+  };
+ }
 
  function greeting(){
   const hr=new Date().getHours();
   return hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';
  }
- function poolFor(category,focus){
+ function poolFor(category,focus,intensity){
   let pool=category==='all'?SESS.sessions.slice():SESS.sessions.filter(s=>s.category===category);
   if(focus)pool=pool.filter(s=>(s.focus||[]).includes(focus));
+  // Hip Opener is always relaxed and has its own UI, not this list — the intensity filter never applies to it.
+  if(intensity&&intensity!=='any'&&category!=='hip')pool=pool.filter(s=>s.intensity===intensity);
   return pool;
  }
- function computeResults(category,minutesSel,focus){
-  const pool=poolFor(category,focus),isAny=minutesSel==='any';
+ function computeResults(category,minutesSel,focus,intensity){
+  const pool=poolFor(category,focus,intensity),isAny=minutesSel==='any';
   const items=pool.map((s,i)=>{
    if(isAny){const plan=Plan.compile(s,META,{countdown:countdown()});return{session:s,plan,changed:[],fits:!!plan.steps.length,idx:i,options:{...Plan.DEFAULTS,countdown:countdown()},score:0};}
    const res=Plan.fit(s,minutesSel,META,{countdown:countdown()});
@@ -355,9 +481,34 @@
    <div class="page-header"><span class="eyebrow">${greeting()}</span><h1 class="page-title">What are we training?</h1></div>
    <div class="controls">
     <div class="tile-row" id="cat-tiles" role="group" aria-label="Category"></div>
-    <div class="chip-group">
-     <span class="row-label">Time</span>
-     <div class="chip-row" id="time-chips" role="group" aria-label="Time available"></div>
+    <div class="control-panel" id="control-panel">
+     <div class="stopslider" id="time-slider">
+      <div class="stopslider-head">
+       <span class="stopslider-label">${icon('clock')}<span>Time</span></span>
+       <span class="stopslider-readout num" id="time-readout"></span>
+      </div>
+      <div class="stopslider-rail" id="time-rail">
+       <div class="stopslider-track-bg"></div>
+       <div class="stopslider-fill" id="time-fill"></div>
+       <div class="stopslider-ticks"></div>
+       <div class="stopslider-thumb" id="time-thumb" role="slider" tabindex="0" aria-label="Time available"></div>
+       <span class="stopslider-bubble" id="time-bubble"></span>
+      </div>
+     </div>
+     <div class="stopslider intensity" id="intensity-slider">
+      <div class="stopslider-head">
+       <span class="stopslider-label">Intensity</span>
+      </div>
+      <div class="stopslider-rail" id="intensity-rail">
+       <div class="stopslider-track-bg"></div>
+       <div class="stopslider-fill" id="intensity-fill"></div>
+       <div class="stopslider-ticks"></div>
+       <div class="stopslider-thumb" id="intensity-thumb" role="slider" tabindex="0" aria-label="Intensity">
+        <span class="stopslider-thumb-icon"></span>
+       </div>
+       <span class="stopslider-bubble" id="intensity-bubble"></span>
+      </div>
+     </div>
     </div>
     <div class="chip-group" id="focus-group">
      <span class="row-label">Focus</span>
@@ -368,7 +519,9 @@
   </div>`;
   paintResumeBanner();
   buildCategoryTiles();
-  buildTimeChips();
+  buildTimeSlider();
+  buildIntensitySlider();
+  if(intensitySlider)intensitySlider.setDisabled(homeState.category==='hip');
   buildFocusChips(true);
   updateResults();
  }
@@ -385,18 +538,42 @@
    setCategory(btn.dataset.cat);
   });
  }
- function buildTimeChips(){
-  const row=$('#time-chips');
-  const opts=[5,10,15,20,30,45,60,'any'];
-  row.innerHTML=opts.map(v=>{
-   const on=homeState.minutes===v;
-   const label=v==='any'?'Any':`${v}m`;
-   return `<button type="button" class="chip" data-min="${v}" aria-pressed="${on}">${label}</button>`;
-  }).join('');
-  row.addEventListener('click',e=>{
-   const btn=e.target.closest('.chip');if(!btn)return;
-   const v=btn.dataset.min==='any'?'any':Number(btn.dataset.min);
-   setMinutes(v);
+ const TIME_STOPS=[5,10,15,20,30,45,60,'any'];
+ const timeLabel=v=>v==='any'?'Any':`${v} min`;
+ let timeSlider=null,intensitySlider=null;
+ function buildTimeSlider(){
+  const root=$('#time-slider');
+  const readout=$('#time-readout'),bubble=$('#time-bubble');
+  timeSlider=buildStopSlider({
+   root,stops:TIME_STOPS,valueOf:v=>v,initial:homeState.minutes,
+   paintThumb(v){
+    const label=timeLabel(v);
+    if(readout.textContent!==label)readout.textContent=label;
+    if(bubble.textContent!==label)bubble.textContent=label;
+    root.querySelector('.stopslider-thumb').setAttribute('aria-valuetext',v==='any'?'Any duration':label);
+   },
+   onPreview(v){homeState.minutes=v;updateResults();},
+   onCommit(v){setMinutes(v,{fromSlider:true});},
+  });
+ }
+ const intensityLabelOf=v=>(INTENSITY_META[v]||INTENSITY_META.any).label;
+ const INTENSITY_STOPS=['any',1,2,3];
+ function buildIntensitySlider(){
+  const root=$('#intensity-slider');
+  const thumb=$('#intensity-thumb'),thumbIcon=thumb.querySelector('.stopslider-thumb-icon'),bubble=$('#intensity-bubble');
+  intensitySlider=buildStopSlider({
+   root,stops:INTENSITY_STOPS,valueOf:v=>v,initial:homeState.intensity,
+   paintThumb(v){
+    const m=INTENSITY_META[v]||INTENSITY_META.any;
+    thumbIcon.innerHTML=icon(m.icon);
+    thumbIcon.className='stopslider-thumb-icon '+m.cls;
+    if(bubble.textContent!==m.label)bubble.textContent=m.label;
+    thumb.setAttribute('aria-valuetext',m.aria);
+    const idx=INTENSITY_STOPS.indexOf(v);
+    root.querySelectorAll('.stopslider-tick').forEach((t,i)=>t.classList.toggle('on',i<=idx));
+   },
+   onPreview(v){homeState.intensity=v;updateResults();},
+   onCommit(v){setIntensity(v);},
   });
  }
  function buildFocusChips(instant){
@@ -425,12 +602,17 @@
   homeState.focus=null;prefs.set('focus',null);
   [...$('#cat-tiles').children].forEach(b=>{const on=b.dataset.cat===id;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
   buildFocusChips(false);
+  if(intensitySlider)intensitySlider.setDisabled(id==='hip');
   updateResults();
  }
  function setMinutes(v){
-  if(homeState.minutes===v)return;
   homeState.minutes=v;prefs.set('minutes',v);
-  [...$('#time-chips').children].forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.min==='any'?'any':Number(b.dataset.min))===v)));
+  if(timeSlider)timeSlider.setValue(v);
+  updateResults();
+ }
+ function setIntensity(v){
+  homeState.intensity=v;prefs.set('intensity',v);
+  if(intensitySlider)intensitySlider.setValue(v);
   updateResults();
  }
  function setFocus(f){
@@ -442,7 +624,7 @@
  function updateResults(){
   const area=$('#results-area');if(!area)return;
   if(homeState.category==='hip'){renderHipSection(area);return;}
-  const items=computeResults(homeState.category,homeState.minutes,homeState.focus);
+  const items=computeResults(homeState.category,homeState.minutes,homeState.focus,homeState.intensity);
   if(!items.length){renderEmptyState(area);return;}
   const countLine=homeState.minutes==='any'?`${items.length} workout${items.length===1?'':'s'}`:`${items.length} workout${items.length===1?'':'s'} fit in ${homeState.minutes} min`;
   const hero=items[0],rest=items.slice(1);
@@ -470,7 +652,10 @@
     </div>
     ${changed&&changed.length?`<span class="hero-fitted">${icon('info')} Fitted: ${h(changed.join(', '))}</span>`:''}
     <div class="hero-cta">
-     <div class="hero-duration"><span class="hero-duration-num num" id="hero-duration">${Math.round(plan.duration/60)}</span><span class="hero-duration-label">minutes</span></div>
+     <div class="hero-duration">
+      <div class="hero-duration-row"><span class="hero-duration-num num" id="hero-duration">${Math.round(plan.duration/60)}</span>${intensityBadge(s.intensity,'on-dark')}</div>
+      <span class="hero-duration-label">minutes</span>
+     </div>
      <button type="button" class="btn hero-start" data-stop-tap>${icon('play')} Start</button>
     </div>
    </div>`;
@@ -487,7 +672,7 @@
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   el.innerHTML=`<div class="result-art"><div class="art" id="art-${h(s.id)}"></div>
     <span class="result-cat-icon" style="color:var(--${s.category})">${icon(catIcon(s.category))}</span>
-    <span class="result-duration-badge">${Math.round(plan.duration/60)} min</span></div>
+    <span class="result-duration-badge">${Math.round(plan.duration/60)} min${intensityBadge(s.intensity,'sm')}</span></div>
    <div class="result-body">
     <h3 class="result-title">${h(s.title)}</h3>
     <p class="result-summary">${h(s.summary)}</p>
@@ -501,7 +686,7 @@
   return el;
  }
  function renderEmptyState(area){
-  const pool=poolFor(homeState.category,homeState.focus);
+  const pool=poolFor(homeState.category,homeState.focus,homeState.intensity);
   const shortest=pool.map(s=>({s,dur:Plan.compile(s,META,{countdown:countdown()}).duration})).sort((a,b)=>a.dur-b.dur).slice(0,3);
   area.innerHTML=`<div class="empty-state">
    <h3>Nothing fits in ${homeState.minutes==='any'?'that window':homeState.minutes+' min'} yet</h3>
@@ -724,6 +909,7 @@
      <div class="stat"><span class="stat-value num" id="stat-duration">${h(Plan.minutes(initialPlan.duration))}</span><span class="stat-label">Duration</span></div>
      <div class="stat"><span class="stat-value num" id="stat-exercises">0</span><span class="stat-label">Exercises</span></div>
      <div class="stat"><span class="stat-value">${h(session.level||'')}</span><span class="stat-label">Level</span></div>
+     <div class="stat"><span class="stat-value stat-value-intensity">${intensityBadge(session.intensity)}${h(INTENSITY_META[session.intensity].label)}</span><span class="stat-label">Intensity</span></div>
      <div class="stat"><span class="stat-value">${equip.length?h(equip.slice(0,2).join(', ')):'Bodyweight'}</span><span class="stat-label">Equipment</span></div>
     </div></div>
     <div class="section"><h2 class="section-title">Adjust</h2><div class="adjust-card" id="adjust-card"></div></div>

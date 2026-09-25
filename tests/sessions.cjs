@@ -148,4 +148,10 @@ for (const minutes of HOLD_MINUTES) {
   for (const id of keep) assert(poses.includes(id), `keep: "${id}" should be kept`);
 }
 
-console.log('PASS sessions: exercises/categories/focus valid, all sessions compile, fixed finger protocols (work/rest, warm-up-hangs ordering), repeaters (24x7s/4x180), intermittent-hard (36x10s/2x480), Plan.fit duration budgets + fixed setsDelta/warmup invariants, Hip Opener (feasibility, uniqueness, position order, 360s holds, 60s pose rests, duration, keep).');
+// ── Every session (and hipOpener) has a valid intensity ─────────────────────
+for (const s of sessions) {
+  assert([1, 2, 3].includes(s.intensity), `${s.id}: intensity should be 1, 2 or 3, got ${s.intensity}`);
+}
+assert([1, 2, 3].includes(hipOpener.intensity), `hipOpener: intensity should be 1, 2 or 3, got ${hipOpener.intensity}`);
+
+console.log('PASS sessions: exercises/categories/focus valid, all sessions compile, fixed finger protocols (work/rest, warm-up-hangs ordering), repeaters (24x7s/4x180), intermittent-hard (36x10s/2x480), Plan.fit duration budgets + fixed setsDelta/warmup invariants, Hip Opener (feasibility, uniqueness, position order, 360s holds, 60s pose rests, duration, keep), session/hipOpener intensity in {1,2,3}.');
