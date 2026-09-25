@@ -28,6 +28,12 @@ for path in sorted(copied):
     (OUT / path).parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / path, OUT / path)
 (OUT / 'data/library.js').write_text('window.LIBRARY = ' + json.dumps(data, ensure_ascii=False) + ';\n')
+# Hosted page: the host supplies the html/head/body skeleton, so keep only the page content.
+html = (OUT / 'index.html').read_text()
+for tag in ['<!doctype html>\n', '<html lang="en">', '<head>', '</head>', '<body>', '</body>', '</html>']:
+    html = html.replace(tag, '')
+html = html.replace('<title>Exercises</title>', '<title>Exercises Workout App</title>').replace('<link rel="stylesheet" href="style.css">', '<link rel="stylesheet" href="style.css"><style>body{background:#f5f5f7}.toolbar{top:env(safe-area-inset-top,0px)}</style>')
+(OUT / 'index.html').write_text(html)
 files = sorted(str(p.relative_to(OUT)) for p in OUT.rglob('*') if p.is_file())
-(OUT / 'files.json').write_text(json.dumps({p: p for p in files if p != 'index.html'}, indent=1))
+(OUT / 'files.json').write_text(json.dumps({p: p for p in files if p not in ('index.html', 'files.json')}, indent=1))
 print(f'{len(files)} files, {sum((OUT / p).stat().st_size for p in files) / 1e6:.1f} MB in preview/')
