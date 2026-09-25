@@ -10,6 +10,7 @@
  };
  const FALLBACK=['#8A93A6','#4E5768'];
  const colors=category=>PALETTES[category]||FALLBACK;
+ const escAttr=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
  // ---- deterministic hash + PRNG (no Math.random) ----
  function hashStr(s){
@@ -90,7 +91,7 @@
    return `<path d="${ring.d}" fill="none" stroke="#fff" stroke-opacity="${thick?0.16:0.12}" stroke-width="${thick?1.6:0.9}"/>`;
   }).join('');
 
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" role="img" aria-label="${category||'workout'} cover art">`
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" role="img" aria-label="${escAttr(category||'workout')} cover art">`
    +`<defs>`
    +`<linearGradient id="${uid}g" x1="${gx1}" y1="${gy1}" x2="${gx2}" y2="${gy2}" gradientUnits="userSpaceOnUse">`
    +`<stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>`

@@ -58,8 +58,8 @@
    const score=plan.duration-Math.abs(setsDelta)*45-(repeat>1?30:0)-(warmup?0:Math.max(120,plan.duration*.25))-(cooldown?0:45);
    if(!best||score>best.score)best={score,options,plan};
   }
-  if(best)return {fits:true,options:best.options,plan:best.plan,changed:describeOptions(best.options)};
-  const plan=compile(session,meta,base);return {fits:false,options:{...base},plan,changed:[]};
+  if(best)return {fits:true,score:best.score,options:best.options,plan:best.plan,changed:describeOptions(best.options)};
+  const plan=compile(session,meta,base);return {fits:false,score:-Infinity,options:{...base},plan,changed:[]};
  }
  function describeOptions(o){const out=[];if(o.setsDelta)out.push(`${o.setsDelta>0?'+':''}${o.setsDelta} set${Math.abs(o.setsDelta)>1?'s':''}`);if(o.repeat>1)out.push('flow twice');if(!o.warmup)out.push('no warm-up');if(!o.cooldown)out.push('no cool-down');return out;}
 
