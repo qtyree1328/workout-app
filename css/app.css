@@ -58,8 +58,11 @@
 .page-header{display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .page-title{font-family:var(--font-round);font-weight:800;letter-spacing:-.6px;font-size:clamp(28px,4.4vw,40px);margin:0;line-height:1.05}
-.section{display:flex;flex-direction:column;gap:14px}
+.section{display:flex;flex-direction:column;gap:12px}
 .section-title{font-family:var(--font-round);font-weight:750;font-size:18px;margin:0;letter-spacing:-.1px}
+/* Session detail stacks bare .section blocks inside .container (no flex gap there) — give each
+   one consistent breathing room from whatever sits above it, so headings never sit flush. */
+.container>.section{margin-top:32px}
 
 /* ── Resume banner ──────────────────────────────────────────────────────── */
 .resume-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow-1);animation:bannerIn .42s var(--spring) both}
@@ -80,9 +83,23 @@
 .category-tile-label{font-size:12px;font-weight:650}
 .category-tile.on{background:color-mix(in srgb,var(--tile-c) 14%,var(--surface));border-color:var(--tile-c);box-shadow:0 0 0 3px color-mix(in srgb,var(--tile-c) 26%,transparent),var(--shadow-1);color:var(--tile-c)}
 .category-tile.on .icon{color:var(--tile-c)}
+/* "All" has no category hue — var(--tile-c) is plain ink, which at the coloured tiles' full-strength
+   border + 26% ring reads as a heavy grey fill with a stark double ring. Soften both to match the
+   coloured tiles' visual weight: same layers (tint/border/ring), lighter mix. */
+.category-tile.on.is-neutral{background:color-mix(in srgb,var(--tile-c) 9%,var(--surface));border-color:color-mix(in srgb,var(--tile-c) 32%,var(--line-2));box-shadow:0 0 0 2px color-mix(in srgb,var(--tile-c) 18%,transparent),var(--shadow-1);color:var(--tile-c)}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px}
-.focus-row{display:flex;flex-wrap:wrap;gap:8px;overflow:hidden;max-height:90px;opacity:1;transition:opacity .3s var(--ease),max-height .3s var(--ease),transform .3s var(--ease),margin .3s var(--ease)}
-.focus-row.is-hidden{opacity:0;max-height:0;transform:translateY(-6px);pointer-events:none}
+.chip-group{display:block}
+.row-label{display:block;margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#focus-group{overflow:hidden;max-height:120px;opacity:1;transition:opacity .3s var(--ease),max-height .3s var(--ease),transform .3s var(--ease)}
+#focus-group.is-hidden{opacity:0;max-height:0;transform:translateY(-6px);pointer-events:none}
+@media (max-width:699px){
+ /* Phones: chip rows wrap onto two lines and crowd the layout — scroll them horizontally instead,
+    like .tile-row, with a soft fade at each edge to hint there's more off-screen. */
+ .chip-row{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 0 6px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent)}
+ .chip-row::-webkit-scrollbar{display:none}
+ .chip-row{scrollbar-width:none}
+ .chip-row .chip{flex:0 0 auto;scroll-snap-align:start}
+}
 
 /* ── Results ────────────────────────────────────────────────────────────── */
 .results{display:flex;flex-direction:column;gap:18px}
@@ -226,16 +243,19 @@
 /* ── Sheets (exercise / settings) ───────────────────────────────────────── */
 .sheet-backdrop{position:fixed;inset:0;background:var(--scrim);opacity:0;transition:opacity .3s var(--ease);z-index:50}
 .sheet-backdrop.open{opacity:1}
-.sheet-panel{position:fixed;left:0;right:0;bottom:0;max-height:92dvh;background:var(--surface);border-radius:26px 26px 0 0;box-shadow:var(--shadow-2);transform:translateY(102%);transition:transform .42s var(--spring);z-index:51;display:flex;flex-direction:column;overflow:hidden}
+.sheet-panel{position:fixed;left:0;right:0;bottom:0;max-height:calc(100dvh - 48px);background:var(--surface);border-radius:26px 26px 0 0;box-shadow:var(--shadow-2);transform:translateY(102%);transition:transform .42s var(--spring);z-index:51;display:flex;flex-direction:column;overflow:hidden}
 .sheet-panel.open{transform:translateY(0)}
 .sheet-panel.dragging{transition:none}
 .sheet-handle-wrap{display:flex;justify-content:center;padding:10px 0 2px;flex:none;touch-action:none;cursor:grab}
 .sheet-handle{width:38px;height:5px;border-radius:999px;background:var(--line-2)}
-.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 4px 20px;flex:none;gap:12px}
+/* Sticky within .sheet-scroll (its nearest scrolling ancestor) so the title/close stay reachable
+   and, on the exercise sheet, the "Try it" footer stays visible — the sheet can be taller than the
+   viewport (long exercise copy on a wide screen) and content in between scrolls underneath both. */
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 4px 20px;flex:none;gap:12px;position:sticky;top:0;z-index:3;background:var(--surface);border-bottom:1px solid var(--line)}
 .sheet-head h2{margin:0;font-family:var(--font-round);font-weight:750;font-size:16px}
-.sheet-scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom)}
+.sheet-scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom)}
 @media (min-width:700px){
- .sheet-panel{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-46%) scale(.96);opacity:0;border-radius:var(--radius-xl);width:min(560px,calc(100vw - 48px));max-height:86dvh}
+ .sheet-panel{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-46%) scale(.96);opacity:0;border-radius:var(--radius-xl);width:min(560px,calc(100vw - 48px));max-height:calc(100dvh - 48px)}
  .sheet-panel.open{transform:translate(-50%,-50%) scale(1);opacity:1}
  .sheet-handle-wrap{display:none}
  .ex-sheet-media{aspect-ratio:auto;height:min(44vh,360px);flex:none}
@@ -259,7 +279,7 @@
 .ex-sheet-source{font-size:12px;color:var(--muted);margin:0}
 .ex-sheet-source a{color:var(--strength);font-weight:650;text-decoration:none}
 .ex-sheet-source a:hover{text-decoration:underline}
-.ex-sheet-actions{display:flex;gap:10px;padding-top:4px}
+.ex-sheet-actions{display:flex;gap:10px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));margin:4px -20px -26px;position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
 .ex-sheet-actions .btn{flex:1}
 
 /* ── Settings sheet ─────────────────────────────────────────────────────── */

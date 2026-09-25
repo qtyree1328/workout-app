@@ -209,6 +209,7 @@
  let sheetFigure=null;
  function exerciseCategory(x){
   if(x.id.startsWith('hip-'))return 'hip';
+  if(x.id.startsWith('hip-'))return 'hip';
   if(x.kind==='Climbing')return 'climbing';
   if(x.kind==='Mobility')return 'mobility';
   if(x.kind==='Warm-up')return 'recovery';
@@ -216,7 +217,8 @@
  }
  function tryItSession(x){
   const m=x.meta||{};
-  const timeMode=!!m.hold;
+  // Only strength-type movements count reps; holds, stretches and mobility drills run on a timer.
+  const timeMode=!!m.hold||!['strength','power'].includes(m.trainingType);
   const item=timeMode
    ?{ex:x.id,mode:'time',work:m.work||20,sets:2,rest:Math.max(15,m.rest||15)}
    :{ex:x.id,mode:'reps',reps:m.reps||8,sets:2,rest:Math.max(15,m.rest||15)};
@@ -225,7 +227,7 @@
  function defaultPrescription(x){
   const m=x.meta||{},d=m.dose;
   if(!d)return '';
-  const item=m.hold?{mode:'time',work:d.workSeconds,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'}
+  const item=(m.hold||!['strength','power'].includes(m.trainingType))?{mode:'time',work:d.workSeconds,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'}
    :{mode:'reps',reps:d.reps,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'};
   return Plan.describe(item,m);
  }
@@ -336,11 +338,13 @@
  function computeResults(category,minutesSel,focus){
   const pool=poolFor(category,focus),isAny=minutesSel==='any';
   const items=pool.map((s,i)=>{
-   if(isAny){const plan=Plan.compile(s,META,{countdown:countdown()});return{session:s,plan,changed:[],fits:!!plan.steps.length,idx:i,options:{...Plan.DEFAULTS,countdown:countdown()}};}
+   if(isAny){const plan=Plan.compile(s,META,{countdown:countdown()});return{session:s,plan,changed:[],fits:!!plan.steps.length,idx:i,options:{...Plan.DEFAULTS,countdown:countdown()},score:0};}
    const res=Plan.fit(s,minutesSel,META,{countdown:countdown()});
-   return{session:s,plan:res.plan,changed:res.changed,fits:res.fits,idx:i,options:res.options};
+   return{session:s,plan:res.plan,changed:res.changed,fits:res.fits,idx:i,options:res.options,score:res.score};
   }).filter(x=>x.fits);
-  items.sort((a,b)=>b.plan.duration-a.plan.duration||a.idx-b.idx);
+  // A chosen time ranks by how well the plan fills it with the fewest changes; "Any" keeps catalogue order.
+  if(isAny)items.sort((a,b)=>a.idx-b.idx);
+  else items.sort((a,b)=>b.score-a.score||a.idx-b.idx);
   return items;
  }
  function catIcon(id){return CATEGORIES[id]?CATEGORIES[id].icon:'all';}
@@ -351,8 +355,14 @@
    <div class="page-header"><span class="eyebrow">${greeting()}</span><h1 class="page-title">What are we training?</h1></div>
    <div class="controls">
     <div class="tile-row" id="cat-tiles" role="group" aria-label="Category"></div>
-    <div class="chip-row" id="time-chips" role="group" aria-label="Time available"></div>
-    <div class="focus-row" id="focus-chips" role="group" aria-label="Focus"></div>
+    <div class="chip-group">
+     <span class="row-label">Time</span>
+     <div class="chip-row" id="time-chips" role="group" aria-label="Time available"></div>
+    </div>
+    <div class="chip-group" id="focus-group">
+     <span class="row-label">Focus</span>
+     <div class="chip-row" id="focus-chips" role="group" aria-label="Focus"></div>
+    </div>
    </div>
    <div class="results" id="results-area"></div>
   </div>`;
@@ -366,7 +376,7 @@
  function buildCategoryTiles(){
   const row=$('#cat-tiles');
   row.innerHTML=CATEGORY_LIST.map(c=>`
-   <button type="button" class="category-tile${homeState.category===c.id?' on':''}" data-cat="${c.id}"
+   <button type="button" class="category-tile${c.id==='all'?' is-neutral':''}${homeState.category===c.id?' on':''}" data-cat="${c.id}"
     aria-pressed="${homeState.category===c.id}" style="--tile-c:${c.id==='all'?'var(--ink)':'var(--'+c.id+')'}">
     ${icon(c.icon)}<span class="category-tile-label">${h(c.label)}</span>
    </button>`).join('');
@@ -390,18 +400,18 @@
   });
  }
  function buildFocusChips(instant){
-  const row=$('#focus-chips');
+  const row=$('#focus-chips'),group=$('#focus-group');
   const cat=SESS.categories.find(c=>c.id===homeState.category);
   const list=(cat&&cat.focus)||[];
   const hideRow=homeState.category==='all'||homeState.category==='hip'||!list.length;
   const render=()=>{
    row.innerHTML=list.map(f=>`<button type="button" class="chip" data-focus="${h(f)}" aria-pressed="${homeState.focus===f}">${h(f)}</button>`).join('');
-   row.classList.toggle('is-hidden',hideRow);
+   if(group)group.classList.toggle('is-hidden',hideRow);
   };
   if(instant||reducedMotion()){render();}
   else{
-   row.classList.add('is-hidden');
-   setTimeout(()=>{render();requestAnimationFrame(()=>{if(!hideRow)row.classList.remove('is-hidden');});},180);
+   if(group)group.classList.add('is-hidden');
+   setTimeout(()=>{render();requestAnimationFrame(()=>{if(!hideRow&&group)group.classList.remove('is-hidden');});},180);
   }
   row.onclick=e=>{
    const btn=e.target.closest('.chip');if(!btn)return;
@@ -542,7 +552,7 @@
   let panel=area.querySelector('.hip-panel');
   if(!panel){
    area.innerHTML=`<div class="hip-panel">
-    <div class="hip-count-row"><div class="chip-row" id="hip-counts" role="group" aria-label="Number of poses"></div></div>
+    <div class="hip-count-row"><span class="row-label">Poses</span><div class="chip-row" id="hip-counts" role="group" aria-label="Number of poses"></div></div>
     <div class="hip-toolbar">
      <label class="switch"><input type="checkbox" id="hip-warmup"><span class="switch-track"></span><span class="switch-label">Warm-up</span></label>
      <span class="hip-summary num" id="hip-summary"></span>

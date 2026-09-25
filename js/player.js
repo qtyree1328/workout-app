@@ -3,13 +3,13 @@
    Emits Crux.emit('player:closed') when the overlay is torn down. */
 (function(){
  const Crux=window.Crux=window.Crux||{};
- const {$,h,icon,prefs,exercise,thumb,displayName,reducedMotion}=Crux;
+ const {h,icon,prefs,exercise,thumb,displayName,reducedMotion}=Crux;
  const LIVE_KEY='crux-live',MAX_RESUME_AGE=6*60*60*1000,RING_R=104,RING_CIRC=2*Math.PI*RING_R;
  const HOLD_MS=120000; // timed work at/above this gets m:ss + halfway/1-min/30-s voice cues
 
  // ── module state ────────────────────────────────────────────────────────────
  let root=null,els={},blockSegEls=[];
- let session=null,options=null,title=null,steps=null,blocks=null,plannedDuration=0,countdownOpt=5,category=null,COLORS=null;
+ let session=null,options=null,title=null,steps=null,blocks=null,countdownOpt=5,category=null,COLORS=null;
  let state=null,raf=null,lastFrame=0,saveIntervalId=null,wakeLockSentinel=null,confettiRaf=null;
  let previousFocus=null,endConfirmOpen=false,wasPausedBeforeConfirm=false,completionShown=false;
  let currentMediaEx=null,showingOptions=false,figureController=null,ringIsIndeterminate=false;
@@ -23,7 +23,12 @@
  function phaseLabelText(){
   if(!state)return'';
   if(state.phase==='ready')return'GET READY';
-  if(state.phase==='work')return'WORK';
+  if(state.phase==='work'){
+   const st=Engine.current(state);
+   if(st&&st.kind==='warm-up')return'WARM-UP';
+   if(st&&st.kind==='cool-down')return'COOL-DOWN';
+   return'WORK';
+  }
   if(state.phase==='rest')return isSideSwitchRest()?'SWITCH SIDES':'REST';
   if(state.phase==='done')return'DONE';
   return'';
@@ -64,7 +69,7 @@
   session=sess;options={...opts};title=t||sess.title||'Workout';
   countdownOpt=prefs.get('countdown',5);
   const compiled=Plan.compile(session,Crux.META,{...options,countdown:countdownOpt});
-  steps=compiled.steps;blocks=compiled.blocks;plannedDuration=compiled.duration;
+  steps=compiled.steps;blocks=compiled.blocks;
   if(!steps.length){Crux.toast&&Crux.toast('Nothing to play');return;}
   category=session.category;
   COLORS={ready:cssVar('--ready')||'#F5B431',rest:'#DCE4E0',work:cssVar('--'+category)||cssVar('--strength')||'#4D65F2'};
@@ -101,7 +106,7 @@
   session=data.session;options={...(data.options||{})};title=data.title||session.title||'Workout';
   countdownOpt=prefs.get('countdown',5);
   const compiled=Plan.compile(session,Crux.META,{...options,countdown:countdownOpt});
-  steps=compiled.steps;blocks=compiled.blocks;plannedDuration=compiled.duration;
+  steps=compiled.steps;blocks=compiled.blocks;
   if(!steps.length)return;
   category=session.category;
   COLORS={ready:cssVar('--ready')||'#F5B431',rest:'#DCE4E0',work:cssVar('--'+category)||cssVar('--strength')||'#4D65F2'};
@@ -157,7 +162,7 @@
       <video class="cp-video" hidden muted loop playsinline preload="auto"></video>
       <div class="cp-photo-card" hidden><img class="cp-photo-img" alt=""><button type="button" class="cp-easier-btn" hidden>Easier options</button></div>
       <div class="cp-figure" hidden></div>
-      <div class="cp-instruction" hidden><img class="cp-instruction-img" alt=""><p class="cp-instruction-text"></p></div>
+      <div class="cp-instruction" hidden><div class="cp-instruction-badge"><img class="cp-instruction-img" alt=""></div><p class="cp-instruction-text"></p></div>
      </div>
      <div class="cp-stage-badges"><span class="cp-badge cp-badge-side" hidden></span><span class="cp-badge cp-badge-set" hidden></span></div>
      <div class="cp-upnext-label" hidden>Up next</div>
