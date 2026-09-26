@@ -7,7 +7,7 @@ const { exercises } = require('../data/classification.json');
 const library = require('../data/library.json');
 const ROOT = path.join(__dirname, '..');
 
-assert.equal(library.exercises.length, 150, 'library exercise count');
+assert.equal(library.exercises.length, 170, 'library exercise count');
 
 for (const e of library.exercises) {
   const m = exercises[e.id];
@@ -46,6 +46,8 @@ assert(find('hangboard').includes('hb-max-hang-half-crimp'), 'hangboard -> hb-ma
 assert(find('crimps').includes('hb-min-edge-hang'), 'crimps -> hb-min-edge-hang');
 assert(find('pull ups').includes('bar-pull-up'), 'pull ups -> bar-pull-up');
 assert(find('pigeon').includes('hip-pigeon'), 'pigeon -> hip-pigeon');
+assert(find('ankle').includes('foot-ankle-circles'), 'ankle -> foot-ankle-circles');
+assert(find('heel raise').includes('foot-double-heel-raise'), 'heel raise -> foot-double-heel-raise');
 assert.equal(find('zqxxnonsense').length, 0, 'nonsense finds nothing');
 
-console.log('PASS catalog: 150 exercises with complete classification (target/difficulty/strain/regions/pattern/trainingType/dose/tags>=5); every referenced media file (clip/thumbnail/image/options) exists on disk; search synonyms, typos, multi-word and nonsense queries.');
+console.log('PASS catalog: 170 exercises with complete classification (target/difficulty/strain/regions/pattern/trainingType/dose/tags>=5); every referenced media file (clip/thumbnail/image/options) exists on disk; search synonyms, typos, multi-word and nonsense queries.');

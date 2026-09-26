@@ -50,6 +50,11 @@ const SOURCES={
   grgic:{label:'Grgic et al. 2018 · rest intervals review',url:'https://pubmed.ncbi.nlm.nih.gov/28933024/'},
   aha:{label:'American Heart Association · warm-up & cool-down',url:'https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/warm-up-cool-down'},
   yogabody:{label:'YOGABODY · 21-Day Hip Opening Challenge chart',url:'https://www.yogabody.com'},
+  mckeon:{label:'McKeon et al. 2015 · Br J Sports Med (foot core concept)',url:'https://pubmed.ncbi.nlm.nih.gov/24659509/'},
+  kneeToWall:{label:'Knee-to-wall dorsiflexion test/drill',url:'https://www.physio-pedia.com/Knee_to_Wall_Test'},
+  achillesLoading:{label:'Baxter et al. 2017 · Achilles tendon loading review',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC5343533/'},
+  digiovanni:{label:'DiGiovanni et al. 2006 · plantar fascia stretching RCT',url:'https://pubmed.ncbi.nlm.nih.gov/16882901/'},
+  balanceCai:{label:'Balance training in chronic ankle instability · meta-analysis 2024',url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10860262/'},
 };
 const FINGER_NOTE='Two hard finger sessions a week, at least 48 hours apart. Stop for any sharp or localized finger pain.';
 
@@ -266,13 +271,29 @@ const hipOpener={id:'hip-opener',title:'Hip Opener',category:'hip',intensity:1,l
   why:'Poses are picked at random from the YOGABODY hip-opening chart and ordered from standing to lying down, so you only go down to the floor once. Each pose is a long, passive 6-minute hold (3 minutes per side for one-sided poses) with a minute to reset in between, in the style of yin yoga. That is well beyond the ~60 s per stretch ACSM uses as a minimum, so ease in, use props and the easier variations on each photo, and back off any pinching or joint pain. Add the optional warm-up if you are coming in cold.',
   sources:['yogabody','acsm']};
 
+// ── Foot Training pool ────────────────────────────────────────────────────────
+// group orders a generated session: mobility/warm-up -> intrinsic -> strength -> balance -> stretch.
+const footPool=[
+ ['foot-ankle-circles','mobility'],['foot-knee-to-wall-mobilization','mobility'],
+ ['foot-short-foot-hold','intrinsic'],['foot-toe-splay-lift','intrinsic'],['foot-toe-spread-squeeze','intrinsic'],['foot-towel-curl','intrinsic'],['foot-marble-pickup','intrinsic'],
+ ['foot-double-heel-raise','strength'],['foot-single-heel-raise','strength'],['foot-bent-knee-heel-raise','strength'],['foot-heel-raise-toes-elevated','strength'],['foot-tibialis-raise','strength'],['foot-band-eversion-inversion','strength'],['foot-toe-heel-walks','strength'],
+ ['foot-single-leg-balance','balance'],['foot-single-leg-balance-eyes-closed','balance'],
+ ['foot-ball-roll','stretch'],['foot-calf-stretch-straight-knee','stretch'],['foot-calf-stretch-bent-knee','stretch'],['foot-plantar-fascia-stretch','stretch'],
+].map(([id,group])=>({id,group}));
+const FOOT_GROUPS=['mobility','intrinsic','strength','balance','stretch'];
+const footTraining={id:'foot-training',title:'Foot Training',category:'feet',intensity:1,level:'Beginner',goals:['Foot & ankle strength','Foot & ankle mobility'],focus:['Feet'],
+  summary:'Random foot & ankle exercises: intrinsic strength, heel raises, balance and mobility.',
+  why:'Exercises are picked at random from a foot & ankle pool covering intrinsic “foot core” work (McKeon 2015), calf/Achilles loading through heel-raise variants, ankle mobility, single-leg balance and stretching, then ordered mobility → intrinsic → strength → balance → stretch so the session builds sensibly. Add the optional warm-up if you are coming in cold.',
+  sources:['mckeon','kneeToWall','achillesLoading','balanceCai']};
+
 const categories=[
   {id:'climbing',label:'Climbing',focus:['Fingers','Endurance','Pulling','Core','Antagonists','Warm-up']},
   {id:'strength',label:'Strength',focus:['Upper body','Lower body','Core','Full body','Skills']},
   {id:'mobility',label:'Mobility',focus:['Hips','Shoulders','Hamstrings','Full body']},
   {id:'hip',label:'Hip Opener',generator:true},
+  {id:'feet',label:'Feet',generator:true},
   {id:'recovery',label:'Recovery',focus:['Cool-down','Relax','Quick']}];
 // No walking warm-ups: drop easy-walking items and any block left empty.
 for(const s of sessions)s.blocks=s.blocks.map(b=>({...b,items:b.items.filter(i=>i.ex!=='easy-walking')})).filter(b=>b.items.length);
-return {sessions,categories,hipPoses,positions:POSITIONS,hipOpener,sources:SOURCES};
+return {sessions,categories,hipPoses,positions:POSITIONS,hipOpener,footPool,footGroups:FOOT_GROUPS,footTraining,sources:SOURCES};
 });

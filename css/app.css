@@ -301,7 +301,7 @@
 .pose-info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .pose-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pose-meta{font-size:12px;color:var(--muted)}
-.pose-hold{font-family:var(--font-round);font-weight:750;font-size:14.5px;color:var(--hip);white-space:nowrap;text-align:right}
+.pose-hold{font-family:var(--font-round);font-weight:750;font-size:14.5px;color:var(--cat-color,var(--hip));white-space:nowrap;text-align:right}
 .hip-empty{padding:20px;text-align:center;color:var(--muted);font-size:13.5px;background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--radius-l)}
 .hip-start-row{display:flex;justify-content:flex-end;padding-top:4px}
 .hip-start-row .btn{min-width:180px}

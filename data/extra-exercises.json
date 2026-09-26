@@ -103,6 +103,46 @@
       "status": "referenced",
       "text": "Flexibility: hold stretches 10–30 s to mild tightness, accumulating about 60 s per exercise, on at least 2–3 days per week.",
       "media": []
+    },
+    {
+      "id": "mckeon-2015",
+      "author": "McKeon, Hertel, Bramble & Davis (2015), Br J Sports Med",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24659509/",
+      "status": "referenced",
+      "text": "The \"foot core system\": intrinsic foot muscles act as local stabilizers of the arch, parallel to the trunk core. The short-foot exercise is the standard way to isolate and train them.",
+      "media": []
+    },
+    {
+      "id": "knee-to-wall-2024",
+      "author": "Weight-bearing lunge (knee-to-wall) dorsiflexion test/drill",
+      "url": "https://www.physio-pedia.com/Knee_to_Wall_Test",
+      "status": "referenced",
+      "text": "A reliable, widely used measure and mobilization drill for weight-bearing ankle dorsiflexion; roughly 3.6 degrees of dorsiflexion per centimetre the knee travels past the toes with the heel down.",
+      "media": []
+    },
+    {
+      "id": "achilles-loading-2017",
+      "author": "Baxter, Corrigan, Hullfish et al. (2017), Med Sci Sports Exerc — Achilles tendon loading review",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5343533/",
+      "status": "referenced",
+      "text": "Heel-raise and heel-drop exercises progressively and reliably load the Achilles tendon and calf, from an easy seated raise up through single-leg and eccentric variations; the standard rehab progression is double leg to single leg to slow eccentric.",
+      "media": []
+    },
+    {
+      "id": "digiovanni-2006",
+      "author": "DiGiovanni et al. (2006), J Bone Joint Surg — 2-year follow-up RCT",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16882901/",
+      "status": "referenced",
+      "text": "A plantar-fascia-specific stretch (pulling the toes back to tension the arch, not just the calf) outperformed a calf-stretch-only protocol for chronic plantar heel pain, with benefits holding at two years.",
+      "media": []
+    },
+    {
+      "id": "balance-cai-2024",
+      "author": "Balance training in chronic ankle instability — systematic review & meta-analysis (2024)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10860262/",
+      "status": "referenced",
+      "text": "Single-leg balance and proprioceptive training improve postural control and self-reported ankle function, and lower re-sprain rates; progressing from eyes-open to eyes-closed increases the demand on the ankle's balance receptors.",
+      "media": []
     }
   ],
   "exercises": [
@@ -3209,6 +3249,1030 @@
           "note": "Deep squat, palms together, elbows gently pressing the knees wide. Props shown are optional.",
           "credit": "YOGABODY pose chart",
           "page": 43,
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-ankle-circles",
+      "name": "Ankle circles",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "ankles",
+          "calves",
+          "feet"
+        ],
+        "pattern": "ankle-circles",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "ankle circles",
+          "alphabet",
+          "warm up"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "knee-to-wall-2024",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Ankle circles",
+          "named": true,
+          "prescription": "",
+          "note": "Lift one foot and slowly circle the ankle, 30 s each direction, then switch feet. Go slowly and make the circle as big as you can without moving the shin. Tracing the alphabet with your big toe works the same way.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-knee-to-wall-mobilization",
+      "name": "Knee-to-wall ankle mobilization",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Wall",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "ankles",
+          "calves"
+        ],
+        "pattern": "dorsiflexion",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "dorsiflexion",
+          "ankle mobility",
+          "lunge stretch"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 15,
+          "reps": 10
+        }
+      },
+      "variants": [
+        {
+          "source": "knee-to-wall-2024",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Knee-to-wall ankle mobilization",
+          "named": true,
+          "prescription": "",
+          "note": "Half-kneel facing a wall, front foot a few inches back. Keeping the heel down, drive the knee forward over the toes toward the wall and back, 10 slow reps, then switch feet. Move the foot back as it gets easy.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-short-foot-hold",
+      "name": "Short foot hold",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "arches"
+        ],
+        "pattern": "arch-doming",
+        "trainingType": "isometric",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot doming",
+          "arch lift",
+          "foot core"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 10,
+          "rest": 20,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "mckeon-2015",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Short foot hold",
+          "named": true,
+          "prescription": "",
+          "note": "Barefoot, stand or sit with toes flat and relaxed. Without curling the toes, draw the ball of the foot toward the heel to gently dome the arch. Hold 10 s, relax, repeat. This is the classic \"foot core\" exercise for the intrinsic foot muscles.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-toe-splay-lift",
+      "name": "Toe splay & lift",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes"
+        ],
+        "pattern": "toe-splay",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "toe yoga",
+          "toe splay",
+          "big toe lift"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 30,
+          "rest": 15,
+          "reps": 10
+        }
+      },
+      "variants": [
+        {
+          "source": "mckeon-2015",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Toe splay & lift",
+          "named": true,
+          "prescription": "",
+          "note": "Spread the toes apart as wide as you can, then lift just the big toe while the other four stay down, then reverse: lift the four small toes while the big toe stays down. Slow and controlled — the separation is the hard part.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-toe-spread-squeeze",
+      "name": "Toe spread & squeeze",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes"
+        ],
+        "pattern": "toe-splay",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "toe spacer",
+          "toe splay",
+          "toe abduction"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 30,
+          "rest": 15,
+          "reps": 10
+        }
+      },
+      "variants": [
+        {
+          "source": "mckeon-2015",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Toe spread & squeeze",
+          "named": true,
+          "prescription": "",
+          "note": "Spread all ten toes as wide apart as possible and hold for 2–3 s, then relax and let them come back together. A folded towel or toe spacer between the toes makes this easier to feel at first.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-towel-curl",
+      "name": "Towel curls",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Towel",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "arches"
+        ],
+        "pattern": "toe-flexion",
+        "trainingType": "strength",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "towel scrunch",
+          "toe curls"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 15
+        }
+      },
+      "variants": [
+        {
+          "source": "mckeon-2015",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Towel curls",
+          "named": true,
+          "prescription": "",
+          "note": "Lay a towel flat on the floor under one foot. Scrunch it toward you using only your toes, then reset and repeat. Add a light weight on the far end of the towel to make it harder.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-marble-pickup",
+      "name": "Marble pickups",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Ball",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "arches"
+        ],
+        "pattern": "toe-flexion",
+        "trainingType": "strength",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "marble pickup",
+          "toe pickup",
+          "object pickup"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 15
+        }
+      },
+      "variants": [
+        {
+          "source": "mckeon-2015",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Marble pickups",
+          "named": true,
+          "prescription": "",
+          "note": "Pick up small objects (marbles, a scrunched sock, pebbles) one at a time with your toes and place them in a cup. Keeps the toe flexors and arch working through a full range.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-double-heel-raise",
+      "name": "Double-leg heel raises",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles"
+        ],
+        "pattern": "plantarflexion",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "calf raise",
+          "heel raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Moderate",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 30,
+          "reps": 15
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Double-leg heel raises",
+          "named": true,
+          "prescription": "",
+          "note": "Rise onto the balls of both feet as high as you can, then lower slowly over about 3 s. Hold a wall or chair for balance if needed. The easiest, lowest-load way to build calf and Achilles capacity.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-single-heel-raise",
+      "name": "Single-leg heel raises",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles"
+        ],
+        "pattern": "plantarflexion",
+        "trainingType": "strength",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "calf raise",
+          "single leg calf raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Moderate",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 30,
+          "reps": 12
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Single-leg heel raises",
+          "named": true,
+          "prescription": "",
+          "note": "Standing on one foot (fingertips on a wall for balance), rise onto the ball of the foot and lower slowly. Roughly double the load of a two-footed raise — progress here once double raises feel easy.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-bent-knee-heel-raise",
+      "name": "Bent-knee heel raises",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles"
+        ],
+        "pattern": "plantarflexion",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "soleus raise",
+          "bent knee calf raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Moderate",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 30,
+          "reps": 15
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Bent-knee heel raises",
+          "named": true,
+          "prescription": "",
+          "note": "Soften the knees into a slight bend and hold it while you raise and lower onto the balls of the feet. Bending the knee takes the gastrocnemius out and shifts the load onto the soleus, deeper in the calf.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-heel-raise-toes-elevated",
+      "name": "Heel raises · toes elevated",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Towel",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles",
+          "arches"
+        ],
+        "pattern": "plantarflexion",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "calf raise",
+          "toe extension raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Moderate",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 30,
+          "reps": 12
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Heel raises · toes elevated",
+          "named": true,
+          "prescription": "",
+          "note": "Rest the balls of your feet on a rolled towel or a low step so the toes sit higher than the heels, then raise and lower. The extra toe extension adds plantar-fascia and arch loading to the calf work.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-tibialis-raise",
+      "name": "Tibialis raises",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Wall",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "shins",
+          "ankles",
+          "feet"
+        ],
+        "pattern": "dorsiflexion",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "toe raise",
+          "shin raise",
+          "tib raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 15
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Tibialis raises",
+          "named": true,
+          "prescription": "",
+          "note": "Lean your back against a wall, feet a little out in front, and lift the toes and forefoot up off the floor as high as you can, then lower slowly. Trains the tibialis anterior, the dorsiflexor that balances all the calf-raise work.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-band-eversion-inversion",
+      "name": "Ankle eversion & inversion with band",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Band",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "ankles",
+          "calves"
+        ],
+        "pattern": "eversion-inversion",
+        "trainingType": "strength",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "ankle band",
+          "eversion",
+          "inversion",
+          "peroneal"
+        ],
+        "target": "Legs",
+        "difficulty": "Intermediate",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 12
+        }
+      },
+      "variants": [
+        {
+          "source": "balance-cai-2024",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Ankle eversion & inversion with band",
+          "named": true,
+          "prescription": "",
+          "note": "Loop a band around the forefoot and anchor it to the side. Turn the foot outward (away from the band) for the reps, then turn the foot inward against the band, then switch feet. Trains the muscles that resist rolling an ankle.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-toe-heel-walks",
+      "name": "Toe & heel walks in place",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "shins",
+          "feet",
+          "ankles"
+        ],
+        "pattern": "gait",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "toe walk",
+          "heel walk",
+          "walking drill"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Toe & heel walks in place",
+          "named": true,
+          "prescription": "",
+          "note": "March in place on your tiptoes for 20 s, then flip to walking on your heels with the toes lifted for 20 s. Builds calf and shin endurance through the ranges you actually walk in.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-single-leg-balance",
+      "name": "Single-leg balance",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "ankles",
+          "feet",
+          "hips"
+        ],
+        "pattern": "balance",
+        "trainingType": "isometric",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "balance",
+          "proprioception",
+          "stork stand"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 30,
+          "rest": 15,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "balance-cai-2024",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Single-leg balance",
+          "named": true,
+          "prescription": "",
+          "note": "Stand on one foot, eyes open, soft knee, and hold as still as you can. Keep a fingertip near a wall the first few times. Try looking around or tapping the free foot lightly to the floor and back to add challenge.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-single-leg-balance-eyes-closed",
+      "name": "Single-leg balance · eyes closed",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "ankles",
+          "feet",
+          "hips"
+        ],
+        "pattern": "balance",
+        "trainingType": "isometric",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "balance",
+          "proprioception",
+          "eyes closed balance"
+        ],
+        "target": "Legs",
+        "difficulty": "Advanced",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 20,
+          "rest": 15,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "balance-cai-2024",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Single-leg balance · eyes closed",
+          "named": true,
+          "prescription": "",
+          "note": "Stand on one foot and close your eyes once you feel steady. Removing vision forces the small muscles of the foot and ankle to do the balancing. Open your eyes any time you feel unsteady, then reset.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-ball-roll",
+      "name": "Foot rolling on a ball",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Ball",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "arches"
+        ],
+        "pattern": "soft-tissue",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "plantar rolling",
+          "self massage",
+          "arch roll"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "dose": {
+          "work": 45,
+          "rest": 15,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "digiovanni-2006",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Foot rolling on a ball",
+          "named": true,
+          "prescription": "",
+          "note": "Stand or sit and roll the arch of one foot slowly over a ball (a lacrosse or tennis ball works) for 45 s, easing off any tender spot rather than grinding into it, then switch feet.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-calf-stretch-straight-knee",
+      "name": "Calf stretch · straight knee",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Wall",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles"
+        ],
+        "pattern": "calf-stretch",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "gastrocnemius stretch",
+          "calf stretch"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Calf stretch · straight knee",
+          "named": true,
+          "prescription": "",
+          "note": "Hands on a wall, back leg straight with the heel down, front knee bent. Lean the hips forward until you feel a stretch up the back of the straight leg's calf. Hold, then switch legs.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-calf-stretch-bent-knee",
+      "name": "Calf stretch · bent knee",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "Wall",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "calves",
+          "ankles"
+        ],
+        "pattern": "calf-stretch",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "soleus stretch",
+          "calf stretch"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "achilles-loading-2017",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Calf stretch · bent knee",
+          "named": true,
+          "prescription": "",
+          "note": "Same wall lean, but bend both knees, keeping the back heel down. Bending the back knee shifts the stretch lower, into the soleus. Hold, then switch legs.",
+          "credit": "Instruction",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "id": "foot-plantar-fascia-stretch",
+      "name": "Plantar fascia stretch",
+      "area": "Hips & legs",
+      "kind": "Foot",
+      "equipment": "None",
+      "level": "General",
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "arches",
+          "toes"
+        ],
+        "pattern": "toe-extension-stretch",
+        "trainingType": "static-stretch",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "plantar fascia stretch",
+          "toe extension stretch",
+          "arch stretch"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": true,
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1
+        }
+      },
+      "variants": [
+        {
+          "source": "digiovanni-2006",
+          "type": "instruction",
+          "thumbnail": "media/examples/foot.svg",
+          "label": "Plantar fascia stretch",
+          "named": true,
+          "prescription": "",
+          "note": "Sit and cross one foot over the opposite knee. Pull the toes back toward the shin with your hand until you feel a stretch along the arch, not just the calf. Hold, then switch feet.",
+          "credit": "Instruction",
           "start": 0,
           "end": 0
         }

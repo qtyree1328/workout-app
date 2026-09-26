@@ -215,7 +215,7 @@
  let sheetFigure=null;
  function exerciseCategory(x){
   if(x.id.startsWith('hip-'))return 'hip';
-  if(x.id.startsWith('hip-'))return 'hip';
+  if(x.id.startsWith('foot-'))return 'feet';
   if(x.kind==='Climbing')return 'climbing';
   if(x.kind==='Mobility')return 'mobility';
   if(x.kind==='Warm-up')return 'recovery';
@@ -329,7 +329,7 @@
  /* ───────────────────────── Home page ───────────────────────── */
  const CATEGORY_LIST=[{id:'all',label:'All',icon:'all'},...Object.entries(CATEGORIES).map(([id,c])=>({id,label:c.label,icon:c.icon}))];
  const homeState={category:prefs.get('category','all'),minutes:prefs.get('minutes','any'),focus:prefs.get('focus',null),intensity:prefs.get('intensity','any')};
- let hipState=null;
+ const GEN_CATS=new Set(['hip','feet']); // categories with the random-generator panel, not a session list
  const minutesEff=()=>homeState.minutes==='any'?30:homeState.minutes;
 
  /* ── Intensity meta (shared by the slider, result cards, hero and session detail) ── */
@@ -605,7 +605,7 @@
   let pool=category==='all'?SESS.sessions.slice():SESS.sessions.filter(s=>s.category===category);
   if(focus)pool=pool.filter(s=>(s.focus||[]).includes(focus));
   // Hip Opener is always relaxed and has its own UI, not this list — the intensity filter never applies to it.
-  if(intensity&&intensity!=='any'&&category!=='hip')pool=pool.filter(s=>s.intensity===intensity);
+  if(intensity&&intensity!=='any'&&!GEN_CATS.has(category))pool=pool.filter(s=>s.intensity===intensity);
   return pool;
  }
  // Plan.fit is pure for a given session/minutes/countdown — cache it so dragging the time slider back
@@ -678,7 +678,7 @@
   buildCategoryTiles();
   buildTimeSlider();
   buildIntensitySlider();
-  if(intensitySlider)intensitySlider.setDisabled(homeState.category==='hip');
+  if(intensitySlider)intensitySlider.setDisabled(GEN_CATS.has(homeState.category));
   buildFocusChips(true);
   updateResults();
  }
@@ -824,7 +824,7 @@
   const row=$('#focus-chips'),group=$('#focus-group');
   const cat=SESS.categories.find(c=>c.id===homeState.category);
   const list=(cat&&cat.focus)||[];
-  const hideRow=homeState.category==='all'||homeState.category==='hip'||!list.length;
+  const hideRow=homeState.category==='all'||GEN_CATS.has(homeState.category)||!list.length;
   const render=()=>{
    row.innerHTML=list.map(f=>`<button type="button" class="chip" data-focus="${h(f)}" aria-pressed="${homeState.focus===f}">${h(f)}</button>`).join('');
    if(group)group.classList.toggle('is-hidden',hideRow);
@@ -849,7 +849,7 @@
   const onTile=$('#cat-tiles .category-tile.on');
   if(onTile){const row=$('#cat-tiles');if(row.scrollWidth>row.clientWidth+2){const l=onTile.offsetLeft-16,r=onTile.offsetLeft+onTile.offsetWidth+16;if(l<row.scrollLeft||r>row.scrollLeft+row.clientWidth)row.scrollTo({left:l<row.scrollLeft?l:r-row.clientWidth,behavior:reducedMotion()?'auto':'smooth'});}}
   buildFocusChips(false);
-  if(intensitySlider)intensitySlider.setDisabled(id==='hip');
+  if(intensitySlider)intensitySlider.setDisabled(GEN_CATS.has(id));
   updateResults();
  }
  function setMinutes(v){
@@ -870,7 +870,7 @@
 
  function updateResults(){
   const area=$('#results-area');if(!area)return;
-  if(homeState.category==='hip'){renderHipSection(area);return;}
+  if(GEN_CATS.has(homeState.category)){renderGenSection(homeState.category,area);return;}
   const items=computeResults(homeState.category,homeState.minutes,homeState.focus,homeState.intensity);
   if(!items.length){renderEmptyState(area);return;}
   const countLine=homeState.minutes==='any'?`${items.length} workout${items.length===1?'':'s'}`:`${items.length} workout${items.length===1?'':'s'} fit in ${homeState.minutes} min`;
@@ -1000,100 +1000,122 @@
   </div>`;
  }
 
- /* ── Hip Opener generator ── */
- function hipRegen(count,warmup,opts){
-  opts=opts||{};
-  const seed=opts.freshSeed?(Date.now()+Math.floor(Math.random()*1e6)):(hipState?hipState.seed:Date.now());
-  const keep=opts.keepOverride!==undefined?opts.keepOverride:(hipState&&hipState.result?hipState.result.poses.slice(0,count):[]);
-  const result=window.HipOpener.generate({minutes:minutesEff(),count,warmup,seed,countdown:countdown(),keep},SESS.hipPoses,SESS.positions,META);
-  hipState={seed,warmup,result};
-  prefs.set('hipCount',count);
+ /* ── Random generator panels: Hip Opener and Foot Training share this UI (count chips,
+    Warm-up toggle, list with swap, Shuffle, Start), each driven by its own module + pool. ── */
+ const genStates={}; // {hip:{seed,warmup,result}, feet:{...}}
+ function genConfig(catId){
+  if(catId==='feet')return {
+   mod:window.FootTraining,pool:SESS.footPool,secondary:SESS.footGroups,
+   countKey:'feetCount',warmupKey:'feetWarmup',label:'Exercises',
+   emptyMsg:'Foot Training needs at least 10 minutes to fit an exercise and its rest.',
+   ids:result=>result.exercises,
+   rowMeta:id=>{const g=(SESS.footPool.find(p=>p.id===id)||{}).group||'';return g.charAt(0).toUpperCase()+g.slice(1);},
+   holdText:id=>{const m=META[id]||{},dose=m.dose||{},txt=Plan.fmt(dose.workSeconds||30);return m.unilateral?`${txt} each side`:txt;},
+   summary:(result,plan)=>`${result.exercises.length} exercise${result.exercises.length===1?'':'s'} · ${Plan.minutes(plan.duration)}`,
+   startLabel:'Foot Training',
+  };
+  return {
+   mod:window.HipOpener,pool:SESS.hipPoses,secondary:SESS.positions,
+   countKey:'hipCount',warmupKey:'hipWarmup',label:'Poses',
+   emptyMsg:'Hip Opener needs at least 10 minutes — each pose is a 6-minute hold.',
+   ids:result=>result.poses,
+   rowMeta:id=>{const pos=(SESS.hipPoses.find(p=>p.id===id)||{}).position||'';return pos.charAt(0).toUpperCase()+pos.slice(1);},
+   holdText:(id,result)=>{const uni=!!(META[id]&&META[id].unilateral);return uni?`${Plan.minutes(result.perSide)} each side`:Plan.minutes(result.hold);},
+   summary:(result,plan)=>`${result.poses.length} pose${result.poses.length===1?'':'s'} · ${Plan.minutes(result.hold)} holds · ${Plan.minutes(result.rest)} rest · ${Plan.minutes(plan.duration)}`,
+   startLabel:'Hip Opener',
+  };
+ }
+ function genRegen(catId,count,warmup,opts){
+  const cfg=genConfig(catId);opts=opts||{};
+  const st=genStates[catId];
+  const seed=opts.freshSeed?(Date.now()+Math.floor(Math.random()*1e6)):(st?st.seed:Date.now());
+  const keep=opts.keepOverride!==undefined?opts.keepOverride:(st&&st.result?cfg.ids(st.result).slice(0,count):[]);
+  const result=cfg.mod.generate({minutes:minutesEff(),count,warmup,seed,countdown:countdown(),keep},cfg.pool,cfg.secondary,META);
+  genStates[catId]={seed,warmup,result};
+  prefs.set(cfg.countKey,count);
   return result;
-}
- function renderHipSection(area){
-  const HipOpener=window.HipOpener;
-  if(!HipOpener){area.innerHTML='<div class="empty-state"><h3>Hip Opener unavailable</h3><p>The generator module did not load.</p></div>';return;}
-  const warmupPref=hipState?hipState.warmup:prefs.get('hipWarmup',false);
-  const max=HipOpener.maxCount(minutesEff(),warmupPref,META,countdown());
-  if(!hipState){
-   const saved=prefs.get('hipCount',null);
-   const initCount=(saved&&HipOpener.COUNTS.includes(saved)&&saved<=max)?saved:max;
-   if(max>0)hipRegen(initCount,warmupPref,{freshSeed:true,keepOverride:[]});
-   else hipState={seed:0,warmup:warmupPref,result:null};
+ }
+ function renderGenSection(catId,area){
+  const cfg=genConfig(catId);
+  if(!cfg.mod){area.innerHTML=`<div class="empty-state"><h3>${h(cfg.startLabel)} unavailable</h3><p>The generator module did not load.</p></div>`;return;}
+  const warmupPref=genStates[catId]?genStates[catId].warmup:prefs.get(cfg.warmupKey,false);
+  const max=cfg.mod.maxCount(minutesEff(),warmupPref,META,countdown(),cfg.pool);
+  if(!genStates[catId]){
+   const saved=prefs.get(cfg.countKey,null);
+   const initCount=(saved&&cfg.mod.COUNTS.includes(saved)&&saved<=max)?saved:max;
+   if(max>0)genRegen(catId,initCount,warmupPref,{freshSeed:true,keepOverride:[]});
+   else genStates[catId]={seed:0,warmup:warmupPref,result:null};
   }else{
-   const curCount=hipState.result?hipState.result.poses.length:0;
-   if(max===0)hipState.result=null;
-   else if(!hipState.result||curCount>max)hipRegen(Math.min(Math.max(curCount||max,1),max),hipState.warmup,{});
+   const st=genStates[catId];
+   const curCount=st.result?cfg.ids(st.result).length:0;
+   if(max===0)st.result=null;
+   else if(!st.result||curCount>max)genRegen(catId,Math.min(Math.max(curCount||max,1),max),st.warmup,{});
   }
-  paintHipPanel(area);
+  paintGenPanel(catId,area);
  }
  // Rebuilds only when coming from the "nothing fits" note; otherwise updates the existing
- // skeleton in place so the pose list keeps its persistent container for flipUpdate to diff against.
- function paintHipPanel(area){
-  const HipOpener=window.HipOpener;
-  if(!hipState.result){
+ // skeleton in place so the list keeps its persistent container for flipUpdate to diff against.
+ function paintGenPanel(catId,area){
+  const cfg=genConfig(catId),st=genStates[catId];
+  if(!st.result){
    area.innerHTML=`<div class="hip-empty">
-    <p>Hip Opener needs at least 10 minutes — each pose is a 6-minute hold.</p>
-    <button type="button" class="btn btn-sm" id="hip-use-10" style="margin-top:10px">Use 10 min</button>
+    <p>${h(cfg.emptyMsg)}</p>
+    <button type="button" class="btn btn-sm" id="gen-use-10" style="margin-top:10px">Use 10 min</button>
    </div>`;
-   $('#hip-use-10').addEventListener('click',()=>setMinutes(10));
+   $('#gen-use-10').addEventListener('click',()=>setMinutes(10));
    return;
   }
-  let panel=area.querySelector('.hip-panel');
+  let panel=area.querySelector(`.hip-panel[data-gen="${catId}"]`);
   if(!panel){
-   area.innerHTML=`<div class="hip-panel">
-    <div class="hip-count-row"><span class="row-label">Poses</span><div class="chip-row" id="hip-counts" role="group" aria-label="Number of poses"></div></div>
+   area.innerHTML=`<div class="hip-panel" data-gen="${catId}" style="--cat-color:var(--${catId})">
+    <div class="hip-count-row"><span class="row-label">${h(cfg.label)}</span><div class="chip-row" id="gen-counts" role="group" aria-label="Number of ${h(cfg.label.toLowerCase())}"></div></div>
     <div class="hip-toolbar">
-     <label class="switch"><input type="checkbox" id="hip-warmup"><span class="switch-track"></span><span class="switch-label">Warm-up</span></label>
-     <span class="hip-summary num" id="hip-summary"></span>
-     <div class="hip-actions"><button type="button" class="btn btn-secondary btn-sm" id="hip-shuffle">${icon('shuffle')} Shuffle</button></div>
+     <label class="switch"><input type="checkbox" id="gen-warmup"><span class="switch-track"></span><span class="switch-label">Warm-up</span></label>
+     <span class="hip-summary num" id="gen-summary"></span>
+     <div class="hip-actions"><button type="button" class="btn btn-secondary btn-sm" id="gen-shuffle">${icon('shuffle')} Shuffle</button></div>
     </div>
-    <div class="pose-list" id="pose-list"></div>
-    <div class="hip-start-row"><button type="button" class="btn" id="hip-start">${icon('play')} Start</button></div>
+    <div class="pose-list" id="gen-list"></div>
+    <div class="hip-start-row"><button type="button" class="btn" id="gen-start">${icon('play')} Start</button></div>
    </div>`;
-   panel=area.querySelector('.hip-panel');
-   $('#hip-counts').addEventListener('click',e=>{
+   panel=area.querySelector(`.hip-panel[data-gen="${catId}"]`);
+   $('#gen-counts').addEventListener('click',e=>{
     const btn=e.target.closest('.chip');if(!btn||btn.disabled)return;
-    hipRegen(Number(btn.dataset.n),hipState.warmup,{});
-    paintHipPanel(area);
+    genRegen(catId,Number(btn.dataset.n),genStates[catId].warmup,{});
+    paintGenPanel(catId,area);
    });
-   $('#hip-warmup').addEventListener('change',e=>{
-    const w=e.target.checked;prefs.set('hipWarmup',w);
-    hipRegen(hipState.result.poses.length,w,{});
-    paintHipPanel(area);
+   $('#gen-warmup').addEventListener('change',e=>{
+    const w=e.target.checked;prefs.set(cfg.warmupKey,w);
+    genRegen(catId,cfg.ids(genStates[catId].result).length,w,{});
+    paintGenPanel(catId,area);
    });
-   $('#hip-shuffle').addEventListener('click',()=>{
-    hipRegen(hipState.result.poses.length,hipState.warmup,{freshSeed:true,keepOverride:[]});
-    paintHipPanel(area);
+   $('#gen-shuffle').addEventListener('click',()=>{
+    genRegen(catId,cfg.ids(genStates[catId].result).length,genStates[catId].warmup,{freshSeed:true,keepOverride:[]});
+    paintGenPanel(catId,area);
    });
   }
-  const result=hipState.result,max=HipOpener.maxCount(minutesEff(),hipState.warmup,META,countdown());
+  const result=genStates[catId].result,max=cfg.mod.maxCount(minutesEff(),genStates[catId].warmup,META,countdown(),cfg.pool);
   const plan=Plan.compile(result.session,META,{countdown:countdown()});
-  const summary=`${result.poses.length} pose${result.poses.length===1?'':'s'} · ${Plan.minutes(result.hold)} holds · ${Plan.minutes(result.rest)} rest · ${Plan.minutes(plan.duration)}`;
-  $('#hip-counts').innerHTML=HipOpener.COUNTS.map(n=>`<button type="button" class="chip" data-n="${n}" aria-pressed="${result.poses.length===n}" ${n>max?'disabled':''}>${n}</button>`).join('');
-  const warmupInput=$('#hip-warmup');if(warmupInput)warmupInput.checked=hipState.warmup;
-  pulse($('#hip-summary'),summary);
-  $('#hip-start').onclick=()=>startSession(result.session,{countdown:countdown()},'Hip Opener');
-  paintPoseList($('#pose-list'),result);
+  const summary=cfg.summary(result,plan);
+  $('#gen-counts').innerHTML=cfg.mod.COUNTS.map(n=>`<button type="button" class="chip" data-n="${n}" aria-pressed="${cfg.ids(result).length===n}" ${n>max?'disabled':''}>${n}</button>`).join('');
+  const warmupInput=$('#gen-warmup');if(warmupInput)warmupInput.checked=genStates[catId].warmup;
+  pulse($('#gen-summary'),summary);
+  $('#gen-start').onclick=()=>startSession(result.session,{countdown:countdown()},cfg.startLabel);
+  paintGenList(catId,$('#gen-list'),result);
  }
- function poseHoldText(id,result){
-  const uni=!!(META[id]&&META[id].unilateral);
-  return uni?`${Plan.minutes(result.perSide)} each side`:Plan.minutes(result.hold);
- }
- function paintPoseList(container,result){
-  flipUpdate(container,result.poses,id=>id,(id,el)=>{
+ function paintGenList(catId,container,result){
+  const cfg=genConfig(catId),ids=cfg.ids(result);
+  flipUpdate(container,ids,id=>id,(id,el)=>{
    const row=el||document.createElement('div');
    if(!el)row.className='pose-row';
-   const pos=(SESS.hipPoses.find(p=>p.id===id)||{}).position||'';
    const label=displayName(id);
    row.innerHTML=`<span class="pose-thumb">${thumb(id,'thumb')}</span>
-    <span class="pose-info"><span class="pose-name">${h(label)}</span><span class="pose-meta">${h(pos.charAt(0).toUpperCase()+pos.slice(1))}</span></span>
-    <span class="pose-hold num">${h(poseHoldText(id,result))}</span>
-    <button type="button" class="icon-btn" data-swap="${h(id)}" aria-label="Swap ${h(label)} for another pose">${icon('swap')}</button>`;
+    <span class="pose-info"><span class="pose-name">${h(label)}</span><span class="pose-meta">${h(cfg.rowMeta(id))}</span></span>
+    <span class="pose-hold num">${h(cfg.holdText(id,result))}</span>
+    <button type="button" class="icon-btn" data-swap="${h(id)}" aria-label="Swap ${h(label)} for another">${icon('swap')}</button>`;
    row.querySelector('[data-swap]').onclick=()=>{
-    const keep=hipState.result.poses.filter(p=>p!==id);
-    hipRegen(hipState.result.poses.length,hipState.warmup,{freshSeed:true,keepOverride:keep});
-    paintHipPanel($('#results-area'));
+    const keep=ids.filter(p=>p!==id);
+    genRegen(catId,ids.length,genStates[catId].warmup,{freshSeed:true,keepOverride:keep});
+    paintGenPanel(catId,$('#results-area'));
    };
    return row;
   });

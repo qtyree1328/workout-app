@@ -2,9 +2,10 @@
 const assert = require('node:assert/strict');
 const Plan = require('../js/core/plan.js');
 const HipOpener = require('../js/core/hip.js');
+const FootTraining = require('../js/core/feet.js');
 const { exercises: meta } = require('../data/classification.json');
 const library = require('../data/library.json');
-const { sessions, categories, hipPoses, positions, hipOpener } = require('../data/sessions.js');
+const { sessions, categories, hipPoses, positions, hipOpener, footPool, footGroups, footTraining } = require('../data/sessions.js');
 
 const byId = Object.fromEntries(library.exercises.map(e => [e.id, e]));
 const catById = Object.fromEntries(categories.map(c => [c.id, c]));
@@ -148,10 +149,62 @@ for (const minutes of HOLD_MINUTES) {
   for (const id of keep) assert(poses.includes(id), `keep: "${id}" should be kept`);
 }
 
-// ── Every session (and hipOpener) has a valid intensity ─────────────────────
+// ── Every session (and hipOpener/footTraining) has a valid intensity ────────
 for (const s of sessions) {
   assert([1, 2, 3].includes(s.intensity), `${s.id}: intensity should be 1, 2 or 3, got ${s.intensity}`);
 }
 assert([1, 2, 3].includes(hipOpener.intensity), `hipOpener: intensity should be 1, 2 or 3, got ${hipOpener.intensity}`);
+assert([1, 2, 3].includes(footTraining.intensity), `footTraining: intensity should be 1, 2 or 3, got ${footTraining.intensity}`);
 
-console.log('PASS sessions: exercises/categories/focus valid, all sessions compile, fixed finger protocols (work/rest, warm-up-hangs ordering), repeaters (24x7s/4x180), intermittent-hard (36x10s/2x480), Plan.fit duration budgets + fixed setsDelta/warmup invariants, Hip Opener (feasibility, uniqueness, position order, 360s holds, 60s pose rests, duration, keep), session/hipOpener intensity in {1,2,3}.');
+// ── Foot Training ────────────────────────────────────────────────────────────
+{
+  const catById = Object.fromEntries(categories.map(c => [c.id, c]));
+  assert(catById.feet && catById.feet.generator, 'categories: "feet" should exist and be a generator category');
+}
+const footIds = new Set(footPool.map(p => p.id));
+const groupRank = Object.fromEntries(footGroups.map((g, i) => [g, i]));
+const FOOT_MINUTES = [10, 15, 20, 30, 45, 60]; // maxCount(5,...) is 0, nothing to generate
+const FOOT_SEEDS = [1, 2, 12345];
+
+for (const id of footIds) {
+  assert(byId[id], `footPool: unknown exercise "${id}"`);
+  assert(meta[id], `footPool: "${id}" missing classification metadata`);
+}
+
+for (const minutes of FOOT_MINUTES) {
+  for (const warmup of [false, true]) {
+    const maxN = FootTraining.maxCount(minutes, warmup, meta, 5, footPool);
+    assert(maxN >= 1, `foot maxCount(${minutes}, warmup=${warmup}) should be >=1`);
+    for (let count = 1; count <= maxN; count++) {
+      for (const seed of FOOT_SEEDS) {
+        const { session, exercises, feasible } = FootTraining.generate({ minutes, count, warmup, seed }, footPool, footGroups, meta);
+        const tag = `foot-training minutes=${minutes} warmup=${warmup} count=${count} seed=${seed}`;
+        assert.equal(feasible, true, `${tag}: expected feasible`);
+        assert.equal(exercises.length, count, `${tag}: expected ${count} exercises, got ${exercises.length}`);
+        assert.equal(new Set(exercises).size, count, `${tag}: exercises should be unique`);
+        for (const id of exercises) assert(footIds.has(id), `${tag}: "${id}" is not in footPool`);
+        const groupOf = Object.fromEntries(footPool.map(p => [p.id, p.group]));
+        for (let i = 1; i < exercises.length; i++) {
+          assert(groupRank[groupOf[exercises[i - 1]]] <= groupRank[groupOf[exercises[i]]], `${tag}: exercises not ordered by group`);
+        }
+
+        const plan = Plan.compile(session, meta);
+        assert(plan.steps.length > 0, `${tag}: compiled to 0 steps`);
+        assert(plan.duration <= minutes * 60 * 1.05 + 1e-9, `${tag}: compiled duration ${plan.duration}s exceeds ${minutes * 60 * 1.05}s`);
+        assert.equal(plan.steps[plan.steps.length - 1].rest, 0, `${tag}: plan's last step should have rest 0`);
+      }
+    }
+    // A count above maxCount is never feasible.
+    const over = FootTraining.generate({ minutes, count: maxN + 1, warmup, seed: 1 }, footPool, footGroups, meta);
+    assert.equal(over.feasible, false, `foot count ${maxN + 1} > maxCount(${minutes}, warmup=${warmup}) should be infeasible`);
+  }
+}
+
+// `keep` always keeps the given exercises.
+{
+  const keep = [footPool[0].id, footPool[5].id];
+  const { exercises } = FootTraining.generate({ minutes: 60, count: 6, warmup: false, seed: 42, keep }, footPool, footGroups, meta);
+  for (const id of keep) assert(exercises.includes(id), `foot keep: "${id}" should be kept`);
+}
+
+console.log('PASS sessions: exercises/categories/focus valid, all sessions compile, fixed finger protocols (work/rest, warm-up-hangs ordering), repeaters (24x7s/4x180), intermittent-hard (36x10s/2x480), Plan.fit duration budgets + fixed setsDelta/warmup invariants, Hip Opener (feasibility, uniqueness, position order, 360s holds, 60s pose rests, duration, keep), Foot Training (feasibility, uniqueness, group order, duration, keep), session/hipOpener/footTraining intensity in {1,2,3}.');

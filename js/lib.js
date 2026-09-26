@@ -31,6 +31,7 @@
   mobility:'M12 21c4.5-3 7-6.6 7-10.5A7 7 0 0 0 12 3.5c-2.6 3.3-2.6 6.6 0 10 2.6 3.4 2.6 5.3 0 7.5ZM12 21c-4.5-3-7-6.6-7-10.5',
   hip:'M12 20c-3.8-1.8-6.5-4.7-6.5-8.6 0-1.3.3-2.5.8-3.4 2.9.6 4.9 2.3 5.7 4.8.8-2.5 2.8-4.2 5.7-4.8.5.9.8 2.1.8 3.4 0 3.9-2.7 6.8-6.5 8.6ZM12 12.8V6.5c-1-.9-1.6-2-1.8-3 .9.3 1.4.6 1.8 1 .4-.4.9-.7 1.8-1-.2 1-.8 2.1-1.8 3',
   recovery:'M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10Z',
+  feet:'M9.5 20c-2.6 0-4-1.4-4-3.7 0-1.9.9-2.9.9-4.9 0-2.3-1-3.5-1-5.8C5.4 3.3 7 2 9 2c1.6 0 2.6 1.1 2.6 2.7 0 1.5-.7 2.3-.7 4 0 1.4.8 2.1 1.9 3.2 1.3 1.3 2.2 2.5 2.2 4.6C15 19 12.4 20 9.5 20ZM8.4 12.2c1.2-.4 3.1-.4 4.6.4M8.2 14.6c1.4-.6 3.6-.6 5.2.3',
   all:'M5 5h5v5H5zM14 5h5v5h-5zM5 14h5v5H5zM14 14h5v5h-5z',
   layers:'M12 4 3 9l9 5 9-5-9-5ZM3 14l9 5 9-5',
   grid:'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
@@ -59,6 +60,7 @@
   strength:{label:'Strength',icon:'strength',blurb:'Bodyweight, bar and band strength'},
   mobility:{label:'Mobility',icon:'mobility',blurb:'Active range for hips, shoulders and spine'},
   hip:{label:'Hip Opener',icon:'hip',blurb:'Random poses from the hip chart, timed to fit'},
+  feet:{label:'Feet',icon:'feet',blurb:'Random foot & ankle strength, mobility and balance'},
   recovery:{label:'Recovery',icon:'recovery',blurb:'Cool-downs, resets and wind-downs'}};
  const EQUIPMENT={'hangboard':'Hangboard','pull-up bar':'Pull-up bar','band':'Band','bar':'Dowel','weighted bar':'Weighted dowel','block':'Yoga block','chair':'Chair','wall':'Wall','bench':'Bench','strap':'Strap','table':'Table','pole':'Pole','weights':'Light weights'};
  const PROPS=new Set(['chair','wall','bench','strap','table','pole']); // household props: shown, never required

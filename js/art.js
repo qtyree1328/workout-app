@@ -6,6 +6,7 @@
   strength:['#5B73F7','#2F3CC4'],
   mobility:['#1BB394','#0A7667'],
   hip:['#EE6D8F','#B5335F'],
+  feet:['#E3A73C','#A8721A'],
   recovery:['#9A7CF4','#5A43C4'],
  };
  const FALLBACK=['#8A93A6','#4E5768'];
