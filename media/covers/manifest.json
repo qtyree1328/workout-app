@@ -388,6 +388,10 @@
     "src": "media/covers/wall-push-up.webp",
     "name": "Wall push-up"
   },
+  "biceps-curl": {
+    "src": "media/covers/biceps-curl.webp",
+    "name": "Biceps curl"
+  },
   "seated-neck-rotation": {
     "src": "media/covers/seated-neck-rotation.webp",
     "name": "Seated neck rotation"
@@ -395,6 +399,10 @@
   "seated-neck-stretch": {
     "src": "media/covers/seated-neck-stretch.webp",
     "name": "Seated neck stretch"
+  },
+  "wall-calf-stretch": {
+    "src": "media/covers/wall-calf-stretch.webp",
+    "name": "Wall calf stretch"
   },
   "seated-chest-stretch": {
     "src": "media/covers/seated-chest-stretch.webp",
@@ -436,6 +444,14 @@
     "src": "media/covers/hip-thread-the-needle-supine.webp",
     "name": "Thread the Needle (supine)"
   },
+  "hip-frog": {
+    "src": "media/covers/hip-frog.webp",
+    "name": "Frog"
+  },
+  "hip-jackknife-blaster": {
+    "src": "media/covers/hip-jackknife-blaster.webp",
+    "name": "Jackknife Blaster"
+  },
   "hip-scissors": {
     "src": "media/covers/hip-scissors.webp",
     "name": "Scissors"
@@ -451,6 +467,10 @@
   "hip-supine-butterfly": {
     "src": "media/covers/hip-supine-butterfly.webp",
     "name": "Supine Butterfly"
+  },
+  "hip-thread-the-needle-wall": {
+    "src": "media/covers/hip-thread-the-needle-wall.webp",
+    "name": "Thread the Needle @ Wall"
   },
   "hip-prone-butterfly": {
     "src": "media/covers/hip-supine-butterfly.webp",
@@ -481,6 +501,11 @@
     "src": "media/covers/hip-squat-twist.webp",
     "name": "Squat Twist"
   },
+  "hip-double-pigeon": {
+    "src": "media/covers/hip-seated-pigeon.webp",
+    "name": "Double Pigeon",
+    "sharedWith": "hip-seated-pigeon"
+  },
   "hip-bound-butterfly": {
     "src": "media/covers/hip-bound-butterfly.webp",
     "name": "Bound Butterfly"
@@ -488,6 +513,10 @@
   "hip-eagle-fold": {
     "src": "media/covers/hip-eagle-fold.webp",
     "name": "Eagle Fold"
+  },
+  "hip-cross-thread": {
+    "src": "media/covers/hip-cross-thread.webp",
+    "name": "Cross-Thread"
   },
   "hip-swiss-army-knife": {
     "src": "media/covers/hip-swiss-army-knife.webp",
@@ -518,9 +547,17 @@
     "src": "media/covers/hip-standing-psoas.webp",
     "name": "Standing Psoas"
   },
+  "hip-standing-pigeon": {
+    "src": "media/covers/hip-standing-pigeon.webp",
+    "name": "Standing Pigeon"
+  },
   "hip-sage-fold": {
     "src": "media/covers/hip-sage-fold.webp",
     "name": "Sage Fold"
+  },
+  "hip-long-butterfly": {
+    "src": "media/covers/hip-long-butterfly.webp",
+    "name": "Long Butterfly"
   },
   "hip-eagle-legs": {
     "src": "media/covers/hip-eagle-legs.webp",
@@ -537,6 +574,14 @@
   "hip-bound-baby": {
     "src": "media/covers/hip-bound-baby.webp",
     "name": "Bound Baby"
+  },
+  "hip-seated-pigeon": {
+    "src": "media/covers/hip-seated-pigeon.webp",
+    "name": "Seated Pigeon"
+  },
+  "hip-railroad-squat": {
+    "src": "media/covers/hip-railroad-squat.webp",
+    "name": "Railroad Squat"
   },
   "hip-thunderbolt": {
     "src": "media/covers/hip-thunderbolt.webp",
@@ -591,6 +636,10 @@
     "name": "Pull-ups",
     "sharedWith": "bar-explosive-pull-up"
   },
+  "bar-weighted-pull-up": {
+    "src": "media/covers/bar-weighted-pull-up.webp",
+    "name": "Weighted pull-ups"
+  },
   "bar-explosive-pull-up": {
     "src": "media/covers/bar-explosive-pull-up.webp",
     "name": "Explosive pull-ups"
@@ -604,6 +653,10 @@
     "src": "media/covers/bar-explosive-pull-up.webp",
     "name": "Lock-offs",
     "sharedWith": "bar-explosive-pull-up"
+  },
+  "bar-hanging-knee-raise": {
+    "src": "media/covers/bar-hanging-knee-raise.webp",
+    "name": "Hanging knee raises"
   },
   "push-up": {
     "src": "media/covers/push-up.webp",

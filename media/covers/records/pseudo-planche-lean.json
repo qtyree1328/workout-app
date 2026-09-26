@@ -2,6 +2,6 @@
   "id": "pseudo-planche-lean",
   "src": "media/covers/pseudo-planche-lean.webp",
   "status": "draft",
-  "prompt": "Re-illustrate reference 1's EXACT exercise pose, joint angles, support points and equipment arrangement. Reference 2 is the approved character: tall, slender male, modest smooth muscles, blank faceless head, dark wavy hair, charcoal tank, teal shorts, barefoot. Reference 3 if present is reusable artwork: preserve its character/rendering, adjust pose to match reference 1. One complete figure, softly shaded clean illustration, plain warm off-white background, 3:2 landscape. Remove all source labels/scenery/other people. Do not substitute a generic pose. Correct existing drawing (reference 3). Use lower-panel HARD pose: lean shoulders far forward beyond wrists; hands alongside lower ribs, elbows straight, toes on floor and rigid body. No ordinary vertical-arm plank. Preserve approved tall slender build, outfit and art style. Full figure and hands visible.",
-  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-885253f1-cf50-40ce-b57c-e5a6a75f6bcb.png"
+  "prompt": "Copy reference1 exact pseudo planche lean working pose and side camera view. Straight elbows, hands under lower rib/waist area, shoulders visibly far forward beyond wrists toward head. Straight diagonal torso and legs, only palms and toes touch ground. Use reference2's exact tall slender faceless male, charcoal tank, teal shorts, barefoot, dark wavy hair. Slender limbs, small shoulders, understated muscles. Clean soft shaded illustration, warm off-white background, entire body visible, landscape3:2, no words.",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-9ece0343-2473-4db3-8715-6e9b3d44d14f.png"
 }
