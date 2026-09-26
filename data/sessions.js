@@ -272,5 +272,7 @@ const categories=[
   {id:'mobility',label:'Mobility',focus:['Hips','Shoulders','Hamstrings','Full body']},
   {id:'hip',label:'Hip Opener',generator:true},
   {id:'recovery',label:'Recovery',focus:['Cool-down','Relax','Quick']}];
+// No walking warm-ups: drop easy-walking items and any block left empty.
+for(const s of sessions)s.blocks=s.blocks.map(b=>({...b,items:b.items.filter(i=>i.ex!=='easy-walking')})).filter(b=>b.items.length);
 return {sessions,categories,hipPoses,positions:POSITIONS,hipOpener,sources:SOURCES};
 });

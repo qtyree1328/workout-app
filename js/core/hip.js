@@ -5,7 +5,6 @@
  const COUNTS=[1,2,3,4,5,6,7,8],HOLD=360,REST=60,SWITCH=10,GRACE=1.05;
  function rng(seed){let a=seed>>>0||1;return ()=>{a=a+0x6D2B79F5>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
  const warmBlock=()=>({name:'Warm-up',items:[
-  {ex:'easy-walking',mode:'time',work:60,rest:10,label:'Easy movement',cue:'Walk, march or jog on the spot.'},
   {ex:'90-90-hip-switches',mode:'time',work:40,rest:10},
   {ex:'prone-bent-knee-hip-rotations',mode:'time',work:40,rest:15}]});
  // Warm-up length plus the 15 s hand-over rest to the first pose.
