@@ -375,6 +375,8 @@
 .exercise-card .thumb img{width:100%;height:100%;object-fit:cover}
 .exercise-card .thumb.is-photo{background:#fff}
 .exercise-card .thumb.is-photo img{object-fit:contain;padding:12px}
+.exercise-card .thumb.is-cover{aspect-ratio:4/3}
+.exercise-card .thumb.is-cover img,.exercise-row .thumb.is-cover img{object-fit:contain;padding:4%}
 .exercise-card .thumb.is-figure{display:grid;place-items:center;background:var(--surface-2)}
 .exercise-card .thumb.is-figure svg{width:66%;height:66%}
 .exercise-card-body{padding:10px 11px 12px;display:flex;flex-direction:column;gap:6px}

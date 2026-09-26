@@ -1,0 +1,613 @@
+window.EXERCISE_COVERS = {
+  "hollow-body-hang": {
+    "src": "media/covers/hollow-body-hang.webp",
+    "name": "Hollow body hang"
+  },
+  "frog-stand": {
+    "src": "media/covers/frog-stand.webp",
+    "name": "Frog stand"
+  },
+  "hollow-body-hold": {
+    "src": "media/covers/hollow-body-hold.webp",
+    "name": "Hollow body hold"
+  },
+  "pseudo-planche-lean": {
+    "src": "media/covers/pseudo-planche-lean.webp",
+    "name": "Pseudo planche lean"
+  },
+  "pseudo-planche-push-up": {
+    "src": "media/covers/pseudo-planche-push-up.webp",
+    "name": "Pseudo planche push-up"
+  },
+  "tuck-front-lever": {
+    "src": "media/covers/tuck-front-lever.webp",
+    "name": "Tuck front lever"
+  },
+  "elbow-lever": {
+    "src": "media/covers/elbow-lever.webp",
+    "name": "Elbow lever"
+  },
+  "german-hang": {
+    "src": "media/covers/german-hang.webp",
+    "name": "German hang"
+  },
+  "butcher-block-stretch": {
+    "src": "media/covers/butcher-block-stretch.webp",
+    "name": "Butcher block stretch"
+  },
+  "pistol-squat": {
+    "src": "media/covers/pistol-squat.webp",
+    "name": "Pistol squat"
+  },
+  "tuck-back-lever": {
+    "src": "media/covers/tuck-back-lever.webp",
+    "name": "Tuck back lever"
+  },
+  "seated-compression-leg-lift": {
+    "src": "media/covers/seated-straight-leg-lift.webp",
+    "name": "Seated compression leg lift",
+    "sharedWith": "seated-straight-leg-lift"
+  },
+  "pike-push-up": {
+    "src": "media/covers/pike-push-up.webp",
+    "name": "Pike push-up"
+  },
+  "l-sit": {
+    "src": "media/covers/l-sit.webp",
+    "name": "L-sit"
+  },
+  "archer-push-up": {
+    "src": "media/covers/archer-push-up.webp",
+    "name": "Archer push-up"
+  },
+  "tuck-planche": {
+    "src": "media/covers/tuck-planche.webp",
+    "name": "Tuck planche"
+  },
+  "reverse-nordic": {
+    "src": "media/covers/reverse-nordic.webp",
+    "name": "Reverse Nordic"
+  },
+  "straddle-sit": {
+    "src": "media/covers/straddle-sit.webp",
+    "name": "Straddle sit"
+  },
+  "shoulder-stand": {
+    "src": "media/covers/shoulder-stand.webp",
+    "name": "Shoulder stand"
+  },
+  "muscle-up": {
+    "src": "media/covers/muscle-up.webp",
+    "name": "Muscle-up"
+  },
+  "handstand": {
+    "src": "media/covers/handstand.webp",
+    "name": "Handstand"
+  },
+  "handstand-push-up": {
+    "src": "media/covers/handstand-push-up.webp",
+    "name": "Handstand push-up"
+  },
+  "band-assisted-thoracic-extension": {
+    "src": "media/covers/band-assisted-thoracic-extension.webp",
+    "name": "Band-assisted thoracic extension"
+  },
+  "prone-band-w-raise": {
+    "src": "media/covers/prone-band-w-raise.webp",
+    "name": "Prone band W raise"
+  },
+  "prone-band-lateral-raise": {
+    "src": "media/covers/prone-band-lateral-raise.webp",
+    "name": "Prone band lateral raise"
+  },
+  "prone-band-row": {
+    "src": "media/covers/prone-band-row.webp",
+    "name": "Prone band row"
+  },
+  "prone-band-pulldown": {
+    "src": "media/covers/prone-band-pulldown.webp",
+    "name": "Prone band pulldown"
+  },
+  "prone-band-overhead-to-t-sweep": {
+    "src": "media/covers/prone-band-overhead-to-t-sweep.webp",
+    "name": "Prone band overhead-to-T sweep"
+  },
+  "standing-band-hip-abduction": {
+    "src": "media/covers/standing-band-hip-abduction.webp",
+    "name": "Standing band hip abduction"
+  },
+  "lateral-weight-shift": {
+    "src": "media/covers/lateral-weight-shift.webp",
+    "name": "Lateral weight shift"
+  },
+  "single-leg-balance-on-block": {
+    "src": "media/covers/single-leg-balance-on-block.webp",
+    "name": "Single-leg balance on block"
+  },
+  "standing-pelvic-shift": {
+    "src": "media/covers/standing-pelvic-shift.webp",
+    "name": "Standing pelvic shift"
+  },
+  "bear-hover-with-block-squeeze": {
+    "src": "media/covers/bear-hover-with-block-squeeze.webp",
+    "name": "Bear hover with block squeeze"
+  },
+  "seated-leg-lift-with-overhead-reach": {
+    "src": "media/covers/seated-leg-lift-with-overhead-reach.webp",
+    "name": "Seated leg lift with overhead reach"
+  },
+  "90-90-forward-fold": {
+    "src": "media/covers/90-90-forward-fold.webp",
+    "name": "90/90 forward fold"
+  },
+  "90-90-hip-switches": {
+    "src": "media/covers/90-90-hip-switches.webp",
+    "name": "90/90 hip switches"
+  },
+  "side-plank-with-leg-lift": {
+    "src": "media/covers/side-plank-with-leg-lift.webp",
+    "name": "Side plank with leg lift"
+  },
+  "90-90-hip-lift-with-block-support": {
+    "src": "media/covers/90-90-hip-lift-with-block-support.webp",
+    "name": "90/90 hip lift with block support"
+  },
+  "half-kneeling-hip-shift": {
+    "src": "media/covers/half-kneeling-hip-shift.webp",
+    "name": "Half-kneeling hip shift"
+  },
+  "prone-dowel-diagonal-reach": {
+    "src": "media/covers/prone-dowel-diagonal-reach.webp",
+    "name": "Prone dowel diagonal reach"
+  },
+  "prone-dowel-pulldown": {
+    "src": "media/covers/prone-dowel-pulldown.webp",
+    "name": "Prone dowel pulldown"
+  },
+  "prone-dowel-side-to-side-reach": {
+    "src": "media/covers/prone-dowel-side-to-side-reach.webp",
+    "name": "Prone dowel side-to-side reach"
+  },
+  "prone-dowel-around-head-sweep": {
+    "src": "media/covers/prone-dowel-around-head-sweep.webp",
+    "name": "Prone dowel around-head sweep"
+  },
+  "prone-alternating-w-reach": {
+    "src": "media/covers/prone-alternating-w-reach.webp",
+    "name": "Prone alternating W reach"
+  },
+  "prone-t-raise": {
+    "src": "media/covers/prone-t-raise.webp",
+    "name": "Prone T raise"
+  },
+  "prone-single-arm-block-reach": {
+    "src": "media/covers/prone-single-arm-block-reach.webp",
+    "name": "Prone single-arm block reach"
+  },
+  "prone-block-y-to-w-raise": {
+    "src": "media/covers/prone-block-y-to-w-raise.webp",
+    "name": "Prone block Y-to-W raise"
+  },
+  "prone-alternating-block-reach": {
+    "src": "media/covers/prone-alternating-block-reach.webp",
+    "name": "Prone alternating block reach"
+  },
+  "prone-weighted-dowel-raise": {
+    "src": "media/covers/prone-weighted-dowel-raise.webp",
+    "name": "Prone weighted dowel raise"
+  },
+  "prone-behind-back-dowel-lift": {
+    "src": "media/covers/prone-behind-back-dowel-lift.webp",
+    "name": "Prone behind-back dowel lift"
+  },
+  "rocking-90-90": {
+    "src": "media/covers/rocking-90-90.webp",
+    "name": "Rocking 90/90"
+  },
+  "supported-single-leg-rdl-to-hip-gate": {
+    "src": "media/covers/supported-single-leg-rdl-to-hip-gate.webp",
+    "name": "Supported single-leg RDL to hip gate"
+  },
+  "rocking-side-lunge-with-hold": {
+    "src": "media/covers/rocking-side-lunge-with-hold.webp",
+    "name": "Rocking side lunge with hold"
+  },
+  "supine-wall-squat---adductor-opener": {
+    "src": "media/covers/supine-wall-squat---adductor-opener.webp",
+    "name": "Supine wall squat / adductor opener"
+  },
+  "standing-fire-hydrant": {
+    "src": "media/covers/standing-fire-hydrant.webp",
+    "name": "Standing fire hydrant"
+  },
+  "wide-stance-forward-fold-to-squat": {
+    "src": "media/covers/wide-stance-forward-fold-to-squat.webp",
+    "name": "Wide-stance forward fold to squat"
+  },
+  "wide-stance-thoracic-rotation": {
+    "src": "media/covers/wide-stance-thoracic-rotation.webp",
+    "name": "Wide-stance thoracic rotation"
+  },
+  "squat-to-forward-fold": {
+    "src": "media/covers/squat-to-forward-fold.webp",
+    "name": "Squat-to-forward-fold"
+  },
+  "deep-squat-thoracic-rotation": {
+    "src": "media/covers/deep-squat-thoracic-rotation.webp",
+    "name": "Deep squat thoracic rotation"
+  },
+  "deep-squat-knee-drops": {
+    "src": "media/covers/deep-squat-knee-drops.webp",
+    "name": "Deep squat knee drops"
+  },
+  "standing-side-bend": {
+    "src": "media/covers/standing-side-bend.webp",
+    "name": "Standing side bend"
+  },
+  "goddess-squat": {
+    "src": "media/covers/goddess-squat.webp",
+    "name": "Goddess squat"
+  },
+  "triangle-pose": {
+    "src": "media/covers/triangle-pose.webp",
+    "name": "Triangle pose"
+  },
+  "wide-stance-forward-fold": {
+    "src": "media/covers/wide-stance-forward-fold.webp",
+    "name": "Wide-stance forward fold"
+  },
+  "low-lunge": {
+    "src": "media/covers/low-lunge.webp",
+    "name": "Low lunge"
+  },
+  "low-lunge-overhead-reach": {
+    "src": "media/covers/low-lunge-overhead-reach.webp",
+    "name": "Low lunge overhead reach"
+  },
+  "warrior-ii": {
+    "src": "media/covers/warrior-ii.webp",
+    "name": "Warrior II"
+  },
+  "cossack-squat": {
+    "src": "media/covers/cossack-squat.webp",
+    "name": "Cossack squat"
+  },
+  "low-lunge-rotation": {
+    "src": "media/covers/low-lunge-rotation.webp",
+    "name": "Low lunge rotation"
+  },
+  "half-split": {
+    "src": "media/covers/half-split.webp",
+    "name": "Half split"
+  },
+  "seated-knee-tuck": {
+    "src": "media/covers/seated-knee-tuck.webp",
+    "name": "Seated knee tuck"
+  },
+  "flutter-kicks": {
+    "src": "media/covers/flutter-kicks.webp",
+    "name": "Flutter kicks"
+  },
+  "wide-leg-sit-up": {
+    "src": "media/covers/wide-leg-sit-up.webp",
+    "name": "Wide-leg sit-up"
+  },
+  "seated-straight-leg-lift": {
+    "src": "media/covers/seated-straight-leg-lift.webp",
+    "name": "Seated straight-leg lift"
+  },
+  "russian-twist": {
+    "src": "media/covers/russian-twist.webp",
+    "name": "Russian twist"
+  },
+  "bicycle-crunch": {
+    "src": "media/covers/bicycle-crunch.webp",
+    "name": "Bicycle crunch"
+  },
+  "toe-reach-crunch": {
+    "src": "media/covers/toe-reach-crunch.webp",
+    "name": "Toe-reach crunch"
+  },
+  "diamond-push-up": {
+    "src": "media/covers/diamond-push-up.webp",
+    "name": "Diamond push-up"
+  },
+  "mountain-climber": {
+    "src": "media/covers/mountain-climber.webp",
+    "name": "Mountain climber"
+  },
+  "prone-bent-knee-hip-rotations": {
+    "src": "media/covers/prone-bent-knee-hip-rotations.webp",
+    "name": "Prone bent-knee hip rotations"
+  },
+  "prone-alternating-hip-rotation": {
+    "src": "media/covers/prone-alternating-hip-rotation.webp",
+    "name": "Prone alternating hip rotation"
+  },
+  "prone-frog-leg-slides": {
+    "src": "media/covers/prone-frog-leg-slides.webp",
+    "name": "Prone frog leg slides"
+  },
+  "prone-scorpion": {
+    "src": "media/covers/prone-scorpion.webp",
+    "name": "Prone scorpion"
+  },
+  "standing-trunk-twists": {
+    "src": "media/covers/standing-trunk-twists.webp",
+    "name": "Standing trunk twists"
+  },
+  "arm-circles": {
+    "src": "media/covers/arm-circles.webp",
+    "name": "Arm circles"
+  },
+  "arm-swings-—-“aura-farmers”": {
+    "src": "media/covers/arm-swings-—-“aura-farmers”.webp",
+    "name": "Arm swings — “Aura farmers”"
+  },
+  "standing-rotational-arm-swings": {
+    "src": "media/covers/standing-rotational-arm-swings.webp",
+    "name": "Standing rotational arm swings"
+  },
+  "relaxed-arm-swings-—-“mcgregor’s”": {
+    "src": "media/covers/relaxed-arm-swings-—-“mcgregor’s”.webp",
+    "name": "Relaxed arm swings — “McGregor’s”"
+  },
+  "body-waves": {
+    "src": "media/covers/body-waves.webp",
+    "name": "Body waves"
+  },
+  "lunge-reaches": {
+    "src": "media/covers/lunge-reaches.webp",
+    "name": "Lunge reaches"
+  },
+  "monk-squat": {
+    "src": "media/covers/monk-squat.webp",
+    "name": "Monk squat"
+  },
+  "easy-walking": {
+    "src": "media/covers/easy-walking.webp",
+    "name": "Easy walking"
+  },
+  "hip-pigeon": {
+    "src": "media/covers/hip-pigeon.webp",
+    "name": "Pigeon"
+  },
+  "hip-butterfly": {
+    "src": "media/covers/hip-butterfly.webp",
+    "name": "Butterfly"
+  },
+  "hip-blaster": {
+    "src": "media/covers/hip-blaster.webp",
+    "name": "Blaster"
+  },
+  "hip-passive-squat": {
+    "src": "media/covers/hip-passive-squat.webp",
+    "name": "Passive Squat"
+  },
+  "hip-happy-baby": {
+    "src": "media/covers/hip-happy-baby.webp",
+    "name": "Happy Baby"
+  },
+  "hip-thread-the-needle-supine": {
+    "src": "media/covers/hip-thread-the-needle-supine.webp",
+    "name": "Thread the Needle (supine)"
+  },
+  "hip-frog": {
+    "src": "media/covers/hip-frog.webp",
+    "name": "Frog"
+  },
+  "hip-jackknife-blaster": {
+    "src": "media/covers/hip-jackknife-blaster.webp",
+    "name": "Jackknife Blaster"
+  },
+  "hip-scissors": {
+    "src": "media/covers/hip-scissors.webp",
+    "name": "Scissors"
+  },
+  "hip-lightning-bolt": {
+    "src": "media/covers/hip-lightning-bolt.webp",
+    "name": "Lightning Bolt"
+  },
+  "hip-zorro": {
+    "src": "media/covers/hip-zorro.webp",
+    "name": "Zorro"
+  },
+  "hip-supine-butterfly": {
+    "src": "media/covers/hip-supine-butterfly.webp",
+    "name": "Supine Butterfly"
+  },
+  "hip-thread-the-needle-wall": {
+    "src": "media/covers/hip-thread-the-needle-wall.webp",
+    "name": "Thread the Needle @ Wall"
+  },
+  "hip-prone-butterfly": {
+    "src": "media/covers/hip-supine-butterfly.webp",
+    "name": "Prone Butterfly",
+    "sharedWith": "hip-supine-butterfly"
+  },
+  "hip-ninja-squats": {
+    "src": "media/covers/hip-ninja-squats.webp",
+    "name": "Ninja Squats"
+  },
+  "hip-lateral-chain-stretch": {
+    "src": "media/covers/hip-lateral-chain-stretch.webp",
+    "name": "Lateral Chain Stretch"
+  },
+  "hip-psoas-blaster-chair": {
+    "src": "media/covers/hip-psoas-blaster-chair.webp",
+    "name": "Psoas Blaster (chair)"
+  },
+  "hip-reclined-scissors": {
+    "src": "media/covers/hip-reclined-scissors.webp",
+    "name": "Reclined Scissors"
+  },
+  "hip-blaster-twist": {
+    "src": "media/covers/hip-blaster-twist.webp",
+    "name": "Blaster Twist"
+  },
+  "hip-squat-twist": {
+    "src": "media/covers/hip-squat-twist.webp",
+    "name": "Squat Twist"
+  },
+  "hip-double-pigeon": {
+    "src": "media/covers/hip-seated-pigeon.webp",
+    "name": "Double Pigeon",
+    "sharedWith": "hip-seated-pigeon"
+  },
+  "hip-bound-butterfly": {
+    "src": "media/covers/hip-bound-butterfly.webp",
+    "name": "Bound Butterfly"
+  },
+  "hip-eagle-fold": {
+    "src": "media/covers/hip-eagle-fold.webp",
+    "name": "Eagle Fold"
+  },
+  "hip-cross-thread": {
+    "src": "media/covers/hip-cross-thread.webp",
+    "name": "Cross-Thread"
+  },
+  "hip-swiss-army-knife": {
+    "src": "media/covers/hip-swiss-army-knife.webp",
+    "name": "Swiss Army Knife"
+  },
+  "hip-saddle": {
+    "src": "media/covers/hip-lightning-bolt.webp",
+    "name": "Saddle",
+    "sharedWith": "hip-lightning-bolt"
+  },
+  "hip-butterfly-squat": {
+    "src": "media/covers/hip-butterfly-squat.webp",
+    "name": "Butterfly Squat"
+  },
+  "hip-half-lightning-bolt": {
+    "src": "media/covers/hip-half-lightning-bolt.webp",
+    "name": "Half Lightning Bolt"
+  },
+  "hip-fallen-blaster": {
+    "src": "media/covers/hip-fallen-blaster.webp",
+    "name": "Fallen Blaster"
+  },
+  "hip-a-baby": {
+    "src": "media/covers/hip-a-baby.webp",
+    "name": "A-Baby"
+  },
+  "hip-standing-psoas": {
+    "src": "media/covers/hip-standing-psoas.webp",
+    "name": "Standing Psoas"
+  },
+  "hip-standing-pigeon": {
+    "src": "media/covers/hip-standing-pigeon.webp",
+    "name": "Standing Pigeon"
+  },
+  "hip-sage-fold": {
+    "src": "media/covers/hip-sage-fold.webp",
+    "name": "Sage Fold"
+  },
+  "hip-long-butterfly": {
+    "src": "media/covers/hip-long-butterfly.webp",
+    "name": "Long Butterfly"
+  },
+  "hip-eagle-legs": {
+    "src": "media/covers/hip-eagle-legs.webp",
+    "name": "Eagle Legs"
+  },
+  "hip-chair-squat": {
+    "src": "media/covers/hip-chair-squat.webp",
+    "name": "Chair Squat"
+  },
+  "hip-twisted-pigeon": {
+    "src": "media/covers/hip-twisted-pigeon.webp",
+    "name": "Twisted Pigeon"
+  },
+  "hip-bound-baby": {
+    "src": "media/covers/hip-bound-baby.webp",
+    "name": "Bound Baby"
+  },
+  "hip-seated-pigeon": {
+    "src": "media/covers/hip-seated-pigeon.webp",
+    "name": "Seated Pigeon"
+  },
+  "hip-railroad-squat": {
+    "src": "media/covers/hip-railroad-squat.webp",
+    "name": "Railroad Squat"
+  },
+  "hip-thunderbolt": {
+    "src": "media/covers/hip-thunderbolt.webp",
+    "name": "Thunderbolt"
+  },
+  "hip-prayer-squat": {
+    "src": "media/covers/hip-prayer-squat.webp",
+    "name": "Prayer Squat"
+  },
+  "hb-warm-up-hangs": {
+    "src": "media/covers/hb-warm-up-hangs.webp",
+    "name": "Hangboard warm-up hangs"
+  },
+  "hb-max-hang-half-crimp": {
+    "src": "media/covers/hb-max-hang-half-crimp.webp",
+    "name": "Max hang · half crimp"
+  },
+  "hb-max-hang-open-hand": {
+    "src": "media/covers/hb-max-hang-open-hand.webp",
+    "name": "Max hang · open hand"
+  },
+  "hb-min-edge-hang": {
+    "src": "media/covers/hb-min-edge-hang.webp",
+    "name": "Min-edge hang"
+  },
+  "hb-repeaters-7-3": {
+    "src": "media/covers/hb-max-hang-half-crimp.webp",
+    "name": "Repeaters 7:3",
+    "sharedWith": "hb-max-hang-half-crimp"
+  },
+  "hb-intermittent-80": {
+    "src": "media/covers/hb-max-hang-half-crimp.webp",
+    "name": "Intermittent hangs 10:6 · hard",
+    "sharedWith": "hb-max-hang-half-crimp"
+  },
+  "hb-endurance-60": {
+    "src": "media/covers/hb-warm-up-hangs.webp",
+    "name": "Endurance hangs 10:6 · moderate",
+    "sharedWith": "hb-warm-up-hangs"
+  },
+  "hb-low-intensity": {
+    "src": "media/covers/hb-warm-up-hangs.webp",
+    "name": "Low-intensity hangs",
+    "sharedWith": "hb-warm-up-hangs"
+  },
+  "bar-scapular-pull-up": {
+    "src": "media/covers/bar-scapular-pull-up.webp",
+    "name": "Scapular pull-ups"
+  },
+  "bar-pull-up": {
+    "src": "media/covers/bar-explosive-pull-up.webp",
+    "name": "Pull-ups",
+    "sharedWith": "bar-explosive-pull-up"
+  },
+  "bar-weighted-pull-up": {
+    "src": "media/covers/bar-weighted-pull-up.webp",
+    "name": "Weighted pull-ups"
+  },
+  "bar-explosive-pull-up": {
+    "src": "media/covers/bar-explosive-pull-up.webp",
+    "name": "Explosive pull-ups"
+  },
+  "bar-slow-negative": {
+    "src": "media/covers/bar-explosive-pull-up.webp",
+    "name": "Slow negative pull-ups",
+    "sharedWith": "bar-explosive-pull-up"
+  },
+  "bar-lock-off": {
+    "src": "media/covers/bar-explosive-pull-up.webp",
+    "name": "Lock-offs",
+    "sharedWith": "bar-explosive-pull-up"
+  },
+  "bar-hanging-knee-raise": {
+    "src": "media/covers/bar-hanging-knee-raise.webp",
+    "name": "Hanging knee raises"
+  },
+  "push-up": {
+    "src": "media/covers/push-up.webp",
+    "name": "Push-up"
+  }
+};

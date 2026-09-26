@@ -73,12 +73,14 @@
   else if(v.type==='image')media={type:'image',src:v.image||v.thumbnail,thumb:v.thumbnail,options:v.options||null,credit:v.credit||''};
   else if(v.type==='instruction')media={type:'instruction',thumb:v.thumbnail,note:v.note};
   else media={type:'video',src:v.clip,thumb:v.thumbnail,poster:v.thumbnail};
-  return {id,name:e.name,kind:e.kind,area:e.area,equipment:m.equipment||[],meta:m,variant:v,media,source:sourceById[v.source]||null,cue:m.dose?.cue||v.note||'',
+  const cover=window.EXERCISE_COVERS?.[id]?.src||null; // drawn cover art (consistent style); demos stay in media
+  return {id,name:e.name,kind:e.kind,area:e.area,equipment:m.equipment||[],meta:m,variant:v,media,cover,source:sourceById[v.source]||null,cue:m.dose?.cue||v.note||'',
    note:v.note||'',climbing:m.climbing||null};
  }
  // Small square/portrait preview markup for lists
  function thumb(id,cls='thumb'){
   const x=exercise(id);if(!x)return `<span class="${cls}"></span>`;
+  if(x.cover)return `<span class="${cls} is-cover"><img loading="lazy" decoding="async" src="${h(x.cover)}" alt=""></span>`;
   if(x.media.type==='figure')return `<span class="${cls} is-figure">${Figures.svg(id)}</span>`;
   return `<span class="${cls}${x.media.type==='image'?' is-photo':''}"><img loading="lazy" decoding="async" src="${h(x.media.thumb||x.media.src)}" alt=""></span>`;
  }
