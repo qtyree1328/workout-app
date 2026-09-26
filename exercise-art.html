@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exercise illustrations</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:32px;font:16px system-ui,sans-serif;background:#faf9f6;color:#243336}header{max-width:1500px;margin:auto auto 28px}h1{font-size:30px;margin:0 0 8px}p{color:#657274}input{width:min(100%,480px);padding:13px 16px;border:1px solid #cbd4d3;border-radius:10px;background:white;font:inherit}main{max-width:1500px;margin:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:20px}article{border:1px solid #e0e4df;border-radius:14px;overflow:hidden;background:white}article img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;background:#faf9f6}h2{font-size:15px;margin:15px 16px 18px;font-weight:600}a{color:inherit}#count{font-size:14px}@media(max-width:600px){body{padding:18px}main{grid-template-columns:1fr}}
+</style>
+<header><h1>Exercise illustrations</h1><p>The complete collection, using the same male figure throughout.</p><label><input id="search" type="search" placeholder="Find an exercise" aria-label="Find an exercise"></label><p id="count" aria-live="polite"></p></header>
+<main id="gallery"></main>
+<script src="data/cover-art.js"></script>
+<script>
+const entries=Object.entries(window.EXERCISE_COVERS),gallery=document.querySelector('#gallery');
+function render(){const query=document.querySelector('#search').value.toLowerCase();const filtered=entries.filter(([id,e])=>(e.name+' '+id).toLowerCase().includes(query));gallery.replaceChildren();for(const [id,e] of filtered){const card=document.createElement('article'),link=document.createElement('a'),img=document.createElement('img'),title=document.createElement('h2');link.href=e.src;link.target='_blank';link.rel='noopener';img.src=e.src;img.alt=e.name;img.loading='lazy';title.textContent=e.name;link.append(img);card.append(link,title);gallery.append(card)}document.querySelector('#count').textContent=filtered.length+' of '+entries.length+' exercises'}
+document.querySelector('#search').addEventListener('input',render);render();
+</script>
+</html>
