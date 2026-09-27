@@ -340,17 +340,17 @@ window.EXERCISE_COVERS = {
     "src": "media/covers/arm-circles.webp",
     "name": "Arm circles"
   },
-  "arm-swings-—-“aura-farmers”": {
-    "src": "media/covers/arm-swings-—-“aura-farmers”.webp",
-    "name": "Arm swings — “Aura farmers”"
+  "arm-swings-\u2014-\u201caura-farmers\u201d": {
+    "src": "media/covers/arm-swings-\u2014-\u201caura-farmers\u201d.webp",
+    "name": "Arm swings \u2014 \u201cAura farmers\u201d"
   },
   "standing-rotational-arm-swings": {
     "src": "media/covers/standing-rotational-arm-swings.webp",
     "name": "Standing rotational arm swings"
   },
-  "relaxed-arm-swings-—-“mcgregor’s”": {
-    "src": "media/covers/relaxed-arm-swings-—-“mcgregor’s”.webp",
-    "name": "Relaxed arm swings — “McGregor’s”"
+  "relaxed-arm-swings-\u2014-\u201cmcgregor\u2019s\u201d": {
+    "src": "media/covers/relaxed-arm-swings-\u2014-\u201cmcgregor\u2019s\u201d.webp",
+    "name": "Relaxed arm swings \u2014 \u201cMcGregor\u2019s\u201d"
   },
   "body-waves": {
     "src": "media/covers/body-waves.webp",
@@ -363,6 +363,58 @@ window.EXERCISE_COVERS = {
   "monk-squat": {
     "src": "media/covers/monk-squat.webp",
     "name": "Monk squat"
+  },
+  "chair-sit-to-stand": {
+    "src": "media/covers/chair-sit-to-stand.webp",
+    "name": "Chair sit-to-stand"
+  },
+  "supported-mini-squat": {
+    "src": "media/covers/supported-mini-squat.webp",
+    "name": "Supported mini squat"
+  },
+  "supported-calf-raise": {
+    "src": "media/covers/supported-calf-raise.webp",
+    "name": "Supported calf raise"
+  },
+  "supported-side-leg-lift": {
+    "src": "media/covers/supported-side-leg-lift.webp",
+    "name": "Supported side leg lift"
+  },
+  "standing-hip-extension": {
+    "src": "media/covers/standing-hip-extension.webp",
+    "name": "Standing hip extension"
+  },
+  "wall-push-up": {
+    "src": "media/covers/wall-push-up.webp",
+    "name": "Wall push-up"
+  },
+  "biceps-curl": {
+    "src": "media/covers/biceps-curl.webp",
+    "name": "Biceps curl"
+  },
+  "seated-neck-rotation": {
+    "src": "media/covers/seated-neck-rotation.webp",
+    "name": "Seated neck rotation"
+  },
+  "seated-neck-stretch": {
+    "src": "media/covers/seated-neck-stretch.webp",
+    "name": "Seated neck stretch"
+  },
+  "wall-calf-stretch": {
+    "src": "media/covers/wall-calf-stretch.webp",
+    "name": "Wall calf stretch"
+  },
+  "seated-chest-stretch": {
+    "src": "media/covers/seated-chest-stretch.webp",
+    "name": "Seated chest stretch"
+  },
+  "seated-ankle-pumps": {
+    "src": "media/covers/seated-ankle-pumps.webp",
+    "name": "Seated ankle pumps"
+  },
+  "seated-thoracic-rotation": {
+    "src": "media/covers/seated-thoracic-rotation.webp",
+    "name": "Seated thoracic rotation"
   },
   "easy-walking": {
     "src": "media/covers/easy-walking.webp",
@@ -545,11 +597,11 @@ window.EXERCISE_COVERS = {
   },
   "hb-max-hang-half-crimp": {
     "src": "media/covers/hb-max-hang-half-crimp.webp",
-    "name": "Max hang · half crimp"
+    "name": "Max hang \u00b7 half crimp"
   },
   "hb-max-hang-open-hand": {
     "src": "media/covers/hb-max-hang-open-hand.webp",
-    "name": "Max hang · open hand"
+    "name": "Max hang \u00b7 open hand"
   },
   "hb-min-edge-hang": {
     "src": "media/covers/hb-min-edge-hang.webp",
@@ -562,12 +614,12 @@ window.EXERCISE_COVERS = {
   },
   "hb-intermittent-80": {
     "src": "media/covers/hb-max-hang-half-crimp.webp",
-    "name": "Intermittent hangs 10:6 · hard",
+    "name": "Intermittent hangs 10:6 \u00b7 hard",
     "sharedWith": "hb-max-hang-half-crimp"
   },
   "hb-endurance-60": {
     "src": "media/covers/hb-warm-up-hangs.webp",
-    "name": "Endurance hangs 10:6 · moderate",
+    "name": "Endurance hangs 10:6 \u00b7 moderate",
     "sharedWith": "hb-warm-up-hangs"
   },
   "hb-low-intensity": {
@@ -609,5 +661,89 @@ window.EXERCISE_COVERS = {
   "push-up": {
     "src": "media/covers/push-up.webp",
     "name": "Push-up"
+  },
+  "foot-ball-toe-curl": {
+    "src": "media/covers/foot-ball-toe-curl.webp",
+    "name": "Toe curls over a ball"
+  },
+  "foot-ball-roll": {
+    "src": "media/covers/foot-ball-roll.webp",
+    "name": "Sole roll over a ball"
+  },
+  "foot-short-foot": {
+    "src": "media/covers/foot-short-foot.webp",
+    "name": "Short-foot arch lift"
+  },
+  "foot-toe-lifts": {
+    "src": "media/covers/foot-toe-lifts.webp",
+    "name": "Standing toe lifts"
+  },
+  "foot-toe-tip-pivots": {
+    "src": "media/covers/foot-toe-tip-pivots.webp",
+    "name": "Toe-tip ankle pivots"
+  },
+  "foot-toe-spread": {
+    "src": "media/covers/foot-toe-spread.webp",
+    "name": "Toe spreading"
+  },
+  "foot-heel-block-pumps": {
+    "src": "media/covers/foot-heel-block-pumps.webp",
+    "name": "Heel-supported ankle pumps"
+  },
+  "foot-block-guided-roll": {
+    "src": "media/covers/foot-block-guided-roll.webp",
+    "name": "Block-guided heel roll"
+  },
+  "foot-block-heel-raise": {
+    "src": "media/covers/foot-block-heel-raise.webp",
+    "name": "Forefoot-on-block heel raise"
+  },
+  "foot-block-tip": {
+    "src": "media/covers/foot-block-tip.webp",
+    "name": "Forefoot block tip"
+  },
+  "foot-block-pickup": {
+    "src": "media/covers/foot-block-pickup.webp",
+    "name": "Two-foot block pickup"
+  },
+  "foot-block-toe-curls": {
+    "src": "media/covers/foot-block-toe-curls.webp",
+    "name": "Toe curls over a block edge"
+  },
+  "foot-block-squeeze-heel-raise": {
+    "src": "media/covers/foot-block-squeeze-heel-raise.webp",
+    "name": "Block-squeeze heel raises"
+  },
+  "foot-block-tucked-toes": {
+    "src": "media/covers/foot-block-tucked-toes.webp",
+    "name": "Tucked-toe rock on a block"
+  },
+  "foot-block-squeeze-toe-raise": {
+    "src": "media/covers/foot-block-squeeze-toe-raise.webp",
+    "name": "Block-squeeze forefoot raises"
+  },
+  "foot-outer-edge-rolls": {
+    "src": "media/covers/foot-outer-edge-rolls.webp",
+    "name": "Outer-edge foot rolls"
+  },
+  "foot-calf-foam-roll": {
+    "src": "media/covers/foot-calf-foam-roll.webp",
+    "name": "Calf foam rolling"
+  },
+  "foot-banded-ankle-pumps": {
+    "src": "media/covers/foot-banded-ankle-pumps.webp",
+    "name": "Banded ankle pumps"
+  },
+  "foot-banded-ankle-circles": {
+    "src": "media/covers/foot-banded-ankle-circles.webp",
+    "name": "Banded ankle circles"
+  },
+  "foot-weighted-ankle-rocks": {
+    "src": "media/covers/foot-weighted-ankle-rocks.webp",
+    "name": "Weighted ankle rocks"
+  },
+  "foot-bent-knee-ankle-pulses": {
+    "src": "media/covers/foot-bent-knee-ankle-pulses.webp",
+    "name": "Bent-knee ankle pulses"
   }
 };

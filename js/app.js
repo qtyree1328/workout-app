@@ -245,7 +245,7 @@
   const tags=[x.meta.difficulty,x.meta.target,...(equipmentLabels(x.equipment,{props:true})||[])].filter(Boolean);
   const trains=(x.climbing&&x.climbing.length)?`<p class="ex-sheet-trains">Trains ${h(x.climbing.join(', '))}</p>`:'';
   const rx=defaultPrescription(x);
-  const src=x.source?`<p class="ex-sheet-source">Source: <a href="${h(x.source.url)}" target="_blank" rel="noopener">${h(x.source.author||'Link')} ↗</a></p>`:'';
+  const src=x.source?`<p class="ex-sheet-source">Source: <a href="${h(x.source.url)}" target="_blank" rel="noopener">${h(x.source.author||'Link')} ↗</a>${x.id.startsWith('foot-')&&x.variant.clip?` · <a href="${h(x.variant.clip)}" target="_blank" rel="noopener">Watch movement ↗</a>`:''}</p>`:'';
   wrap.innerHTML=`
    <div class="sheet-head"><h2>${h(x.name)}</h2><button type="button" class="icon-btn plain" data-sheet-close aria-label="Close">${icon('close')}</button></div>
    <div class="ex-sheet-media ${mediaCls}" id="ex-media"></div>

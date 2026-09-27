@@ -1,0 +1,309 @@
+{
+  "sources": [
+    {
+      "id": "2103541666112295254",
+      "author": "RealGemsfinder",
+      "url": "https://x.com/RealGemsfinder/status/2103541666112295254",
+      "text": "Feet Exercises At Home",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2103789206204232021",
+      "author": "NutritionGuide_",
+      "url": "https://x.com/NutritionGuide_/status/2103789206204232021",
+      "text": "These exercises are very effective \ud83d\udc47",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2027354346866806854",
+      "author": "CadioArena",
+      "url": "https://x.com/CadioArena/status/2027354346866806854",
+      "text": "8 Ankle Stability Exercises for Strong & Healthy Feet \ud83d\udc63\ud83d\udd25",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2103684361417802003",
+      "author": "PostureBluprint",
+      "url": "https://x.com/PostureBluprint/status/2103684361417802003",
+      "text": "Ankles feeling stiff? Start here\n\nA little mobility, a little loading, and a little control can go a long way.\n\nSave this for your next warm up or simply do it on its own",
+      "status": "reviewed",
+      "media": []
+    }
+  ],
+  "exercises": [
+    {
+      "id": "foot-ball-toe-curl",
+      "name": "Toe curls over a ball",
+      "source": "2103541666112295254",
+      "start": 0,
+      "end": 3.6,
+      "frame": 1,
+      "equipment": "ball",
+      "unilateral": true,
+      "cue": "Curl and release the toes over a small ball while the heel stays down.",
+      "region": null
+    },
+    {
+      "id": "foot-ball-roll",
+      "name": "Sole roll over a ball",
+      "source": "2103541666112295254",
+      "start": 3.8,
+      "end": 7,
+      "frame": 5,
+      "equipment": "ball",
+      "unilateral": true,
+      "cue": "Roll a small ball along the sole with light pressure and a slow ankle movement.",
+      "region": null
+    },
+    {
+      "id": "foot-short-foot",
+      "name": "Short-foot arch lift",
+      "source": "2103541666112295254",
+      "start": 7.2,
+      "end": 10,
+      "frame": 8,
+      "equipment": "",
+      "unilateral": false,
+      "cue": "Keep the toes long and heel down; gently shorten the foot to lift the arch, then release.",
+      "region": null
+    },
+    {
+      "id": "foot-toe-lifts",
+      "name": "Standing toe lifts",
+      "source": "2103541666112295254",
+      "start": 10.1,
+      "end": 14,
+      "frame": 11,
+      "equipment": "",
+      "unilateral": false,
+      "cue": "Keep heels and the balls of the feet down while lifting and lowering the toes.",
+      "region": null
+    },
+    {
+      "id": "foot-toe-tip-pivots",
+      "name": "Toe-tip ankle pivots",
+      "source": "2103541666112295254",
+      "start": 14.5,
+      "end": 18.7,
+      "frame": 16,
+      "equipment": "",
+      "unilateral": true,
+      "cue": "With very light pressure through the toe tips, slowly turn the raised heel side to side.",
+      "region": null
+    },
+    {
+      "id": "foot-toe-spread",
+      "name": "Toe spreading",
+      "source": "2103541666112295254",
+      "start": 19,
+      "end": 23.1,
+      "frame": 20,
+      "equipment": "",
+      "unilateral": false,
+      "cue": "Spread the toes apart, then relax without forcing the movement.",
+      "region": null
+    },
+    {
+      "id": "foot-heel-block-pumps",
+      "name": "Heel-supported ankle pumps",
+      "source": "2103789206204232021",
+      "start": 0,
+      "end": 7.6,
+      "frame": 2,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "Rest the heel on a low block and slowly lower and lift the forefoot.",
+      "region": 1
+    },
+    {
+      "id": "foot-block-guided-roll",
+      "name": "Block-guided heel roll",
+      "source": "2103789206204232021",
+      "start": 0,
+      "end": 7.6,
+      "frame": 2,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "With a block alongside the inner foot, gently lift and roll the heel while the forefoot stays in contact.",
+      "region": 2
+    },
+    {
+      "id": "foot-block-heel-raise",
+      "name": "Forefoot-on-block heel raise",
+      "source": "2027354346866806854",
+      "start": 9,
+      "end": 13,
+      "frame": 10,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "Support the forefoot on a low block and slowly raise and lower the heel.",
+      "region": null
+    },
+    {
+      "id": "foot-block-tip",
+      "name": "Forefoot block tip",
+      "source": "2103789206204232021",
+      "start": 0,
+      "end": 7.6,
+      "frame": 2,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "Lift the forefoot to gently tip the adjacent lightweight block, then lower it under control.",
+      "region": 4
+    },
+    {
+      "id": "foot-block-pickup",
+      "name": "Two-foot block pickup",
+      "source": "2027354346866806854",
+      "start": 0,
+      "end": 4.1,
+      "frame": 1,
+      "equipment": "block",
+      "unilateral": false,
+      "cue": "Place a lightweight block between the feet and squeeze inward to lift it slightly, then lower.",
+      "region": null
+    },
+    {
+      "id": "foot-block-toe-curls",
+      "name": "Toe curls over a block edge",
+      "source": "2027354346866806854",
+      "start": 4.2,
+      "end": 8.9,
+      "frame": 5,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "Support the foot on the block with toes over the front edge; curl the toes downward and release.",
+      "region": null
+    },
+    {
+      "id": "foot-block-squeeze-heel-raise",
+      "name": "Block-squeeze heel raises",
+      "source": "2027354346866806854",
+      "start": 18,
+      "end": 22,
+      "frame": 19,
+      "equipment": "block",
+      "unilateral": false,
+      "cue": "Hold a lightweight block between the ankles while slowly raising and lowering both heels.",
+      "region": null
+    },
+    {
+      "id": "foot-block-tucked-toes",
+      "name": "Tucked-toe rock on a block",
+      "source": "2027354346866806854",
+      "start": 22.1,
+      "end": 25.5,
+      "frame": 23,
+      "equipment": "block",
+      "unilateral": true,
+      "cue": "Rest the curled toe surfaces lightly on the block and gently rock the raised heel; use only a small comfortable range.",
+      "region": null
+    },
+    {
+      "id": "foot-block-squeeze-toe-raise",
+      "name": "Block-squeeze forefoot raises",
+      "source": "2027354346866806854",
+      "start": 25.7,
+      "end": 30.5,
+      "frame": 28,
+      "equipment": "block",
+      "unilateral": false,
+      "cue": "Keep the block between the ankles and heels down; raise and lower the forefeet.",
+      "region": null
+    },
+    {
+      "id": "foot-outer-edge-rolls",
+      "name": "Outer-edge foot rolls",
+      "source": "2027354346866806854",
+      "start": 30.7,
+      "end": 35.8,
+      "frame": 33,
+      "equipment": "",
+      "unilateral": false,
+      "cue": "Gently roll toward the outside borders of the feet and return to flat feet; keep the movement small.",
+      "region": null
+    },
+    {
+      "id": "foot-calf-foam-roll",
+      "name": "Calf foam rolling",
+      "source": "2103684361417802003",
+      "start": 4,
+      "end": 7.8,
+      "frame": 6,
+      "equipment": "foam roller",
+      "unilateral": false,
+      "cue": "Support yourself on your hands with the calves over the roller; roll slowly along the calf muscles.",
+      "region": null
+    },
+    {
+      "id": "foot-banded-ankle-pumps",
+      "name": "Banded ankle pumps",
+      "source": "2103684361417802003",
+      "start": 8,
+      "end": 10.9,
+      "frame": 9,
+      "equipment": "band",
+      "unilateral": true,
+      "cue": "Loop the band around the forefoot and hold the ends. Slowly point and flex the ankle with the lower leg supported on a roller.",
+      "region": null
+    },
+    {
+      "id": "foot-banded-ankle-circles",
+      "name": "Banded ankle circles",
+      "source": "2103684361417802003",
+      "start": 11,
+      "end": 14.8,
+      "frame": 13,
+      "equipment": "band",
+      "unilateral": true,
+      "cue": "With the band around the forefoot and the lower leg supported, trace slow controlled ankle circles in both directions.",
+      "region": null
+    },
+    {
+      "id": "foot-weighted-ankle-rocks",
+      "name": "Weighted ankle rocks",
+      "source": "2103684361417802003",
+      "start": 15,
+      "end": 18.8,
+      "frame": 17,
+      "equipment": "weights",
+      "unilateral": true,
+      "cue": "Half kneel with a light kettlebell resting on the front thigh near the knee. Keep the front heel down while gently moving the knee forward over the toes.",
+      "region": null
+    },
+    {
+      "id": "foot-bent-knee-ankle-pulses",
+      "name": "Bent-knee ankle pulses",
+      "source": "2103684361417802003",
+      "start": 19,
+      "end": 23.5,
+      "frame": 21,
+      "equipment": "wall",
+      "unilateral": true,
+      "cue": "Use the wall for balance, keep the standing knee bent, and make small quick heel lifts with the ball of that foot staying on the floor.",
+      "region": null
+    }
+  ],
+  "reuse": {
+    "foot-heel-block-pumps": {
+      "source": "2027354346866806854",
+      "start": 13,
+      "end": 18
+    },
+    "foot-block-heel-raise": {
+      "source": "2103789206204232021",
+      "panel": 3,
+      "start": 0,
+      "end": 7.6
+    },
+    "foot-ball-roll": {
+      "source": "2103684361417802003",
+      "start": 1.5,
+      "end": 3.9
+    }
+  },
+  "notes": "Four source videos visually inspected. All 24 movement occurrences covered by 21 distinct exercise entries. Source exercise names retained for Posture Blueprint where shown; others descriptive. Before/after correction claims excluded. Workout timing is editable and not specified by the fourth video."
+}
