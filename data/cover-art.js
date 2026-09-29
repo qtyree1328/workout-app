@@ -745,5 +745,61 @@ window.EXERCISE_COVERS = {
   "foot-bent-knee-ankle-pulses": {
     "src": "media/covers/foot-bent-knee-ankle-pulses.webp",
     "name": "Bent-knee ankle pulses"
+  },
+  "foot-knee-to-wall-mobilization": {
+    "src": "media/covers/foot-knee-to-wall-mobilization.webp",
+    "name": "Knee-to-wall ankle mobilization"
+  },
+  "foot-towel-curl": {
+    "src": "media/covers/foot-towel-curl.webp",
+    "name": "Towel curls"
+  },
+  "foot-marble-pickup": {
+    "src": "media/covers/foot-marble-pickup.webp",
+    "name": "Marble pickups"
+  },
+  "foot-double-heel-raise": {
+    "src": "media/covers/foot-double-heel-raise.webp",
+    "name": "Double-leg heel raises"
+  },
+  "foot-single-heel-raise": {
+    "src": "media/covers/foot-single-heel-raise.webp",
+    "name": "Single-leg heel raises"
+  },
+  "foot-bent-knee-heel-raise": {
+    "src": "media/covers/foot-bent-knee-heel-raise.webp",
+    "name": "Bent-knee heel raises"
+  },
+  "foot-tibialis-raise": {
+    "src": "media/covers/foot-tibialis-raise.webp",
+    "name": "Tibialis raises"
+  },
+  "foot-band-eversion-inversion": {
+    "src": "media/covers/foot-band-eversion-inversion.webp",
+    "name": "Ankle eversion & inversion with band"
+  },
+  "foot-toe-heel-walks": {
+    "src": "media/covers/foot-toe-heel-walks.webp",
+    "name": "Toe & heel walks in place"
+  },
+  "foot-single-leg-balance": {
+    "src": "media/covers/foot-single-leg-balance.webp",
+    "name": "Single-leg balance"
+  },
+  "foot-single-leg-balance-eyes-closed": {
+    "src": "media/covers/foot-single-leg-balance-eyes-closed.webp",
+    "name": "Single-leg balance · eyes closed"
+  },
+  "foot-calf-stretch-straight-knee": {
+    "src": "media/covers/foot-calf-stretch-straight-knee.webp",
+    "name": "Calf stretch · straight knee"
+  },
+  "foot-calf-stretch-bent-knee": {
+    "src": "media/covers/foot-calf-stretch-bent-knee.webp",
+    "name": "Calf stretch · bent knee"
+  },
+  "foot-plantar-fascia-stretch": {
+    "src": "media/covers/foot-plantar-fascia-stretch.webp",
+    "name": "Plantar fascia stretch"
   }
 };

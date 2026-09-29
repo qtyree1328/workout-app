@@ -1,0 +1,17 @@
+{
+  "id": "foot-towel-curl",
+  "name": "Towel curls",
+  "prompt": "Use case: illustration-story. Create a polished exercise cover matching the supplied reference model exactly: same tall slender adult male, modest muscle definition, tan skin, short dark wavy hair, smooth completely faceless head, charcoal tank top, teal shorts, barefoot. Clean softly shaded illustration on a flat opaque warm off-white background with subtle grounding shadow, no transparency, no text or labels. Landscape 3:2, intended 1200x800. Keep entire figure and exercise equipment visible with margins. Reference image defines identity, clothing and illustration style; do not copy the reference sheet layout. Exercise: Towel curls. Seated upright on simple chair, knees 90 degrees, bare feet on floor. Working toes visibly curl and gather a small towel toward the heel; heel stays on floor. Include a large clear foot-detail inset on right showing towel scrunched under curling toes.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-towel-curl.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-c0297c56-64da-42ff-a970-12d1db465caa.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}

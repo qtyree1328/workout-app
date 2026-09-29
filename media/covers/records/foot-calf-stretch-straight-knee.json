@@ -1,0 +1,17 @@
+{
+  "id": "foot-calf-stretch-straight-knee",
+  "name": "Calf stretch · straight knee",
+  "prompt": "Use case: illustration-story. Create a polished exercise cover matching the supplied reference model exactly: same tall slender adult male, modest muscle definition, tan skin, short dark wavy hair, smooth completely faceless head, charcoal tank top, teal shorts, barefoot. Clean softly shaded illustration on a flat opaque warm off-white background with subtle grounding shadow, no transparency, no text or labels. Landscape 3:2, intended 1200x800. Keep entire figure and exercise equipment visible with margins. Reference image defines identity, clothing and illustration style; do not copy the reference sheet layout. Exercise: Calf stretch · straight knee. Full-body side view wall lunge with hands on wall: front knee bent, rear leg extended backward and rear knee STRAIGHT, rear heel pressed firmly FLAT onto floor. Both feet face wall.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-calf-stretch-straight-knee.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-56c75fda-ee2c-4b84-a66c-20306e6ee52b.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}

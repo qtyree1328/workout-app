@@ -1,0 +1,17 @@
+{
+  "id": "foot-calf-stretch-bent-knee",
+  "name": "Calf stretch \u00b7 bent knee",
+  "prompt": "Create an exercise illustration using reference 1 for exactly the same tall slim faceless male, charcoal tank, teal shorts, barefoot, offwhite opaque background. Landscape 3:2. BENT KNEE SOLEUS WALL STRETCH: side view, hands on wall at right, feet in a VERY SHORT staggered stance only 15 cm apart front to back. BOTH KNEES DEEPLY BENT 60 degrees like a squat, hips lowered, knees forward. Rear knee is visibly in front of rear ankle; rear shin angles strongly toward wall. BOTH soles completely FLAT, especially rear HEEL DOWN. NO straight rear leg, NO long lunge, NO heel lift. Full figure with margins. No text. Soft shaded illustration same reference style.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-calf-stretch-bent-knee.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-c52826f7-7b93-4e77-83ba-c2f9517dcaa1.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}

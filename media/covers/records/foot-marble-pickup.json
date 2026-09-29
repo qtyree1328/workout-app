@@ -1,0 +1,17 @@
+{
+  "id": "foot-marble-pickup",
+  "name": "Marble pickups",
+  "prompt": "Use case: illustration-story. Create a polished exercise cover matching the supplied reference model exactly: same tall slender adult male, modest muscle definition, tan skin, short dark wavy hair, smooth completely faceless head, charcoal tank top, teal shorts, barefoot. Clean softly shaded illustration on a flat opaque warm off-white background with subtle grounding shadow, no transparency, no text or labels. Landscape 3:2, intended 1200x800. Keep entire figure and exercise equipment visible with margins. Reference image defines identity, clothing and illustration style; do not copy the reference sheet layout. Exercise: Marble pickups. Seated on chair, one foot grounded, working bare foot slightly raised holding one small marble between toes directly over a small bowl on floor, few marbles nearby. Include clear magnified foot-detail inset on right.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-marble-pickup.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-027936e2-bb85-4364-9def-9eab92d4c764.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}

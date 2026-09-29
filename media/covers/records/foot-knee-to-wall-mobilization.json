@@ -1,0 +1,17 @@
+{
+  "id": "foot-knee-to-wall-mobilization",
+  "name": "Knee-to-wall ankle mobilization",
+  "prompt": "Use case: illustration-story. Create a polished exercise cover matching the supplied reference model exactly: same tall slender adult male, modest muscle definition, tan skin, short dark wavy hair, smooth completely faceless head, charcoal tank top, teal shorts, barefoot. Clean softly shaded illustration on a flat opaque warm off-white background with subtle grounding shadow, no transparency, no text or labels. Landscape 3:2, intended 1200x800. Keep entire figure and exercise equipment visible with margins. Reference image defines identity, clothing and illustration style; do not copy the reference sheet layout. Exercise: Knee-to-wall ankle mobilization, HALF KNEELING side view facing right. Rear knee on floor. Front foot completely FLAT on floor, heel and toes same horizontal level. Front toes 10 cm away from wall. Front knee touching wall well forward of toes; front shin slopes forward. Hip low toward heel. Hands lightly on wall. Absolutely no lifted front heel. Show gap between toes and wall. Entire figure visible.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-knee-to-wall-mobilization.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-d977b129-cdee-410d-a404-3691c3f0092c.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}

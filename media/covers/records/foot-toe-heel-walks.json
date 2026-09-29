@@ -1,0 +1,17 @@
+{
+  "id": "foot-toe-heel-walks",
+  "name": "Toe & heel walks in place",
+  "prompt": "Use case: illustration-story. Create a polished exercise cover matching the supplied reference model exactly: same tall slender adult male, modest muscle definition, tan skin, short dark wavy hair, smooth completely faceless head, charcoal tank top, teal shorts, barefoot. Clean softly shaded illustration on a flat opaque warm off-white background with subtle grounding shadow, no transparency, no text or labels. Landscape 3:2, intended 1200x800. Keep entire figure and exercise equipment visible with margins. Reference image defines identity, clothing and illustration style; do not copy the reference sheet layout. Exercise: Toe & heel walks in place. Two full-body poses of SAME model side by side: left standing tall on balls of both feet with both heels up; right standing on both heels with forefeet and toes visibly lifted. Legs straight, arms relaxed, walking-in-place exercise endpoints.",
+  "referenceImages": [
+    "media/covers/references/male-model-reference.webp"
+  ],
+  "src": "media/covers/foot-toe-heel-walks.webp",
+  "sourceImage": "/workspace/scratch/7f63401941b3/generated_images/exec-94c7e835-cfc3-4403-9f21-36c1a476f54b.png",
+  "generator": "built-in image_gen",
+  "output": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "transparent": false
+  }
+}
