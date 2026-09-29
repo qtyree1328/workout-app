@@ -100,6 +100,13 @@
     commit(source,[name],ts);
     return next;
    },
+   // Change fields of an item without touching updatedAt (used to attach a downloaded photo).
+   patchItem(name,id,patch,source='remote'){
+    const list=coll(name);const cur=list&&list.find(i=>i.id===id&&!i.deleted);if(!cur)return false;
+    setColl(name,list.map(i=>i.id===id?{...i,...patch}:i));
+    persist();emit({type:'change',source,collections:[name]});
+    return true;
+   },
    remove(name,id,source='local'){
     const list=coll(name);if(!list||!list.some(i=>i.id===id))return;
     const ts=stamp();
