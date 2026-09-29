@@ -31,6 +31,105 @@
   }
   el.style.background=`linear-gradient(135deg,var(--${category}),var(--${category}-2))`;
  }
+ /* ── Cover carousel: the session's main-block exercise drawings, sliding on a category-tinted paper background ── */
+ const CV={list:new Set(),io:null,timer:0,PERIOD:2800,EASE:'cubic-bezier(.65,0,.35,1)'};
+ function cvObserver(){
+  if(CV.io||!('IntersectionObserver' in window))return CV.io;
+  CV.io=new IntersectionObserver(es=>es.forEach(e=>{const c=e.target._cv;if(!c)return;c.visible=e.isIntersecting;if(c.visible){c.load(c.i);c.load(c.i+1);c.next=Math.max(c.next,performance.now()+900);}}),{rootMargin:'60px'});
+  return CV.io;
+ }
+ function cvTick(){
+  if(document.hidden)return;
+  const now=performance.now();
+  for(const c of [...CV.list]){
+   if(!c.el.isConnected){c.destroy();continue;}
+   if(c.auto&&c.visible&&!c.busy&&!c.hover&&now>=c.next)c.go(1);
+  }
+  if(!CV.list.size){clearInterval(CV.timer);CV.timer=0;}
+ }
+ document.addEventListener('visibilitychange',()=>{const t=performance.now()+CV.PERIOD;CV.list.forEach(c=>{c.next=Math.max(c.next,t);});});
+ function coverIds(session){
+  let ids=[];
+  try{ids=Plan.mainExercises(session);}catch(err){}
+  let list=ids.filter(id=>{const x=exercise(id);return x&&x.cover;});
+  if(!list.length)list=Plan.exercisesOf(session).filter((id,i,a)=>a.indexOf(id)===i&&exercise(id)&&exercise(id).cover);
+  return list.slice(0,6);
+ }
+ function mountCover(el,session){
+  const cat=session.category,ids=coverIds(session),n=ids.length;
+  const seed=hashSeed(String(session.id));
+  el.className='art cv';el.style.setProperty('--cc',`var(--${cat},var(--strength))`);
+  let contour='';try{contour=window.Art&&Art.contours?Art.contours(seed,cat):'';}catch(err){console.error(err);}
+  el.innerHTML=`<div class="cv-bg"></div><div class="cv-lines">${contour}</div>`
+   +(n?`<div class="cv-floor"></div>${ids.map((id,k)=>`<div class="cv-slide${k===0?' is-cur':''}" aria-hidden="true"><img alt="" draggable="false" decoding="async" data-src="${h(exercise(id).cover)}"></div>`).join('')}`
+     :`<div class="cv-empty">${icon(Crux.CATEGORIES[cat]?Crux.CATEGORIES[cat].icon:'all')}</div>`)
+   +(n>1?`<div class="cv-dots" aria-hidden="true">${ids.map((_,k)=>`<i${k===0?' class="on"':''}></i>`).join('')}</div>`:'');
+  const c=el._cv={el,i:0,n,visible:false,busy:false,hover:false,auto:n>1&&!reducedMotion(),next:performance.now()+CV.PERIOD+(seed%1900)};
+  const slides=[...el.querySelectorAll('.cv-slide')],dots=[...el.querySelectorAll('.cv-dots i')];
+  c.load=k=>{if(!n)return;const img=slides[((k%n)+n)%n].firstChild;if(img.dataset.src){img.src=img.dataset.src;delete img.dataset.src;}};
+  c.destroy=()=>{CV.list.delete(c);if(CV.io)CV.io.unobserve(el);};
+  const setDots=k=>dots.forEach((d,j)=>d.classList.toggle('on',j===k));
+  const finish=k=>{slides.forEach((s,j)=>{s.classList.toggle('is-cur',j===k);s.style.transform='';s.style.transition='';s.style.opacity='';});c.i=k;setDots(k);c.busy=false;c.next=performance.now()+CV.PERIOD;c.load(k+1);};
+  c.go=(dir)=>{
+   if(n<2||c.busy)return;
+   const to=((c.i+dir)%n+n)%n,a=slides[c.i],b=slides[to];
+   c.load(to);c.load(to+1);
+   if(reducedMotion()||!a.animate){finish(to);return;}
+   c.busy=true;b.classList.add('is-cur');
+   const o={duration:640,easing:CV.EASE,fill:'forwards'};
+   const fa=a.animate([{transform:'translate3d(0,0,0)',opacity:1},{transform:`translate3d(${-dir*100}%,0,0)`,opacity:.15}],o);
+   b.animate([{transform:`translate3d(${dir*100}%,0,0)`,opacity:.15},{transform:'translate3d(0,0,0)',opacity:1}],o);
+   setDots(to);
+   const done=()=>{el.getAnimations({subtree:true}).forEach(x=>x.cancel());finish(to);};
+   fa.onfinish=done;fa.oncancel=()=>{if(c.busy)done();};
+  };
+  if(n>1){CV.list.add(c);if(!CV.timer)CV.timer=setInterval(cvTick,250);}
+  if(n){const io=cvObserver();if(io)io.observe(el);else{c.visible=true;c.load(0);c.load(1);}}
+  if(n<2)return;
+  // Swipe / drag on the media area (vertical scroll and taps stay native).
+  const host=el.parentElement;host.classList.add('cv-host');
+  let sx=0,sy=0,pid=-1,down=false,drag=false,dx=0,t0=0,suppress=false,dir=0,w=1;
+  host.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')c.hover=true;});
+  host.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'){c.hover=false;c.next=Math.max(c.next,performance.now()+1200);}});
+  host.addEventListener('pointerdown',e=>{
+   if(c.busy||(e.pointerType==='mouse'&&e.button>0)||e.target.closest('[data-stop-tap]'))return;
+   down=true;drag=false;pid=e.pointerId;sx=e.clientX;sy=e.clientY;dx=0;t0=performance.now();c.next=t0+6000;
+  });
+  const place=()=>{
+   const nd=dx<0?1:-1;
+   if(nd!==dir){if(dir){const old=slides[((c.i+dir)%n+n)%n];old.style.transform='';old.classList.remove('is-cur');old.style.opacity='';}dir=nd;}
+   const a=slides[c.i],b=slides[((c.i+dir)%n+n)%n];c.load(c.i+dir);
+   b.classList.add('is-cur');
+   const p=Math.min(1,Math.abs(dx)/w);
+   a.style.transform=`translate3d(${dx}px,0,0)`;a.style.opacity=String(1-.6*p);
+   b.style.transform=`translate3d(calc(${dir*100}% + ${dx}px),0,0)`;b.style.opacity=String(.4+.6*p);
+  };
+  host.addEventListener('pointermove',e=>{
+   if(!down||e.pointerId!==pid)return;
+   const mx=e.clientX-sx,my=e.clientY-sy;
+   if(!drag){
+    if(Math.abs(my)>10&&Math.abs(my)>Math.abs(mx)){down=false;return;}
+    if(Math.abs(mx)<8||Math.abs(mx)<Math.abs(my)*1.2)return;
+    drag=true;c.busy=true;dir=0;w=el.clientWidth||300;try{host.setPointerCapture(pid);}catch(err){}
+   }
+   dx=mx;place();
+  });
+  const end=e=>{
+   if(!down||e.pointerId!==pid)return;
+   down=false;
+   if(!drag)return;
+   drag=false;suppress=true;setTimeout(()=>{suppress=false;},60);
+   const v=Math.abs(dx)/Math.max(1,performance.now()-t0),commit=e.type==='pointerup'&&(Math.abs(dx)>w*.22||v>.5)&&dir;
+   const a=slides[c.i],b=slides[((c.i+dir)%n+n)%n],to=((c.i+dir)%n+n)%n;
+   const tr='transform .28s cubic-bezier(.2,.8,.2,1),opacity .28s';
+   a.style.transition=b.style.transition=reducedMotion()?'none':tr;
+   if(commit){a.style.transform=`translate3d(${-dir*100}%,0,0)`;a.style.opacity='.15';b.style.transform='translate3d(0,0,0)';b.style.opacity='1';}
+   else{a.style.transform='translate3d(0,0,0)';a.style.opacity='1';b.style.transform=`translate3d(${dir*100}%,0,0)`;b.style.opacity='.15';}
+   setTimeout(()=>{if(commit)finish(to);else{b.classList.remove('is-cur');finish(c.i);}},reducedMotion()?0:300);
+  };
+  host.addEventListener('pointerup',end);host.addEventListener('pointercancel',end);
+  host.addEventListener('click',e=>{if(suppress){e.stopPropagation();e.preventDefault();}},true);
+ }
  function setVT(el,name){if(el&&typeof document.startViewTransition==='function')el.style.viewTransitionName=name;}
  function go(path,withTransition){
   const apply=()=>{location.hash=path;handleHash();};
@@ -947,7 +1046,7 @@
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   const trainsLine=(s.goals&&s.goals.length)?`<p class="hero-trains">Trains ${h(s.goals.join(', '))}</p>`:'';
   const heroDone=Crux.recentDone(s.id);
-  el.innerHTML=`<div class="hero-art-wrap"><div class="art" id="hero-art"></div></div><span class="hero-eyebrow">Best match</span>${Crux.favBtn('sessions',s.id,'on-art hero-fav')}${heroDone?doneBadge(heroDone).replace('done-badge','done-badge hero-done'):''}
+  el.innerHTML=`<div class="hero-art-wrap"><div class="art" id="hero-art"></div><span class="hero-eyebrow">Best match</span></div>${Crux.favBtn('sessions',s.id,'on-art hero-fav')}${heroDone?doneBadge(heroDone).replace('done-badge','done-badge hero-done'):''}
    <div class="hero-content">
     <h2 class="hero-title">${h(s.title)}</h2>
     <p class="hero-summary">${h(s.summary)}</p>
@@ -975,7 +1074,7 @@
    el.classList.add('is-swapping');
   }else el.classList.add('is-arriving');
   slot.insertBefore(el,slot.firstChild);
-  mountArt(el.querySelector('#hero-art'),s.id,s.category);
+  mountCover(el.querySelector('#hero-art'),s);el.style.setProperty('--cc',`var(--${s.category})`);
   setVT(el.querySelector('#hero-art'),'card-art-'+s.id);
   makeTappable(el,()=>go('#/session/'+encodeURIComponent(s.id),true),'Open '+s.title+' details');
   el.querySelector('.hero-start').addEventListener('click',()=>startSession(s,el._item.options,s.title));
@@ -1016,7 +1115,7 @@
     <div class="result-tags">${s.custom?'<span class="tag tag-mine">Mine</span>':`<span class="tag">${h(s.level)}</span>`}${equip.slice(0,2).map(e=>`<span class="tag">${h(e)}</span>`).join('')}</div>
    </div>`;
   const artEl=el.querySelector('.art');
-  mountArt(artEl,s.id,s.category);
+  mountCover(artEl,s);el.style.setProperty('--cc',`var(--${s.category})`);
   setVT(artEl,'card-art-'+s.id);
   el.onclick=()=>go('#/session/'+encodeURIComponent(s.id),true);
   if(!el._sheen&&matchMedia('(hover:hover) and (pointer:fine)').matches){
@@ -1272,8 +1371,8 @@
   const initialPlan=Plan.compile(session,META,o);
   const equip=equipmentLabels(Plan.equipmentOf(session,META));
   view.innerHTML=`<div class="page-session">
-   <div class="session-hero"><div class="art" id="session-art"></div>
-    <button type="button" class="icon-btn on-dark session-back" id="session-back" aria-label="Back">${icon('back')}</button>
+   <div class="session-hero" style="--cc:var(--${h(session.category)})"><div class="session-hero-media"><div class="art" id="session-art"></div></div>
+    <button type="button" class="icon-btn session-back" id="session-back" aria-label="Back">${icon('back')}</button>
     ${Crux.favBtn('sessions',session.id,'on-art session-fav')}
     <div class="session-hero-content">
      <h1 class="session-hero-title">${h(session.title)}</h1>
@@ -1299,7 +1398,7 @@
    <div class="bottom-bar"><div class="bottom-bar-duration"><span class="num" id="bar-duration">${h(Plan.clock(initialPlan.duration))}</span><span>Duration</span></div>
     <button type="button" class="btn" id="bar-start">${icon('play')} Start</button></div>
   </div>`;
-  mountArt($('#session-art'),session.id,session.category);
+  mountCover($('#session-art'),session);
   setVT($('#session-art'),'card-art-'+session.id);
   $('#session-back').addEventListener('click',()=>go('#/',true));
   $('#session-customize').addEventListener('click',()=>{
@@ -1437,7 +1536,7 @@
  });
  // Force the current page to render again (the builder/timer pages re-render themselves after big changes).
  function rerender(){currentBaseRendered=null;renderBase(routeState.base||'#/');}
- Object.assign(Crux.ui=Crux.ui||{},{openSheet,closeSheet,go,startSession,flipUpdate,syncIndicator,mountArt,hashSeed,rollText,buildStopSlider,makeTappable,pulse,debounce,
+ Object.assign(Crux.ui=Crux.ui||{},{openSheet,closeSheet,go,startSession,flipUpdate,syncIndicator,mountArt,mountCover,hashSeed,rollText,buildStopSlider,makeTappable,pulse,debounce,
   intensityBadge,INTENSITY_META,countdown,doneBadge,rerender,exerciseCategory,tryItSession,openExerciseSheet,setVT,exercisePool,matchesFilter,searchHaystack,EX_FILTERS});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();

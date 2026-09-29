@@ -108,5 +108,19 @@
   return svg;
  }
 
- window.Art={cover,colors};
+ // Faint topographic contour lines only (stroke = currentColor, colour/opacity set in CSS) for paper backgrounds.
+ function contours(seed,category,opts){
+  opts=opts||{};
+  const key='c\u0000'+category+'\u0000'+String(seed);
+  if(cache.has(key))return cache.get(key);
+  const rng=mulberry32(hashStr('contour|'+category+'|'+String(seed)));
+  const W=400,H=250,cx=W*(0.25+rng()*0.5),cy=H*(0.3+rng()*0.4);
+  const rings=buildRings(rng,cx,cy,opts.ringCount||10,Math.max(W,H)*0.7);
+  const paths=rings.map((r,i)=>`<path d="${r.d}" stroke-width="${i%4===0?1.5:0.8}"/>`).join('');
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" aria-hidden="true"><g fill="none" stroke="currentColor">${paths}</g></svg>`;
+  cache.set(key,svg);
+  return svg;
+ }
+
+ window.Art={cover,contours,colors};
 })();

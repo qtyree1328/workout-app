@@ -97,6 +97,7 @@
    <section class="section"><h2 class="section-title">Recent</h2>
     <div class="h-list" id="h-list">${hist.length?hist.map(histHTML).join(''):`<p class="no-results">Finished workouts show up here so you can repeat them.</p>`}</div>
    </section></div>`;
+  root.querySelectorAll('[data-cv]').forEach(el=>{const w=st.find('customWorkouts',el.dataset.cv);if(w)Crux.ui.mountCover(el,Crux.customSession(w));});
   const nw=()=>{draft=blankDraft();mode='edit';expanded=null;saveDraft();paint();window.scrollTo({top:0});};
   q('#b-new').addEventListener('click',nw);
   const n2=q('#b-new2');if(n2)n2.addEventListener('click',nw);
@@ -131,6 +132,7 @@
   const s=Crux.customSession(w),plan=Plan.compile(s,META,{countdown:Crux.ui.countdown()});
   const cat=w.category||'strength',n=(w.items||[]).length;
   return `<article class="w-card" style="--cat:var(--${cat})">
+   <div class="w-card-media" data-act="open" data-id="${h(w.id)}"><div class="art" data-cv="${h(w.id)}"></div></div>
    <button type="button" class="w-card-main" data-act="open" data-id="${h(w.id)}"><span class="w-card-icon">${icon(CATEGORIES[cat]?CATEGORIES[cat].icon:'all')}</span>
     <span class="w-card-text"><span class="w-card-title">${h(w.title||'Untitled')}</span><span class="w-card-meta num">${n} exercise${n===1?'':'s'} · ${Plan.minutes(plan.duration)}${plan.estimated?' (est.)':''} · ${h((Crux.ui.INTENSITY_META[w.intensity]||{}).label||'')}</span></span></button>
    <div class="w-card-actions">

@@ -259,3 +259,8 @@ textarea.field-input{min-height:88px;line-height:1.45}
  .h-row .icon-btn{margin-left:auto}
 }
 @media (min-width:560px){.timer-param[data-k="getReady"]{grid-column:1/-1}}
+
+.w-card-media{position:relative;aspect-ratio:16/7;background:#FEFFFA;overflow:hidden;cursor:pointer}
+.w-card-media::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--cat),color-mix(in srgb,var(--cat) 35%,transparent));z-index:2;pointer-events:none}
+.w-card-media .art{--cc:var(--cat)}
+.w-card-media .cv-slide img{padding:4% 8% 9%}
