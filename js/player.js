@@ -9,7 +9,7 @@
 
  // ── module state ────────────────────────────────────────────────────────────
  let root=null,els={},blockSegEls=[];
- let session=null,options=null,title=null,steps=null,blocks=null,countdownOpt=5,category=null,COLORS=null;
+ let session=null,options=null,title=null,steps=null,blocks=null,countdownOpt=5,category=null,COLORS=null,startedAt=0,historyId=null;
  let state=null,raf=null,lastFrame=0,saveIntervalId=null,wakeLockSentinel=null,confettiRaf=null;
  let previousFocus=null,endConfirmOpen=false,wasPausedBeforeConfirm=false,completionShown=false;
  let currentMediaEx=null,showingOptions=false,figureController=null,ringIsIndeterminate=false;
@@ -63,11 +63,13 @@
  }
 
  // ── public API ───────────────────────────────────────────────────────────────
+ // A session/timer can carry its own get-ready length in options.countdown; otherwise the Settings value applies.
+ function countdownFor(o){return o&&typeof o.countdown==='number'?o.countdown:prefs.get('countdown',5);}
  function start({session:sess,options:opts={},title:t}={}){
   if(!sess||!sess.blocks){Crux.toast&&Crux.toast('Nothing to play');return;}
   removeStaleRoot();
   session=sess;options={...opts};title=t||sess.title||'Workout';
-  countdownOpt=prefs.get('countdown',5);
+  countdownOpt=countdownFor(options);startedAt=Date.now();historyId=null;
   const compiled=Plan.compile(session,Crux.META,{...options,countdown:countdownOpt});
   steps=compiled.steps;blocks=compiled.blocks;
   if(!steps.length){Crux.toast&&Crux.toast('Nothing to play');return;}
@@ -90,7 +92,7 @@
   if(Date.now()-data.savedAt>=MAX_RESUME_AGE)return null;
   let total=0,idx=0;
   try{
-   const compiled=Plan.compile(data.session,Crux.META,{...(data.options||{}),countdown:prefs.get('countdown',5)});
+   const compiled=Plan.compile(data.session,Crux.META,{...(data.options||{}),countdown:countdownFor(data.options)});
    total=compiled.steps.length;
    idx=data.snapshot&&typeof data.snapshot.index==='number'?data.snapshot.index:0;
   }catch{return null;}
@@ -104,7 +106,7 @@
   if(!data||!data.session)return;
   removeStaleRoot();
   session=data.session;options={...(data.options||{})};title=data.title||session.title||'Workout';
-  countdownOpt=prefs.get('countdown',5);
+  countdownOpt=countdownFor(options);startedAt=data.startedAt||Date.now();historyId=null;
   const compiled=Plan.compile(session,Crux.META,{...options,countdown:countdownOpt});
   steps=compiled.steps;blocks=compiled.blocks;
   if(!steps.length)return;
@@ -125,7 +127,7 @@
  // ── persistence ──────────────────────────────────────────────────────────────
  function saveLive(){
   if(!state)return;
-  try{localStorage.setItem(LIVE_KEY,JSON.stringify({session,options,title,snapshot:Engine.snapshot(state),savedAt:Date.now()}));}catch{}
+  try{localStorage.setItem(LIVE_KEY,JSON.stringify({session,options,title,startedAt,snapshot:Engine.snapshot(state),savedAt:Date.now()}));}catch{}
  }
  function clearLive(){try{localStorage.removeItem(LIVE_KEY);}catch{}}
 
@@ -351,6 +353,7 @@
   if(saveIntervalId){clearInterval(saveIntervalId);saveIntervalId=null;}
   releaseWakeLock();
   clearLive();
+  logHistory();
   Crux.Audio&&Crux.Audio.beep('done');
   Crux.Audio&&Crux.Audio.say('Workout complete. Nice work.');
   showCompletion();
@@ -635,6 +638,9 @@
     <div class="cp-stat"><div class="cp-stat-num num">${exCount}</div><div class="cp-stat-label">Exercises</div></div>
     <div class="cp-stat"><div class="cp-stat-num num">${h(Plan.clock(workSec))}</div><div class="cp-stat-label">Time under work</div></div>
    </div>
+   <div class="cp-effort-wrap"><div class="cp-effort-label">How did it feel?</div>
+    <div class="cp-effort" role="radiogroup" aria-label="Effort from 1 to 5">${[1,2,3,4,5].map(n=>`<button type="button" class="cp-effort-btn" role="radio" aria-checked="false" data-effort="${n}" aria-label="Effort ${n} of 5">${icon('flame')}</button>`).join('')}</div>
+    <textarea class="cp-note" rows="2" maxlength="400" placeholder="Add a note (optional)" aria-label="Workout note"></textarea></div>
    <div class="cp-complete-actions">
     <button type="button" class="btn-secondary btn cp-again">Do it again</button>
     <button type="button" class="btn cp-donebtn">Done</button>
@@ -642,10 +648,35 @@
   els.complete.hidden=false;
   const canvas=els.complete.querySelector('.cp-confetti');
   if(canvas)startConfetti(canvas,colors);
-  els.complete.querySelector('.cp-again').addEventListener('click',doAgain);
+  els.complete.querySelector('.cp-again').addEventListener('click',()=>{saveFeedback();doAgain();});
+  wireFeedback();
   const doneBtn=els.complete.querySelector('.cp-donebtn');
-  doneBtn.addEventListener('click',()=>teardown());
+  doneBtn.addEventListener('click',()=>{saveFeedback();teardown();});
   try{doneBtn.focus();}catch{}
+ }
+ // ── saved progress: one history entry per finished workout (+ optional effort / note) ──
+ function logHistory(){
+  const st=Crux.store;if(!st||!state||historyId)return;
+  try{
+   const entry={title:title||session.title||'Workout',category:session.category||'strength',sessionId:session.id||'',startedAt,
+    duration:Math.round((state.elapsed||0)/1000),completedSteps:(state.completed||[]).length,totalSteps:steps.length,options:{...options}};
+   // Sessions that cannot be looked up later (Timer, Try it, Hip Opener, Feet) keep a snapshot so they can be repeated.
+   if(!(Crux.findSession&&Crux.findSession(session.id)))entry.session=session;
+   historyId=st.addHistory(entry).id;
+  }catch(err){console.error(err);}
+ }
+ let feedback={effort:null,note:''};
+ function wireFeedback(){
+  feedback={effort:null,note:''};
+  const btns=[...els.complete.querySelectorAll('.cp-effort-btn')],note=els.complete.querySelector('.cp-note');
+  const paint=()=>btns.forEach(b=>{const on=feedback.effort&&Number(b.dataset.effort)<=feedback.effort;b.classList.toggle('on',!!on);b.setAttribute('aria-checked',String(Number(b.dataset.effort)===feedback.effort));});
+  btns.forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.effort);feedback.effort=feedback.effort===n?null:n;paint();saveFeedback();}));
+  if(note){note.addEventListener('input',()=>{feedback.note=note.value;});note.addEventListener('change',saveFeedback);note.addEventListener('blur',saveFeedback);}
+ }
+ function saveFeedback(){
+  const st=Crux.store;if(!st||!historyId)return;
+  const note=els.complete&&els.complete.querySelector('.cp-note');if(note)feedback.note=note.value;
+  st.updateHistory(historyId,{effort:feedback.effort||null,note:(feedback.note||'').trim()});
  }
  function doAgain(){const s=session,o=options,t=title;teardown();start({session:s,options:o,title:t});}
  function startConfetti(canvas,colors){

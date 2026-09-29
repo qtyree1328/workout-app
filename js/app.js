@@ -13,7 +13,7 @@
  function hashSeed(str){let n=0;for(let i=0;i<str.length;i++)n=(n*31+str.charCodeAt(i))|0;return Math.abs(n)||1;}
  function startSession(session,options,title){
   if(window.Crux&&window.Crux.Player&&typeof window.Crux.Player.start==='function'){
-   try{window.Crux.Player.start({session,options,title:title||session.title});}
+   try{window.Crux.Player.start({session,options:options&&options.ownCountdown?options:{...options,countdown:countdown()},title:title||session.title});}
    catch(err){console.error(err);toast('Player not available');}
   }else toast('Player not available');
  }
@@ -189,8 +189,18 @@
       <span class="segmented-indicator" aria-hidden="true"></span>
      </div></div>
     <hr class="settings-divider">
+    <div class="settings-block" id="pwa-block"></div>
+    <hr class="settings-divider">
+    <div class="settings-block" id="sync-block"></div>
+    <hr class="settings-divider">
+    <div class="settings-block">
+     <div class="dl-head"><span class="settings-row-label">Your data</span><span class="dl-status" id="data-count"></span></div>
+     <p class="settings-note">Favorites, custom exercises, workouts, timer presets and workout history live on this device. Export a backup any time, or import one to merge it back in.</p>
+     <div class="dl-actions"><button type="button" class="btn btn-secondary btn-sm" id="data-export">${icon('download')} Export</button><button type="button" class="btn btn-secondary btn-sm" id="data-import">Import…</button><input type="file" id="data-file" accept="application/json,.json" hidden></div>
+    </div>
+    <hr class="settings-divider">
     <a class="settings-link" href="RESEARCH.md" target="_blank" rel="noopener">Evidence & sources ↗</a>
-    <p class="settings-note">Nothing you do here is tracked, logged or sent anywhere. Only these preferences are saved, on this device.</p>
+    <p class="settings-note">Nothing is sent anywhere unless you turn on cloud sync. Preferences and your data stay in this browser.</p>
    </div>`;
   openSheet({body,label:'Settings'});
   const themeSeg=body.querySelector('#theme-seg'),cdSeg=body.querySelector('#cd-seg');
@@ -209,22 +219,34 @@
   body.querySelector('#sound-toggle').addEventListener('change',e=>prefs.set('sound',e.target.checked));
   body.querySelector('#voice-toggle').addEventListener('change',e=>prefs.set('voice',e.target.checked));
   requestAnimationFrame(()=>{syncIndicator(themeSeg,'button','.segmented-indicator');syncIndicator(cdSeg,'button','.segmented-indicator');});
+  if(Crux.pwa)Crux.pwa.settingsSection(body.querySelector('#pwa-block'));
+  {const sb=body.querySelector('#sync-block');if(!(Crux.sync&&Crux.sync.settingsSection(sb))){sb.previousElementSibling.remove();sb.remove();}}
+  const st=Crux.store,counts=()=>{const el=body.querySelector('#data-count');if(el)el.textContent=`${st.favorites('exercises').length+st.favorites('sessions').length} ★ · ${st.items('customExercises').length} exercises · ${st.items('customWorkouts').length} workouts · ${st.items('history').length} logged`;};
+  counts();
+  body.querySelector('#data-export').addEventListener('click',()=>{
+   const blob=new Blob([st.exportJSON()],{type:'application/json'}),a=document.createElement('a');
+   a.href=URL.createObjectURL(blob);a.download=`crux-backup-${new Date().toISOString().slice(0,10)}.json`;
+   document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  });
+  const file=body.querySelector('#data-file');
+  body.querySelector('#data-import').addEventListener('click',()=>file.click());
+  file.addEventListener('change',async()=>{
+   const f=file.files[0];if(!f)return;
+   try{const r=st.importJSON(await f.text());toast(`Imported: ${r.exercises} exercises, ${r.workouts} workouts, ${r.history} logged`);counts();}
+   catch(err){toast(err.message||'Could not import that file');}
+   file.value='';
+  });
  }
 
  /* ───────────────────────── exercise sheet ───────────────────────── */
  let sheetFigure=null;
  function exerciseCategory(x){
-  if(x.id.startsWith('hip-'))return 'hip';
-  if(x.id.startsWith('foot-'))return 'feet';
-  if(x.kind==='Climbing')return 'climbing';
-  if(x.kind==='Mobility')return 'mobility';
-  if(x.kind==='Warm-up')return 'recovery';
-  return 'strength';
+  return Crux.exerciseCategory(x);
  }
  function tryItSession(x){
   const m=x.meta||{};
   // Only strength-type movements count reps; holds, stretches and mobility drills run on a timer.
-  const timeMode=!!m.hold||!['strength','power'].includes(m.trainingType);
+  const timeMode=Crux.modeOf(m)==='time';
   const item=timeMode
    ?{ex:x.id,mode:'time',work:m.work||20,sets:2,rest:Math.max(15,m.rest||15)}
    :{ex:x.id,mode:'reps',reps:m.reps||8,sets:2,rest:Math.max(15,m.rest||15)};
@@ -233,7 +255,7 @@
  function defaultPrescription(x){
   const m=x.meta||{},d=m.dose;
   if(!d)return '';
-  const item=(m.hold||!['strength','power'].includes(m.trainingType))?{mode:'time',work:d.workSeconds,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'}
+  const item=Crux.modeOf(m)==='time'?{mode:'time',work:d.workSeconds,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'}
    :{mode:'reps',reps:d.reps,sets:d.sets,rest:d.restSeconds,sides:m.unilateral?'each':'both'};
   return Plan.describe(item,m);
  }
@@ -247,16 +269,16 @@
   const rx=defaultPrescription(x);
   const src=x.source?`<p class="ex-sheet-source">Source: <a href="${h(x.source.url)}" target="_blank" rel="noopener">${h(x.source.author||'Link')} ↗</a>${x.id.startsWith('foot-')&&x.variant.clip?` · <a href="${h(x.variant.clip)}" target="_blank" rel="noopener">Watch movement ↗</a>`:''}</p>`:'';
   wrap.innerHTML=`
-   <div class="sheet-head"><h2>${h(x.name)}</h2><button type="button" class="icon-btn plain" data-sheet-close aria-label="Close">${icon('close')}</button></div>
+   <div class="sheet-head"><h2>${h(x.name)}</h2><span class="sheet-head-actions">${Crux.favBtn('exercises',x.id,'in-head')}<button type="button" class="icon-btn plain" data-sheet-close aria-label="Close">${icon('close')}</button></span></div>
    <div class="ex-sheet-media ${mediaCls}" id="ex-media"></div>
    <div class="ex-sheet-body">
     <h1 class="ex-sheet-title sr-only">${h(x.name)}</h1>
-    <div class="ex-sheet-tags">${tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div>
+    <div class="ex-sheet-tags">${x.custom?'<span class="tag tag-mine">Mine</span>':''}${tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div>
     ${trains}
     ${x.cue?`<p class="ex-sheet-cue">${h(x.cue)}</p>`:''}
     ${rx?`<span class="ex-sheet-prescription">${h(rx)}</span>`:''}
     ${src}
-    <div class="ex-sheet-actions"><button type="button" class="btn" id="try-it-btn">${icon('play')} Try it</button></div>
+    <div class="ex-sheet-actions"><button type="button" class="btn" id="try-it-btn">${icon('play')} Try it</button><button type="button" class="btn btn-secondary" id="add-build-btn">${icon('plus')} Add<span class="hide-sm">&nbsp;to workout</span></button>${x.custom?`<button type="button" class="btn btn-secondary btn-icon-only" id="edit-ex-btn" aria-label="Edit exercise">${icon('edit')}</button>`:''}</div>
    </div>`;
   const mediaEl=wrap.querySelector('#ex-media');
   if(x.media.type==='figure'&&window.Figures){
@@ -286,6 +308,11 @@
    const session=tryItSession(x);
    startSession(session,{countdown:countdown()},x.name);
   });
+  wrap.querySelector('#add-build-btn').addEventListener('click',()=>{
+   if(Crux.builder){Crux.builder.addExercise(x.id);toast(`Added ${x.name} to your workout`);}
+  });
+  const editBtn=wrap.querySelector('#edit-ex-btn');
+  if(editBtn)editBtn.addEventListener('click',()=>{const id=x.id;closeSheet();setTimeout(()=>Crux.custom&&Crux.custom.openForm(id),120);});
   return wrap;
  }
  function openExerciseSheet(id){
@@ -327,7 +354,7 @@
  on('player:closed',()=>paintResumeBanner());
 
  /* ───────────────────────── Home page ───────────────────────── */
- const CATEGORY_LIST=[{id:'all',label:'All',icon:'all'},...Object.entries(CATEGORIES).map(([id,c])=>({id,label:c.label,icon:c.icon}))];
+ const CATEGORY_LIST=[{id:'all',label:'All',icon:'all'},...Object.entries(CATEGORIES).map(([id,c])=>({id,label:c.label,icon:c.icon})),{id:'mine',label:'My workouts',icon:'build'},{id:'favorites',label:'Favorites',icon:'starfill'}];
  const homeState={category:prefs.get('category','all'),minutes:prefs.get('minutes','any'),focus:prefs.get('focus',null),intensity:prefs.get('intensity','any')};
  const GEN_CATS=new Set(['hip','feet']); // categories with the random-generator panel, not a session list
  const minutesEff=()=>homeState.minutes==='any'?30:homeState.minutes;
@@ -601,8 +628,12 @@
   const hr=new Date().getHours();
   return hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';
  }
+ function allSessions(){return SESS.sessions.concat(Crux.customSessions());}
  function poolFor(category,focus,intensity){
-  let pool=category==='all'?SESS.sessions.slice():SESS.sessions.filter(s=>s.category===category);
+  let pool;
+  if(category==='favorites'){const fav=new Set(Crux.store.favorites('sessions'));pool=allSessions().filter(s=>fav.has(s.id));}
+  else if(category==='mine')pool=Crux.customSessions();
+  else pool=category==='all'?allSessions():allSessions().filter(s=>s.category===category);
   if(focus)pool=pool.filter(s=>(s.focus||[]).includes(focus));
   // Hip Opener is always relaxed and has its own UI, not this list — the intensity filter never applies to it.
   if(intensity&&intensity!=='any'&&!GEN_CATS.has(category))pool=pool.filter(s=>s.intensity===intensity);
@@ -612,7 +643,7 @@
  // and forth only pays for each stop once (keeps drag frames well under budget).
  const fitCache=new Map();
  function fitCached(s,minutes){
-  const key=s.id+'|'+minutes+'|'+countdown();
+  const key=s.id+'|'+(s.v||0)+'|'+minutes+'|'+countdown();
   let res=fitCache.get(key);
   if(!res){res=Plan.fit(s,minutes,META,{countdown:countdown()});fitCache.set(key,res);if(fitCache.size>2000)fitCache.clear();}
   return res;
@@ -630,6 +661,7 @@
   return items;
  }
  function catIcon(id){return CATEGORIES[id]?CATEGORIES[id].icon:'all';}
+ const TILE_VAR={mine:'--mine',favorites:'--favorites'};
 
  function renderHome(){
   view.innerHTML=`<div class="page page-home">
@@ -687,7 +719,7 @@
   const row=$('#cat-tiles');
   row.innerHTML=CATEGORY_LIST.map(c=>`
    <button type="button" class="category-tile${c.id==='all'?' is-neutral':''}${homeState.category===c.id?' on':''}" data-cat="${c.id}"
-    aria-pressed="${homeState.category===c.id}" style="--tile-c:${c.id==='all'?'var(--ink)':'var(--'+c.id+')'}">
+    aria-pressed="${homeState.category===c.id}" style="--tile-c:${c.id==='all'?'var(--ink)':'var('+(TILE_VAR[c.id]||'--'+c.id)+')'}">
     ${icon(c.icon)}<span class="category-tile-label">${h(c.label)}</span>
    </button>`).join('')+'<span class="tile-indicator" aria-hidden="true"></span>';
   row.addEventListener('click',e=>{
@@ -902,7 +934,7 @@
   const {session:s,plan,changed}=item;
   const mins=Math.round(plan.duration/60);
   const cur=slot.querySelector('.hero-card:not(.is-leaving)');
-  if(cur&&cur.dataset.id===s.id){
+  if(cur&&cur.dataset.id===s.id&&cur.dataset.v===String(s.v||0)){
    // Same workout: update in place — the duration counts to its new value, the fitted note swaps.
    cur._item=item;
    countTo(cur.querySelector('.hero-duration-num'),mins);
@@ -911,16 +943,17 @@
    return;
   }
   const el=document.createElement('div');
-  el.className='hero-card';el.dataset.id=s.id;el._item=item;
+  el.className='hero-card';el.dataset.id=s.id;el.dataset.v=String(s.v||0);el._item=item;
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   const trainsLine=(s.goals&&s.goals.length)?`<p class="hero-trains">Trains ${h(s.goals.join(', '))}</p>`:'';
-  el.innerHTML=`<div class="hero-art-wrap"><div class="art" id="hero-art"></div></div><span class="hero-eyebrow">Best match</span>
+  const heroDone=Crux.recentDone(s.id);
+  el.innerHTML=`<div class="hero-art-wrap"><div class="art" id="hero-art"></div></div><span class="hero-eyebrow">Best match</span>${Crux.favBtn('sessions',s.id,'on-art hero-fav')}${heroDone?doneBadge(heroDone).replace('done-badge','done-badge hero-done'):''}
    <div class="hero-content">
     <h2 class="hero-title">${h(s.title)}</h2>
     <p class="hero-summary">${h(s.summary)}</p>
     ${trainsLine}
     <div class="hero-tags">
-     <span class="tag">${h(s.level)}</span>
+     ${s.custom?'<span class="tag tag-mine">Mine</span>':`<span class="tag">${h(s.level)}</span>`}
      ${equip.map(e=>`<span class="tag">${h(e)}</span>`).join('')}
     </div>
     <div class="hero-fitted-wrap">${heroFittedHTML(changed)}</div>
@@ -959,26 +992,28 @@
   const clear=e=>{if(e.target===el){el.classList.remove('is-arriving','is-swapping');}};
   el.addEventListener('animationend',clear);
  }
+ function doneBadge(n){return `<span class="done-badge" title="Completed in the last 7 days">${icon('check')}${n>1?' ×'+n:' Done'}</span>`;}
  function buildResultCard(item,existingEl){
   const {session:s,plan}=item;
   const mins=Math.round(plan.duration/60);
-  if(existingEl&&existingEl.dataset.id===s.id&&existingEl.querySelector('.result-duration-num')){
+  if(existingEl&&existingEl.dataset.id===s.id&&existingEl.dataset.v===String(s.v||0)&&existingEl.dataset.done===String(Crux.recentDone(s.id))&&existingEl.querySelector('.result-duration-num')){
    const num=existingEl.querySelector('.result-duration-num');
    if(num.textContent!==String(mins))rollText(num,String(mins),mins>Number(num.textContent)?1:-1);
    return existingEl;
   }
   const el=existingEl||document.createElement('button');
-  el.dataset.id=s.id;
+  el.dataset.id=s.id;el.dataset.v=String(s.v||0);const done=Crux.recentDone(s.id);el.dataset.done=String(done);
   if(!existingEl){el.type='button';el.className='result-card';}
   const equip=equipmentLabels(Plan.equipmentOf(s,META));
   el.innerHTML=`<div class="result-art"><div class="art" id="art-${h(s.id)}"></div>
     <span class="result-cat-icon" style="color:var(--${s.category})">${icon(catIcon(s.category))}</span>
+    ${Crux.favBtn('sessions',s.id,'on-art')}${done?doneBadge(done):''}
     <span class="result-duration-badge"><span class="result-duration-num">${mins}</span> min${intensityBadge(s.intensity,'sm')}</span></div>
    <div class="result-body">
     <h3 class="result-title">${h(s.title)}</h3>
     <p class="result-summary">${h(s.summary)}</p>
     ${s.goals&&s.goals.length?`<span class="result-trains">Trains ${h(s.goals.slice(0,2).join(', '))}</span>`:''}
-    <div class="result-tags"><span class="tag">${h(s.level)}</span>${equip.slice(0,2).map(e=>`<span class="tag">${h(e)}</span>`).join('')}</div>
+    <div class="result-tags">${s.custom?'<span class="tag tag-mine">Mine</span>':`<span class="tag">${h(s.level)}</span>`}${equip.slice(0,2).map(e=>`<span class="tag">${h(e)}</span>`).join('')}</div>
    </div>`;
   const artEl=el.querySelector('.art');
   mountArt(artEl,s.id,s.category);
@@ -992,6 +1027,14 @@
  }
  function renderEmptyState(area){
   const pool=poolFor(homeState.category,homeState.focus,homeState.intensity);
+  if(!pool.length&&(homeState.category==='mine'||homeState.category==='favorites')){
+   const mine=homeState.category==='mine',noFilter=!Crux.customSessions().length&&mine||!mine&&!Crux.store.favorites('sessions').length;
+   area.innerHTML=`<div class="empty-state"><h3>${mine?'No workouts of your own yet':'No favorites yet'}</h3>
+    <p>${mine?(noFilter?'Put your own together from every exercise in the library.':'Nothing matches these filters.'):(noFilter?'Tap the star on a workout to keep it here.':'Nothing starred matches these filters.')}</p>
+    ${noFilter&&mine?`<button type="button" class="btn btn-sm" id="empty-build">${icon('plus')} Build a workout</button>`:''}</div>`;
+   const b=$('#empty-build');if(b)b.onclick=()=>go('#/build',false);
+   return;
+  }
   const shortest=pool.map(s=>({s,dur:Plan.compile(s,META,{countdown:countdown()}).duration})).sort((a,b)=>a.dur-b.dur).slice(0,3);
   area.innerHTML=`<div class="empty-state">
    <h3>Nothing fits in ${homeState.minutes==='any'?'that window':homeState.minutes+' min'} yet</h3>
@@ -1125,7 +1168,8 @@
  const exState={q:'',filter:'all'};
  const EX_FILTERS=[
   {id:'all',label:'All'},{id:'climbing',label:'Climbing'},{id:'upper',label:'Upper body'},{id:'lower',label:'Lower body'},
-  {id:'core',label:'Core'},{id:'hip',label:'Hip poses'},{id:'mobility',label:'Mobility'},{id:'strength',label:'Strength'}];
+  {id:'core',label:'Core'},{id:'hip',label:'Hip poses'},{id:'mobility',label:'Mobility'},{id:'strength',label:'Strength'},
+  {id:'favorites',label:'Favorites',icon:'starfill'},{id:'mine',label:'Mine',icon:'build'}];
  function exercisePool(){
   return Object.keys(byId).map(id=>exercise(id)).filter(Boolean);
  }
@@ -1133,6 +1177,8 @@
   const m=x.meta||{};
   switch(filter){
    case 'all':return true;
+   case 'favorites':return Crux.store.isFav('exercises',x.id);
+   case 'mine':return !!x.custom;
    case 'climbing':return x.kind==='Climbing';
    case 'upper':return m.target==='Arms';
    case 'lower':return m.target==='Legs';
@@ -1149,7 +1195,7 @@
  }
  function renderExercises(){
   view.innerHTML=`<div class="page page-exercises">
-   <div class="page-header"><span class="eyebrow">Library</span><h1 class="page-title">Exercises</h1></div>
+   <div class="page-header page-header-row"><div><span class="eyebrow">Library</span><h1 class="page-title">Exercises</h1></div><button type="button" class="btn btn-sm" id="new-exercise">${icon('plus')} New exercise</button></div>
    <div class="section">
     <div class="search-field">${icon('search','search-icon')}<input type="search" id="ex-search" placeholder="Search exercises" aria-label="Search exercises" value="${h(exState.q)}"></div>
     <div class="chip-row" id="ex-filters" role="group" aria-label="Filter"></div>
@@ -1157,7 +1203,8 @@
    <div id="ex-grid-wrap"></div>
   </div>`;
   const filters=$('#ex-filters');
-  filters.innerHTML=EX_FILTERS.map(f=>`<button type="button" class="chip" data-f="${f.id}" aria-pressed="${exState.filter===f.id}">${h(f.label)}</button>`).join('');
+  filters.innerHTML=EX_FILTERS.map(f=>`<button type="button" class="chip" data-f="${f.id}" aria-pressed="${exState.filter===f.id}">${f.icon?icon(f.icon)+' ':''}${h(f.label)}</button>`).join('');
+  $('#new-exercise').addEventListener('click',()=>Crux.custom&&Crux.custom.openForm());
   filters.addEventListener('click',e=>{
    const btn=e.target.closest('.chip');if(!btn)return;
    exState.filter=btn.dataset.f;
@@ -1171,7 +1218,9 @@
  function updateExerciseGrid(){
   const wrap=$('#ex-grid-wrap');if(!wrap)return;
   const list=exercisePool().filter(x=>matchesFilter(x,exState.filter)).filter(x=>window.Search?Search.matches(searchHaystack(x),exState.q):true);
-  if(!list.length){wrap.innerHTML='<p class="no-results">No exercises match. Try a different search or filter.</p>';return;}
+  if(!list.length){
+   const none=exState.filter==='favorites'?'No favorite exercises yet. Tap the star on any exercise.':exState.filter==='mine'?'You have not made any exercises yet. Tap “New exercise” to add one.':'No exercises match. Try a different search or filter.';
+   wrap.innerHTML=`<p class="no-results">${none}</p>`;return;}
   if(!wrap.querySelector('.exercise-grid'))wrap.innerHTML='<div class="exercise-grid" id="exercise-grid"></div>';
   const grid=$('#exercise-grid');
   flipUpdate(grid,list,x=>x.id,(x,el)=>buildExerciseCard(x,el));
@@ -1179,10 +1228,10 @@
  function buildExerciseCard(x,existingEl){
   const el=existingEl||document.createElement('button');
   if(!existingEl){el.type='button';el.className='exercise-card';}
-  const tags=[x.meta.difficulty,x.meta.target].filter(Boolean);
-  el.innerHTML=`${thumb(x.id,'thumb')}
+  const tags=x.custom?[]:[x.meta.difficulty,x.meta.target].filter(Boolean);
+  el.innerHTML=`<span class="exercise-card-media">${thumb(x.id,'thumb')}${Crux.favBtn('exercises',x.id,'on-thumb')}</span>
    <div class="exercise-card-body"><span class="exercise-card-name">${h(x.name)}</span>
-    <div class="exercise-card-tags">${tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div></div>`;
+    <div class="exercise-card-tags">${x.custom?'<span class="tag tag-mine">Mine</span>':''}${tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div></div>`;
   el.onclick=()=>go('#/exercise/'+encodeURIComponent(x.id),false);
   return el;
  }
@@ -1212,7 +1261,7 @@
  }
  function describeSetsDelta(n){return n===0?'Normal':`${n>0?'+':''}${n} set${Math.abs(n)>1?'s':''}`;}
  function renderSessionDetail(id){
-  const session=SESS.sessions.find(s=>s.id===id);
+  const session=Crux.findSession(id);
   if(!session){go('#/',false);return;}
   const minutesPref=prefs.get('minutes','any');
   let o;
@@ -1225,6 +1274,7 @@
   view.innerHTML=`<div class="page-session">
    <div class="session-hero"><div class="art" id="session-art"></div>
     <button type="button" class="icon-btn on-dark session-back" id="session-back" aria-label="Back">${icon('back')}</button>
+    ${Crux.favBtn('sessions',session.id,'on-art session-fav')}
     <div class="session-hero-content">
      <h1 class="session-hero-title">${h(session.title)}</h1>
      <p class="session-hero-summary">${h(session.summary)}</p>
@@ -1239,11 +1289,12 @@
      <div class="stat"><span class="stat-value stat-value-intensity">${intensityBadge(session.intensity)}${h(INTENSITY_META[session.intensity].label)}</span><span class="stat-label">Intensity</span></div>
      <div class="stat"><span class="stat-value">${equip.length?h(equip.slice(0,2).join(', ')):'Bodyweight'}</span><span class="stat-label">Equipment</span></div>
     </div></div>
+    <div class="section session-actions"><button type="button" class="btn btn-secondary" id="session-customize">${icon(session.custom?'edit':'copy')} ${session.custom?'Edit workout':'Customize'}</button>${session.custom?'':'<span class="session-actions-note">Make your own copy in the builder</span>'}</div>
     <div class="section"><h2 class="section-title">Adjust</h2><div class="adjust-card" id="adjust-card"></div></div>
     <div class="section"><h2 class="section-title">Exercises</h2><div id="exercise-list" style="display:flex;flex-direction:column;gap:18px"></div></div>
-    <div class="section"><div class="why-card"><h2 class="section-title">Why this works</h2><p class="why-text">${h(session.why||'')}</p>
+    ${session.why||(session.sources&&session.sources.length)?`<div class="section"><div class="why-card"><h2 class="section-title">Why this works</h2><p class="why-text">${h(session.why||'')}</p>
      ${(session.sources&&session.sources.length)?`<ul class="source-list">${session.sources.map(k=>{const src=SESS.sources[k];return src?`<li><a href="${h(src.url)}" target="_blank" rel="noopener">${h(src.label)} ↗</a></li>`:'';}).join('')}</ul>`:''}
-    </div></div>
+    </div></div>`:''}
    </div>
    <div class="bottom-bar"><div class="bottom-bar-duration"><span class="num" id="bar-duration">${h(Plan.clock(initialPlan.duration))}</span><span>Duration</span></div>
     <button type="button" class="btn" id="bar-start">${icon('play')} Start</button></div>
@@ -1251,6 +1302,11 @@
   mountArt($('#session-art'),session.id,session.category);
   setVT($('#session-art'),'card-art-'+session.id);
   $('#session-back').addEventListener('click',()=>go('#/',true));
+  $('#session-customize').addEventListener('click',()=>{
+   if(!Crux.builder)return;
+   if(session.custom)Crux.builder.edit(session.id);else Crux.builder.copyFrom(session,o);
+   go('#/build',false);
+  });
 
   function paint(){
    const plan=Plan.compile(session,META,o);
@@ -1321,7 +1377,11 @@
   if(currentBaseRendered===path)return;
   currentBaseRendered=path;
   const m=path.match(/^#\/session\/([^/?#]+)/);
+  document.body.classList.toggle('on-session',!!m);
+  const pages=Crux.pages||{};
   if(path==='#/exercises')renderExercises();
+  else if(path==='#/timer'&&pages.timer)pages.timer.render(view);
+  else if(path==='#/build'&&pages.build)pages.build.render(view);
   else if(m)renderSessionDetail(decodeURIComponent(m[1]));
   else renderHome();
   updateTabnav(path);
@@ -1329,8 +1389,8 @@
   requestAnimationFrame(syncAllIndicators);
  }
  function updateTabnav(path){
-  const onExercises=path==='#/exercises';
-  $$('.tabnav-btn').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.route==='/exercises')===onExercises)));
+  const route=path==='#/exercises'?'/exercises':path==='#/timer'?'/timer':path==='#/build'?'/build':'/';
+  $$('.tabnav-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.route===route)));
   syncIndicator($('#tabnav'),'.tabnav-btn','.tabnav-indicator');
  }
  function handleHash(){
@@ -1354,6 +1414,8 @@
  /* ───────────────────────── boot ───────────────────────── */
  function boot(){
   $('#wordmark-glyph').innerHTML=icon('climbing');
+  $$('.tabnav-ico').forEach(el=>{el.innerHTML=icon(el.dataset.ico);});
+  if(Crux.pwa)Crux.pwa.register();
   $('#settings-open').innerHTML=icon('settings');
   $('#settings-open').addEventListener('click',openSettings);
   $$('.tabnav-btn').forEach(a=>a.addEventListener('click',e=>{
@@ -1362,5 +1424,20 @@
   }));
   handleHash();
  }
+ // Live updates: custom exercises/workouts, favorites and history change what the pages show.
+ Crux.on('custom:changed',()=>{if($('#ex-grid-wrap'))updateExerciseGrid();});
+ Crux.on('favorites:changed',()=>{
+  if($('#ex-grid-wrap')&&exState.filter==='favorites')updateExerciseGrid();
+  if($('#results-area')&&homeState.category==='favorites')updateResults();
+ });
+ Crux.store.on(e=>{
+  if(e.type!=='change')return;
+  const c=e.collections||[];
+  if($('#results-area')&&(c.includes('*')||c.includes('customWorkouts')||c.includes('history')||(e.source==='remote'&&c.some(x=>x.startsWith('favorites')))))updateResults();
+ });
+ // Force the current page to render again (the builder/timer pages re-render themselves after big changes).
+ function rerender(){currentBaseRendered=null;renderBase(routeState.base||'#/');}
+ Object.assign(Crux.ui=Crux.ui||{},{openSheet,closeSheet,go,startSession,flipUpdate,syncIndicator,mountArt,hashSeed,rollText,buildStopSlider,makeTappable,pulse,debounce,
+  intensityBadge,INTENSITY_META,countdown,doneBadge,rerender,exerciseCategory,tryItSession,openExerciseSheet,setVT,exercisePool,matchesFilter,searchHaystack,EX_FILTERS});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();

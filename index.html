@@ -5,13 +5,17 @@
 <meta name="theme-color" content="#F2F3EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1110" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Crux">
 <meta name="description" content="Pick how much time you have and what you want to train. Crux finds a workout that fits and times it for you.">
 <title>Crux</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/features.css">
 <link rel="stylesheet" href="css/player.css">
 <script defer src="data/library.js"></script><script defer src="data/cover-art.js"></script>
 <script defer src="data/classification.js"></script>
@@ -23,9 +27,16 @@
 <script defer src="js/core/feet.js"></script>
 <script defer src="js/figures.js"></script>
 <script defer src="js/art.js"></script>
+<script defer src="js/store.js"></script>
 <script defer src="js/lib.js"></script>
 <script defer src="js/audio.js"></script>
 <script defer src="js/player.js"></script>
+<script defer src="js/pwa.js"></script>
+<script defer src="js/custom.js"></script>
+<script defer src="js/timer.js"></script>
+<script defer src="js/builder.js"></script>
+<script defer src="firebase-config.js"></script>
+<script defer src="js/sync.js"></script>
 <script defer src="js/app.js"></script>
 </head>
 <body>
@@ -38,8 +49,10 @@
    <span>Crux</span>
   </a>
   <nav class="tabnav" aria-label="Pages" id="tabnav">
-   <a class="tabnav-btn" data-route="/" href="#/" aria-pressed="true">Workouts</a>
-   <a class="tabnav-btn" data-route="/exercises" href="#/exercises" aria-pressed="false">Exercises</a>
+   <a class="tabnav-btn" data-route="/" href="#/" aria-pressed="true"><span class="tabnav-ico" data-ico="workouts"></span><span class="tabnav-label">Workouts</span></a>
+   <a class="tabnav-btn" data-route="/exercises" href="#/exercises" aria-pressed="false"><span class="tabnav-ico" data-ico="strength"></span><span class="tabnav-label">Exercises</span></a>
+   <a class="tabnav-btn" data-route="/timer" href="#/timer" aria-pressed="false"><span class="tabnav-ico" data-ico="timer"></span><span class="tabnav-label">Timer</span></a>
+   <a class="tabnav-btn" data-route="/build" href="#/build" aria-pressed="false"><span class="tabnav-ico" data-ico="build"></span><span class="tabnav-label">Build</span></a>
    <span class="tabnav-indicator" aria-hidden="true"></span>
   </nav>
   <button type="button" class="icon-btn" id="settings-open" aria-label="Settings" aria-haspopup="dialog"></button>

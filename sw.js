@@ -10,6 +10,7 @@
 const VERSION='2026-09-29.1';
 const SHELL_CACHE='crux-shell-'+VERSION;
 const MEDIA_CACHE='crux-media-v1';
+const SDK_CACHE='crux-sdk-v1';
 const SHELL=[
  './','index.html','manifest.webmanifest','icon.svg','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png',
  'css/base.css','css/app.css','css/features.css','css/player.css','firebase-config.js',
@@ -45,7 +46,9 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET')return;
  const url=new URL(req.url);
- if(url.origin!==self.location.origin)return; // Firebase, fonts etc. go straight to the network
+ // Firebase SDK files (only requested when cloud sync is configured): keep a copy so sync can start offline.
+ if(url.hostname==='www.gstatic.com'&&url.pathname.startsWith('/firebasejs/')){event.respondWith(sdk(event,req));return;}
+ if(url.origin!==self.location.origin)return; // everything else cross-origin goes straight to the network
  if(!url.pathname.startsWith(scopeURL.pathname))return;
  if(MEDIA_RE.test(url.pathname)){event.respondWith(media(event,req));return;}
  if(req.mode==='navigate'){event.respondWith(navigation(event,req));return;}
@@ -108,4 +111,15 @@ async function slice(res,rangeHeader){
  if(start>end||start>=size)return new Response(null,{status:416,statusText:'Range Not Satisfiable',headers:{'Content-Range':`bytes */${size}`,'Accept-Ranges':'bytes'}});
  const part=blob.slice(start,end+1,type);
  return new Response(part,{status:206,statusText:'Partial Content',headers:{'Content-Type':type,'Content-Range':`bytes ${start}-${end}/${size}`,'Content-Length':String(part.size),'Accept-Ranges':'bytes'}});
+}
+
+async function sdk(event,req){
+ const cache=await caches.open(SDK_CACHE);
+ const hit=await cache.match(req.url);
+ if(hit)return hit;
+ try{
+  const res=await fetch(req);
+  if(res.ok||res.type==='opaque')event.waitUntil(cache.put(req.url,res.clone()));
+  return res;
+ }catch{return new Response('',{status:504});}
 }
