@@ -661,5 +661,89 @@
   "push-up": {
     "src": "media/covers/push-up.webp",
     "name": "Push-up"
+  },
+  "foot-ball-toe-curl": {
+    "src": "media/covers/foot-ball-toe-curl.webp",
+    "name": "Toe curls over a ball"
+  },
+  "foot-ball-roll": {
+    "src": "media/covers/foot-ball-roll.webp",
+    "name": "Sole roll over a ball"
+  },
+  "foot-short-foot": {
+    "src": "media/covers/foot-short-foot.webp",
+    "name": "Short-foot arch lift"
+  },
+  "foot-toe-lifts": {
+    "src": "media/covers/foot-toe-lifts.webp",
+    "name": "Standing toe lifts"
+  },
+  "foot-toe-tip-pivots": {
+    "src": "media/covers/foot-toe-tip-pivots.webp",
+    "name": "Toe-tip ankle pivots"
+  },
+  "foot-toe-spread": {
+    "src": "media/covers/foot-toe-spread.webp",
+    "name": "Toe spreading"
+  },
+  "foot-heel-block-pumps": {
+    "src": "media/covers/foot-heel-block-pumps.webp",
+    "name": "Heel-supported ankle pumps"
+  },
+  "foot-block-guided-roll": {
+    "src": "media/covers/foot-block-guided-roll.webp",
+    "name": "Block-guided heel roll"
+  },
+  "foot-block-heel-raise": {
+    "src": "media/covers/foot-block-heel-raise.webp",
+    "name": "Forefoot-on-block heel raise"
+  },
+  "foot-block-tip": {
+    "src": "media/covers/foot-block-tip.webp",
+    "name": "Forefoot block tip"
+  },
+  "foot-block-pickup": {
+    "src": "media/covers/foot-block-pickup.webp",
+    "name": "Two-foot block pickup"
+  },
+  "foot-block-toe-curls": {
+    "src": "media/covers/foot-block-toe-curls.webp",
+    "name": "Toe curls over a block edge"
+  },
+  "foot-block-squeeze-heel-raise": {
+    "src": "media/covers/foot-block-squeeze-heel-raise.webp",
+    "name": "Block-squeeze heel raises"
+  },
+  "foot-block-tucked-toes": {
+    "src": "media/covers/foot-block-tucked-toes.webp",
+    "name": "Tucked-toe rock on a block"
+  },
+  "foot-block-squeeze-toe-raise": {
+    "src": "media/covers/foot-block-squeeze-toe-raise.webp",
+    "name": "Block-squeeze forefoot raises"
+  },
+  "foot-outer-edge-rolls": {
+    "src": "media/covers/foot-outer-edge-rolls.webp",
+    "name": "Outer-edge foot rolls"
+  },
+  "foot-calf-foam-roll": {
+    "src": "media/covers/foot-calf-foam-roll.webp",
+    "name": "Calf foam rolling"
+  },
+  "foot-banded-ankle-pumps": {
+    "src": "media/covers/foot-banded-ankle-pumps.webp",
+    "name": "Banded ankle pumps"
+  },
+  "foot-banded-ankle-circles": {
+    "src": "media/covers/foot-banded-ankle-circles.webp",
+    "name": "Banded ankle circles"
+  },
+  "foot-weighted-ankle-rocks": {
+    "src": "media/covers/foot-weighted-ankle-rocks.webp",
+    "name": "Weighted ankle rocks"
+  },
+  "foot-bent-knee-ankle-pulses": {
+    "src": "media/covers/foot-bent-knee-ankle-pulses.webp",
+    "name": "Bent-knee ankle pulses"
   }
 }

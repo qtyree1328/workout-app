@@ -35,6 +35,7 @@ const armsLoose=()=>block('Cool-down',[t(LOOSE,40,{rest:10}),t('band-assisted-th
 
 // ── Sources ─────────────────────────────────────────────────────────────────
 const SOURCES={
+  postureBlueprint:{label:'Posture Blueprint · ankle mobility video',url:'https://x.com/posturebluprint/status/2103684361417802003'},
   lopez:{label:'López-Rivera & González-Badillo 2012; 2019',url:'https://www.researchgate.net/publication/324731332_Comparison_of_the_Effects_of_Three_Hangboard_Strength_and_Endurance_Training_Programs_on_Grip_Endurance_in_Sport_Climbers'},
   mundry:{label:'Mundry et al. 2021 · Scientific Reports (RCT)',url:'https://www.nature.com/articles/s41598-021-92898-2'},
   levernier:{label:'Levernier & Laffaye 2019 · JSCR',url:'https://pubmed.ncbi.nlm.nih.gov/28945641/'},
@@ -60,6 +61,21 @@ const FINGER_NOTE='Two hard finger sessions a week, at least 48 hours apart. Sto
 
 // ── Sessions ────────────────────────────────────────────────────────────────
 const sessions=[
+ {id:'ankle-mobility-postureblueprint',focus:['Feet & ankles'],title:'Ankle Mobility · Posture Blueprint',category:'mobility',intensity:1,level:'Beginner',goals:['Ankle mobility','Ankle control'],
+  summary:'Foot roll → calf roll → banded pumps → circles → weighted rocks → ankle pulses.',
+  why:'Follows the six-movement order shown in the supplied Posture Blueprint video. The video gives no set lengths or repetitions; these are editable app defaults. Use light resistance and controlled motion.',sources:['postureBlueprint'],
+  blocks:[block('Warm-up',[t('foot-ball-roll',30,{rest:10}),t('foot-calf-foam-roll',30,{rest:10})]),
+    block('Mobility & control',[t('foot-banded-ankle-pumps',30,{rest:10}),t('foot-banded-ankle-circles',30,{rest:10}),t('foot-weighted-ankle-rocks',30,{rest:10}),t('foot-bent-knee-ankle-pulses',20,{rest:10})])]},
+ {id:'foot-control',focus:['Feet & ankles'],title:'Feet & Toe Control',category:'mobility',intensity:1,level:'Beginner',goals:['Foot control','Toe mobility'],
+  summary:'Ball work, arch control and toe movement from the saved videos.',
+  why:'A short collection of observed movements. Timing is an editable app default; the source videos do not establish anatomical correction or treatment benefits.',sources:[],
+  blocks:[block('Warm-up',[t('foot-toe-spread',20,{rest:10})]),block('Foot control',[
+    t('foot-ball-roll',30,{side:'Both',rest:10}),t('foot-ball-toe-curl',30,{rest:10}),t('foot-short-foot',30,{rest:10}),t('foot-toe-lifts',30,{rest:10})]),block('Cool-down',[t('foot-toe-spread',20,{rest:0})])]},
+ {id:'foot-block-control',focus:['Feet & ankles'],title:'Feet & Ankles with a Block',category:'mobility',intensity:1,level:'Beginner',goals:['Ankle control','Toe mobility'],
+  summary:'Controlled ankle and toe movements with a lightweight block.',
+  why:'Selected movements extracted from the supplied videos. Use a stable support for balance and a small comfortable range. Defaults are editable.',sources:[],
+  blocks:[block('Warm-up',[t('foot-toe-spread',20,{rest:10})]),block('Block control',[
+    t('foot-heel-block-pumps',30,{rest:10}),t('foot-block-toe-curls',30,{rest:10}),t('foot-block-heel-raise',30,{rest:10}),t('foot-block-squeeze-heel-raise',30,{rest:10}),t('foot-block-squeeze-toe-raise',30,{rest:10})]),block('Cool-down',[t('foot-toe-spread',20,{rest:0})])]},
  // Climbing · fingers
  {id:'max-hangs',focus:['Fingers'],fixed:true,title:'Max Hangs',category:'climbing',intensity:3,level:'Advanced',goals:['Max finger strength','Crimps'],
   summary:'Five heavy 10-second hangs in a half crimp.',
@@ -272,13 +288,14 @@ const hipOpener={id:'hip-opener',title:'Hip Opener',category:'hip',intensity:1,l
   sources:['yogabody','acsm']};
 
 // ── Foot Training pool ────────────────────────────────────────────────────────
+// Union of the 21 video-extracted exercises (clip + drawing) and 14 researched instruction-only ones.
 // group orders a generated session: mobility/warm-up -> intrinsic -> strength -> balance -> stretch.
 const footPool=[
- ['foot-ankle-circles','mobility'],['foot-knee-to-wall-mobilization','mobility'],
- ['foot-short-foot-hold','intrinsic'],['foot-toe-splay-lift','intrinsic'],['foot-toe-spread-squeeze','intrinsic'],['foot-towel-curl','intrinsic'],['foot-marble-pickup','intrinsic'],
- ['foot-double-heel-raise','strength'],['foot-single-heel-raise','strength'],['foot-bent-knee-heel-raise','strength'],['foot-heel-raise-toes-elevated','strength'],['foot-tibialis-raise','strength'],['foot-band-eversion-inversion','strength'],['foot-toe-heel-walks','strength'],
+ ['foot-toe-tip-pivots','mobility'],['foot-heel-block-pumps','mobility'],['foot-banded-ankle-pumps','mobility'],['foot-banded-ankle-circles','mobility'],['foot-bent-knee-ankle-pulses','mobility'],['foot-weighted-ankle-rocks','mobility'],['foot-block-guided-roll','mobility'],['foot-block-tip','mobility'],['foot-outer-edge-rolls','mobility'],['foot-knee-to-wall-mobilization','mobility'],
+ ['foot-short-foot','intrinsic'],['foot-toe-spread','intrinsic'],['foot-toe-lifts','intrinsic'],['foot-ball-toe-curl','intrinsic'],['foot-block-toe-curls','intrinsic'],['foot-block-pickup','intrinsic'],['foot-block-tucked-toes','intrinsic'],['foot-towel-curl','intrinsic'],['foot-marble-pickup','intrinsic'],
+ ['foot-block-heel-raise','strength'],['foot-block-squeeze-heel-raise','strength'],['foot-block-squeeze-toe-raise','strength'],['foot-double-heel-raise','strength'],['foot-single-heel-raise','strength'],['foot-bent-knee-heel-raise','strength'],['foot-tibialis-raise','strength'],['foot-band-eversion-inversion','strength'],['foot-toe-heel-walks','strength'],
  ['foot-single-leg-balance','balance'],['foot-single-leg-balance-eyes-closed','balance'],
- ['foot-ball-roll','stretch'],['foot-calf-stretch-straight-knee','stretch'],['foot-calf-stretch-bent-knee','stretch'],['foot-plantar-fascia-stretch','stretch'],
+ ['foot-ball-roll','stretch'],['foot-calf-foam-roll','stretch'],['foot-calf-stretch-straight-knee','stretch'],['foot-calf-stretch-bent-knee','stretch'],['foot-plantar-fascia-stretch','stretch'],
 ].map(([id,group])=>({id,group}));
 const FOOT_GROUPS=['mobility','intrinsic','strength','balance','stretch'];
 const footTraining={id:'foot-training',title:'Foot Training',category:'feet',intensity:1,level:'Beginner',goals:['Foot & ankle strength','Foot & ankle mobility'],focus:['Feet'],
@@ -289,7 +306,7 @@ const footTraining={id:'foot-training',title:'Foot Training',category:'feet',int
 const categories=[
   {id:'climbing',label:'Climbing',focus:['Fingers','Endurance','Pulling','Core','Antagonists','Warm-up']},
   {id:'strength',label:'Strength',focus:['Upper body','Lower body','Core','Full body','Skills']},
-  {id:'mobility',label:'Mobility',focus:['Hips','Shoulders','Hamstrings','Full body']},
+  {id:'mobility',label:'Mobility',focus:['Hips','Shoulders','Hamstrings','Feet & ankles','Full body']},
   {id:'hip',label:'Hip Opener',generator:true},
   {id:'feet',label:'Feet',generator:true},
   {id:'recovery',label:'Recovery',focus:['Cool-down','Relax','Quick']}];

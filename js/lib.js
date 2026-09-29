@@ -62,7 +62,7 @@
   hip:{label:'Hip Opener',icon:'hip',blurb:'Random poses from the hip chart, timed to fit'},
   feet:{label:'Feet',icon:'feet',blurb:'Random foot & ankle strength, mobility and balance'},
   recovery:{label:'Recovery',icon:'recovery',blurb:'Cool-downs, resets and wind-downs'}};
- const EQUIPMENT={'hangboard':'Hangboard','pull-up bar':'Pull-up bar','band':'Band','bar':'Dowel','weighted bar':'Weighted dowel','block':'Yoga block','chair':'Chair','wall':'Wall','bench':'Bench','strap':'Strap','table':'Table','pole':'Pole','weights':'Light weights'};
+ const EQUIPMENT={'hangboard':'Hangboard','pull-up bar':'Pull-up bar','band':'Band','bar':'Dowel','weighted bar':'Weighted dowel','block':'Yoga block','chair':'Chair','wall':'Wall','bench':'Bench','strap':'Strap','table':'Table','pole':'Pole','weights':'Light weights','ball':'Small ball','foam roller':'Foam roller'};
  const PROPS=new Set(['chair','wall','bench','strap','table','pole']); // household props: shown, never required
  const displayName=(id,label)=>label||byId[id]?.name||id;
 

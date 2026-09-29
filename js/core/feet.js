@@ -8,7 +8,7 @@
  const GROUP_ORDER=['mobility','intrinsic','strength','balance','stretch'];
  // The optional warm-up always uses these two mobility exercises; when it is on, generate()
  // leaves them out of the random draw so they never appear twice in the same session.
- const WARM_IDS=['foot-ankle-circles','foot-knee-to-wall-mobilization'];
+ const WARM_IDS=['foot-toe-tip-pivots','foot-knee-to-wall-mobilization'];
  function rng(seed){let a=seed>>>0||1;return ()=>{a=a+0x6D2B79F5>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
  const warmBlock=meta=>({name:'Warm-up',items:WARM_IDS.map((id,i)=>({...itemFor(id,meta),rest:i===WARM_IDS.length-1?10:REST}))});
  // Warm-up length plus the 10 s hand-over rest to the first exercise.

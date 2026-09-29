@@ -1,9 +1,16 @@
-"""Foot & ankle strengthening and mobility exercises for the Foot Training generator.
+"""Foot & ankle exercise catalog and the Feet generator pool.
 
-Illustrations are not ready yet, so every entry is an 'instruction' variant using a single
-shared neutral foot icon (media/examples/foot.svg), the same way 'easy-walking' works.
+Two sets live together here:
+  * VIDEO set: 21 exercises extracted from social videos (data/foot-extraction.json), each with a
+    clip (media/clips/foot-*.mp4) and a drawing (media/covers/foot-*.webp). They are already in the
+    catalog; this script only normalises them (media type 'video', taxonomy/dose for classify.py).
+  * RESEARCHED set (EXERCISES below): instruction-only exercises with a placeholder icon
+    (media/examples/foot.svg) and a study citation, for movements the video set does not cover.
+Researched exercises that duplicate a video exercise are NOT created (see DUPLICATES); their how-to
+text and source citation are carried onto the video exercise instead (see CARRY).
 See RESEARCH.md -> Foot training for the evidence summary.
 """
+import json, pathlib
 import pathlib
 from add_hip_poses import merge
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -31,22 +38,10 @@ SOURCES = [{'id': id, 'author': author, 'url': url, 'status': 'referenced', 'tex
 # id, name, equipment, group, goals(aliases extra), pattern, training, regions, unilateral, difficulty, strain, hold, work, rest, reps, source, how
 EXERCISES = [
  # Mobility / warm-up
- ('foot-ankle-circles', 'Ankle circles', 'None', 'mobility', 'ankle circles|alphabet|warm up', 'ankle-circles', 'active-mobility',
-  'ankles|calves|feet', True, 'Beginner', 'Light', False, 30, 10, 1, 'knee-to-wall-2024',
-  'Lift one foot and slowly circle the ankle, 30 s each direction, then switch feet. Go slowly and make the circle as big as you can without moving the shin. Tracing the alphabet with your big toe works the same way.'),
  ('foot-knee-to-wall-mobilization', 'Knee-to-wall ankle mobilization', 'Wall', 'mobility', 'dorsiflexion|ankle mobility|lunge stretch', 'dorsiflexion', 'active-mobility',
   'ankles|calves', True, 'Beginner', 'Light', False, 40, 15, 10, 'knee-to-wall-2024',
   'Half-kneel facing a wall, front foot a few inches back. Keeping the heel down, drive the knee forward over the toes toward the wall and back, 10 slow reps, then switch feet. Move the foot back as it gets easy.'),
  # Intrinsic foot muscles
- ('foot-short-foot-hold', 'Short foot hold', 'None', 'intrinsic', 'foot doming|arch lift|foot core', 'arch-doming', 'isometric',
-  'feet|arches', True, 'Intermediate', 'Light', True, 10, 20, 1, 'mckeon-2015',
-  'Barefoot, stand or sit with toes flat and relaxed. Without curling the toes, draw the ball of the foot toward the heel to gently dome the arch. Hold 10 s, relax, repeat. This is the classic "foot core" exercise for the intrinsic foot muscles.'),
- ('foot-toe-splay-lift', 'Toe splay & lift', 'None', 'intrinsic', 'toe yoga|toe splay|big toe lift', 'toe-splay', 'control',
-  'feet|toes', False, 'Beginner', 'Light', False, 30, 15, 10, 'mckeon-2015',
-  'Spread the toes apart as wide as you can, then lift just the big toe while the other four stay down, then reverse: lift the four small toes while the big toe stays down. Slow and controlled — the separation is the hard part.'),
- ('foot-toe-spread-squeeze', 'Toe spread & squeeze', 'None', 'intrinsic', 'toe spacer|toe splay|toe abduction', 'toe-splay', 'control',
-  'feet|toes', False, 'Beginner', 'Light', False, 30, 15, 10, 'mckeon-2015',
-  'Spread all ten toes as wide apart as possible and hold for 2–3 s, then relax and let them come back together. A folded towel or toe spacer between the toes makes this easier to feel at first.'),
  ('foot-towel-curl', 'Towel curls', 'Towel', 'intrinsic', 'towel scrunch|toe curls', 'toe-flexion', 'strength',
   'feet|toes|arches', True, 'Beginner', 'Light', False, 40, 20, 15, 'mckeon-2015',
   'Lay a towel flat on the floor under one foot. Scrunch it toward you using only your toes, then reset and repeat. Add a light weight on the far end of the towel to make it harder.'),
@@ -63,9 +58,6 @@ EXERCISES = [
  ('foot-bent-knee-heel-raise', 'Bent-knee heel raises', 'None', 'strength', 'soleus raise|bent knee calf raise', 'plantarflexion', 'strength',
   'calves|ankles', False, 'Beginner', 'Moderate', False, 40, 30, 15, 'achilles-loading-2017',
   'Soften the knees into a slight bend and hold it while you raise and lower onto the balls of the feet. Bending the knee takes the gastrocnemius out and shifts the load onto the soleus, deeper in the calf.'),
- ('foot-heel-raise-toes-elevated', 'Heel raises · toes elevated', 'Towel', 'strength', 'calf raise|toe extension raise', 'plantarflexion', 'strength',
-  'calves|ankles|arches', False, 'Intermediate', 'Moderate', False, 40, 30, 12, 'achilles-loading-2017',
-  'Rest the balls of your feet on a rolled towel or a low step so the toes sit higher than the heels, then raise and lower. The extra toe extension adds plantar-fascia and arch loading to the calf work.'),
  ('foot-tibialis-raise', 'Tibialis raises', 'Wall', 'strength', 'toe raise|shin raise|tib raise', 'dorsiflexion', 'strength',
   'shins|ankles|feet', False, 'Beginner', 'Light', False, 40, 20, 15, 'achilles-loading-2017',
   'Lean your back against a wall, feet a little out in front, and lift the toes and forefoot up off the floor as high as you can, then lower slowly. Trains the tibialis anterior, the dorsiflexor that balances all the calf-raise work.'),
@@ -83,9 +75,6 @@ EXERCISES = [
   'ankles|feet|hips', True, 'Advanced', 'Light', True, 20, 15, 1, 'balance-cai-2024',
   'Stand on one foot and close your eyes once you feel steady. Removing vision forces the small muscles of the foot and ankle to do the balancing. Open your eyes any time you feel unsteady, then reset.'),
  # Stretch / soft tissue
- ('foot-ball-roll', 'Foot rolling on a ball', 'Ball', 'stretch', 'plantar rolling|self massage|arch roll', 'soft-tissue', 'active-mobility',
-  'feet|arches', True, 'Beginner', 'Light', False, 45, 15, 1, 'digiovanni-2006',
-  'Stand or sit and roll the arch of one foot slowly over a ball (a lacrosse or tennis ball works) for 45 s, easing off any tender spot rather than grinding into it, then switch feet.'),
  ('foot-calf-stretch-straight-knee', 'Calf stretch · straight knee', 'Wall', 'stretch', 'gastrocnemius stretch|calf stretch', 'calf-stretch', 'static-stretch',
   'calves|ankles', True, 'Beginner', 'Light', True, 30, 10, 1, 'achilles-loading-2017',
   'Hands on a wall, back leg straight with the heel down, front knee bent. Lean the hips forward until you feel a stretch up the back of the straight leg\'s calf. Hold, then switch legs.'),
@@ -99,10 +88,71 @@ EXERCISES = [
 
 GROUPS = ['mobility', 'intrinsic', 'strength', 'balance', 'stretch']
 
+# researched id -> video exercise that replaces it (video clip + drawing win)
+DUPLICATES = {
+ 'foot-ankle-circles': 'foot-banded-ankle-circles',
+ 'foot-short-foot-hold': 'foot-short-foot',
+ 'foot-toe-splay-lift': 'foot-toe-spread',
+ 'foot-toe-spread-squeeze': 'foot-toe-spread',
+ 'foot-heel-raise-toes-elevated': 'foot-block-heel-raise',
+ 'foot-ball-roll': 'foot-ball-roll',   # same id: the video entry is kept, researched text is carried over
+}
+# kept video id -> [(source id, how-to text carried over from the dropped researched exercise)]
+CARRY = {
+ 'foot-ball-roll': [('digiovanni-2006', 'Researched how-to: stand or sit and roll the arch slowly over a lacrosse or tennis ball for about 45 s per foot, easing off any tender spot rather than grinding into it.')],
+ 'foot-short-foot': [('mckeon-2015', 'Researched how-to: without curling the toes, draw the ball of the foot toward the heel to dome the arch, hold about 10 s, then relax. This is the classic "foot core" exercise for the intrinsic foot muscles (McKeon 2015).')],
+ 'foot-toe-spread': [('mckeon-2015', 'Researched how-to: spread all ten toes as wide as you can and hold 2-3 s. To separate them further, lift just the big toe while the four small toes stay down, then reverse. A toe spacer or folded towel makes it easier to feel.')],
+ 'foot-banded-ankle-circles': [('knee-to-wall-2024', 'Researched how-to: go slowly and make the circle as big as you can without moving the shin, 30 s each direction, then switch feet. Tracing the alphabet with the big toe works the same way. Also works without a band.')],
+ 'foot-block-heel-raise': [('achilles-loading-2017', 'Researched how-to: with the forefoot raised on a block, rise and lower slowly over about 3 s. The extra toe extension adds plantar-fascia and arch loading to the calf work (Baxter 2017 heel-raise progression).')],
+}
+
+# Video set: id -> (group, trainingType, work, rest, reps, hold, name of a movement family alias)
+VIDEO = {
+ 'foot-toe-tip-pivots': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-heel-block-pumps': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-banded-ankle-pumps': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-banded-ankle-circles': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-bent-knee-ankle-pulses': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-weighted-ankle-rocks': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-block-guided-roll': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-block-tip': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-outer-edge-rolls': ('mobility', 'active-mobility', 30, 10, 1),
+ 'foot-short-foot': ('intrinsic', 'control', 20, 10, 1),
+ 'foot-toe-spread': ('intrinsic', 'control', 20, 10, 1),
+ 'foot-toe-lifts': ('intrinsic', 'control', 30, 10, 1),
+ 'foot-ball-toe-curl': ('intrinsic', 'control', 30, 10, 1),
+ 'foot-block-toe-curls': ('intrinsic', 'control', 30, 10, 1),
+ 'foot-block-pickup': ('intrinsic', 'control', 30, 10, 1),
+ 'foot-block-tucked-toes': ('intrinsic', 'control', 30, 10, 1),
+ 'foot-block-heel-raise': ('strength', 'strength', 40, 20, 12),
+ 'foot-block-squeeze-heel-raise': ('strength', 'strength', 40, 20, 12),
+ 'foot-block-squeeze-toe-raise': ('strength', 'strength', 40, 20, 12),
+ 'foot-ball-roll': ('stretch', 'active-mobility', 45, 15, 1),
+ 'foot-calf-foam-roll': ('stretch', 'active-mobility', 45, 15, 1),
+}
+VIDEO_EQUIPMENT = {'foot-banded-ankle-pumps': ['band', 'foam roller'], 'foot-banded-ankle-circles': ['band', 'foam roller']}
+
+def video_entry(e, ext):
+    """Normalise a video-branch entry: playable video media, drawing as thumbnail, taxonomy for classify.py."""
+    group, training, work, rest, reps = VIDEO[e['id']]
+    x = ext[e['id']]
+    e['variants'][0]['type'] = 'video'   # clip plays in the sheet/player; the drawing is the poster and (via cover-art.js) the cover
+    for src, how in CARRY.get(e['id'], []):
+        v = e['variants'][0]
+        if src not in v['additionalSources']: v['additionalSources'].append(src)
+        if how not in v['note']: v['note'] = (v['note'] + ' ' + how).strip()
+    v = e['variants'][0]
+    aliases = ['foot', 'feet', 'ankle', 'ankles', 'toes', 'arch', 'foot exercises', 'ankle mobility', e['name'].lower()]
+    e['taxonomy'] = {'regions': ['feet', 'toes', 'ankles', 'calves'], 'pattern': 'foot control', 'trainingType': training,
+        'unilateral': x['unilateral'], 'aliases': aliases, 'target': 'Legs', 'difficulty': 'Beginner', 'strain': 'Light',
+        'hold': False, 'equipment': VIDEO_EQUIPMENT.get(e['id'], [x['equipment']] if x['equipment'] else []),
+        'dose': {'work': work, 'rest': rest, 'reps': reps, 'cue': ' '.join([x['cue']] + [how for _, how in CARRY.get(e['id'], [])])}}
+    return e
+
 def entries():
     out = []
     for id, name, equipment, group, aliases, pattern, training, regions, uni, level, strain, hold, work, rest, reps, source, how in EXERCISES:
-        out.append({'id': id, 'name': name, 'area': 'Hips & legs', 'kind': 'Foot', 'equipment': equipment, 'level': 'General',
+        out.append({'id': id, 'name': name, 'area': 'Feet & ankles', 'kind': 'Mobility', 'equipment': equipment, 'level': 'General',
             'taxonomy': {'regions': regions.split('|'), 'pattern': pattern, 'trainingType': training, 'unilateral': uni,
                 'aliases': ['foot', 'feet', 'ankle', 'ankles', 'toes', 'arch'] + aliases.split('|'),
                 'target': 'Legs', 'difficulty': level, 'strain': strain, 'hold': hold,
@@ -111,14 +161,28 @@ def entries():
     return out
 
 def pool():
-    """(id, group) pairs in evidence order, for data/sessions.js's footPool."""
-    return [(id, group) for id, name, equipment, group, *_ in EXERCISES]
+    """(id, group) pairs, video set first within each group, for data/sessions.js's footPool."""
+    both = [(id, v[0]) for id, v in VIDEO.items()] + [(id, g) for id, name, equipment, g, *_ in EXERCISES]
+    return sorted(both, key=lambda p: GROUPS.index(p[1]))
+
+def main():
+    ext = {e['id']: e for e in json.loads((ROOT / 'data/foot-extraction.json').read_text())['exercises']}
+    assert set(VIDEO) == set(ext), 'VIDEO table must cover every extracted exercise'
+    assert not (set(DUPLICATES) - {'foot-ball-roll'}) & {id for id, *_ in EXERCISES}, 'dropped duplicates must not be recreated'
+    assert all(v in VIDEO for v in DUPLICATES.values())
+    # normalise the video entries in place, merge the sources, drop any previously created duplicates
+    for path in ['data/extra-exercises.json', 'data/library.json']:
+        data = json.loads((ROOT / path).read_text())
+        by = {e['id']: e for e in data['exercises']}
+        for id in VIDEO: video_entry(by[id], ext)
+        data['exercises'] = [e for e in data['exercises'] if e['id'] not in DUPLICATES or e['id'] in VIDEO]
+        (ROOT / path).write_text(json.dumps(data, ensure_ascii=False, indent=2))
+        if path == 'data/library.json':
+            (ROOT / 'data/library.js').write_text('window.LIBRARY = ' + json.dumps(data, ensure_ascii=False) + ';\n')
+    merge(SOURCES, [e for e in entries()])
+    print(f'{len(VIDEO)} video + {len(EXERCISES)} researched = {len(VIDEO) + len(EXERCISES)} foot exercises.')
 
 if __name__ == '__main__':
-    ex = entries()
-    groups = {id: g for id, g in pool()}
-    assert set(GROUPS) == set(groups.values())
-    merge(SOURCES, ex)
-    print(f'Added {len(EXERCISES)} foot & ankle exercises across {len(GROUPS)} groups.')
+    main()
     print('footPool:')
     print(',\n'.join(f" ['{id}','{g}']" for id, g in pool()))

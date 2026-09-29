@@ -93,7 +93,7 @@ Added September 25, 2026. Equipment: a hangboard and a pull-up bar. Open the **C
 
 ## Foot training
 
-Added September 26, 2026. Equipment: none, or a towel/small ball/resistance band/wall as noted per exercise. Open the **Feet** tile — it works like Hip Opener: pick a time and a number of exercises, and the app draws at random from a 20-exercise foot & ankle pool, ordered mobility → intrinsic → strength → balance → stretch so a session flows sensibly. No illustrations yet (drawings arrive later); each exercise is an instruction card with a how-to note.
+Added September 26, 2026. Equipment: none, or a towel/small ball/resistance band/wall as noted per exercise. Open the **Feet** tile — it works like Hip Opener: pick a time and a number of exercises, and the app draws at random from a 35-exercise foot & ankle pool (21 video-extracted exercises with a clip and drawing, see FOOT-EXERCISES.md, plus 14 researched instruction-only ones), ordered mobility → intrinsic → strength → balance → stretch so a session flows sensibly. The video exercises play their clip and show a drawing; the researched ones are instruction cards with a how-to note and a placeholder icon. Where a researched exercise duplicated a video one (ankle circles, short foot, toe splay/spread, toe-elevated heel raise, ball rolling), the video exercise was kept and the researched how-to and citation were merged into it (`scripts/add_feet.py`).
 
 ### What the evidence supports
 
@@ -109,6 +109,6 @@ Added September 26, 2026. Equipment: none, or a towel/small ball/resistance band
 
 - **Group order, not a fixed routine.** The pool's `group` field (mobility, intrinsic, strength, balance, stretch) sorts whatever the generator draws, so a 4-exercise session and a 10-exercise session both build sensibly instead of jumping randomly between a stretch and a balance drill.
 - **Own dose per exercise.** Unlike Hip Opener's fixed 6-minute hold, each foot/ankle exercise keeps its own work time, rest and (for rep-based moves) target reps from `data/classification.js`, since a 10-second short-foot hold and a 45-second ball roll are not interchangeable.
-- **Optional warm-up, off by default.** When turned on, it runs ankle circles and the knee-to-wall drill up front and leaves them out of the random draw so they never appear twice in one session; with the toggle off, they can still be drawn into the main list like any other mobility-group exercise.
+- **Optional warm-up, off by default.** When turned on, it runs toe-tip ankle pivots and the knee-to-wall drill up front and leaves them out of the random draw so they never appear twice in one session; with the toggle off, they can still be drawn into the main list like any other mobility-group exercise.
 - **Time budget.** `maxCount` bounds the exercise count using the single most time-consuming exercise in the pool as a safe (worst-case) per-exercise cost, the same conservative approach Hip Opener uses for one-sided poses, so a session is never generated over the time available.
-- Every exercise is an `instruction` variant with a shared neutral foot icon (`media/examples/foot.svg`) until illustrations are ready.
+- Researched exercises are `instruction` variants with a shared neutral foot icon (`media/examples/foot.svg`); video exercises use their drawing and clip.

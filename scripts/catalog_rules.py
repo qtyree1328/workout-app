@@ -92,6 +92,7 @@ def enrich(data,metadata):
         if training=='skill':m['dose']['cue']='Practice only a familiar progression. Stop before technique deteriorates.'
         if training in ['finger-strength','finger-endurance','power']:m['dose']['basis']='Published climbing protocol; see source'
         if e['variants'][0].get('type') in ['image','instruction','illustration']:m['dose']['cue']=e['variants'][0]['note']
+        if x and x.get('dose',{}).get('cue'):m['dose']['cue']=x['dose']['cue']  # explicit cue (e.g. video-extracted foot exercises)
         goals=e.get('climbing',{}).get('goals') or CLIMBING_EXISTING.get(id)
         if goals:m['climbing']=goals
         if 'Warm-up' in (goals or []):m['phase']=['warm-up','main']
@@ -101,5 +102,6 @@ def enrich(data,metadata):
         m['tags']=sorted(set(t['regions']+[t['pattern'],training,e['kind'].lower(),e['equipment'].lower(),m['target'].lower(),m['difficulty'].lower(),m['strain'].lower()]+aliases+equipmentAliases.get(e['equipment'],[])+(['climbing']+[g.lower() for g in goals] if goals else [])))
         if 'upper back' in t['regions'] or 'lower back' in t['regions']:m['tags'].append('back')
         m['equipment']=[x for x in {'None':[],'Dowel':['bar'],'Resistance band':['band'],'Yoga block':['block'],'Yoga blocks':['block'],'Band + block':['band','block'],'Pull-up bar':['pull-up bar'],'Chair':['chair'],'Stable support':['chair'],'Wall':['wall'],'Light weights':['weights'],'Bench':['bench'],'Band + bench':['band','bench'],'Weighted dowel':['weighted bar'],'Hangboard':['hangboard'],'Strap':['strap'],'Table':['table'],'Pole':['pole']}.get(e['equipment'],[e['equipment'].lower()])]
+        if x and 'equipment' in x:m['equipment']=x['equipment']
         if e.get('program'):m['equipment']=[]  # pose-chart props are optional
     return metadata

@@ -105,6 +105,38 @@
       "media": []
     },
     {
+      "id": "2103541666112295254",
+      "author": "RealGemsfinder",
+      "url": "https://x.com/RealGemsfinder/status/2103541666112295254",
+      "text": "Feet Exercises At Home",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2103789206204232021",
+      "author": "NutritionGuide_",
+      "url": "https://x.com/NutritionGuide_/status/2103789206204232021",
+      "text": "These exercises are very effective 👇",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2027354346866806854",
+      "author": "CadioArena",
+      "url": "https://x.com/CadioArena/status/2027354346866806854",
+      "text": "8 Ankle Stability Exercises for Strong & Healthy Feet 👣🔥",
+      "status": "reviewed",
+      "media": []
+    },
+    {
+      "id": "2103684361417802003",
+      "author": "PostureBluprint",
+      "url": "https://x.com/PostureBluprint/status/2103684361417802003",
+      "text": "Ankles feeling stiff? Start here\n\nA little mobility, a little loading, and a little control can go a long way.\n\nSave this for your next warm up or simply do it on its own",
+      "status": "reviewed",
+      "media": []
+    },
+    {
       "id": "mckeon-2015",
       "author": "McKeon, Hertel, Bramble & Davis (2015), Br J Sports Med",
       "url": "https://pubmed.ncbi.nlm.nih.gov/24659509/",
@@ -3255,19 +3287,108 @@
       ]
     },
     {
-      "id": "foot-ankle-circles",
-      "name": "Ankle circles",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "None",
+      "id": "foot-ball-toe-curl",
+      "name": "Toe curls over a ball",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Ball",
       "level": "General",
+      "variants": [
+        {
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-ball-toe-curl.webp",
+          "thumbnail": "media/covers/foot-ball-toe-curl.webp",
+          "clip": "media/clips/foot-ball-toe-curl.mp4",
+          "label": "Toe curls over a ball",
+          "named": false,
+          "prescription": "",
+          "note": "Curl and release the toes over a small ball while the heel stays down. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 0,
+          "end": 3.6,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
       "taxonomy": {
         "regions": [
+          "feet",
+          "toes",
           "ankles",
-          "calves",
-          "feet"
+          "calves"
         ],
-        "pattern": "ankle-circles",
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "toe curls over a ball"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "ball"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Curl and release the toes over a small ball while the heel stays down."
+        }
+      }
+    },
+    {
+      "id": "foot-ball-roll",
+      "name": "Sole roll over a ball",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Ball",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-ball-roll.webp",
+          "thumbnail": "media/covers/foot-ball-roll.webp",
+          "clip": "media/clips/foot-ball-roll.mp4",
+          "label": "Sole roll over a ball",
+          "named": false,
+          "prescription": "",
+          "note": "Roll a small ball along the sole with light pressure and a slow ankle movement. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed. Researched how-to: stand or sit and roll the arch slowly over a lacrosse or tennis ball for about 45 s per foot, easing off any tender spot rather than grinding into it.",
+          "credit": "Exercise illustration",
+          "start": 3.8,
+          "end": 7,
+          "sourcePanel": null,
+          "additionalSources": [
+            {
+              "source": "2103684361417802003",
+              "start": 1.5,
+              "end": 3.9,
+              "panel": null,
+              "note": "Same sole-rolling movement shown with a small foot roller."
+            },
+            "digiovanni-2006"
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
         "trainingType": "active-mobility",
         "unilateral": true,
         "aliases": [
@@ -3277,40 +3398,1202 @@
           "ankles",
           "toes",
           "arch",
-          "ankle circles",
-          "alphabet",
-          "warm up"
+          "foot exercises",
+          "ankle mobility",
+          "sole roll over a ball"
         ],
         "target": "Legs",
         "difficulty": "Beginner",
         "strain": "Light",
         "hold": false,
+        "equipment": [
+          "ball"
+        ],
+        "dose": {
+          "work": 45,
+          "rest": 15,
+          "reps": 1,
+          "cue": "Roll a small ball along the sole with light pressure and a slow ankle movement. Researched how-to: stand or sit and roll the arch slowly over a lacrosse or tennis ball for about 45 s per foot, easing off any tender spot rather than grinding into it."
+        }
+      }
+    },
+    {
+      "id": "foot-short-foot",
+      "name": "Short-foot arch lift",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-short-foot.webp",
+          "thumbnail": "media/covers/foot-short-foot.webp",
+          "clip": "media/clips/foot-short-foot.mp4",
+          "label": "Short-foot arch lift",
+          "named": false,
+          "prescription": "",
+          "note": "Keep the toes long and heel down; gently shorten the foot to lift the arch, then release. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed. Researched how-to: without curling the toes, draw the ball of the foot toward the heel to dome the arch, hold about 10 s, then relax. This is the classic \"foot core\" exercise for the intrinsic foot muscles (McKeon 2015).",
+          "credit": "Exercise illustration",
+          "start": 7.2,
+          "end": 10,
+          "sourcePanel": null,
+          "additionalSources": [
+            "mckeon-2015"
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "short-foot arch lift"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [],
+        "dose": {
+          "work": 20,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Keep the toes long and heel down; gently shorten the foot to lift the arch, then release. Researched how-to: without curling the toes, draw the ball of the foot toward the heel to dome the arch, hold about 10 s, then relax. This is the classic \"foot core\" exercise for the intrinsic foot muscles (McKeon 2015)."
+        }
+      }
+    },
+    {
+      "id": "foot-toe-lifts",
+      "name": "Standing toe lifts",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-toe-lifts.webp",
+          "thumbnail": "media/covers/foot-toe-lifts.webp",
+          "clip": "media/clips/foot-toe-lifts.mp4",
+          "label": "Standing toe lifts",
+          "named": false,
+          "prescription": "",
+          "note": "Keep heels and the balls of the feet down while lifting and lowering the toes. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 10.1,
+          "end": 14,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "standing toe lifts"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [],
         "dose": {
           "work": 30,
           "rest": 10,
-          "reps": 1
+          "reps": 1,
+          "cue": "Keep heels and the balls of the feet down while lifting and lowering the toes."
         }
-      },
+      }
+    },
+    {
+      "id": "foot-toe-tip-pivots",
+      "name": "Toe-tip ankle pivots",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
       "variants": [
         {
-          "source": "knee-to-wall-2024",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Ankle circles",
-          "named": true,
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-toe-tip-pivots.webp",
+          "thumbnail": "media/covers/foot-toe-tip-pivots.webp",
+          "clip": "media/clips/foot-toe-tip-pivots.mp4",
+          "label": "Toe-tip ankle pivots",
+          "named": false,
           "prescription": "",
-          "note": "Lift one foot and slowly circle the ankle, 30 s each direction, then switch feet. Go slowly and make the circle as big as you can without moving the shin. Tracing the alphabet with your big toe works the same way.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
+          "note": "With very light pressure through the toe tips, slowly turn the raised heel side to side. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 14.5,
+          "end": 18.7,
+          "sourcePanel": null,
+          "additionalSources": []
         }
-      ]
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "toe-tip ankle pivots"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "With very light pressure through the toe tips, slowly turn the raised heel side to side."
+        }
+      }
+    },
+    {
+      "id": "foot-toe-spread",
+      "name": "Toe spreading",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103541666112295254",
+          "type": "video",
+          "image": "media/covers/foot-toe-spread.webp",
+          "thumbnail": "media/covers/foot-toe-spread.webp",
+          "clip": "media/clips/foot-toe-spread.mp4",
+          "label": "Toe spreading",
+          "named": false,
+          "prescription": "",
+          "note": "Spread the toes apart, then relax without forcing the movement. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed. Researched how-to: spread all ten toes as wide as you can and hold 2-3 s. To separate them further, lift just the big toe while the four small toes stay down, then reverse. A toe spacer or folded towel makes it easier to feel.",
+          "credit": "Exercise illustration",
+          "start": 19,
+          "end": 23.1,
+          "sourcePanel": null,
+          "additionalSources": [
+            "mckeon-2015"
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "toe spreading"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [],
+        "dose": {
+          "work": 20,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Spread the toes apart, then relax without forcing the movement. Researched how-to: spread all ten toes as wide as you can and hold 2-3 s. To separate them further, lift just the big toe while the four small toes stay down, then reverse. A toe spacer or folded towel makes it easier to feel."
+        }
+      }
+    },
+    {
+      "id": "foot-heel-block-pumps",
+      "name": "Heel-supported ankle pumps",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103789206204232021",
+          "type": "video",
+          "image": "media/covers/foot-heel-block-pumps.webp",
+          "thumbnail": "media/covers/foot-heel-block-pumps.webp",
+          "clip": "media/clips/foot-heel-block-pumps.mp4",
+          "label": "Heel-supported ankle pumps",
+          "named": false,
+          "prescription": "",
+          "note": "Rest the heel on a low block and slowly lower and lift the forefoot. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 0,
+          "end": 7.6,
+          "sourcePanel": 1,
+          "additionalSources": [
+            {
+              "source": "2027354346866806854",
+              "start": 13,
+              "end": 18,
+              "panel": null
+            }
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "heel-supported ankle pumps"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Rest the heel on a low block and slowly lower and lift the forefoot."
+        }
+      }
+    },
+    {
+      "id": "foot-block-guided-roll",
+      "name": "Block-guided heel roll",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103789206204232021",
+          "type": "video",
+          "image": "media/covers/foot-block-guided-roll.webp",
+          "thumbnail": "media/covers/foot-block-guided-roll.webp",
+          "clip": "media/clips/foot-block-guided-roll.mp4",
+          "label": "Block-guided heel roll",
+          "named": false,
+          "prescription": "",
+          "note": "With a block alongside the inner foot, gently lift and roll the heel while the forefoot stays in contact. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 0,
+          "end": 7.6,
+          "sourcePanel": 2,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "block-guided heel roll"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "With a block alongside the inner foot, gently lift and roll the heel while the forefoot stays in contact."
+        }
+      }
+    },
+    {
+      "id": "foot-block-heel-raise",
+      "name": "Forefoot-on-block heel raise",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-heel-raise.webp",
+          "thumbnail": "media/covers/foot-block-heel-raise.webp",
+          "clip": "media/clips/foot-block-heel-raise.mp4",
+          "label": "Forefoot-on-block heel raise",
+          "named": false,
+          "prescription": "",
+          "note": "Support the forefoot on a low block and slowly raise and lower the heel. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed. Researched how-to: with the forefoot raised on a block, rise and lower slowly over about 3 s. The extra toe extension adds plantar-fascia and arch loading to the calf work (Baxter 2017 heel-raise progression).",
+          "credit": "Exercise illustration",
+          "start": 9,
+          "end": 13,
+          "sourcePanel": null,
+          "additionalSources": [
+            {
+              "source": "2103789206204232021",
+              "start": 0,
+              "end": 7.6,
+              "panel": 3
+            },
+            "achilles-loading-2017"
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "strength",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "forefoot-on-block heel raise"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 12,
+          "cue": "Support the forefoot on a low block and slowly raise and lower the heel. Researched how-to: with the forefoot raised on a block, rise and lower slowly over about 3 s. The extra toe extension adds plantar-fascia and arch loading to the calf work (Baxter 2017 heel-raise progression)."
+        }
+      }
+    },
+    {
+      "id": "foot-block-tip",
+      "name": "Forefoot block tip",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103789206204232021",
+          "type": "video",
+          "image": "media/covers/foot-block-tip.webp",
+          "thumbnail": "media/covers/foot-block-tip.webp",
+          "clip": "media/clips/foot-block-tip.mp4",
+          "label": "Forefoot block tip",
+          "named": false,
+          "prescription": "",
+          "note": "Lift the forefoot to gently tip the adjacent lightweight block, then lower it under control. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 0,
+          "end": 7.6,
+          "sourcePanel": 4,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "forefoot block tip"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Lift the forefoot to gently tip the adjacent lightweight block, then lower it under control."
+        }
+      }
+    },
+    {
+      "id": "foot-block-pickup",
+      "name": "Two-foot block pickup",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-pickup.webp",
+          "thumbnail": "media/covers/foot-block-pickup.webp",
+          "clip": "media/clips/foot-block-pickup.mp4",
+          "label": "Two-foot block pickup",
+          "named": false,
+          "prescription": "",
+          "note": "Place a lightweight block between the feet and squeeze inward to lift it slightly, then lower. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 0,
+          "end": 4.1,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "two-foot block pickup"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Place a lightweight block between the feet and squeeze inward to lift it slightly, then lower."
+        }
+      }
+    },
+    {
+      "id": "foot-block-toe-curls",
+      "name": "Toe curls over a block edge",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-toe-curls.webp",
+          "thumbnail": "media/covers/foot-block-toe-curls.webp",
+          "clip": "media/clips/foot-block-toe-curls.mp4",
+          "label": "Toe curls over a block edge",
+          "named": false,
+          "prescription": "",
+          "note": "Support the foot on the block with toes over the front edge; curl the toes downward and release. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 4.2,
+          "end": 8.9,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "toe curls over a block edge"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Support the foot on the block with toes over the front edge; curl the toes downward and release."
+        }
+      }
+    },
+    {
+      "id": "foot-block-squeeze-heel-raise",
+      "name": "Block-squeeze heel raises",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-squeeze-heel-raise.webp",
+          "thumbnail": "media/covers/foot-block-squeeze-heel-raise.webp",
+          "clip": "media/clips/foot-block-squeeze-heel-raise.mp4",
+          "label": "Block-squeeze heel raises",
+          "named": false,
+          "prescription": "",
+          "note": "Hold a lightweight block between the ankles while slowly raising and lowering both heels. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 18,
+          "end": 22,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "block-squeeze heel raises"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 12,
+          "cue": "Hold a lightweight block between the ankles while slowly raising and lowering both heels."
+        }
+      }
+    },
+    {
+      "id": "foot-block-tucked-toes",
+      "name": "Tucked-toe rock on a block",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-tucked-toes.webp",
+          "thumbnail": "media/covers/foot-block-tucked-toes.webp",
+          "clip": "media/clips/foot-block-tucked-toes.mp4",
+          "label": "Tucked-toe rock on a block",
+          "named": false,
+          "prescription": "",
+          "note": "Rest the curled toe surfaces lightly on the block and gently rock the raised heel; use only a small comfortable range. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 22.1,
+          "end": 25.5,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "control",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "tucked-toe rock on a block"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Rest the curled toe surfaces lightly on the block and gently rock the raised heel; use only a small comfortable range."
+        }
+      }
+    },
+    {
+      "id": "foot-block-squeeze-toe-raise",
+      "name": "Block-squeeze forefoot raises",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Block",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-block-squeeze-toe-raise.webp",
+          "thumbnail": "media/covers/foot-block-squeeze-toe-raise.webp",
+          "clip": "media/clips/foot-block-squeeze-toe-raise.mp4",
+          "label": "Block-squeeze forefoot raises",
+          "named": false,
+          "prescription": "",
+          "note": "Keep the block between the ankles and heels down; raise and lower the forefeet. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 25.7,
+          "end": 30.5,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "strength",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "block-squeeze forefoot raises"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "block"
+        ],
+        "dose": {
+          "work": 40,
+          "rest": 20,
+          "reps": 12,
+          "cue": "Keep the block between the ankles and heels down; raise and lower the forefeet."
+        }
+      }
+    },
+    {
+      "id": "foot-outer-edge-rolls",
+      "name": "Outer-edge foot rolls",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "None",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2027354346866806854",
+          "type": "video",
+          "image": "media/covers/foot-outer-edge-rolls.webp",
+          "thumbnail": "media/covers/foot-outer-edge-rolls.webp",
+          "clip": "media/clips/foot-outer-edge-rolls.mp4",
+          "label": "Outer-edge foot rolls",
+          "named": false,
+          "prescription": "",
+          "note": "Gently roll toward the outside borders of the feet and return to flat feet; keep the movement small. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 30.7,
+          "end": 35.8,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "outer-edge foot rolls"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Gently roll toward the outside borders of the feet and return to flat feet; keep the movement small."
+        }
+      }
+    },
+    {
+      "id": "foot-calf-foam-roll",
+      "name": "Calf foam rolling",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Foam Roller",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103684361417802003",
+          "type": "video",
+          "image": "media/covers/foot-calf-foam-roll.webp",
+          "thumbnail": "media/covers/foot-calf-foam-roll.webp",
+          "clip": "media/clips/foot-calf-foam-roll.mp4",
+          "label": "Calf foam rolling",
+          "named": false,
+          "prescription": "",
+          "note": "Support yourself on your hands with the calves over the roller; roll slowly along the calf muscles. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 4,
+          "end": 7.8,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": false,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "calf foam rolling"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "foam roller"
+        ],
+        "dose": {
+          "work": 45,
+          "rest": 15,
+          "reps": 1,
+          "cue": "Support yourself on your hands with the calves over the roller; roll slowly along the calf muscles."
+        }
+      }
+    },
+    {
+      "id": "foot-banded-ankle-pumps",
+      "name": "Banded ankle pumps",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Band",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103684361417802003",
+          "type": "video",
+          "image": "media/covers/foot-banded-ankle-pumps.webp",
+          "thumbnail": "media/covers/foot-banded-ankle-pumps.webp",
+          "clip": "media/clips/foot-banded-ankle-pumps.mp4",
+          "label": "Banded ankle pumps",
+          "named": false,
+          "prescription": "",
+          "note": "Loop the band around the forefoot and hold the ends. Slowly point and flex the ankle with the lower leg supported on a roller. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 8,
+          "end": 10.9,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "banded ankle pumps"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "band",
+          "foam roller"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Loop the band around the forefoot and hold the ends. Slowly point and flex the ankle with the lower leg supported on a roller."
+        }
+      }
+    },
+    {
+      "id": "foot-banded-ankle-circles",
+      "name": "Banded ankle circles",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Band",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103684361417802003",
+          "type": "video",
+          "image": "media/covers/foot-banded-ankle-circles.webp",
+          "thumbnail": "media/covers/foot-banded-ankle-circles.webp",
+          "clip": "media/clips/foot-banded-ankle-circles.mp4",
+          "label": "Banded ankle circles",
+          "named": false,
+          "prescription": "",
+          "note": "With the band around the forefoot and the lower leg supported, trace slow controlled ankle circles in both directions. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed. Researched how-to: go slowly and make the circle as big as you can without moving the shin, 30 s each direction, then switch feet. Tracing the alphabet with the big toe works the same way. Also works without a band.",
+          "credit": "Exercise illustration",
+          "start": 11,
+          "end": 14.8,
+          "sourcePanel": null,
+          "additionalSources": [
+            "knee-to-wall-2024"
+          ]
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "banded ankle circles"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "band",
+          "foam roller"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "With the band around the forefoot and the lower leg supported, trace slow controlled ankle circles in both directions. Researched how-to: go slowly and make the circle as big as you can without moving the shin, 30 s each direction, then switch feet. Tracing the alphabet with the big toe works the same way. Also works without a band."
+        }
+      }
+    },
+    {
+      "id": "foot-weighted-ankle-rocks",
+      "name": "Weighted ankle rocks",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Weights",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103684361417802003",
+          "type": "video",
+          "image": "media/covers/foot-weighted-ankle-rocks.webp",
+          "thumbnail": "media/covers/foot-weighted-ankle-rocks.webp",
+          "clip": "media/clips/foot-weighted-ankle-rocks.mp4",
+          "label": "Weighted ankle rocks",
+          "named": false,
+          "prescription": "",
+          "note": "Half kneel with a light kettlebell resting on the front thigh near the knee. Keep the front heel down while gently moving the knee forward over the toes. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 15,
+          "end": 18.8,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "weighted ankle rocks"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "weights"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Half kneel with a light kettlebell resting on the front thigh near the knee. Keep the front heel down while gently moving the knee forward over the toes."
+        }
+      }
+    },
+    {
+      "id": "foot-bent-knee-ankle-pulses",
+      "name": "Bent-knee ankle pulses",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
+      "equipment": "Wall",
+      "level": "General",
+      "variants": [
+        {
+          "source": "2103684361417802003",
+          "type": "video",
+          "image": "media/covers/foot-bent-knee-ankle-pulses.webp",
+          "thumbnail": "media/covers/foot-bent-knee-ankle-pulses.webp",
+          "clip": "media/clips/foot-bent-knee-ankle-pulses.mp4",
+          "label": "Bent-knee ankle pulses",
+          "named": false,
+          "prescription": "",
+          "note": "Use the wall for balance, keep the standing knee bent, and make small quick heel lifts with the ball of that foot staying on the floor. Descriptive name inferred from the video. Use light pressure and a comfortable range; support your balance as needed.",
+          "credit": "Exercise illustration",
+          "start": 19,
+          "end": 23.5,
+          "sourcePanel": null,
+          "additionalSources": []
+        }
+      ],
+      "taxonomy": {
+        "regions": [
+          "feet",
+          "toes",
+          "ankles",
+          "calves"
+        ],
+        "pattern": "foot control",
+        "trainingType": "active-mobility",
+        "unilateral": true,
+        "aliases": [
+          "foot",
+          "feet",
+          "ankle",
+          "ankles",
+          "toes",
+          "arch",
+          "foot exercises",
+          "ankle mobility",
+          "bent-knee ankle pulses"
+        ],
+        "target": "Legs",
+        "difficulty": "Beginner",
+        "strain": "Light",
+        "hold": false,
+        "equipment": [
+          "wall"
+        ],
+        "dose": {
+          "work": 30,
+          "rest": 10,
+          "reps": 1,
+          "cue": "Use the wall for balance, keep the standing knee bent, and make small quick heel lifts with the ball of that foot staying on the floor."
+        }
+      }
     },
     {
       "id": "foot-knee-to-wall-mobilization",
       "name": "Knee-to-wall ankle mobilization",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Wall",
       "level": "General",
       "taxonomy": {
@@ -3358,163 +4641,10 @@
       ]
     },
     {
-      "id": "foot-short-foot-hold",
-      "name": "Short foot hold",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "None",
-      "level": "General",
-      "taxonomy": {
-        "regions": [
-          "feet",
-          "arches"
-        ],
-        "pattern": "arch-doming",
-        "trainingType": "isometric",
-        "unilateral": true,
-        "aliases": [
-          "foot",
-          "feet",
-          "ankle",
-          "ankles",
-          "toes",
-          "arch",
-          "foot doming",
-          "arch lift",
-          "foot core"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Light",
-        "hold": true,
-        "dose": {
-          "work": 10,
-          "rest": 20,
-          "reps": 1
-        }
-      },
-      "variants": [
-        {
-          "source": "mckeon-2015",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Short foot hold",
-          "named": true,
-          "prescription": "",
-          "note": "Barefoot, stand or sit with toes flat and relaxed. Without curling the toes, draw the ball of the foot toward the heel to gently dome the arch. Hold 10 s, relax, repeat. This is the classic \"foot core\" exercise for the intrinsic foot muscles.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "foot-toe-splay-lift",
-      "name": "Toe splay & lift",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "None",
-      "level": "General",
-      "taxonomy": {
-        "regions": [
-          "feet",
-          "toes"
-        ],
-        "pattern": "toe-splay",
-        "trainingType": "control",
-        "unilateral": false,
-        "aliases": [
-          "foot",
-          "feet",
-          "ankle",
-          "ankles",
-          "toes",
-          "arch",
-          "toe yoga",
-          "toe splay",
-          "big toe lift"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": false,
-        "dose": {
-          "work": 30,
-          "rest": 15,
-          "reps": 10
-        }
-      },
-      "variants": [
-        {
-          "source": "mckeon-2015",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Toe splay & lift",
-          "named": true,
-          "prescription": "",
-          "note": "Spread the toes apart as wide as you can, then lift just the big toe while the other four stay down, then reverse: lift the four small toes while the big toe stays down. Slow and controlled — the separation is the hard part.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
-      "id": "foot-toe-spread-squeeze",
-      "name": "Toe spread & squeeze",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "None",
-      "level": "General",
-      "taxonomy": {
-        "regions": [
-          "feet",
-          "toes"
-        ],
-        "pattern": "toe-splay",
-        "trainingType": "control",
-        "unilateral": false,
-        "aliases": [
-          "foot",
-          "feet",
-          "ankle",
-          "ankles",
-          "toes",
-          "arch",
-          "toe spacer",
-          "toe splay",
-          "toe abduction"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": false,
-        "dose": {
-          "work": 30,
-          "rest": 15,
-          "reps": 10
-        }
-      },
-      "variants": [
-        {
-          "source": "mckeon-2015",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Toe spread & squeeze",
-          "named": true,
-          "prescription": "",
-          "note": "Spread all ten toes as wide apart as possible and hold for 2–3 s, then relax and let them come back together. A folded towel or toe spacer between the toes makes this easier to feel at first.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
       "id": "foot-towel-curl",
       "name": "Towel curls",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Towel",
       "level": "General",
       "taxonomy": {
@@ -3564,8 +4694,8 @@
     {
       "id": "foot-marble-pickup",
       "name": "Marble pickups",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Ball",
       "level": "General",
       "taxonomy": {
@@ -3616,8 +4746,8 @@
     {
       "id": "foot-double-heel-raise",
       "name": "Double-leg heel raises",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -3666,8 +4796,8 @@
     {
       "id": "foot-single-heel-raise",
       "name": "Single-leg heel raises",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -3716,8 +4846,8 @@
     {
       "id": "foot-bent-knee-heel-raise",
       "name": "Bent-knee heel raises",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -3764,61 +4894,10 @@
       ]
     },
     {
-      "id": "foot-heel-raise-toes-elevated",
-      "name": "Heel raises · toes elevated",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "Towel",
-      "level": "General",
-      "taxonomy": {
-        "regions": [
-          "calves",
-          "ankles",
-          "arches"
-        ],
-        "pattern": "plantarflexion",
-        "trainingType": "strength",
-        "unilateral": false,
-        "aliases": [
-          "foot",
-          "feet",
-          "ankle",
-          "ankles",
-          "toes",
-          "arch",
-          "calf raise",
-          "toe extension raise"
-        ],
-        "target": "Legs",
-        "difficulty": "Intermediate",
-        "strain": "Moderate",
-        "hold": false,
-        "dose": {
-          "work": 40,
-          "rest": 30,
-          "reps": 12
-        }
-      },
-      "variants": [
-        {
-          "source": "achilles-loading-2017",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Heel raises · toes elevated",
-          "named": true,
-          "prescription": "",
-          "note": "Rest the balls of your feet on a rolled towel or a low step so the toes sit higher than the heels, then raise and lower. The extra toe extension adds plantar-fascia and arch loading to the calf work.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
       "id": "foot-tibialis-raise",
       "name": "Tibialis raises",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Wall",
       "level": "General",
       "taxonomy": {
@@ -3869,8 +4948,8 @@
     {
       "id": "foot-band-eversion-inversion",
       "name": "Ankle eversion & inversion with band",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Band",
       "level": "General",
       "taxonomy": {
@@ -3921,8 +5000,8 @@
     {
       "id": "foot-toe-heel-walks",
       "name": "Toe & heel walks in place",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -3974,8 +5053,8 @@
     {
       "id": "foot-single-leg-balance",
       "name": "Single-leg balance",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -4026,8 +5105,8 @@
     {
       "id": "foot-single-leg-balance-eyes-closed",
       "name": "Single-leg balance · eyes closed",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {
@@ -4076,61 +5155,10 @@
       ]
     },
     {
-      "id": "foot-ball-roll",
-      "name": "Foot rolling on a ball",
-      "area": "Hips & legs",
-      "kind": "Foot",
-      "equipment": "Ball",
-      "level": "General",
-      "taxonomy": {
-        "regions": [
-          "feet",
-          "arches"
-        ],
-        "pattern": "soft-tissue",
-        "trainingType": "active-mobility",
-        "unilateral": true,
-        "aliases": [
-          "foot",
-          "feet",
-          "ankle",
-          "ankles",
-          "toes",
-          "arch",
-          "plantar rolling",
-          "self massage",
-          "arch roll"
-        ],
-        "target": "Legs",
-        "difficulty": "Beginner",
-        "strain": "Light",
-        "hold": false,
-        "dose": {
-          "work": 45,
-          "rest": 15,
-          "reps": 1
-        }
-      },
-      "variants": [
-        {
-          "source": "digiovanni-2006",
-          "type": "instruction",
-          "thumbnail": "media/examples/foot.svg",
-          "label": "Foot rolling on a ball",
-          "named": true,
-          "prescription": "",
-          "note": "Stand or sit and roll the arch of one foot slowly over a ball (a lacrosse or tennis ball works) for 45 s, easing off any tender spot rather than grinding into it, then switch feet.",
-          "credit": "Instruction",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
       "id": "foot-calf-stretch-straight-knee",
       "name": "Calf stretch · straight knee",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Wall",
       "level": "General",
       "taxonomy": {
@@ -4179,8 +5207,8 @@
     {
       "id": "foot-calf-stretch-bent-knee",
       "name": "Calf stretch · bent knee",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "Wall",
       "level": "General",
       "taxonomy": {
@@ -4229,8 +5257,8 @@
     {
       "id": "foot-plantar-fascia-stretch",
       "name": "Plantar fascia stretch",
-      "area": "Hips & legs",
-      "kind": "Foot",
+      "area": "Feet & ankles",
+      "kind": "Mobility",
       "equipment": "None",
       "level": "General",
       "taxonomy": {

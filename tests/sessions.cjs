@@ -200,6 +200,24 @@ for (const minutes of FOOT_MINUTES) {
   }
 }
 
+// Pool is exactly the foot-* catalog (union of the video and researched sets), each in a known group.
+{
+  const catalogFoot = library.exercises.filter(e => e.id.startsWith('foot-')).map(e => e.id).sort();
+  assert.deepEqual([...footIds].sort(), catalogFoot, 'footPool should contain every foot-* exercise exactly once');
+  assert.equal(footPool.length, footIds.size, 'footPool ids unique');
+  for (const p of footPool) assert(footGroups.includes(p.group), `footPool: "${p.id}" has unknown group "${p.group}"`);
+  for (const g of footGroups) assert(footPool.some(p => p.group === g), `footPool: group "${g}" is empty`);
+  for (const p of footPool) {
+    const d = meta[p.id].dose;
+    assert(d.workSeconds >= 10 && d.restSeconds >= 5, `footPool: "${p.id}" needs a sensible work/rest dose`);
+  }
+  // The three video-branch sessions live under Mobility -> "Feet & ankles" with intensity 1.
+  const ankleSessions = sessions.filter(s => (s.focus || []).includes('Feet & ankles'));
+  assert.equal(ankleSessions.length, 3, 'three Feet & ankles sessions');
+  for (const s of ankleSessions) { assert.equal(s.category, 'mobility'); assert.equal(s.intensity, 1); }
+  assert(catById.mobility.focus.includes('Feet & ankles'), 'mobility focus chip "Feet & ankles"');
+}
+
 // `keep` always keeps the given exercises.
 {
   const keep = [footPool[0].id, footPool[5].id];
