@@ -7,7 +7,7 @@
    Media (clips, covers, poses, thumbs, examples, climbing) lives in its own cache that is
    never versioned or purged by updates: cache-first, filled on first use or by the
    "Download all media" button in Settings. */
-const VERSION='2026-09-30.2';
+const VERSION='2026-09-30.3';
 const SHELL_CACHE='crux-shell-'+VERSION;
 const MEDIA_CACHE='crux-media-v1';
 const SDK_CACHE='crux-sdk-v1';

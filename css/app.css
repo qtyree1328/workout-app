@@ -459,14 +459,13 @@
  linear-gradient(160deg,color-mix(in srgb,var(--cc) 17%,var(--paper)) 0%,color-mix(in srgb,var(--cc) 7%,var(--paper)) 55%,color-mix(in srgb,var(--cc) 13%,var(--paper)) 100%)}
 .cv-lines{position:absolute;inset:0;color:var(--cc);opacity:.2;pointer-events:none}
 .cv-floor{position:absolute;left:22%;right:22%;bottom:10%;height:12%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--cc) 22%,transparent),transparent);pointer-events:none}
-.cv-slide{position:absolute;inset:0;visibility:hidden;mix-blend-mode:multiply}
-.cv-slide.is-cur{visibility:visible}
-.cv-slide img{filter:brightness(1.03);width:100%;height:100%;object-fit:contain;padding:6% 8% 11%;pointer-events:none;-webkit-user-drag:none}
-.cv-dots{position:absolute;left:0;right:0;bottom:9px;display:flex;justify-content:center;gap:5px;z-index:3;pointer-events:none}
-.cv-dots i{width:14px;height:4px;border-radius:2px;background:var(--cc);opacity:.3;transform:scaleX(.42);transition:transform .35s var(--ease),opacity .35s}
-.cv-dots i.on{opacity:.95;transform:scaleX(1)}
+.cv-track{position:absolute;inset:0;display:flex;justify-content:center;mix-blend-mode:multiply;pointer-events:none}
+.cv-track.is-loop{right:auto;justify-content:flex-start;animation:cv-drift var(--dur,20s) linear infinite;animation-play-state:paused;will-change:transform}
+.cv.is-run .cv-track.is-loop{animation-play-state:running}
+.cv-tile{flex:none;width:clamp(150px,58%,420px);height:100%}
+.cv-track:not(.is-loop) .cv-tile{width:100%}
+.cv-tile img{filter:brightness(1.03);width:100%;height:100%;object-fit:contain;padding:6% 5% 11%;pointer-events:none;-webkit-user-drag:none}
+@keyframes cv-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .cv-empty{position:absolute;inset:0;display:grid;place-items:center;color:var(--cc);opacity:.55}
 .cv-empty .icon{width:56px;height:56px;stroke-width:1.4}
-.cv-host{touch-action:pan-y;-webkit-user-select:none;user-select:none}
-.hero-card .cv-host,.session-hero .cv-host{cursor:grab}
-@media (prefers-reduced-motion:reduce){.cv-dots i{transition:none!important}}
+@media (prefers-reduced-motion:reduce){.cv-track.is-loop{animation:none;overflow-x:auto;pointer-events:auto;right:0}}
