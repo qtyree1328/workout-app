@@ -29,7 +29,6 @@ Nothing is tracked. Only display preferences are stored in the browser. Use GitH
 
 **Local Mac/iPad server:** Run `python3 scripts/serve.py --bind 0.0.0.0 --port 8766` from this folder, then open the Mac's IP on the iPad (e.g., `http://192.168.1.163:8766` — find it with `ipconfig getifaddr en0`). Put the Mac and iPad on the same Wi-Fi. Optionally use Safari's **Share → Add to Home Screen**.
 
-**Password:** The hosted site shows a password screen (site-gate.js). It hides the app but does not encrypt files. Change the password by replacing the hash in `site-gate.js`.
 
 ## Files
 
