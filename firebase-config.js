@@ -14,4 +14,12 @@
 
    These values are not secrets: access is controlled by firestore.rules (each signed-in user can only
    read and write their own data). */
-window.CRUX_FIREBASE = null;
+window.CRUX_FIREBASE = {
+  apiKey: "AIzaSyDxBgktCLi0Tj6Z9tBITIkSo7LUVI8p8dA",
+  authDomain: "hutchout-ef5f9.firebaseapp.com",
+  projectId: "hutchout-ef5f9",
+  storageBucket: "hutchout-ef5f9.firebasestorage.app",
+  messagingSenderId: "487203953790",
+  appId: "1:487203953790:web:58d378c7b43f78bb754c2f",
+  measurementId: "G-1LN56N63P4"
+};
