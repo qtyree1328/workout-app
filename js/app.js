@@ -275,13 +275,16 @@
  function exerciseCategory(x){
   return Crux.exerciseCategory(x);
  }
- function tryItSession(x){
-  const m=x.meta||{};
-  // Only strength-type movements count reps; holds, stretches and mobility drills run on a timer.
-  const timeMode=Crux.modeOf(m)==='time';
-  const item=timeMode
-   ?{ex:x.id,mode:'time',work:m.work||20,sets:2,rest:Math.max(15,m.rest||15)}
-   :{ex:x.id,mode:'reps',reps:m.reps||8,sets:2,rest:Math.max(15,m.rest||15)};
+ // Exercise page run: `rounds` work → rest cycles (0 = unlimited, until the user ends it), `work` s on, `rest` s off.
+ const RUN_ROUNDS=[1,2,3,4,5,6,8,10,0],RUN_WORK=[10,15,20,30,45,60,90,120],RUN_REST=[0,10,15,20,30,45,60,90];
+ function runDefaults(x){
+  const m=x.meta||{},d=m.dose||{};
+  return {rounds:d.sets||m.sets||3,work:(Crux.modeOf(m)==='time'?d.workSeconds||m.work:0)||30,rest:d.restSeconds??m.rest??15};
+ }
+ function tryItSession(x,o){
+  o=o||runDefaults(x);
+  const item={ex:x.id,mode:'time',work:o.work,rest:o.rest,sets:o.rounds||1,sides:'both'};
+  if(!o.rounds)item.endless=true;
   return {id:'single-'+x.id,title:x.name,category:exerciseCategory(x),blocks:[{name:'Main',items:[item]}]};
  }
  function defaultPrescription(x){
@@ -310,7 +313,8 @@
     ${x.cue?`<p class="ex-sheet-cue">${h(x.cue)}</p>`:''}
     ${rx?`<span class="ex-sheet-prescription">${h(rx)}</span>`:''}
     ${src}
-    <div class="ex-sheet-actions"><button type="button" class="btn" id="try-it-btn">${icon('play')} Try it</button><button type="button" class="btn btn-secondary" id="add-build-btn">${icon('plus')} Add<span class="hide-sm">&nbsp;to workout</span></button>${x.custom?`<button type="button" class="btn btn-secondary btn-icon-only" id="edit-ex-btn" aria-label="Edit exercise">${icon('edit')}</button>`:''}</div>
+    <div class="ex-run" id="ex-run">${[['rounds','Reps'],['work','Time'],['rest','Rest']].map(([k,l])=>`<div class="ex-run-row" role="group" aria-label="${l}"><span class="ex-run-label">${l}</span><div class="ex-run-opts" data-run="${k}"></div></div>`).join('')}</div>
+    <div class="ex-sheet-actions"><button type="button" class="btn" id="try-it-btn">${icon('play')} Start</button>${x.custom?`<button type="button" class="btn btn-secondary btn-icon-only" id="edit-ex-btn" aria-label="Edit exercise">${icon('edit')}</button>`:''}</div>
    </div>`;
   const mediaEl=wrap.querySelector('#ex-media');
   if(x.media.type==='figure'&&window.Figures){
@@ -336,13 +340,18 @@
    if(x.media.src)mediaEl.innerHTML=`<video autoplay muted loop playsinline poster="${h(x.media.poster||'')}" src="${h(x.media.src)}"></video>`;
    else mediaEl.innerHTML=`<img src="${h(x.media.poster||x.media.thumb||'')}" alt="">`;
   }
-  wrap.querySelector('#try-it-btn').addEventListener('click',()=>{
-   const session=tryItSession(x);
-   startSession(session,{countdown:countdown()},x.name);
+  const run=runDefaults(x),runLabel={rounds:v=>v?`${v}`:'Unlimited',work:v=>`${v} s`,rest:v=>v?`${v} s`:'None'};
+  const paintRun=()=>wrap.querySelectorAll('[data-run]').forEach(box=>{
+   const k=box.dataset.run,base=k==='rounds'?RUN_ROUNDS:k==='work'?RUN_WORK:RUN_REST;
+   const list=base.includes(run[k])?base:[...base,run[k]].sort((a,b)=>k==='rounds'&&(!a||!b)?(a?-1:1):a-b);
+   box.innerHTML=list.map(v=>`<button type="button" class="chip" data-v="${v}" aria-pressed="${v===run[k]}">${runLabel[k](v)}</button>`).join('');
   });
-  wrap.querySelector('#add-build-btn').addEventListener('click',()=>{
-   if(Crux.builder){Crux.builder.addExercise(x.id);toast(`Added ${x.name} to your workout`);}
+  paintRun();
+  wrap.querySelector('#ex-run').addEventListener('click',e=>{
+   const b=e.target.closest('.chip');if(!b)return;
+   run[b.parentNode.dataset.run]=Number(b.dataset.v);paintRun();
   });
+  wrap.querySelector('#try-it-btn').addEventListener('click',()=>startSession(tryItSession(x,run),{countdown:countdown()},x.name));
   const editBtn=wrap.querySelector('#edit-ex-btn');
   if(editBtn)editBtn.addEventListener('click',()=>{const id=x.id;closeSheet();setTimeout(()=>Crux.custom&&Crux.custom.openForm(id),120);});
   return wrap;
@@ -1413,6 +1422,7 @@
   const pages=Crux.pages||{};
   if(path==='#/exercises')renderExercises();
   else if(path==='#/timer'&&pages.timer)pages.timer.render(view);
+  else if(path==='#/hangboard'&&pages.hangboard)pages.hangboard.render(view);
   else if(path==='#/build'&&pages.build)pages.build.render(view);
   else if(m)renderSessionDetail(decodeURIComponent(m[1]));
   else renderHome();
@@ -1421,7 +1431,7 @@
   requestAnimationFrame(syncAllIndicators);
  }
  function updateTabnav(path){
-  const route=path==='#/exercises'?'/exercises':path==='#/timer'?'/timer':path==='#/build'?'/build':'/';
+  const route=path==='#/exercises'?'/exercises':path==='#/timer'?'/timer':path==='#/hangboard'?'/hangboard':path==='#/build'?'/build':'/';
   $$('.tabnav-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.route===route)));
   syncIndicator($('#tabnav'),'.tabnav-btn','.tabnav-indicator');
  }

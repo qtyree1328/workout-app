@@ -3,7 +3,7 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.Engine=api;})(typeof window!=='undefined'?window:globalThis,()=>{
  function create(steps,{countdown=5}={}){
   const s={steps,index:0,phase:steps.length?'ready':'done',phaseTotal:countdown*1000,remaining:countdown*1000,phaseElapsed:0,
-   elapsed:0,workTime:0,paused:false,done:!steps.length,repsDone:0,completed:[]};
+   elapsed:0,workTime:0,paused:false,done:!steps.length,repsDone:0,completed:[],cycle:1};
   return s;
  }
  const current=s=>s.steps[s.index];
@@ -15,9 +15,11 @@
  function advance(s){
   if(s.done)return;
   if(s.phase==='ready'){enterWork(s,s.index);return;}
-  if(s.phase==='work'){markDone(s);if(s.index>=s.steps.length-1){finish(s);return;}if(current(s).rest>0)enterRest(s);else enterWork(s,s.index+1);return;}
-  if(s.phase==='rest')enterWork(s,s.index+1);
+  if(s.phase==='work'){markDone(s);if(current(s).endless){if(current(s).rest>0)enterRest(s);else{s.cycle++;enterWork(s,s.index);}return;}if(s.index>=s.steps.length-1){finish(s);return;}if(current(s).rest>0)enterRest(s);else enterWork(s,s.index+1);return;}
+  if(s.phase==='rest'){if(current(s).endless){s.cycle++;enterWork(s,s.index);}else enterWork(s,s.index+1);}
  }
+ // Ends an endless step (or any run) on demand, keeping what was done.
+ function end(s){if(s.done)return;if(s.phase==='work'&&s.phaseElapsed>0||s.phase==='rest')markDone(s);finish(s);}
  function tick(s,dt){
   if(s.paused||s.done)return;
   dt=Math.max(0,dt);
@@ -42,16 +44,16 @@
  function rep(s,d=1){if(s.phase!=='work'||current(s).mode!=='reps'||s.paused)return;s.repsDone=Math.max(0,Math.min(99,s.repsDone+d));}
  // Planned seconds left, from the current position.
  function remainingPlanned(s){
-  if(s.done)return 0;
+  if(s.done||current(s).endless)return 0;
   let total=Math.max(0,s.remaining)/1000;const st=current(s);
   if(s.phase==='ready')total+=st.work+st.rest;
   else if(s.phase==='work'){if(st.mode==='reps')total+=Math.max(0,st.work-s.phaseElapsed/1000);total+=st.rest;}
   for(let i=s.index+1;i<s.steps.length;i++)total+=s.steps[i].work+s.steps[i].rest;
   return total;
  }
- function progress(s,planned){if(s.done)return 1;const left=remainingPlanned(s);return planned>0?Math.max(0,Math.min(1,1-left/planned)):0;}
- function snapshot(s){return {index:s.index,phase:s.phase,remaining:s.remaining,phaseTotal:s.phaseTotal,elapsed:s.elapsed,workTime:s.workTime,completed:s.completed.slice(),repsDone:s.repsDone};}
- function restore(steps,snap,opts){const s=create(steps,opts);if(!snap||snap.index>=steps.length)return s;Object.assign(s,{index:snap.index,elapsed:snap.elapsed||0,workTime:snap.workTime||0,completed:snap.completed||[]});
+ function progress(s,planned){if(s.done)return 1;if(current(s).endless)return 0;const left=remainingPlanned(s);return planned>0?Math.max(0,Math.min(1,1-left/planned)):0;}
+ function snapshot(s){return {index:s.index,phase:s.phase,remaining:s.remaining,phaseTotal:s.phaseTotal,elapsed:s.elapsed,workTime:s.workTime,completed:s.completed.slice(),repsDone:s.repsDone,cycle:s.cycle};}
+ function restore(steps,snap,opts){const s=create(steps,opts);if(!snap||snap.index>=steps.length)return s;Object.assign(s,{index:snap.index,elapsed:snap.elapsed||0,workTime:snap.workTime||0,completed:snap.completed||[],cycle:snap.cycle||1});
   if(snap.phase==='rest'){s.phase='rest';s.phaseTotal=snap.phaseTotal;s.remaining=snap.remaining;}else{enterWork(s,snap.index);}s.paused=true;return s;}
- return {create,tick,advance,previous,jump,addTime,rep,remainingPlanned,progress,snapshot,restore,current};
+ return {create,tick,advance,end,previous,jump,addTime,rep,remainingPlanned,progress,snapshot,restore,current};
 });

@@ -405,7 +405,8 @@
 }
 
 .ex-sheet-media{position:relative;width:100%;aspect-ratio:4/5;background:var(--fill);flex:none}
-.ex-sheet-media video,.ex-sheet-media>img{width:100%;height:100%;object-fit:cover}
+.ex-sheet-media video,.ex-sheet-media>img{width:100%;height:100%;object-fit:contain}
+.ex-sheet-media video{background:#0d0f0e}
 .ex-sheet-media.is-photo{background:#fff}
 .ex-sheet-media.is-photo>img{object-fit:contain;padding:14px}
 .ex-sheet-media.is-figure{display:grid;place-items:center;background:var(--surface-2)}
@@ -424,6 +425,10 @@
 .ex-sheet-source a:hover{text-decoration:underline}
 .ex-sheet-actions{display:flex;gap:10px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));margin:4px -20px -26px;position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
 .ex-sheet-actions .btn{flex:1}
+.ex-run{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.ex-run-row{display:flex;flex-direction:column;gap:6px}
+.ex-run-label{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.ex-run-opts{display:flex;flex-wrap:wrap;gap:8px}
 
 /* ── Settings sheet ─────────────────────────────────────────────────────── */
 .settings-body{display:flex;flex-direction:column;gap:22px;padding:6px 20px 26px}

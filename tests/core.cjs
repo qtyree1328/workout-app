@@ -55,4 +55,14 @@ E.jump(s,2);assert.equal(s.index,2);E.previous(s);assert.equal(s.index,1);
 s=E.create(steps,{countdown:3});const planned=3+5+2+20+3+4;assert.equal(E.remainingPlanned(s),planned);E.tick(s,3000);assert.equal(E.remainingPlanned(s),planned-3);
 E.tick(s,2000);const snap=E.snapshot(s);const back=E.restore(steps,snap,{countdown:3});assert.equal(back.index,0);assert(back.paused);assert.equal(back.phase,'work');
 assert.equal(E.create([]).done,true);
+// Endless: one step that cycles work → rest until ended; rest survives on the last step; no planned time
+c=P.compile({blocks:[{name:'Main',items:[{ex:'u',mode:'time',work:20,rest:10,endless:true}]}]},meta);
+assert.equal(c.steps.length,1);assert(c.steps[0].endless);assert.equal(c.steps[0].rest,10);assert.equal(c.steps[0].side,'Both');assert.equal(c.duration,5);
+s=E.create(c.steps,{countdown:1});E.tick(s,1000);assert.equal(s.cycle,1);
+for(let i=1;i<=4;i++){assert.equal(s.phase,'work');assert.equal(s.cycle,i);E.tick(s,20000);assert.equal(s.phase,'rest');E.tick(s,10000);}
+assert.equal(s.phase,'work');assert.equal(s.cycle,5);assert(!s.done);assert.equal(E.remainingPlanned(s),0);assert.equal(E.progress(s,100),0);
+assert.equal(E.restore(c.steps,E.snapshot(s),{countdown:1}).cycle,5);
+E.tick(s,5000);E.end(s);assert(s.done);assert.deepEqual(s.completed,[0]);
+s=E.create(c.steps,{countdown:0});E.advance(s);E.advance(s);E.advance(s);assert.equal(s.phase,'work');assert.equal(s.cycle,2);// Done/Skip rest keep cycling
+c=P.compile({blocks:[{name:'Main',items:[{ex:'a',mode:'time',work:20,rest:0,endless:true}]}]},meta);s=E.create(c.steps,{countdown:0});E.advance(s);E.advance(s);assert.equal(s.phase,'work');assert.equal(s.cycle,2);
 console.log('PASS core: compile (blocks, sides, intervals, circuits, reps, options), descriptions, builder rows, engine (phases, reps, add time, overshoot, previous/jump, planned time, restore).');

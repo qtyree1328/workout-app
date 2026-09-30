@@ -41,6 +41,7 @@
  function stepPrescription(step){
   const parts=[];
   if(step.mode==='reps')parts.push(`${step.reps} reps`);
+  else if(step.endless)parts.push(step.work>=60?Plan.clock(step.work):`${step.work} s`);
   else parts.push(step.work>=60?Plan.clock(step.work):`${step.work} s`);
   if(step.hangs)parts.push(`${step.hangs} hangs`);
   if(step.side&&step.side!=='Both')parts.push(`${step.side} side`);
@@ -49,6 +50,7 @@
  function stageBadgeText(step){
   if(!step)return'';
   if(step.hangs)return`Hang ${step.hang} of ${step.hangs}`;
+  if(step.endless)return`Round ${state.cycle}`;
   if(step.sets>1)return`Set ${step.set} of ${step.sets}`;
   if(step.rounds>1)return`Round ${step.round} of ${step.rounds}`;
   return'';
@@ -56,6 +58,7 @@
  function counterLineText(step){
   if(!step)return'';
   const parts=[];
+  if(step.endless)parts.push(`Round ${state.cycle} · until you end`);
   if(step.sets>1)parts.push(`Set ${step.set} of ${step.sets}`);
   if(step.hangs)parts.push(`Hang ${step.hang} of ${step.hangs}`);
   if(step.rounds>1)parts.push(`Round ${step.round} of ${step.rounds}`);
@@ -165,9 +168,9 @@
       <div class="cp-photo-card" hidden><img class="cp-photo-img" alt=""><button type="button" class="cp-easier-btn" hidden>Easier options</button></div>
       <div class="cp-figure" hidden></div>
       <div class="cp-instruction" hidden><div class="cp-instruction-badge"><img class="cp-instruction-img" alt=""></div><p class="cp-instruction-text"></p></div>
+      <div class="cp-stage-badges"><span class="cp-badge cp-badge-side" hidden></span><span class="cp-badge cp-badge-set" hidden></span></div>
+      <div class="cp-upnext-label" hidden>Up next</div>
      </div>
-     <div class="cp-stage-badges"><span class="cp-badge cp-badge-side" hidden></span><span class="cp-badge cp-badge-set" hidden></span></div>
-     <div class="cp-upnext-label" hidden>Up next</div>
     </div>
     <div class="cp-controls">
      <div class="cp-phase round"></div>
@@ -208,8 +211,10 @@
   els.ringFill.style.strokeDashoffset=String(RING_CIRC);
   blockSegEls=(blocks||[]).map(()=>{const seg=document.createElement('div');seg.className='cp-progress-seg';seg.style.setProperty('--fill-amt','0');els.progress.appendChild(seg);return seg;});
   renderSoundBtn();renderVoiceBtn();
+  if(steps.some(s=>s.endless))els.confirmEndBtn.textContent='Finish & log';
   attachButtonEvents();
   attachStageGestures();
+  attachMediaShape();
  }
  function cacheEls(){
   const q=s=>root.querySelector(s);
@@ -247,6 +252,13 @@
   els.resumeBtn.addEventListener('click',()=>setPaused(false));
   els.keepGoingBtn.addEventListener('click',keepGoing);
   els.confirmEndBtn.addEventListener('click',confirmEndWorkout);
+ }
+// The media frame follows the video's / photo's own aspect ratio (vertical 9:16 until known).
+ const AR_MIN=.4,AR_MAX=2.5,arCache={};
+ function setFrameAR(ar){if(els.media&&ar>0)els.media.style.setProperty('--ar',String(Math.min(AR_MAX,Math.max(AR_MIN,ar)).toFixed(4)));}
+ function attachMediaShape(){
+  els.video.addEventListener('loadedmetadata',()=>{const w=els.video.videoWidth,v=els.video.videoHeight;if(w&&v){arCache[els.video.getAttribute('src')]=w/v;setFrameAR(w/v);}});
+  els.photoImg.addEventListener('load',()=>{const w=els.photoImg.naturalWidth,v=els.photoImg.naturalHeight;if(w&&v)setFrameAR(w/v);});
  }
  function attachStageGestures(){
   let sx=0,sy=0,st=0,pid=null;
@@ -332,7 +344,8 @@
   Crux.Audio&&Crux.Audio.say(phrase);
  }
  function maybeAnnounceRest(){
-  const cur=Engine.current(state),nxt=steps[state.index+1];
+  const cur=Engine.current(state),nxt=cur.endless?null:steps[state.index+1];
+  if(cur.endless){if(cur.rest>=10)Crux.Audio&&Crux.Audio.say('Rest.');return;}
   if(!nxt||cur.rest<10)return;
   const sideSwitch=nxt.ex===cur.ex&&nxt.side!==cur.side;
   Crux.Audio&&Crux.Audio.say(sideSwitch?'Switch sides.':`Rest. Next up: ${displayName(nxt.ex,nxt.label)}.`);
@@ -400,7 +413,7 @@
    }
   }
 
-  const remainSec=Math.ceil(Engine.remainingPlanned(state));
+  const remainSec=Engine.current(state).endless?Math.floor((state.elapsed||0)/1000):Math.ceil(Engine.remainingPlanned(state));
   if(remainSec!==lastRemainSec){lastRemainSec=remainSec;els.timeLeft.textContent=Plan.clock(remainSec);}
 
   updateProgressFractions();
@@ -446,6 +459,7 @@
   els.video.hidden=true;els.photoCard.hidden=true;els.figureBox.hidden=true;els.instructionBox.hidden=true;
   if(figureController){try{figureController.destroy();}catch{}figureController=null;}
   if(!x)return;
+  setFrameAR(x.media.type==='figure'?1:x.media.type==='instruction'?.8:x.media.type==='image'?1:arCache[x.media.src]||.5625);
   if(x.media.type==='figure'){
    els.figureBox.hidden=false;els.figureBox.innerHTML='';
    if(window.Figures)figureController=Figures.mount(els.figureBox,x.id,{phase:state.phase==='work'?'work':'ready'});
@@ -517,7 +531,7 @@
  function syncDisplay(){
   if(!state)return;
   const isRest=state.phase==='rest',cur=Engine.current(state);
-  const displayStep=isRest?(steps[state.index+1]||cur):cur;
+  const displayStep=isRest&&!cur.endless?(steps[state.index+1]||cur):cur;
 
   swapMedia(displayStep);
   els.stage.classList.toggle('is-dim',isRest);
@@ -619,7 +633,10 @@
   else if(!wasPausedBeforeConfirm){setPaused(false);try{els.close.focus();}catch{}}
  }
  function keepGoing(){showEndConfirm(false);}
- function confirmEndWorkout(){clearLive();teardown();}
+ function confirmEndWorkout(){
+  if(state&&Engine.current(state).endless&&state.phase!=='ready'&&!state.done){endConfirmOpen=false;els.endConfirm.classList.remove('is-shown');els.endConfirm.setAttribute('inert','');state.paused=false;withTransition(()=>Engine.end(state));return;}
+  clearLive();teardown();
+ }
 
  // ── completion ───────────────────────────────────────────────────────────────
  function showCompletion(){

@@ -22,8 +22,8 @@
      const m=meta[item.ex]||{};
      const baseSets=item.sets||1;
      const sets=kind==='main'&&baseRounds===1&&baseSets>1?Math.max(1,baseSets+o.setsDelta):baseSets;
-     const sides=sidesOf(item,m);
-     const hangs=item.mode==='interval'?item.count:1;
+     const sides=item.endless?['Both']:sidesOf(item,m);
+     const hangs=item.mode==='interval'?item.count:1,endless=!!item.endless;
      for(let set=1;set<=sets;set++)sides.forEach((side,si)=>{for(let h=1;h<=hangs;h++){
       const lastHang=h===hangs,lastSide=si===sides.length-1,lastSet=set===sets,lastItem=ii===b.items.length-1;
       let rest;
@@ -33,7 +33,7 @@
       else if(lastItem&&round<rounds&&b.roundRest!=null)rest=scale(b.roundRest);
       else rest=scale(item.restAfter??item.rest??10);
       steps.push({ex:item.ex,label:item.label||null,block:b.name,kind,blockIndex:bi,item:ii,key:`${bi}.${ii}`,
-       round,rounds,set,sets,side,hang:item.mode==='interval'?h:null,hangs:item.mode==='interval'?hangs:null,
+       endless,round,rounds,set,sets,side,hang:item.mode==='interval'?h:null,hangs:item.mode==='interval'?hangs:null,
        mode:item.mode==='reps'?'reps':'time',work:item.mode==='interval'?item.on:item.mode==='reps'?estimate(item):item.work,
        reps:item.mode==='reps'?item.reps:null,target:item.target||null,rest,
        cue:(item.cues&&item.cues[set-1])||item.cue||'',log:item.log||null});
@@ -42,8 +42,8 @@
    }
    if(steps.length>start)blocks.push({name:b.name,kind,start,end:steps.length-1});
   });
-  if(steps.length)steps[steps.length-1].rest=0;
-  const work=steps.reduce((n,s)=>n+s.work,0),rest=steps.reduce((n,s)=>n+s.rest,0);
+  if(steps.length&&!steps[steps.length-1].endless)steps[steps.length-1].rest=0;
+  const work=steps.reduce((n,s)=>n+(s.endless?0:s.work),0),rest=steps.reduce((n,s)=>n+(s.endless?0:s.rest),0);
   return {steps,blocks,duration:steps.length?o.countdown+work+rest:0,work,estimated:steps.some(s=>s.mode==='reps'),countdown:o.countdown};
  }
 
