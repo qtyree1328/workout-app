@@ -100,4 +100,23 @@ function memory(){const m={};return {getItem:k=>k in m?m[k]:null,setItem:(k,v)=>
  assert.throws(()=>b.importJSON('nope'),/valid JSON/);
  assert.throws(()=>b.importJSON('{"hello":1}'),/not a Crux backup/);
 }
+// hangLog: records persist, sort by time, delete leaves a tombstone, merge + export/import carry them
+{
+ const m=memory(),a=S.createStore(m,{listenStorage:false,now:()=>1000});
+ const r1=a.addHang({hold:'jug',type:'hang',seconds:12.3});
+ const r2=a.addHang({hold:'bar',type:'pullups',reps:8,at:500});
+ assert.equal(r1.at,1000);assert.equal(r2.at,500);assert(r1.id.startsWith('hb-'));
+ assert.equal(a.items('hangLog').length,2);
+ assert.equal(S.createStore(m,{listenStorage:false}).items('hangLog').length,2,'reloads from storage');
+ const b=S.createStore(memory(),{listenStorage:false});
+ assert.equal(b.importJSON(a.exportJSON()).history,0);
+ assert.equal(b.items('hangLog').length,2);
+ a.remove('hangLog',r1.id);
+ assert.equal(a.items('hangLog').length,1);assert.equal(a.get().hangLog.find(x=>x.id===r1.id).deleted,true);
+ b.merge(a.get());
+ assert.equal(b.items('hangLog').length,1,'delete propagates through merge');
+ assert.equal(b.find('hangLog',r2.id).reps,8);
+ assert.deepEqual(S.emptyDoc().hangLog,[]);
+ assert.deepEqual(S.normalize({history:[{id:'h',updatedAt:1}]}).hangLog,[]);
+}
 console.log('PASS store: merge (newest wins, tombstones, commutative/idempotent), normalize, pruning, favorites, CRUD, history, remote merge, export/import.');

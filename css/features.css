@@ -15,7 +15,7 @@
  /* backdrop-filter on the header would trap the fixed tab bar inside it */
  .topbar{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--surface)}
  .topbar-row{height:56px}
- .tabnav{position:fixed;left:0;right:0;bottom:0;z-index:45;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:0;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(20,23,21,.05)}
+ .tabnav{position:fixed;left:0;right:0;bottom:0;z-index:45;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-radius:0;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(20,23,21,.05)}
  .tabnav-btn{display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;height:50px;min-height:50px;padding:0;font-size:11px;letter-spacing:.01em;border-radius:16px;color:var(--muted)}
  .tabnav-btn[aria-pressed="true"]{color:var(--ink)}
  .tabnav-ico{display:block}

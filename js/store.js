@@ -1,5 +1,5 @@
 /* Crux.store: the one document that holds everything the person creates on this device.
-     { v, favorites:{exercises:[],sessions:[]}, customExercises:[], customWorkouts:[], history:[], timerPresets:[], updatedAt }
+     { v, favorites:{exercises:[],sessions:[]}, customExercises:[], customWorkouts:[], history:[], timerPresets:[], hangLog:[], updatedAt }
    Every list item is {id, updatedAt, deleted?, …}. Deleting leaves a small tombstone ({id, updatedAt, deleted:true})
    so two devices can be merged safely: per item, the newest updatedAt wins (a tombstone can win too).
    The pure merge helpers below are shared with tests/store.cjs and js/sync.js. Stored in localStorage (one key). */
@@ -9,11 +9,11 @@
  else{const Crux=root.Crux=root.Crux||{};Crux.storeCore=api;Crux.store=api.createStore(root.localStorage);}
 })(typeof window!=='undefined'?window:globalThis,()=>{
  const VERSION=1,KEY='crux-store';
- const COLLECTIONS=['customExercises','customWorkouts','history','timerPresets'];
+ const COLLECTIONS=['customExercises','customWorkouts','history','timerPresets','hangLog'];
  const FAV_KINDS=['exercises','sessions'];
  const TOMBSTONE_TTL=90*24*3600*1000;
 
- const emptyDoc=()=>({v:VERSION,favorites:{exercises:[],sessions:[]},customExercises:[],customWorkouts:[],history:[],timerPresets:[],updatedAt:0});
+ const emptyDoc=()=>({v:VERSION,favorites:{exercises:[],sessions:[]},customExercises:[],customWorkouts:[],history:[],timerPresets:[],hangLog:[],updatedAt:0});
  const isItem=x=>x&&typeof x==='object'&&typeof x.id==='string'&&x.id;
  const clean=list=>(Array.isArray(list)?list:[]).filter(isItem).map(x=>({...x,updatedAt:Number(x.updatedAt)||0}));
 
@@ -122,6 +122,8 @@
     return !on_;
    },
    addHistory(entry){return api.upsert('history',{...entry,id:entry.id||newId('h')});},
+   // Hangboard tab: one record per hang ({hold, type:'hang', seconds}) or pull-up set ({hold, type:'pullups', reps}).
+   addHang(entry){return api.upsert('hangLog',{...entry,id:entry.id||newId('hb'),at:entry.at||now()});},
    updateHistory(id,patch){const cur=api.find('history',id);return cur?api.upsert('history',{...cur,...patch}):null;},
    // Merge in a document from elsewhere (another device, an import). Never loses newer local edits.
    merge(remote,source='remote'){
@@ -136,7 +138,7 @@
     let parsed;
     try{parsed=JSON.parse(text);}catch{throw new Error('That file is not valid JSON.');}
     const data=parsed&&parsed.app==='crux'&&parsed.data?parsed.data:parsed;
-    if(!data||typeof data!=='object'||!('favorites' in data||'customExercises' in data||'history' in data||'customWorkouts' in data||'timerPresets' in data))throw new Error('That file is not a Crux backup.');
+    if(!data||typeof data!=='object'||!('favorites' in data||'customExercises' in data||'history' in data||'customWorkouts' in data||'timerPresets' in data||'hangLog' in data))throw new Error('That file is not a Crux backup.');
     api.merge(data,'import');
     return {exercises:api.items('customExercises').length,workouts:api.items('customWorkouts').length,history:api.items('history').length};
    },

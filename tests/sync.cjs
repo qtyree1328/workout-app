@@ -48,7 +48,9 @@ function device(srv,name){
  // B edits, A deletes a different item; both converge
  B.store.upsert('customWorkouts',{...B.store.find('customWorkouts','cw-1'),title:'Pull day v2'});
  A.store.upsert('timerPresets',{id:'tp-1',name:'Tabata',work:20});
+ A.store.addHang({id:'hb-x',hold:'edge-20',type:'hang',seconds:9.4});
  await sleep(150);
+ assert.equal(B.store.find('hangLog','hb-x').seconds,9.4,'hang record synced');
  A.store.remove('customExercises','my-1');
  await sleep(150);
  assert.equal(A.store.find('customWorkouts','cw-1').title,'Pull day v2');
