@@ -7,7 +7,7 @@
    Media (clips, covers, poses, thumbs, examples, climbing) lives in its own cache that is
    never versioned or purged by updates: cache-first, filled on first use or by the
    "Download all media" button in Settings. */
-const VERSION='2026-09-30.5';
+const VERSION='2026-09-30.6';
 const SHELL_CACHE='crux-shell-'+VERSION;
 const MEDIA_CACHE='crux-media-v1';
 const SDK_CACHE='crux-sdk-v1';
@@ -16,7 +16,7 @@ const SHELL=[
  'css/base.css','css/app.css','css/features.css','css/player.css','css/hangboard.css','firebase-config.js',
  'data/library.js','data/cover-art.js','data/classification.js','data/sessions.js',
  'js/core/plan.js','js/core/engine.js','js/core/search.js','js/core/hip.js','js/core/feet.js',
- 'js/figures.js','js/art.js','js/store.js','js/lib.js','js/audio.js','js/player.js','js/pwa.js','js/custom.js','js/timer.js','js/builder.js','js/hangboard.js','js/sync.js','js/app.js'
+ 'js/figures.js','js/art.js','js/store.js','js/lib.js','js/audio.js','js/player.js','js/pwa.js','js/custom.js','js/timer.js','js/builder.js','js/hangboard.js','js/hangboard3d.js','js/vendor/three.module.min.js','js/sync.js','js/app.js'
 ];
 const MEDIA_RE=/\/media\/(clips|covers|poses|examples|climbing|thumbs)\//;
 const scopeURL=new URL(self.registration.scope);

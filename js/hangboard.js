@@ -6,51 +6,69 @@
  const {h,icon,prefs,toast}=Crux;
 
  /* ───────────── the board ─────────────
-    Drawn after the board in the max-hang drawings: a wooden board on a backboard with steel side brackets,
-    three rows (top pockets + angled slopers + flat top, seven pockets, four edges + a long centre edge) and a wooden
-    pull-up bar underneath. Holds left of centre mirror the right about x = 500, so each is a pair; centre holds are
-    single, two-handed holds. x/w are for the left copy. */
- const VB_W=1000,VB_H=430,MID=VB_W/2;
+    The hang module is a reversible box: a beech Clevo hangboard on the front face, climbing holds on the back and a
+    wooden pull-up bar across the open bottom (reachable from either side). The board view is a 3D model
+    (js/hangboard3d.js, three.js, loaded on demand); this flat SVG is its fallback when WebGL or module loading is not
+    available. Hold ids are the keys of the 'hangLog' records, so they never change. Front holds left of centre
+    mirror the right about x = 500, so each is a pair; centre holds are single, two-handed holds. x/w are for the
+    left copy (SVG units, board 56–944 ≈ 60 cm). */
+ const VB_W=1000,VB_H=760,MID=VB_W/2;
  const ROWS=[{y:78,h:48},{y:146,h:50},{y:214,h:44}];
  const HOLDS=[
-  {id:'top-pocket',name:'Top pocket',kind:'pocket',row:0,x:92,w:150},
-  {id:'sloper',name:'Angled sloper',kind:'sloper',row:0,x:262,w:150},
-  {id:'flat-top',name:'Flat top',kind:'sloper',row:0,x:432,w:136,centre:true},
-  {id:'pocket-large',name:'Large pocket',kind:'pocket',row:1,x:76,w:132},
-  {id:'pocket-medium',name:'Medium pocket',kind:'pocket',row:1,x:224,w:96},
-  {id:'pocket-small',name:'Small pocket',kind:'pocket',row:1,x:336,w:72},
-  {id:'pocket-centre',name:'Centre pocket',kind:'pocket',row:1,x:424,w:152,centre:true},
-  {id:'edge-outer',name:'Outer edge',kind:'edge',row:2,x:88,w:118},
-  {id:'edge-inner',name:'Inner edge',kind:'edge',row:2,x:222,w:136},
-  {id:'edge-centre',name:'Centre edge',kind:'edge',row:2,x:374,w:252,centre:true},
+  {id:'top-pocket',name:'Top pocket',kind:'pocket',side:'front',row:0,x:96,w:124},
+  {id:'sloper',name:'Angled sloper',kind:'sloper',side:'front',row:0,x:238,w:58},
+  {id:'top-rail',name:'Top rail',kind:'rail',side:'front',row:0,x:300,w:76},
+  {id:'flat-top',name:'Flat top',kind:'sloper',side:'front',row:0,x:380,w:240,centre:true},
+  {id:'pocket-large',name:'Large pocket',kind:'pocket',side:'front',row:1,x:74,w:130},
+  {id:'pocket-medium',name:'Medium pocket',kind:'pocket',side:'front',row:1,x:222,w:102},
+  {id:'pocket-small',name:'Small pocket',kind:'pocket',side:'front',row:1,x:344,w:76},
+  {id:'pocket-centre',name:'Centre pocket',kind:'pocket',side:'front',row:1,x:432,w:136,centre:true},
+  {id:'edge-outer',name:'Bottom outer pocket',kind:'pocket',side:'front',row:2,x:72,w:163},
+  {id:'edge-inner',name:'Bottom small pocket',kind:'pocket',side:'front',row:2,x:263,w:84},
+  {id:'edge-centre',name:'Bottom centre slot',kind:'pocket',side:'front',row:2,x:376,w:248,centre:true},
+  {id:'back-triangle',name:'Green triangles',kind:'triangle',side:'back',color:'#97C42A'},
+  {id:'back-frog',name:'Frog',kind:'frog',side:'back',centre:true,color:'#2C8A34'},
+  {id:'back-dome',name:'Blue domes',kind:'dome',side:'back',color:'#3B7FD8'},
  ];
- const BAR={id:'bar',name:'Pull-up bar',kind:'bar'};
+ const BAR={id:'bar',name:'Pull-up bar',kind:'bar',side:'both'};
  const ALL=[...HOLDS,BAR];
  const byId=Object.fromEntries(ALL.map(x=>[x.id,x]));
+ const holdLabel=hd=>hd.kind==='bar'?'Pull-up bar, under both faces':`${hd.name}, ${hd.side==='back'?'back':'front'}, ${hd.centre?'centre':'left and right pair'}`;
 
- // One copy of a hold: side 'L', 'R' (mirrored) or 'C' (centre).
+ // One copy of a front hold: side 'L', 'R' (mirrored) or 'C' (centre).
  function sideSVG(hd,side){
   const {y,h:hh}=ROWS[hd.row],w=hd.w,x=side==='R'?VB_W-hd.x-w:hd.x,r=Math.min(hh/2,22);
   let s=`<g class="hb-side" data-side="${side}">`;
-  s+=`<rect class="hb-ring" x="${x-6}" y="${y-6}" width="${w+12}" height="${hh+12}" rx="${r+6}"/>`;
-  if(hd.kind==='sloper'){
-   // Raised angled block; the flat top is a level slab.
-   const flat=!!hd.centre,sl=flat?0:(side==='R'?-1:1)*18;
+  s+=`<rect class="hb-ring" x="${x-6}" y="${y-6}" width="${w+12}" height="${hh+12}" rx="${Math.min(r+6,(w+12)/2)}"/>`;
+  if(hd.kind==='sloper'||hd.kind==='rail'){
+   // raised angled ramp; the rail and the flat top are level
+   const flat=hd.kind==='rail'||!!hd.centre,sl=flat?0:(side==='R'?-1:1)*18;
    s+=`<path class="hb-recess hb-slab" d="M${x+Math.max(0,sl)} ${y+4}H${x+w+Math.min(0,sl)}L${x+w} ${y+hh-4}H${x}Z"/>`;
    s+=`<path class="hb-lip" d="M${x+Math.max(0,sl)+6} ${y+8}H${x+w+Math.min(0,sl)-6}L${x+w-8} ${y+hh*.45}H${x+8}Z"/>`;
   }else{
    s+=`<rect class="hb-recess" x="${x}" y="${y}" width="${w}" height="${hh}" rx="${r}"/>`;
-   s+=`<rect class="hb-hole" x="${x+7}" y="${y+(hd.kind==='edge'?hh*.42:hh*.3)}" width="${w-14}" height="${hh*(hd.kind==='edge'?.42:.56)}" rx="${r-6}"/>`;
+   s+=`<rect class="hb-hole" x="${x+7}" y="${y+hh*.3}" width="${w-14}" height="${hh*.56}" rx="${r-6}"/>`;
    s+=`<rect class="hb-lip" x="${x+10}" y="${y+4}" width="${w-20}" height="4" rx="2"/>`;
   }
   return s+`<rect class="hb-hit" x="${x-8}" y="${y-8}" width="${w+16}" height="${hh+16}"/></g>`;
  }
+ // Back holds, drawn as seen from behind the module.
+ function backShapes(hd){
+  const g=(d,extra='')=>`<g class="hb-side">${d}${extra}</g>`;
+  if(hd.kind==='triangle')return [[1,0],[-1,1000]].map(([k,o])=>{
+   const P=pts=>pts.map(([x,y])=>`${o+k*x},${y}`).join(' ');
+   return g(`<polygon class="hb-ring" points="${P([[196,478],[422,496],[236,652]])}" stroke-linejoin="round"/><polygon class="hb-recess" points="${P([[204,486],[412,502],[240,640]])}" stroke-linejoin="round"/><polygon class="hb-lip" points="${P([[222,494],[380,505],[236,520]])}"/>`,`<polygon class="hb-hit" points="${P([[188,470],[432,490],[236,662]])}"/>`);
+  }).join('');
+  if(hd.kind==='frog')return g(`<ellipse class="hb-ring" cx="500" cy="560" rx="82" ry="86"/><ellipse class="hb-recess" cx="500" cy="585" rx="74" ry="58"/><ellipse class="hb-recess" cx="500" cy="528" rx="52" ry="36"/><circle class="hb-lip" cx="476" cy="500" r="11"/><circle class="hb-lip" cx="524" cy="500" r="11"/><circle class="hb-hole" cx="500" cy="580" r="8"/>`,`<rect class="hb-hit" x="410" y="468" width="180" height="186"/>`);
+  return [322,678].map(cx=>g(`<path class="hb-ring" d="M${cx-114} 712A114 114 0 0 1 ${cx+114} 712Z"/><path class="hb-recess" d="M${cx-104} 708A104 104 0 0 1 ${cx+104} 708Z"/><path d="M${cx-58} 640Q${cx} 598 ${cx+58} 640M${cx-80} 684Q${cx} 650 ${cx+80} 684" style="fill:none;stroke:rgba(255,255,255,.28);stroke-width:7;stroke-linecap:round"/><circle class="hb-hole" cx="${cx}" cy="628" r="8"/>`,`<rect class="hb-hit" x="${cx-114}" y="592" width="228" height="124"/>`)).join('');
+ }
  function holdSVG(hd){
-  const sides=hd.centre?['C']:['L','R'];
-  return `<g class="hb-hold" data-hold="${hd.id}" role="button" tabindex="0" aria-pressed="false" aria-label="${h(hd.name)}${hd.centre?', centre':', left and right pair'}">${sides.map(sd=>sideSVG(hd,sd)).join('')}</g>`;
+  const style=hd.color?` style="--hb-base:${hd.color}"`:'';
+  const body=hd.side==='back'?backShapes(hd):(hd.centre?['C']:['L','R']).map(sd=>sideSVG(hd,sd)).join('');
+  return `<g class="hb-hold" data-hold="${hd.id}" role="button" tabindex="0" aria-pressed="false" aria-label="${h(holdLabel(hd))}"${style}>${body}</g>`;
  }
  function barSVG(){
-  return `<g class="hb-hold hb-bar" data-hold="bar" role="button" tabindex="0" aria-pressed="false" aria-label="Pull-up bar">
+  return `<g class="hb-hold hb-bar" data-hold="bar" role="button" tabindex="0" aria-pressed="false" aria-label="${h(holdLabel(BAR))}">
    <g class="hb-side">
     <rect class="hb-ring" x="54" y="324" width="892" height="48" rx="24"/>
     <rect class="hb-bar-body" x="62" y="332" width="876" height="32" rx="16"/>
@@ -62,7 +80,8 @@
  function boardSVG(){
   const bolts=[[34,40],[34,390],[966,40],[966,390]].map(([x,y])=>`<circle class="hb-screw" cx="${x}" cy="${y}" r="5"/>`).join('');
   const screws=[[92,102],[908,102],[MID,171]].map(([x,y])=>`<circle class="hb-screw" cx="${x}" cy="${y}" r="3.5"/>`).join('');
-  return `<svg class="hb-svg" viewBox="0 0 ${VB_W} ${VB_H}" role="group" aria-label="Hangboard. Choose a hold or the pull-up bar.">
+  const front=HOLDS.filter(x=>x.side==='front'),back=HOLDS.filter(x=>x.side==='back');
+  return `<svg class="hb-svg" viewBox="0 0 ${VB_W} ${VB_H}" role="group" aria-label="Hang module. Choose a hold on the front or back, or the pull-up bar.">
    <rect class="hb-wall" x="0" y="0" width="${VB_W}" height="${VB_H}" rx="26"/>
    <rect class="hb-back" x="24" y="14" width="952" height="402" rx="10"/>
    <rect class="hb-bracket" x="12" y="8" width="26" height="414" rx="6"/><rect class="hb-bracket" x="962" y="8" width="26" height="414" rx="6"/>
@@ -71,10 +90,21 @@
    <rect class="hb-board-edge" x="56" y="64" width="888" height="210" rx="18"/>
    <line class="hb-seam" x1="60" y1="204" x2="940" y2="204"/>
    ${screws}
-   ${HOLDS.map(holdSVG).join('')}
+   ${front.map(holdSVG).join('')}
    ${barSVG()}
+   <text class="hb-face-label" x="${MID}" y="446" text-anchor="middle">BACK</text>
+   <rect class="hb-back" x="150" y="462" width="700" height="278" rx="10"/>
+   <rect class="hb-bracket" x="138" y="456" width="22" height="290" rx="6"/><rect class="hb-bracket" x="840" y="456" width="22" height="290" rx="6"/>
+   ${back.map(holdSVG).join('')}
   </svg>`;
  }
+ const webgl=(()=>{let ok=null;return ()=>{
+  if(ok!==null)return ok;
+  try{const c=document.createElement('canvas');const gl=c.getContext('webgl2');ok=!!gl;const lose=gl&&gl.getExtension('WEBGL_lose_context');if(lose)lose.loseContext();}catch{ok=false;}
+  return ok;
+ };})();
+ let view3d=null,viewObs=null;
+ function drop3d(){if(viewObs){viewObs.disconnect();viewObs=null;}if(view3d){try{view3d.dispose();}catch{}view3d=null;}}
 
  /* ───────────── helpers ───────────── */
  const store=()=>Crux.store;
@@ -97,11 +127,6 @@
  }
  const fmtDay=ts=>new Date(ts).toLocaleDateString([],{month:'short',day:'numeric'});
  const reduced=()=>window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
- function heatOf(hold){
-  const cut=Date.now()-30*86400000;
-  const n=logs().filter(r=>r.hold===hold&&r.at>=cut).length;
-  return n>=6?3:n>=3?2:n>=1?1:0;
- }
  function niceMax(v){
   if(v<=0)return 4;
   const steps=[1,2,5,10,20,25,50,100,200];
@@ -144,7 +169,7 @@
  function stopLoop(){if(run&&run.raf)cancelAnimationFrame(run.raf);run=null;letSleep();}
 
  function render(view){
-  stopLoop();if(unsub){unsub();unsub=null;}
+  stopLoop();if(unsub){unsub();unsub=null;}drop3d();
   const saved=prefs.get('hbSel',null)||{};
   const latest=logs().sort((a,b)=>b.at-a.at)[0];
   const st={
@@ -155,14 +180,16 @@
   view.innerHTML=`<div class="page page-hangboard">
    <div class="page-header"><span class="eyebrow">Fingers &amp; pulling</span><h1 class="page-title">Hangboard</h1></div>
    <div class="hb-layout">
-    <section class="hb-board-card" aria-label="Hangboard">
+    <section class="hb-board-card" aria-label="Hang module">
+     <div class="hb3d" id="hb-3d" hidden></div>
      ${boardSVG()}
-     <div class="hb-board-foot"><span class="hb-hint">${icon('info')}<span>Tap a hold to pick the pair, or the bar below it.</span></span>
+     <div class="hb-holdlist" id="hb-holdlist" role="group" aria-label="Holds" hidden>${ALL.map(hd=>`<button type="button" data-pick="${hd.id}" aria-pressed="false">${h(holdLabel(hd))}</button>`).join('')}</div>
+     <div class="hb-board-foot"><span class="hb-hint">${icon('info')}<span id="hb-hint-text">Tap a hold to pick the pair, or the bar below it.</span></span>
       <span class="hb-legend" aria-label="Training in the last 30 days"><span>Last 30 days</span><i data-heat="0"></i><i data-heat="1"></i><i data-heat="2"></i><i data-heat="3"></i></span></div>
     </section>
     <section class="hb-panel" aria-label="Record">
      <div class="hb-select">
-      <div class="hb-select-name"><span class="hb-select-kicker" id="hb-kicker"></span><h2 class="hb-select-title" id="hb-title"></h2></div>
+      <div class="hb-select-name" aria-live="polite" aria-atomic="true"><span class="hb-select-kicker" id="hb-kicker"></span><h2 class="hb-select-title" id="hb-title"></h2></div>
       <div class="segmented" id="hb-type" role="group" aria-label="Exercise">
        <button type="button" data-t="hang" aria-pressed="false">${icon('timer')}Hang</button>
        <button type="button" data-t="pullups" aria-pressed="false">${icon('strength')}Pull-ups</button>
@@ -184,15 +211,50 @@
   const rowsFor=(hold,type)=>logs().filter(r=>r.hold===hold&&r.type===type).sort((a,b)=>a.at-b.at||a.updatedAt-b.updatedAt);
   const bestRow=rows=>rows.reduce((b,r)=>!b||valueOf(r)>=valueOf(b)?r:b,null);
 
-  /* board */
+  /* board: the 3D model when WebGL is there, the flat SVG otherwise */
+  const host3d=q('#hb-3d'),holdList=q('#hb-holdlist');
+  function heatMap(){
+   const cut=Date.now()-30*86400000,n={};
+   for(const r of logs())if(r.at>=cut)n[r.hold]=(n[r.hold]||0)+1;
+   const out={};for(const id of Object.keys(byId)){const c=n[id]||0;out[id]=c>=6?3:c>=3?2:c>=1?1:0;}
+   return out;
+  }
   function paintBoard(){
+   const heat=heatMap();
    svg.querySelectorAll('.hb-hold').forEach(g=>{
     const id=g.dataset.hold;
     g.setAttribute('aria-pressed',String(id===st.hold));
-    g.dataset.heat=String(heatOf(id));
+    g.dataset.heat=String(heat[id]||0);
    });
    svg.classList.toggle('is-locked',!!run);
+   holdList.querySelectorAll('[data-pick]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.pick===st.hold));b.disabled=!!run;});
+   if(view3d)view3d.update({selected:st.hold,heat,locked:!!run});
   }
+  function useSVG(){
+   drop3d();
+   host3d.hidden=true;host3d.classList.remove('is-loading');holdList.hidden=true;svg.removeAttribute('hidden');
+   q('#hb-hint-text').textContent='Tap a hold to pick the pair, or the bar below it.';
+  }
+  function load3d(){
+   if(!webgl()||!window.ResizeObserver)return;
+   host3d.hidden=false;host3d.classList.add('is-loading');svg.setAttribute('hidden','');
+   import(new URL('js/hangboard3d.js',document.baseURI).href).then(mod=>{
+    if(!root.isConnected)return;
+    view3d=mod.mount(host3d,{
+     holds:ALL.map(x=>({id:x.id,side:x.side,centre:!!x.centre,name:x.name})),
+     onSelect:id=>select(id),
+     onFail:()=>{if(root.isConnected)useSVG();},
+     icon,
+    });
+    host3d.classList.remove('is-loading');holdList.hidden=false;
+    q('#hb-hint-text').textContent='Drag to turn it · tap a hold · double-tap or Flip for the other side.';
+    // tear the model down (and free the GL context) as soon as the page is replaced
+    viewObs=new MutationObserver(()=>{if(!root.isConnected)drop3d();});
+    viewObs.observe(view,{childList:true});
+    paintBoard();
+   }).catch(err=>{console.warn('Hangboard 3D unavailable, using the flat board.',err);if(root.isConnected)useSVG();});
+  }
+  holdList.addEventListener('click',e=>{const b=e.target.closest('[data-pick]');if(b)select(b.dataset.pick);});
   function select(id){
    if(run||!byId[id])return;
    if(id===st.hold)return;
@@ -208,7 +270,7 @@
   function paintSelect(){
    const hd=byId[st.hold];
    q('#hb-title').textContent=hd.name;
-   q('#hb-kicker').textContent=hd.kind==='bar'?'Overhead bar':'Left + right pair';
+   q('#hb-kicker').textContent=hd.kind==='bar'?'Overhead bar':`${hd.side==='back'?'Back':'Front'} · ${hd.centre?'Centre hold':'Left + right pair'}`;
    q('#hb-type').querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.t===st.type));b.disabled=!!run;});
    sync();
   }
@@ -390,10 +452,11 @@
    if(e.type==='change'&&e.source!=='local'&&(e.collections.includes('hangLog')||e.collections.includes('*'))){if(!run)paintAll();}
   });
   paintAll();
+  load3d();
   requestAnimationFrame(sync);
  }
 
  Crux.pages=Crux.pages||{};
  Crux.pages.hangboard={render};
- Crux.hangboard={HOLDS,BAR,byId};
+ Crux.hangboard={HOLDS,BAR,byId,view3d:()=>view3d};
 })();
